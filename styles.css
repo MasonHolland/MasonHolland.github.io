@@ -39,6 +39,6 @@ footer li {
   margin: 0 25px;
 }
 
-.email-image {
-  height: 44px;
+img.email-image {
+  width: 44px;
 }
