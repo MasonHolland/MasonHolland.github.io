@@ -2,7 +2,7 @@ body {
   background-color: #212F3C;
 }
 header {
-  height: 630px;
+  height: 200px;
   background-color: #5DADE2;
   outline: 50px;
   outline-color: white;
@@ -10,7 +10,7 @@ header {
 
 header h1 {
   padding-top: 20px;
-  font-family: monospace;
+  font: tahoma;
   font-size: 60px;
   font-weight: bold;
   text-align: center;
@@ -26,15 +26,20 @@ footer {
 }
 
 footer h3 {
-  font-family: monospace;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 
 }
 
-footer ul {
-  margin: 40px 0;
-}
 
 footer li {
   display: inline-block;
-  margin: 0 25px;
+  margin: 0 1%;
+}
+
+img.email-image {
+  height: 44px;
+}
+
+ul.contact-icons {
+  padding-right: 4%;
 }
