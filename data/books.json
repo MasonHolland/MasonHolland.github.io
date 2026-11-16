@@ -1,0 +1,18 @@
+{
+  "source": "sample",
+  "updated": "2026-11-11",
+  "books": [
+    { "title": "Walden", "author": "Henry David Thoreau", "rating": 4, "dateRead": "2026-10-02", "link": "" },
+    { "title": "Meditations", "author": "Marcus Aurelius", "rating": 5, "dateRead": "2026-09-14", "link": "" },
+    { "title": "Frankenstein", "author": "Mary Shelley", "rating": 4, "dateRead": "2026-08-20", "link": "" },
+    { "title": "The Art of War", "author": "Sun Tzu", "rating": 3, "dateRead": "2026-07-03", "link": "" },
+    { "title": "Dracula", "author": "Bram Stoker", "rating": 4, "dateRead": "2026-06-11", "link": "" },
+    { "title": "Pride and Prejudice", "author": "Jane Austen", "rating": 5, "dateRead": "2026-05-01", "link": "" },
+    { "title": "Moby-Dick", "author": "Herman Melville", "rating": 3, "dateRead": "2026-03-28", "link": "" },
+    { "title": "The Time Machine", "author": "H. G. Wells", "rating": 4, "dateRead": "2026-02-09", "link": "" },
+    { "title": "Siddhartha", "author": "Hermann Hesse", "rating": 5, "dateRead": "2026-01-15", "link": "" },
+    { "title": "Great Expectations", "author": "Charles Dickens", "rating": 4, "dateRead": "2025-12-05", "link": "" },
+    { "title": "The Odyssey", "author": "Homer", "rating": 4, "dateRead": "2025-10-21", "link": "" },
+    { "title": "Jane Eyre", "author": "Charlotte Bronte", "rating": 5, "dateRead": "2025-09-02", "link": "" }
+  ]
+}

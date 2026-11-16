@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>The room</title>
+  <meta name="description" content="Walk around a virtual study to see awards, projects and a bookshelf.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    html, body { height: 100%; overflow: hidden; background: #0f151c; }
+    #stage { position: fixed; inset: 0; touch-action: none; }
+    #stage canvas { display: block; width: 100%; height: 100%; }
+
+    .hud { position: fixed; z-index: 5; font-family: var(--display); }
+    .hud--top { top: 1rem; left: 1rem; right: 1rem; display: flex; justify-content: space-between; gap: 1rem; pointer-events: none; }
+    .hud--top a, .hud--top button { pointer-events: auto; }
+    .pill {
+      background: rgba(15, 21, 28, 0.78);
+      color: var(--paper);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      font: 500 0.9375rem var(--display);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .pill:hover { border-color: var(--brass); }
+    span.pill { cursor: default; }
+    span.pill:hover { border-color: rgba(255, 255, 255, 0.18); }
+
+    #cross {
+      position: fixed; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px;
+      border-radius: 50%; background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35); z-index: 4; pointer-events: none;
+      transition: transform 0.15s;
+    }
+    #cross.on { transform: scale(1.9); background: var(--brass); }
+
+    #hint {
+      position: fixed; left: 50%; bottom: 2.25rem; transform: translateX(-50%);
+      z-index: 5; max-width: min(90vw, 30rem); text-align: center;
+      background: rgba(15, 21, 28, 0.85); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 0.6rem; padding: 0.5rem 1rem; font: 500 1rem var(--display);
+      opacity: 0; pointer-events: none; transition: opacity 0.15s;
+    }
+    #hint.on { opacity: 1; }
+
+    .overlay {
+      position: fixed; inset: 0; z-index: 10; display: grid; place-items: center;
+      background: rgba(15, 21, 28, 0.82); padding: 1.5rem; text-align: center;
+    }
+    .overlay[hidden] { display: none; }
+    .overlay__box { max-width: 30rem; }
+    .overlay h1 { font: 800 clamp(2.25rem, 7vw, 3.5rem)/1 var(--display); letter-spacing: -0.03em; margin: 0 0 1rem; }
+    .overlay p { color: var(--muted); margin: 0 0 0.6rem; }
+    .overlay .keys { color: var(--paper); margin-bottom: 1.5rem; }
+    .overlay .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; }
+    .btn {
+      background: var(--brass); color: #1b1407; border: 0; border-radius: 0.5rem;
+      font: 700 1.0625rem var(--display); padding: 0.75rem 1.6rem; cursor: pointer; text-decoration: none;
+    }
+    .btn--ghost { background: transparent; color: var(--paper); border: 1px solid rgba(255,255,255,0.3); }
+
+    #panel {
+      position: fixed; z-index: 12; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: min(92vw, 34rem); max-height: 82vh; overflow: auto;
+      background: var(--paper); color: var(--ink); border-radius: 0.75rem;
+      padding: 1.75rem 1.75rem 1.5rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+    }
+    #panel[hidden] { display: none; }
+    #panel h2 { font: 800 1.75rem/1.1 var(--display); letter-spacing: -0.02em; margin: 0 2rem 0.35rem 0; }
+    #panel .meta { font: 500 0.9375rem var(--display); color: #4d5d6b; margin: 0 0 1rem; }
+    #panel p { margin: 0 0 0.9rem; }
+    #panel a { color: var(--oxblood); font-weight: 500; }
+    #panel .item { border-top: 1px solid rgba(27, 37, 48, 0.18); padding-top: 0.9rem; margin-top: 0.9rem; }
+    #panel .item h3 { font: 600 1.125rem var(--display); margin: 0 0 0.2rem; }
+    #panel .close {
+      position: absolute; top: 0.75rem; right: 0.75rem; width: 2.25rem; height: 2.25rem;
+      border-radius: 50%; border: 1px solid rgba(27,37,48,0.25); background: transparent;
+      font: 600 1.25rem/1 var(--display); color: var(--ink); cursor: pointer;
+    }
+    #panel :focus-visible { outline-color: var(--oxblood); }
+
+    #loading { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; background: #0f151c; font: 500 1.125rem var(--display); color: var(--muted); }
+    #loading[hidden] { display: none; }
+
+    #stick { position: fixed; left: 1.5rem; bottom: 1.5rem; width: 7rem; height: 7rem; border-radius: 50%; border: 2px solid rgba(255,255,255,0.25); z-index: 5; display: none; pointer-events: none; }
+    #stick i { position: absolute; left: 50%; top: 50%; width: 2.75rem; height: 2.75rem; margin: -1.375rem 0 0 -1.375rem; border-radius: 50%; background: rgba(255,255,255,0.3); }
+    body.touch #stick { display: block; }
+  </style>
+</head>
+<body>
+  <div id="stage" aria-label="Interactive 3D room"></div>
+  <div id="cross" aria-hidden="true"></div>
+  <div id="hint" role="status" aria-live="polite"></div>
+  <div id="stick" aria-hidden="true"><i></i></div>
+
+  <div class="hud hud--top">
+    <a class="pill" href="index.html">Leave the room</a>
+    <span class="pill" id="where" role="status" aria-live="polite">The hall</span>
+    <a class="pill" href="resume.html">Read the simple version</a>
+  </div>
+
+  <div id="loading">Switching on the lamp…</div>
+
+  <div class="overlay" id="start" hidden>
+    <div class="overlay__box">
+      <h1 id="startTitle">The study</h1>
+      <p class="keys" id="keysHelp"></p>
+      <p>Three doors lead off the hall: About me on the left, Work straight ahead, and Hobbies on the right.</p>
+      <div class="actions">
+        <button class="btn" id="enter" type="button">Enter</button>
+        <a class="btn btn--ghost" href="resume.html">Read the simple version</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
+    <button class="close" id="panelClose" type="button" aria-label="Close">×</button>
+    <h2 id="panelTitle"></h2>
+    <p class="meta" id="panelMeta"></p>
+    <div id="panelBody"></div>
+  </section>
+
+  <script type="importmap">
+    { "imports": { "three": "./assets/vendor/three.module.js" } }
+  </script>
+  <script type="module" src="assets/room.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+/* Entry point: builds the hall and the rooms, then handles input, picking and the render loop.
+ * The rooms themselves live in assets/rooms/. */
+import * as THREE from "three";
+import { $, EYE, SPEED, TOUCH, animations, areaAt, camera, closePanel, crossEl, hintEl, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, walkable } from "./rooms/core.js";
+import { buildHub } from "./rooms/hub.js";
+import { buildAbout } from "./rooms/about.js";
+import { buildWork } from "./rooms/work.js";
+import { buildHobbies } from "./rooms/hobbies.js";
+
+
+/* ---------- build everything ---------- */
+
+buildHub();
+buildAbout();
+buildWork();
+buildHobbies();
+
+const meshes = interactables.map((i) => i.mesh);
+
+/* ---------- input ---------- */
+
+const keys = new Set();
+let yaw = 0, pitch = 0;
+let started = false;
+
+addEventListener("keydown", (e) => {
+  if (e.code === "Escape" && panelOpen) { closePanel(); return; }
+  if (panelOpen) return;
+  keys.add(e.code);
+  if (e.code === "KeyE") interact(null);
+});
+addEventListener("keyup", (e) => keys.delete(e.code));
+addEventListener("blur", () => keys.clear());
+
+const startEl = $("start");
+function lockPointer() {
+  if (TOUCH) return;
+  renderer.domElement.requestPointerLock?.();
+}
+$("enter").addEventListener("click", () => {
+  started = true;
+  startEl.hidden = true;
+  lockPointer();
+});
+document.addEventListener("pointerlockchange", () => {
+  if (!document.pointerLockElement && started && !panelOpen) {
+    startEl.hidden = false;
+    $("enter").textContent = "Keep exploring";
+    keys.clear();
+  }
+});
+document.addEventListener("mousemove", (e) => {
+  if (document.pointerLockElement !== renderer.domElement) return;
+  yaw -= e.movementX * 0.0022;
+  pitch -= e.movementY * 0.0022;
+  pitch = Math.max(-1.2, Math.min(1.2, pitch));
+});
+renderer.domElement.addEventListener("click", () => {
+  if (TOUCH || panelOpen || !started) return;
+  if (document.pointerLockElement) interact(null);
+  else lockPointer();
+});
+
+// touch: left side walks, right side looks, a quick tap inspects what was tapped
+const stick = { id: null, x0: 0, y0: 0, x: 0, y: 0 };
+const look = { id: null, x: 0, y: 0, x0: 0, y0: 0, t0: 0 };
+const stickKnob = document.querySelector("#stick i");
+
+renderer.domElement.addEventListener("touchstart", (e) => {
+  if (!started || panelOpen) return;
+  for (const t of e.changedTouches) {
+    if (t.clientX < innerWidth * 0.4 && stick.id === null) {
+      stick.id = t.identifier; stick.x0 = stick.x = t.clientX; stick.y0 = stick.y = t.clientY;
+    } else if (look.id === null) {
+      look.id = t.identifier; look.x = look.x0 = t.clientX; look.y = look.y0 = t.clientY; look.t0 = performance.now();
+    }
+  }
+}, { passive: true });
+renderer.domElement.addEventListener("touchmove", (e) => {
+  for (const t of e.changedTouches) {
+    if (t.identifier === stick.id) {
+      stick.x = t.clientX; stick.y = t.clientY;
+      const dx = Math.max(-40, Math.min(40, stick.x - stick.x0));
+      const dy = Math.max(-40, Math.min(40, stick.y - stick.y0));
+      stickKnob.style.transform = `translate(${dx}px, ${dy}px)`;
+    } else if (t.identifier === look.id) {
+      yaw -= (t.clientX - look.x) * 0.005;
+      pitch -= (t.clientY - look.y) * 0.005;
+      pitch = Math.max(-1.2, Math.min(1.2, pitch));
+      look.x = t.clientX; look.y = t.clientY;
+    }
+  }
+  e.preventDefault();
+}, { passive: false });
+renderer.domElement.addEventListener("touchend", (e) => {
+  for (const t of e.changedTouches) {
+    if (t.identifier === stick.id) { stick.id = null; stickKnob.style.transform = ""; }
+    if (t.identifier === look.id) {
+      const moved = Math.hypot(t.clientX - look.x0, t.clientY - look.y0);
+      if (moved < 12 && performance.now() - look.t0 < 350) interact({ x: t.clientX, y: t.clientY });
+      look.id = null;
+    }
+  }
+});
+
+/* ---------- interaction ---------- */
+
+const ray = new THREE.Raycaster();
+ray.far = 4.5;
+let hovered = null;
+
+function pick(screenPt) {
+  const ndc = screenPt
+    ? new THREE.Vector2((screenPt.x / innerWidth) * 2 - 1, -(screenPt.y / innerHeight) * 2 + 1)
+    : new THREE.Vector2(0, 0);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObjects(meshes, false)[0];
+  return hit ? interactables.find((i) => i.mesh === hit.object) : null;
+}
+function interact(screenPt) {
+  if (!started || panelOpen) return;
+  const item = pick(screenPt);
+  if (item) item.open();
+}
+function setHover(item) {
+  if (hovered === item) return;
+  if (hovered && hovered.mat) {
+    if (hovered.base !== undefined) hovered.mat.emissiveIntensity = hovered.base;
+    else hovered.mat.emissive?.setHex(0x000000);
+  }
+  hovered = item;
+  if (item && item.mat) {
+    if (item.base !== undefined) item.mat.emissiveIntensity = Math.min(item.base + 0.5, 1.3);
+    else item.mat.emissive?.setHex(0x4a3510);
+  }
+  crossEl.classList.toggle("on", !!item);
+  if (item && !TOUCH) {
+    hintEl.textContent = item.hint + "  (click or E)";
+    hintEl.classList.add("on");
+  } else {
+    hintEl.classList.remove("on");
+  }
+}
+
+/* ---------- loop ---------- */
+
+const whereEl = $("where");
+let lastArea = "";
+let shownRoom = null;
+
+/** Which room the player is properly inside (not the doorway), or null. */
+function roomAt(x, z) {
+  for (const [key, room] of Object.entries(rooms)) {
+    const [lx, lz] = toLocal(room.angle, x, z);
+    if (lz < -5.6 && lz > -13 && Math.abs(lx) < 4.05) return key;
+  }
+  return null;
+}
+
+/** Hide the rooms you can't see from where you are. It saves drawing and lighting work. */
+function showOnly(key) {
+  shownRoom = key;
+  for (const [k, room] of Object.entries(rooms)) room.group.visible = !key || k === key;
+}
+const clock = new THREE.Clock();
+let bob = 0;
+
+function frame() {
+  const dt = Math.min(clock.getDelta(), 0.05);
+  const t = clock.elapsedTime;
+
+  if (started && !panelOpen && (document.pointerLockElement || TOUCH)) {
+    let f = 0, s = 0;
+    if (keys.has("KeyW") || keys.has("ArrowUp")) f += 1;
+    if (keys.has("KeyS") || keys.has("ArrowDown")) f -= 1;
+    if (keys.has("KeyD")) s += 1;
+    if (keys.has("KeyA")) s -= 1;
+    if (keys.has("ArrowLeft")) yaw += 1.8 * dt;
+    if (keys.has("ArrowRight")) yaw -= 1.8 * dt;
+    if (stick.id !== null) {
+      f += -Math.max(-1, Math.min(1, (stick.y - stick.y0) / 40));
+      s += Math.max(-1, Math.min(1, (stick.x - stick.x0) / 40));
+    }
+    const len = Math.hypot(f, s);
+    if (len > 0) {
+      const k = (SPEED * dt) / Math.max(1, len);
+      const sin = Math.sin(yaw), cos = Math.cos(yaw);
+      const dx = (-sin * f + cos * s) * k;
+      const dz = (-cos * f - sin * s) * k;
+      const p = camera.position;
+      if (walkable(p.x + dx, p.z)) p.x += dx;
+      if (walkable(p.x, p.z + dz)) p.z += dz;
+      bob += dt * 8;
+    }
+  }
+
+  camera.position.y = EYE + Math.sin(bob) * 0.012;
+  camera.rotation.set(pitch, yaw, 0);
+
+  const area = areaAt(camera.position.x, camera.position.z);
+  if (area && area !== lastArea) { lastArea = area; whereEl.textContent = area; }
+  const inRoom = roomAt(camera.position.x, camera.position.z);
+  if (inRoom !== shownRoom) showOnly(inRoom);
+
+  animations.forEach((fn) => fn(t));
+
+  if (started && !panelOpen && !TOUCH && document.pointerLockElement) setHover(pick(null));
+  else if (TOUCH || panelOpen) setHover(null);
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+
+// Compile the shaders for each view up front, so walking through a door doesn't stutter.
+try {
+  [null, ...Object.keys(rooms)].forEach((k) => { showOnly(k); renderer.compile(scene, camera); });
+} catch (e) {}
+showOnly(null);
+
+$("loading").hidden = true;
+startEl.hidden = false;
+frame();
+
+// hook for automated tests
+window.__room = {
+  camera, interactables, walkable, rooms,
+  get started() { return started; },
+  showPanel,
+  setView(x, z, y, p) { camera.position.x = x; camera.position.z = z; yaw = y; pitch = p; },
+};
+

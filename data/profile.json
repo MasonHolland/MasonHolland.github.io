@@ -1,0 +1,156 @@
+{
+  "name": "Mason",
+  "headline": "Web developer based in Australia",
+  "summary": "Replace this with two or three sentences about who you are, what you build, and what you want to work on next. Both the simple page and the room read from this file, so you only write it once.",
+  "location": "Australia",
+  "links": [
+    {
+      "label": "Email",
+      "url": "mailto:you@example.com"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/your-handle"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/your-handle"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Sample role",
+      "org": "Sample Company",
+      "start": "2023",
+      "end": "Present",
+      "summary": "One or two sentences on what you owned and what changed because of it.",
+      "highlights": [
+        "A result with a number in it, such as cutting load time by 40%",
+        "Something you led, shipped, or taught"
+      ]
+    },
+    {
+      "role": "Earlier sample role",
+      "org": "Another Company",
+      "start": "2020",
+      "end": "2023",
+      "summary": "One or two sentences on the work.",
+      "highlights": [
+        "Another concrete result"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Sample project one",
+      "year": "2026",
+      "summary": "What it is and who it is for, in one sentence.",
+      "tags": [
+        "Swift",
+        "SwiftUI"
+      ],
+      "url": "https://example.com/project-one"
+    },
+    {
+      "title": "Sample project two",
+      "year": "2025",
+      "summary": "What it is and who it is for, in one sentence.",
+      "tags": [
+        "TypeScript",
+        "Web"
+      ],
+      "url": "https://example.com/project-two"
+    },
+    {
+      "title": "Sample project three",
+      "year": "2024",
+      "summary": "What it is and who it is for, in one sentence.",
+      "tags": [
+        "Design",
+        "Prototype"
+      ],
+      "url": ""
+    }
+  ],
+  "accolades": [
+    {
+      "title": "Sample award",
+      "from": "Awarding body",
+      "year": "2025",
+      "kind": "award",
+      "summary": "One sentence on what it recognised."
+    },
+    {
+      "title": "Sample certification",
+      "from": "Issuing body",
+      "year": "2024",
+      "kind": "certificate",
+      "summary": "One sentence on what it covers."
+    },
+    {
+      "title": "Sample degree",
+      "from": "University name",
+      "year": "2022",
+      "kind": "degree",
+      "summary": "Field of study and any honours."
+    },
+    {
+      "title": "Sample talk or publication",
+      "from": "Event or outlet",
+      "year": "2025",
+      "kind": "press",
+      "summary": "What you spoke or wrote about."
+    }
+  ],
+  "about": {
+    "frames": [
+      {
+        "type": "info",
+        "title": "Hi, I'm Mason",
+        "text": "Web developer based in Australia. Replace this with a few lines about you."
+      },
+      {
+        "type": "photo",
+        "src": "assets/photos/family-1.jpg",
+        "caption": "Add a caption for this photo"
+      },
+      {
+        "type": "photo",
+        "src": "assets/photos/family-2.jpg",
+        "caption": "Add a caption for this photo"
+      },
+      {
+        "type": "info",
+        "title": "What I do",
+        "text": "Replace this with what you build and the tools you use."
+      },
+      {
+        "type": "photo",
+        "src": "assets/photos/family-3.jpg",
+        "caption": "Add a caption for this photo"
+      },
+      {
+        "type": "info",
+        "title": "Away from the keyboard",
+        "text": "Replace this with what you do outside of work."
+      }
+    ],
+    "largeFrames": [
+      {
+        "src": "assets/photos/large-1.jpg",
+        "caption": "Add a caption for the first large picture",
+        "text": "Optional: a longer description shown when the picture is opened."
+      },
+      {
+        "src": "assets/photos/large-2.jpg",
+        "caption": "Add a caption for the second large picture",
+        "text": "Optional: a longer description shown when the picture is opened."
+      },
+      {
+        "src": "assets/photos/large-3.jpg",
+        "caption": "Add a caption for the third large picture",
+        "text": "Optional: a longer description shown when the picture is opened."
+      }
+    ]
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "source": "sample",
+  "updated": "2026-11-11",
+  "games": [
+    {
+      "platform": "steam",
+      "title": "Hades",
+      "hours": 212,
+      "recentHours": 6.5,
+      "lastPlayed": "2026-11-05",
+      "cover": "",
+      "id": "0"
+    },
+    {
+      "platform": "steam",
+      "title": "Stardew Valley",
+      "hours": 340,
+      "recentHours": 0,
+      "lastPlayed": "2026-10-20",
+      "cover": "",
+      "id": "1"
+    },
+    {
+      "platform": "psn",
+      "title": "God of War Ragnar\u00f6k",
+      "hours": 64,
+      "recentHours": 0,
+      "lastPlayed": "2026-09-30",
+      "cover": "",
+      "id": "2"
+    },
+    {
+      "platform": "steam",
+      "title": "Portal 2",
+      "hours": 31,
+      "recentHours": 0,
+      "lastPlayed": "2026-08-12",
+      "cover": "",
+      "id": "3"
+    },
+    {
+      "platform": "steam",
+      "title": "Celeste",
+      "hours": 18,
+      "recentHours": 0,
+      "lastPlayed": "2026-07-01",
+      "cover": "",
+      "id": "4"
+    },
+    {
+      "platform": "psn",
+      "title": "Astro Bot",
+      "hours": 22,
+      "recentHours": 3.2,
+      "lastPlayed": "2026-11-08",
+      "cover": "",
+      "id": "5"
+    },
+    {
+      "platform": "steam",
+      "title": "Hollow Knight",
+      "hours": 57,
+      "recentHours": 0,
+      "lastPlayed": "2026-06-10",
+      "cover": "",
+      "id": "6"
+    },
+    {
+      "platform": "psn",
+      "title": "Marvel's Spider-Man 2",
+      "hours": 41,
+      "recentHours": 0,
+      "lastPlayed": "2026-05-22",
+      "cover": "",
+      "id": "7"
+    },
+    {
+      "platform": "steam",
+      "title": "Baldur's Gate 3",
+      "hours": 188,
+      "recentHours": 0,
+      "lastPlayed": "2026-04-18",
+      "cover": "",
+      "id": "8"
+    },
+    {
+      "platform": "psn",
+      "title": "Helldivers 2",
+      "hours": 96,
+      "recentHours": 1.4,
+      "lastPlayed": "2026-11-09",
+      "cover": "",
+      "id": "9"
+    },
+    {
+      "platform": "steam",
+      "title": "Balatro",
+      "hours": 73,
+      "recentHours": 0,
+      "lastPlayed": "2026-03-03",
+      "cover": "",
+      "id": "10"
+    },
+    {
+      "platform": "psn",
+      "title": "Ghost of Tsushima",
+      "hours": 52,
+      "recentHours": 0,
+      "lastPlayed": "2026-02-14",
+      "cover": "",
+      "id": "11"
+    },
+    {
+      "platform": "switch",
+      "id": "sw-0",
+      "title": "The Legend of Zelda: Tears of the Kingdom",
+      "hours": 120,
+      "recentHours": 0,
+      "lastPlayed": "2026-09-14",
+      "cover": "",
+      "note": "Added by hand."
+    },
+    {
+      "platform": "switch",
+      "id": "sw-1",
+      "title": "Super Mario Odyssey",
+      "hours": 60,
+      "recentHours": 0,
+      "lastPlayed": "2026-07-02",
+      "cover": "",
+      "note": "Added by hand."
+    },
+    {
+      "platform": "switch",
+      "id": "sw-2",
+      "title": "Mario Kart 8 Deluxe",
+      "hours": 90,
+      "recentHours": 0,
+      "lastPlayed": "2026-10-01",
+      "cover": "",
+      "note": "Added by hand."
+    },
+    {
+      "platform": "switch",
+      "id": "sw-3",
+      "title": "Animal Crossing: New Horizons",
+      "hours": 210,
+      "recentHours": 0,
+      "lastPlayed": "2026-05-20",
+      "cover": "",
+      "note": "Added by hand."
+    },
+    {
+      "platform": "switch",
+      "id": "sw-4",
+      "title": "Hollow Knight",
+      "hours": 35,
+      "recentHours": 0,
+      "lastPlayed": "2026-03-11",
+      "cover": "",
+      "note": "Added by hand."
+    },
+    {
+      "platform": "switch",
+      "id": "sw-5",
+      "title": "Hades",
+      "hours": 48,
+      "recentHours": 0,
+      "lastPlayed": "2026-02-02",
+      "cover": "",
+      "note": "Added by hand."
+    },
+    {
+      "platform": "switch",
+      "id": "sw-6",
+      "title": "Metroid Dread",
+      "hours": 14,
+      "recentHours": 0,
+      "lastPlayed": "2025-12-08",
+      "cover": "",
+      "note": "Added by hand."
+    },
+    {
+      "platform": "switch",
+      "id": "sw-7",
+      "title": "Stardew Valley",
+      "hours": 75,
+      "recentHours": 0,
+      "lastPlayed": "2026-08-19",
+      "cover": "",
+      "note": "Added by hand."
+    }
+  ]
+}
