@@ -12,7 +12,8 @@
         "earned": 3,
         "total": 31,
         "progress": 4
-      }
+      },
+      "thumb": "assets/covers/small/psn-c1259d982c.jpg"
     },
     {
       "platform": "psn",
@@ -24,7 +25,8 @@
         "earned": 30,
         "total": 69,
         "progress": 34
-      }
+      },
+      "thumb": "assets/covers/small/psn-edd2de8982.jpg"
     },
     {
       "platform": "steam",
@@ -32,7 +34,8 @@
       "title": "Valheim",
       "hours": 1489.4,
       "lastPlayed": "2026-11-11",
-      "cover": "assets/covers/steam-2c6698ddcd.jpg"
+      "cover": "assets/covers/steam-2c6698ddcd.jpg",
+      "thumb": "assets/covers/small/steam-2c6698ddcd.jpg"
     },
     {
       "platform": "psn",
@@ -44,7 +47,8 @@
         "earned": 47,
         "total": 47,
         "progress": 100
-      }
+      },
+      "thumb": "assets/covers/small/psn-569c9670da.jpg"
     },
     {
       "platform": "psn",
@@ -56,7 +60,8 @@
         "earned": 10,
         "total": 46,
         "progress": 15
-      }
+      },
+      "thumb": "assets/covers/small/psn-88c7aace2b.jpg"
     },
     {
       "platform": "psn",
@@ -68,7 +73,8 @@
         "earned": 39,
         "total": 39,
         "progress": 100
-      }
+      },
+      "thumb": "assets/covers/small/psn-b425ee3e40.jpg"
     },
     {
       "platform": "psn",
@@ -80,7 +86,8 @@
         "earned": 51,
         "total": 51,
         "progress": 100
-      }
+      },
+      "thumb": "assets/covers/small/psn-ab370bb6ae.jpg"
     },
     {
       "platform": "psn",
@@ -92,7 +99,8 @@
         "earned": 1,
         "total": 58,
         "progress": 1
-      }
+      },
+      "thumb": "assets/covers/small/psn-6eb54f965f.jpg"
     },
     {
       "platform": "psn",
@@ -104,7 +112,8 @@
         "earned": 3,
         "total": 35,
         "progress": 4
-      }
+      },
+      "thumb": "assets/covers/small/psn-5eb549ff2e.jpg"
     },
     {
       "platform": "steam",
@@ -112,7 +121,8 @@
       "title": "Golf With Your Friends",
       "hours": 1.6,
       "lastPlayed": "2026-10-28",
-      "cover": "assets/covers/steam-1e8b730e4b.jpg"
+      "cover": "assets/covers/steam-1e8b730e4b.jpg",
+      "thumb": "assets/covers/small/steam-1e8b730e4b.jpg"
     },
     {
       "platform": "psn",
@@ -124,7 +134,8 @@
         "earned": 1,
         "total": 13,
         "progress": 9
-      }
+      },
+      "thumb": "assets/covers/small/psn-91dd2b481d.jpg"
     },
     {
       "platform": "steam",
@@ -132,7 +143,8 @@
       "title": "V Rising",
       "hours": 7.3,
       "lastPlayed": "2026-10-25",
-      "cover": "assets/covers/steam-5713e1c93a.jpg"
+      "cover": "assets/covers/steam-5713e1c93a.jpg",
+      "thumb": "assets/covers/small/steam-5713e1c93a.jpg"
     },
     {
       "platform": "psn",
@@ -144,7 +156,8 @@
         "earned": 4,
         "total": 21,
         "progress": 23
-      }
+      },
+      "thumb": "assets/covers/small/psn-d0c71c60bb.jpg"
     },
     {
       "platform": "steam",
@@ -160,7 +173,8 @@
       "title": "Terraria",
       "hours": 6.5,
       "lastPlayed": "2026-10-04",
-      "cover": "assets/covers/steam-71dce5150d.jpg"
+      "cover": "assets/covers/steam-71dce5150d.jpg",
+      "thumb": "assets/covers/small/steam-71dce5150d.jpg"
     },
     {
       "platform": "psn",
@@ -172,14 +186,16 @@
         "earned": 30,
         "total": 66,
         "progress": 36
-      }
+      },
+      "thumb": "assets/covers/small/psn-489e53cdb1.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA02110_00",
       "title": "No Man's Sky",
       "lastPlayed": "2026-09-24",
-      "cover": "assets/covers/psn-4b84af1923.jpg"
+      "cover": "assets/covers/psn-4b84af1923.jpg",
+      "thumb": "assets/covers/small/psn-4b84af1923.jpg"
     },
     {
       "platform": "psn",
@@ -193,7 +209,8 @@
         "earned": 2,
         "total": 28,
         "progress": 2
-      }
+      },
+      "thumb": "assets/covers/small/psn-fdd00ca27b.jpg"
     },
     {
       "platform": "steam",
@@ -201,7 +218,8 @@
       "title": "Project Zomboid",
       "hours": 13.3,
       "lastPlayed": "2026-09-23",
-      "cover": "assets/covers/steam-417c9778d6.jpg"
+      "cover": "assets/covers/steam-417c9778d6.jpg",
+      "thumb": "assets/covers/small/steam-417c9778d6.jpg"
     },
     {
       "platform": "psn",
@@ -213,7 +231,8 @@
         "earned": 1,
         "total": 24,
         "progress": 1
-      }
+      },
+      "thumb": "assets/covers/small/psn-88f67d1a01.jpg"
     },
     {
       "platform": "psn",
@@ -225,7 +244,8 @@
         "earned": 0,
         "total": 51,
         "progress": 0
-      }
+      },
+      "thumb": "assets/covers/small/psn-3e0229a82b.jpg"
     },
     {
       "platform": "psn",
@@ -237,7 +257,8 @@
         "earned": 38,
         "total": 48,
         "progress": 86
-      }
+      },
+      "thumb": "assets/covers/small/psn-6ea689deb1.jpg"
     },
     {
       "platform": "psn",
@@ -249,7 +270,8 @@
         "earned": 1,
         "total": 35,
         "progress": 1
-      }
+      },
+      "thumb": "assets/covers/small/psn-be9790e8f7.jpg"
     },
     {
       "platform": "psn",
@@ -261,7 +283,8 @@
         "earned": 8,
         "total": 54,
         "progress": 11
-      }
+      },
+      "thumb": "assets/covers/small/psn-9a64473138.jpg"
     },
     {
       "platform": "steam",
@@ -269,7 +292,8 @@
       "title": "DARK SOULS™ III",
       "hours": 139.4,
       "lastPlayed": "2026-08-10",
-      "cover": "assets/covers/steam-4bb975859c.jpg"
+      "cover": "assets/covers/steam-4bb975859c.jpg",
+      "thumb": "assets/covers/small/steam-4bb975859c.jpg"
     },
     {
       "platform": "steam",
@@ -277,7 +301,8 @@
       "title": "COCOON",
       "hours": 0.7,
       "lastPlayed": "2026-08-06",
-      "cover": "assets/covers/steam-de452479ed.jpg"
+      "cover": "assets/covers/steam-de452479ed.jpg",
+      "thumb": "assets/covers/small/steam-de452479ed.jpg"
     },
     {
       "platform": "steam",
@@ -285,7 +310,8 @@
       "title": "ELDEN RING",
       "hours": 73.9,
       "lastPlayed": "2026-08-05",
-      "cover": "assets/covers/steam-8fe85b37eb.jpg"
+      "cover": "assets/covers/steam-8fe85b37eb.jpg",
+      "thumb": "assets/covers/small/steam-8fe85b37eb.jpg"
     },
     {
       "platform": "steam",
@@ -305,7 +331,8 @@
         "earned": 42,
         "total": 42,
         "progress": 100
-      }
+      },
+      "thumb": "assets/covers/small/psn-e4db859b18.jpg"
     },
     {
       "platform": "psn",
@@ -317,7 +344,8 @@
         "earned": 0,
         "total": 38,
         "progress": 0
-      }
+      },
+      "thumb": "assets/covers/small/psn-97d856ae00.jpg"
     },
     {
       "platform": "steam",
@@ -325,7 +353,8 @@
       "title": "Voidling Bound",
       "hours": 0.6,
       "lastPlayed": "2026-07-18",
-      "cover": "assets/covers/steam-7287d1aa65.jpg"
+      "cover": "assets/covers/steam-7287d1aa65.jpg",
+      "thumb": "assets/covers/small/steam-7287d1aa65.jpg"
     },
     {
       "platform": "psn",
@@ -337,14 +366,16 @@
         "earned": 2,
         "total": 44,
         "progress": 2
-      }
+      },
+      "thumb": "assets/covers/small/psn-5f50eadd23.jpg"
     },
     {
       "platform": "psn",
       "id": "CUSA05933_00",
       "title": "KINGDOM HEARTS - HD 1.5+2.5 ReMIX -",
       "lastPlayed": "2026-07-09",
-      "cover": "assets/covers/psn-cf34ecfae8.jpg"
+      "cover": "assets/covers/psn-cf34ecfae8.jpg",
+      "thumb": "assets/covers/small/psn-cf34ecfae8.jpg"
     },
     {
       "platform": "psn",
@@ -356,7 +387,8 @@
         "earned": 22,
         "total": 61,
         "progress": 26
-      }
+      },
+      "thumb": "assets/covers/small/psn-92a746ccd9.jpg"
     },
     {
       "platform": "psn",
@@ -368,7 +400,8 @@
         "earned": 0,
         "total": 50,
         "progress": 0
-      }
+      },
+      "thumb": "assets/covers/small/psn-875da92dfa.jpg"
     },
     {
       "platform": "psn",
@@ -382,7 +415,8 @@
         "earned": 0,
         "total": 56,
         "progress": 0
-      }
+      },
+      "thumb": "assets/covers/small/psn-e8e6a1956c.jpg"
     },
     {
       "platform": "psn",
@@ -394,7 +428,8 @@
         "earned": 6,
         "total": 14,
         "progress": 36
-      }
+      },
+      "thumb": "assets/covers/small/psn-9550151aa8.jpg"
     },
     {
       "platform": "steam",
@@ -402,7 +437,8 @@
       "title": "PUBG: BATTLEGROUNDS",
       "hours": 1344.5,
       "lastPlayed": "2026-05-01",
-      "cover": "assets/covers/steam-fcfc8b7784.jpg"
+      "cover": "assets/covers/steam-fcfc8b7784.jpg",
+      "thumb": "assets/covers/small/steam-fcfc8b7784.jpg"
     },
     {
       "platform": "steam",
@@ -410,7 +446,8 @@
       "title": "Deep Rock Galactic",
       "hours": 38.9,
       "lastPlayed": "2026-03-31",
-      "cover": "assets/covers/steam-84e8a04b1c.jpg"
+      "cover": "assets/covers/steam-84e8a04b1c.jpg",
+      "thumb": "assets/covers/small/steam-84e8a04b1c.jpg"
     },
     {
       "platform": "steam",
@@ -418,7 +455,8 @@
       "title": "Absolum",
       "hours": 39.9,
       "lastPlayed": "2026-03-30",
-      "cover": "assets/covers/steam-d96af49840.jpg"
+      "cover": "assets/covers/steam-d96af49840.jpg",
+      "thumb": "assets/covers/small/steam-d96af49840.jpg"
     },
     {
       "platform": "psn",
@@ -430,7 +468,8 @@
         "earned": 5,
         "total": 21,
         "progress": 8
-      }
+      },
+      "thumb": "assets/covers/small/psn-70a0302ea0.jpg"
     },
     {
       "platform": "steam",
@@ -446,7 +485,8 @@
       "title": "Sons of Valhalla",
       "hours": 1.5,
       "lastPlayed": "2026-03-16",
-      "cover": "assets/covers/steam-f19469acb7.jpg"
+      "cover": "assets/covers/steam-f19469acb7.jpg",
+      "thumb": "assets/covers/small/steam-f19469acb7.jpg"
     },
     {
       "platform": "psn",
@@ -458,7 +498,8 @@
         "earned": 4,
         "total": 79,
         "progress": 4
-      }
+      },
+      "thumb": "assets/covers/small/psn-ba17acbbee.jpg"
     },
     {
       "platform": "steam",
@@ -466,7 +507,8 @@
       "title": "Over The Top: WWI",
       "hours": 2.7,
       "lastPlayed": "2026-03-13",
-      "cover": "assets/covers/steam-5660d5a2c2.jpg"
+      "cover": "assets/covers/steam-5660d5a2c2.jpg",
+      "thumb": "assets/covers/small/steam-5660d5a2c2.jpg"
     },
     {
       "platform": "psn",
@@ -478,7 +520,8 @@
         "earned": 3,
         "total": 36,
         "progress": 4
-      }
+      },
+      "thumb": "assets/covers/small/psn-a56ea94252.jpg"
     },
     {
       "platform": "psn",
@@ -490,7 +533,8 @@
         "earned": 20,
         "total": 48,
         "progress": 28
-      }
+      },
+      "thumb": "assets/covers/small/psn-38405a8bbc.jpg"
     },
     {
       "platform": "steam",
@@ -498,14 +542,16 @@
       "title": "Fallout: New Vegas",
       "hours": 2.8,
       "lastPlayed": "2026-03-06",
-      "cover": "assets/covers/steam-46011ca3f6.jpg"
+      "cover": "assets/covers/steam-46011ca3f6.jpg",
+      "thumb": "assets/covers/small/steam-46011ca3f6.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA33065_00",
       "title": "PRAGMATA SKETCHBOOK",
       "lastPlayed": "2026-03-05",
-      "cover": "assets/covers/psn-1be4bd4083.jpg"
+      "cover": "assets/covers/psn-1be4bd4083.jpg",
+      "thumb": "assets/covers/small/psn-1be4bd4083.jpg"
     },
     {
       "platform": "steam",
@@ -513,14 +559,16 @@
       "title": "Death Must Die",
       "hours": 7.2,
       "lastPlayed": "2026-03-03",
-      "cover": "assets/covers/steam-8300f8e4b3.jpg"
+      "cover": "assets/covers/steam-8300f8e4b3.jpg",
+      "thumb": "assets/covers/small/steam-8300f8e4b3.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA35800_00",
       "title": "God of War Sons of Sparta Digital Artbook and Soundtrack",
       "lastPlayed": "2026-03-02",
-      "cover": "assets/covers/psn-58a7fe9304.jpg"
+      "cover": "assets/covers/psn-58a7fe9304.jpg",
+      "thumb": "assets/covers/small/psn-58a7fe9304.jpg"
     },
     {
       "platform": "steam",
@@ -528,7 +576,8 @@
       "title": "ENDER LILIES: Quietus of the Knights",
       "hours": 1.2,
       "lastPlayed": "2026-02-28",
-      "cover": "assets/covers/steam-6f8f0c4d6f.jpg"
+      "cover": "assets/covers/steam-6f8f0c4d6f.jpg",
+      "thumb": "assets/covers/small/steam-6f8f0c4d6f.jpg"
     },
     {
       "platform": "steam",
@@ -536,7 +585,8 @@
       "title": "Battle Brothers",
       "hours": 1.2,
       "lastPlayed": "2026-02-24",
-      "cover": "assets/covers/steam-985682331f.jpg"
+      "cover": "assets/covers/steam-985682331f.jpg",
+      "thumb": "assets/covers/small/steam-985682331f.jpg"
     },
     {
       "platform": "steam",
@@ -544,7 +594,8 @@
       "title": "Exanima",
       "hours": 0.7,
       "lastPlayed": "2026-02-23",
-      "cover": "assets/covers/steam-102c361b63.jpg"
+      "cover": "assets/covers/steam-102c361b63.jpg",
+      "thumb": "assets/covers/small/steam-102c361b63.jpg"
     },
     {
       "platform": "steam",
@@ -552,7 +603,8 @@
       "title": "No Rest for the Wicked",
       "hours": 2.2,
       "lastPlayed": "2026-02-18",
-      "cover": "assets/covers/steam-0b3f4868f0.jpg"
+      "cover": "assets/covers/steam-0b3f4868f0.jpg",
+      "thumb": "assets/covers/small/steam-0b3f4868f0.jpg"
     },
     {
       "platform": "steam",
@@ -584,14 +636,16 @@
       "title": "9 Kings",
       "hours": 8.7,
       "lastPlayed": "2026-02-10",
-      "cover": "assets/covers/steam-56476b238c.jpg"
+      "cover": "assets/covers/steam-56476b238c.jpg",
+      "thumb": "assets/covers/small/steam-56476b238c.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA22040_00",
       "title": "Path of Exile 2 Beta",
       "lastPlayed": "2026-02-06",
-      "cover": "assets/covers/psn-54a3c9904c.jpg"
+      "cover": "assets/covers/psn-54a3c9904c.jpg",
+      "thumb": "assets/covers/small/psn-54a3c9904c.jpg"
     },
     {
       "platform": "steam",
@@ -599,7 +653,8 @@
       "title": "D&D Lords of Waterdeep",
       "hours": 3.3,
       "lastPlayed": "2026-01-30",
-      "cover": "assets/covers/steam-354ceac9b8.jpg"
+      "cover": "assets/covers/steam-354ceac9b8.jpg",
+      "thumb": "assets/covers/small/steam-354ceac9b8.jpg"
     },
     {
       "platform": "psn",
@@ -611,7 +666,8 @@
         "earned": 3,
         "total": 42,
         "progress": 4
-      }
+      },
+      "thumb": "assets/covers/small/psn-c3293ff4fd.jpg"
     },
     {
       "platform": "steam",
@@ -619,7 +675,8 @@
       "title": "Risk of Rain 2",
       "hours": 65.1,
       "lastPlayed": "2026-01-23",
-      "cover": "assets/covers/steam-c7b763f5a4.jpg"
+      "cover": "assets/covers/steam-c7b763f5a4.jpg",
+      "thumb": "assets/covers/small/steam-c7b763f5a4.jpg"
     },
     {
       "platform": "steam",
@@ -627,7 +684,8 @@
       "title": "GODBREAKERS",
       "hours": 15.5,
       "lastPlayed": "2026-01-06",
-      "cover": "assets/covers/steam-cf873cd5d5.jpg"
+      "cover": "assets/covers/steam-cf873cd5d5.jpg",
+      "thumb": "assets/covers/small/steam-cf873cd5d5.jpg"
     },
     {
       "platform": "steam",
@@ -635,7 +693,8 @@
       "title": "Middle-earth™: Shadow of Mordor™",
       "hours": 39.7,
       "lastPlayed": "2026-01-05",
-      "cover": "assets/covers/steam-e46cebb87e.jpg"
+      "cover": "assets/covers/steam-e46cebb87e.jpg",
+      "thumb": "assets/covers/small/steam-e46cebb87e.jpg"
     },
     {
       "platform": "steam",
@@ -643,7 +702,8 @@
       "title": "ARC Raiders",
       "hours": 1.1,
       "lastPlayed": "2025-12-29",
-      "cover": "assets/covers/steam-6ff893dfba.jpg"
+      "cover": "assets/covers/steam-6ff893dfba.jpg",
+      "thumb": "assets/covers/small/steam-6ff893dfba.jpg"
     },
     {
       "platform": "steam",
@@ -659,7 +719,8 @@
       "title": "He is Coming",
       "hours": 1.4,
       "lastPlayed": "2025-10-31",
-      "cover": "assets/covers/steam-9484ee4a89.jpg"
+      "cover": "assets/covers/steam-9484ee4a89.jpg",
+      "thumb": "assets/covers/small/steam-9484ee4a89.jpg"
     },
     {
       "platform": "steam",
@@ -667,7 +728,8 @@
       "title": "Mortal Sin",
       "hours": 0.2,
       "lastPlayed": "2025-10-31",
-      "cover": "assets/covers/steam-8b348a6074.jpg"
+      "cover": "assets/covers/steam-8b348a6074.jpg",
+      "thumb": "assets/covers/small/steam-8b348a6074.jpg"
     },
     {
       "platform": "steam",
@@ -687,7 +749,8 @@
         "earned": 0,
         "total": 28,
         "progress": 0
-      }
+      },
+      "thumb": "assets/covers/small/psn-11bfd5fe4d.jpg"
     },
     {
       "platform": "psn",
@@ -699,7 +762,8 @@
         "earned": 42,
         "total": 43,
         "progress": 97
-      }
+      },
+      "thumb": "assets/covers/small/psn-ec9d566aa9.jpg"
     }
   ]
 }

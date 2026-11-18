@@ -37,17 +37,17 @@ Put photo files in `assets/photos/`. Until a file exists, the frame shows a "You
 
 ## Bookshelf from Goodreads
 
-Goodreads closed its developer API in 2020, so this reads the RSS feed every shelf still publishes.
+Goodreads retired its shelf RSS feeds in October 2026, so the sync reads the public shelf widget instead. The widget only returns the 100 most recent books per shelf and no "date read", so your older history comes from a one-time export.
 
-1. Your user ID is the digits after `/user/show/` in your Goodreads profile address.
-2. Make your profile and "read" shelf public. For a private shelf, copy the RSS key from the bottom of the shelf page and set `GOODREADS_RSS_KEY`.
+1. Your user ID is the digits after `/user/show/` in your Goodreads profile address. Your profile must be public.
+2. Once: in Goodreads, go to My Books, Import and export, and export your library. Then run `node scripts/import-goodreads-export.mjs path/to/goodreads_library_export.csv`. This writes `data/books-archive.json` with only the read shelf's titles, authors, ratings and dates. Don't commit the CSV, because it holds your reviews and private notes (`.gitignore` skips it).
 3. Run `GOODREADS_USER_ID=12345678 node scripts/sync-goodreads.mjs` (Node 18 or newer).
 
-Goodreads returns roughly the 100 most recent books per shelf. Your own books appear in brighter colours among plain filler books, so the case always looks full.
+The read shelf merges the archive, books found by earlier syncs and the widget, matched by Goodreads book id so nothing appears twice. A book stays once it has been seen, even after it drops out of the widget's 100; to remove one, delete it from `data/books.json` and `data/books-archive.json`. Books read since the export show no "Finished" date. Currently reading and want to read come from the widget alone (up to 100 each). Each spine is coloured by genre, from the book's subjects on Open Library (looked up once per book and kept in `data/genres.json`). To set a genre yourself, or fill in one Open Library doesn't know, edit `data/genre-overrides.json`: it lists the books without a genre and the genre names to choose from. Series stay together on the shelf, in series order. Plain filler books fill the rest of each case.
 
 ## Games from Steam and PlayStation
 
-Run `node scripts/sync-games.mjs` after setting the variables below. Each platform is optional. If one fails, its games from the last good run are kept. Cover art is downloaded into `assets/covers/`. Each platform's shelf holds up to 36 games, most recently played first (`MAX_GAMES` changes the limit). On each shelf the 4 newest sit beside the console.
+Run `node scripts/sync-games.mjs` after setting the variables below. Each platform is optional. If one fails, its games from the last good run are kept. Cover art is downloaded into `assets/covers/` at full size, and a 200x300 copy for the room goes in `assets/covers/small/` (`node scripts/thumbs.mjs --force` remakes them after changing the size). Run `npm install` first. Games played for 5 hours or more are shown (`MIN_HOURS` changes that), most recently played first. Each platform has a console shelf in the Hobbies room: the 4 games beside the console are the ones with the highest trophy or achievement completion, and 32 more sit around it. The rest line the game gallery, a hallway off the room that grows to fit. Set `MAX_GAMES` to cap each platform. PlayStation play time covers PS4 and PS5 games; older games that only appear in your trophy list have no play time, so they are left out.
 
 **Steam** (reliable, official)
 
@@ -77,7 +77,7 @@ Nintendo has no API, so add Switch games yourself to the `games` list in `data/g
 
 ## Keep it fresh automatically
 
-Push this folder to GitHub. Under Settings, Secrets and variables, Actions, add whichever of these you use: `GOODREADS_USER_ID`, `GOODREADS_RSS_KEY`, `STEAM_API_KEY`, `STEAM_ID`, `PSN_NPSSO`. The workflow in `.github/workflows/sync-data.yml` then refreshes books and games every day and commits the result. You can also run it by hand from the Actions tab.
+Push this folder to GitHub. Under Settings, Secrets and variables, Actions, add whichever of these you use: `GOODREADS_USER_ID`, `STEAM_API_KEY`, `STEAM_ID`, `PSN_NPSSO`. The workflow in `.github/workflows/sync-data.yml` then refreshes books and games every day and commits the result. You can also run it by hand from the Actions tab.
 
 ## Work in GitHub Codespaces
 
@@ -92,9 +92,9 @@ If the preview doesn't open, use the Ports tab and open port 8000. On an iPad th
 
 The room loads data files, so serve the folder rather than double-clicking the file:
 
-    python3 -m http.server 8000
+    npx http-server -p 8000 -c-1
 
-then visit http://localhost:8000.
+then visit http://localhost:8000. This needs Node 18 or newer. The first run asks to download `http-server`; `-c-1` turns off caching so edits show on refresh.
 
 ## Publish it
 

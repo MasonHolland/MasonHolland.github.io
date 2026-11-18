@@ -1,30 +1,37 @@
 /* HOBBIES room (2 o'clock): a castle library with the bookcase and the game shelves. */
 import * as THREE from "three";
-import { DOOR_ANGLES, NEAR, RD, RW, animations, archFrameGeo, basic, bookData, box, canvasTex, createRoom, cyl, esc, fitText, gameData, interactables, mat, noise, rand, rooms, safeUrl, showPanel, signMesh, wrapText } from "./core.js";
-import { loadInto, plankTex } from "./shared.js";
+import { DOOR_ANGLES, NEAR, RW, animations, archFrameGeo, basic, bookData, box, canvasTex, createRoom, cyl, esc, fitText, gameData, interactables, mat, noise, rand, rooms, safeUrl, showPanel, signMesh, tiled, wrapText } from "./core.js";
+import { plankTex } from "./shared.js";
 
 /* ================================================================== *
  * HOBBIES (2 o'clock): a castle library with a game case
  * ================================================================== */
 
+/**
+ * Stone blocks in running bond: 4 rows of 3 equal blocks per 2 m tile, every other row shifted by
+ * half a block. The tile repeats seamlessly: the block split by the left and right edges of a
+ * shifted row is drawn twice from the same seed (once off each edge), so its two halves match,
+ * and the even number of rows keeps the alternation going from one tile to the next.
+ */
 function stoneTex() {
-  return canvasTex(512, 384, (ctx, w, h) => {
+  return canvasTex(512, 512, (ctx, w, h) => {
     ctx.fillStyle = "#2c2824"; ctx.fillRect(0, 0, w, h);
-    const rows = 3, rh = h / rows;
+    const rows = 4, per = 3, rh = h / rows, bw = w / per;
+    const block = (x, y, seed) => {
+      const s = 62 + Math.floor(rand(seed) * 34);
+      ctx.fillStyle = `rgb(${s + 14},${s + 8},${s})`;
+      ctx.fillRect(x + 3, y + 3, bw - 6, rh - 6);
+      for (let k = 0; k < 60; k++) {
+        ctx.fillStyle = `rgba(${rand(seed + k) > 0.5 ? "255,255,255" : "0,0,0"},${rand(seed * 3 + k) * 0.1})`;
+        ctx.fillRect(x + 3 + rand(seed + k + 9) * (bw - 9), y + 3 + rand(seed + k + 4) * (rh - 8), 3, 2);
+      }
+    };
     for (let r = 0; r < rows; r++) {
-      let x = -(rand(r + 3) * 120);
-      let i = 0;
-      while (x < w) {
-        const bw = 150 + rand(r * 17 + i) * 110;
-        const s = 62 + Math.floor(rand(r * 31 + i * 7) * 34);
-        ctx.fillStyle = `rgb(${s + 14},${s + 8},${s})`;
-        ctx.fillRect(x + 3, r * rh + 3, bw - 6, rh - 6);
-        for (let k = 0; k < 60; k++) {
-          ctx.fillStyle = `rgba(${rand(k + i) > 0.5 ? "255,255,255" : "0,0,0"},${rand(k * 3 + r + i) * 0.1})`;
-          ctx.fillRect(x + rand(k + 9 + i) * bw, r * rh + rand(k + 4) * rh, 3, 2);
-        }
-        x += bw;
-        i++;
+      const shift = r % 2 ? bw / 2 : 0;
+      for (let i = 0; i < per; i++) {
+        const seed = r * 31 + i * 7 + 1;
+        block(shift + i * bw, r * rh, seed);
+        if (shift + (i + 1) * bw > w) block(shift + i * bw - w, r * rh, seed);   // the half that wraps to the left edge
       }
     }
   });
@@ -95,7 +102,42 @@ function addGlassWindow(parent, x, y, z, rotY, w, rectH, seed, stone) {
   return gl;
 }
 
-const SPINES = ["#7a2e2e", "#2f4a5c", "#3d5a40", "#8a6a2f", "#4b3a5c", "#5c4033", "#2e4d4a", "#6b3b4f", "#33465e", "#7b5b2a"];
+/** Plain filler books are muted leather, so the real ones (coloured by genre) stand out. */
+const FILLER = ["#3b2b21", "#2f2721", "#45362b", "#362c26", "#2b2521", "#403028", "#33302b"];
+
+/** One spine colour per genre (the groups come from scripts/sync-goodreads.mjs). */
+export const GENRE_COLORS = {
+  "Fantasy": "#5e2b8a",
+  "Science fiction": "#1d5c8c",
+  "Horror": "#8c1c22",
+  "Mystery & thriller": "#1f6e63",
+  "Historical fiction": "#9a5a14",
+  "Classics & literature": "#7a2a55",
+  "History": "#8f7414",
+  "Philosophy & religion": "#4549b8",
+  "Science & nature": "#3f7d2a",
+  "Biography & memoir": "#b0582a",
+  "Society & politics": "#5a6470",
+  "Comics & graphic novels": "#c2a21f",
+  "Self-help & family": "#b8407e",
+  "Other fiction": "#6e5a4a",
+};
+const NO_GENRE = "#7d6a55";
+const genreColor = (g) => GENRE_COLORS[g] || NO_GENRE;
+
+/** Keep each series together, in series order, where its most recent book would have been. */
+function seriesGroups(list) {
+  const groups = [], byName = new Map();
+  for (const b of list) {
+    const key = b.series ? b.series.toLowerCase() : null;
+    if (key && byName.has(key)) { byName.get(key).push(b); continue; }
+    const grp = [b];
+    groups.push(grp);
+    if (key) byName.set(key, grp);
+  }
+  groups.forEach((grp) => grp.sort((a, b) => (a.seriesNo ?? 0) - (b.seriesNo ?? 0)));
+  return groups;
+}
 
 function spineTexture(title, color) {
   return canvasTex(64, 384, (ctx, w, h) => {
@@ -135,7 +177,7 @@ function decorativeBooks(caseGroup, { w, rows, rowH, d }, seed, startX = []) {
       if (x + bw > w / 2 - 0.1) break;
       const bh = 0.28 + rand(seed + r * 57 + i + 3) * 0.17;
       const bd = 0.2 + rand(seed + r * 13 + i + 9) * 0.08;
-      if (rand(seed + r * 7 + i * 3) > 0.04) items.push({ x: x + bw / 2, y: 0.04 + r * rowH + bh / 2, z: 0.02 + (0.27 - bd) * 0.5, bw, bh, bd, c: SPINES[Math.floor(rand(seed + r * 29 + i) * SPINES.length)], tilt: rand(seed + i + r) > 0.97 ? 0.12 : 0 });
+      if (rand(seed + r * 7 + i * 3) > 0.04) items.push({ x: x + bw / 2, y: 0.04 + r * rowH + bh / 2, z: 0.02 + (0.27 - bd) * 0.5, bw, bh, bd, c: FILLER[Math.floor(rand(seed + r * 29 + i) * FILLER.length)] });
       x += bw + 0.004;
       i++;
     }
@@ -145,11 +187,10 @@ function decorativeBooks(caseGroup, { w, rows, rowH, d }, seed, startX = []) {
   const col = new THREE.Color();
   items.forEach((it, k) => {
     dummy.position.set(it.x, it.y, it.z);
-    dummy.rotation.set(0, 0, it.tilt);
     dummy.scale.set(it.bw, it.bh, it.bd);
     dummy.updateMatrix();
     mesh.setMatrixAt(k, dummy.matrix);
-    col.set(it.c).multiplyScalar(0.55 + rand(seed + k) * 0.5);
+    col.set(it.c).multiplyScalar(0.75 + rand(seed + k) * 0.4);
     mesh.setColorAt(k, col);
   });
   mesh.instanceMatrix.needsUpdate = true;
@@ -162,18 +203,21 @@ const BOOK_KINDS = {
   want: { hint: "Want to read: ", note: "On my want-to-read list" },
 };
 
+/** Spine width of real book i: paperback-thin so a few hundred fit. */
+const bookW = (i) => 0.05 + rand(i + 1) * 0.03;
+const GAP = 0.004;
+
 /** Put one real, clickable book on a case at (x, row). kind is "read", "current" or "want". Returns its width. */
 function placeBook(caseGroup, spec, b, i, x, row, kind) {
   const K = BOOK_KINDS[kind];
-  const bw = 0.07 + rand(i + 1) * 0.04;
+  const bw = bookW(i);
   const bh = 0.31 + rand(i + 50) * 0.13;
   const bd = 0.22 + rand(i + 99) * 0.06;
-  const color = SPINES[i % SPINES.length];
+  const color = genreColor(b.genre);
   const plain = mat(color);
   const spine = new THREE.MeshStandardMaterial({ map: spineTexture(b.title, color), roughness: 0.8 });
   const m = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), [plain, plain, plain, plain, spine, plain]);
   m.position.set(x + bw / 2, 0.04 + row * spec.rowH + bh / 2, 0.02 + (0.27 - bd) * 0.5);
-  m.rotation.z = kind === "read" && rand(i + 7) > 0.93 ? 0.12 : 0;
   caseGroup.add(m);
   const stars = kind === "read" && b.rating ? "★".repeat(b.rating) + "☆".repeat(5 - b.rating) : "";
   interactables.push({
@@ -182,6 +226,8 @@ function placeBook(caseGroup, spec, b, i, x, row, kind) {
       title: b.title, meta: b.author ? "by " + b.author : "",
       html: [
         K.note ? `<p>${K.note}</p>` : "",
+        b.series ? `<p>${esc(b.series)}${b.seriesNo != null ? `, book ${esc(b.seriesNo)}` : ""}</p>` : "",
+        b.genre ? `<p><span style="display:inline-block;width:0.8em;height:0.8em;border-radius:2px;vertical-align:-0.05em;margin-right:0.4em;background:${genreColor(b.genre)}"></span>${esc(b.genre)}</p>` : "",
         stars ? `<p aria-label="Rated ${b.rating} out of 5">${stars}</p>` : "",
         kind === "read" && b.dateRead ? `<p>Finished ${esc(b.dateRead)}</p>` : "",
         safeUrl(b.link) ? `<p><a href="${esc(safeUrl(b.link))}" target="_blank" rel="noopener">View on Goodreads</a></p>` : "",
@@ -192,22 +238,71 @@ function placeBook(caseGroup, spec, b, i, x, row, kind) {
 }
 
 /**
- * Shelve a list of real books row by row (in rowOrder), then fill the rest of those rows with plain
- * filler books so the case looks full and the real ones stand out. Rows in skipRows get no filler.
+ * Shelve real books along a run of shelf rows that may span several cases.
+ * runs: [{ c, row, from? }] in order, where c = { g, spec, fillSeed, skipRows? } is a case and
+ * from (optional) is where the row starts. A series that won't fit at the end of a row starts
+ * on the next one, unless it is longer than a whole row. Afterwards each case's free space
+ * gets plain filler books. Returns how many books were shelved.
  */
-function shelveBooks(caseGroup, spec, list, rowOrder, kind, seed, fillSeed, skipRows) {
-  const start = -spec.w / 2 + 0.12, end = spec.w / 2 - 0.1;
-  const cursor = rowOrder.map(() => start);
-  let rIdx = 0;
-  list.forEach((b, i) => {
-    while (rIdx < rowOrder.length && cursor[rIdx] + 0.11 > end) rIdx++;
-    if (rIdx >= rowOrder.length) return;
-    cursor[rIdx] += placeBook(caseGroup, spec, b, seed + i, cursor[rIdx], rowOrder[rIdx], kind) + 0.004;
+function shelveAcross(runs, list, kind, seed) {
+  const startOf = (r) => r.from ?? (-r.c.spec.w / 2 + 0.12);
+  const endOf = (r) => r.c.spec.w / 2 - 0.1;
+  let ri = 0, x = runs.length ? startOf(runs[0]) : 0, n = 0;
+  const nextRow = () => { ri++; if (ri < runs.length) x = startOf(runs[ri]); };
+
+  outer: for (const grp of seriesGroups(list)) {
+    const total = grp.reduce((sum, _, k) => sum + bookW(seed + n + k) + GAP, 0);
+    const r = runs[ri];
+    if (r && x + total > endOf(r) && x > startOf(r) + 0.01 && total <= endOf(r) - startOf(r)) nextRow();
+    for (const b of grp) {
+      while (ri < runs.length && x + bookW(seed + n) > endOf(runs[ri])) nextRow();
+      if (ri >= runs.length) break outer;
+      const run = runs[ri];
+      x += placeBook(run.c.g, run.c.spec, b, seed + n, x, run.row, kind) + GAP;
+      run.used = x;
+      n++;
+    }
+  }
+
+  // filler: after the last real book on each row, from the row's start on empty rows
+  for (const c of new Set(runs.map((r) => r.c))) {
+    const fillFrom = [];
+    runs.filter((r) => r.c === c).forEach((r) => { fillFrom[r.row] = r.used ? r.used + 0.01 : r.from; });
+    (c.skipRows || []).forEach((row) => { fillFrom[row] = c.spec.w; });   // starting past the end leaves the row empty
+    decorativeBooks(c.g, c.spec, c.fillSeed, fillFrom);
+  }
+  return n;
+}
+
+/** A small brass-trimmed plaque that stands on a shelf, like "Currently reading". */
+function shelfLabel(w, h, text) {
+  return signMesh(w, h, (ctx, cw, ch) => {
+    ctx.fillStyle = "#2a1b12"; ctx.fillRect(0, 0, cw, ch);
+    ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 10; ctx.strokeRect(10, 10, cw - 20, ch - 20);
+    ctx.fillStyle = "#f0d9a8"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = "italic 500 104px 'Literata', Georgia, serif";
+    ctx.fillText(fitText(ctx, text, cw - 70), cw / 2, ch / 2 + 6);
   });
-  const fillFrom = [];
-  rowOrder.forEach((row, k) => { if (cursor[k] > start + 0.01) fillFrom[row] = cursor[k] + 0.01; });
-  skipRows.forEach((row) => { fillFrom[row] = spec.w; });   // starting past the end leaves the row empty
-  decorativeBooks(caseGroup, spec, fillSeed, fillFrom);
+}
+
+/** A key to the spine colours, for the genres actually on the shelves. */
+function genreLegend(w, genres) {
+  const rowH = 0.085, h = 0.16 + genres.length * rowH;
+  const s = signMesh(w, h, (ctx, cw, ch) => {
+    const px = cw / w;
+    ctx.fillStyle = "#2a1b12"; ctx.fillRect(0, 0, cw, ch);
+    ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 6; ctx.strokeRect(8, 8, cw - 16, ch - 16);
+    ctx.textBaseline = "middle";
+    ctx.font = `500 ${Math.round(rowH * px * 0.62)}px 'Bricolage Grotesque', Arial, sans-serif`;
+    genres.forEach((g, i) => {
+      const y = (0.08 + rowH * (i + 0.5)) * px;
+      ctx.fillStyle = genreColor(g);
+      ctx.fillRect(0.08 * px, y - rowH * px * 0.32, 0.05 * px, rowH * px * 0.64);
+      ctx.fillStyle = "#f0d9a8";
+      ctx.fillText(fitText(ctx, g, cw - 0.22 * px), 0.17 * px, y + 2);
+    });
+  });
+  return { mesh: s, h };
 }
 
 /** A dark wooden sign with brass trim, for the top of a bookcase (in the case's own frame). */
@@ -245,15 +340,24 @@ function gameCoverTexture(game) {
   });
 }
 
+/** The library runs 11 m from the door to the stained glass, deeper than the other rooms, so every
+ * bookcase can stay at a readable 5 shelves. */
+const DEPTH = 11;
+const BACK = -(NEAR + DEPTH);          // the back wall, in the room's frame
+const MID = -(NEAR + DEPTH / 2);       // halfway down the room
+
 export function buildHobbies() {
   const H = 5.0;
+  const textures = { wall: stoneTex(), floor: flagstoneTex(), ceil: plankTex("#2a1b12", 0.2, 64) };
   const g = createRoom("hobbies", {
     angle: DOOR_ANGLES.hobbies, H, label: "Hobbies",
-    wall: { tex: stoneTex(), tw: 2, th: 1.5 },
-    floor: { tex: flagstoneTex(), tw: 2, th: 2, opts: { roughness: 0.75 } },
-    ceil: { tex: plankTex("#2a1b12", 0.2, 64), tw: 2, th: 2 },
-    front: { tex: stoneTex(), tw: 2, th: 1.5 },
-    bounds: { x0: -3.3, x1: 3.3, z0: -12.26, z1: -5.26 },
+    wall: { tex: textures.wall, tw: 2, th: 2 },
+    floor: { tex: textures.floor, tw: 2, th: 2, opts: { roughness: 0.75 } },
+    ceil: { tex: textures.ceil, tw: 2, th: 2 },
+    rightOpening: HALL_OPEN,
+    front: { tex: stoneTex(), tw: 2, th: 2 },
+    depth: DEPTH,
+    bounds: { x0: -3.3, x1: 3.3, z0: BACK + 0.7, z1: -5.26 },
     frameMat: mat(0x3a2619, { roughness: 0.7 }),
   });
   const stoneM = mat(0x6c665c, { roughness: 0.95 });
@@ -261,61 +365,86 @@ export function buildHobbies() {
   const darkWood = mat(0x2a1a10, { roughness: 0.8 });
 
   // ceiling beams
-  [-6.2, -8.0, -9.8, -11.6].forEach((z) => box(RW, 0.3, 0.3, darkWood, 0, H - 0.15, z, g));
-  [-2.7, 0, 2.7].forEach((x) => box(0.24, 0.24, RD, darkWood, x, H - 0.34, -(NEAR + RD / 2), g));
+  for (let z = -6.2; z > BACK + 0.5; z -= 1.8) box(RW, 0.3, 0.3, darkWood, 0, H - 0.15, z, g);
+  [-2.7, 0, 2.7].forEach((x) => box(0.24, 0.24, DEPTH, darkWood, x, H - 0.34, MID, g));
 
   // stained glass: one tall window behind, jewel-coloured lattice with a single sword
-  addGlassWindow(g, 0, 0.7, -(NEAR + RD) + 0.01, 0, 2.2, 2.8, 3, stoneM);
+  addGlassWindow(g, 0, 0.7, BACK + 0.01, 0, 2.2, 2.8, 3, stoneM);
 
-  // bookcases: two decorative ones on the back wall. Along the left wall, from the entrance:
-  // a decorative case, the read-books case (with the currently-reading shelf), and the want-to-read case.
-  const caseBack = { w: 2.8, rows: 8, rowH: 0.5, d: 0.42 };
-  [-2.6, 2.6].forEach((x, i) => {
+  // bookcases, all 5 shelves tall. Two on the back wall, either side of the window, stopping short
+  // of its sconces. Along the left wall, from the entrance: read-books overflow, the read-books case
+  // (with the currently-reading shelf), then want-to-read.
+  const ROWS = 5, EYE_FIRST = [2, 3, 1, 4, 0];
+  const caseBack = { w: 2.25, rows: ROWS, rowH: 0.5, d: 0.42 };
+  const backCases = [-1, 1].map((side, i) => {
     const c = buildCase(g, caseBack, wood, darkWood);
-    c.g.position.set(x, 0, -(NEAR + RD) + caseBack.d / 2);
-    decorativeBooks(c.g, caseBack, 100 + i * 50);
+    c.g.position.set(side * (RW / 2 - caseBack.w / 2), 0, BACK + caseBack.d / 2);
+    return { g: c.g, spec: caseBack, fillSeed: 100 + i * 50 };
   });
-  const caseEnd = { w: 1.5, rows: 8, rowH: 0.5, d: 0.42 };
+  decorativeBooks(backCases[1].g, caseBack, backCases[1].fillSeed);   // the left one holds want-to-read overflow
+  const caseEnd = { w: 3.0, rows: ROWS, rowH: 0.5, d: 0.42 };
   const leftCase = (spec, z) => {
     const c = buildCase(g, spec, wood, darkWood);
     c.g.position.set(-RW / 2 + spec.d / 2, 0, z);
     c.g.rotation.y = Math.PI / 2;
     return c;
   };
-  const nearCase = leftCase(caseEnd, -6.0);
-  decorativeBooks(nearCase.g, caseEnd, 400);
+  const nearCase = leftCase(caseEnd, -5.26 - caseEnd.w / 2);
+  const near = { g: nearCase.g, spec: caseEnd, fillSeed: 400 };
+  const backLeft = backCases[0];
 
-  // centre: books you have finished, with the eye-height shelf kept for what you are reading now
+  // centre: books you have finished, with the eye-height shelf kept for what you are reading now.
+  // Read books that don't fit carry on in the case to its left (nearer the door).
   const readCase = { w: 4.4, rows: 5, rowH: 0.5, d: 0.42 };
-  const rc = leftCase(readCase, -8.95);
+  const rc = leftCase(readCase, -5.26 - caseEnd.w - readCase.w / 2);
   const CURRENT_ROW = 2;
   let cx = -readCase.w / 2 + 0.12;
   (bookData.currentlyReading || []).forEach((b, i) => {
     if (cx + 0.11 > readCase.w / 2 - 0.75) return;    // leave room for the label at the right end
-    cx += placeBook(rc.g, readCase, b, 900 + i, cx, CURRENT_ROW, "current") + 0.004;
+    cx += placeBook(rc.g, readCase, b, 900 + i, cx, CURRENT_ROW, "current") + GAP;
   });
-  const curLabel = signMesh(0.56, 0.15, (ctx, w, h) => {
-    ctx.fillStyle = "#2a1b12"; ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 10; ctx.strokeRect(10, 10, w - 20, h - 20);
-    ctx.fillStyle = "#f0d9a8"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.font = "italic 500 104px 'Literata', Georgia, serif";
-    ctx.fillText("Currently reading", w / 2, h / 2 + 6);
-  });
+  const curLabel = shelfLabel(0.56, 0.15, "Currently reading");
   curLabel.position.set(readCase.w / 2 - 0.42, 0.04 + CURRENT_ROW * readCase.rowH + 0.09, 0.08);
   curLabel.rotation.x = -0.12;
   rc.g.add(curLabel);
-  // the other rows, nearest eye height first; plain filler books skip the currently-reading shelf
-  shelveBooks(rc.g, readCase, (bookData.books || []).slice(0, 220), [3, 1, 4, 0], "read", 0, 700, [CURRENT_ROW]);
-  rc.g.add(caseSign(1.9, 0.4, `${(bookData.books || []).length} books read`, 0, rc.h + 0.47));
+  const read = bookData.books || [];
+  const readC = { g: rc.g, spec: readCase, fillSeed: 700, skipRows: [CURRENT_ROW] };
+  shelveAcross([
+    ...[3, 1, 4, 0].map((row) => ({ c: readC, row })),
+    ...EYE_FIRST.map((row) => ({ c: near, row })),
+  ], read, "read", 0);
+  rc.g.add(caseSign(1.9, 0.4, `${read.length} books read`, 0, rc.h + 0.47));
 
-  // far end: books you want to read
+  // a key to the spine colours, either side of the count
+  const shelved = [...read, ...(bookData.currentlyReading || []), ...(bookData.wantToRead || [])];
+  const genres = Object.keys(GENRE_COLORS).filter((k) => shelved.some((b) => b.genre === k));
+  const half = Math.ceil(genres.length / 2);
+  [genres.slice(0, half), genres.slice(half)].forEach((list, i) => {
+    if (!list.length) return;
+    const { mesh, h } = genreLegend(1.05, list);
+    mesh.position.set(i ? 1.6 : -1.6, rc.h + 0.2 + h / 2, -0.11);
+    rc.g.add(mesh);
+  });
+
+  // far end: books you want to read, labelled on the eye-height shelf. Any that don't fit
+  // carry on in the back-wall case to its right.
   const want = bookData.wantToRead || [];
-  const wantCase = leftCase(caseEnd, -11.9);
-  shelveBooks(wantCase.g, caseEnd, want.slice(0, 100), [3, 2, 4, 1, 5, 0, 6, 7], "want", 2000, 450, []);
-  wantCase.g.add(caseSign(1.4, 0.34, want.length ? `Want to read · ${want.length}` : "Want to read", 0, wantCase.h + 0.32));
+  const wantCase = leftCase(caseEnd, -5.26 - caseEnd.w - readCase.w - caseEnd.w / 2);
+  const wantC = { g: wantCase.g, spec: caseEnd, fillSeed: 450 };
+  const LABEL_ROW = 2, labelW = 0.62;   // the middle shelf
+  const wantLabel = shelfLabel(labelW, 0.17, want.length ? `Want to read · ${want.length}` : "Want to read");
+  wantLabel.position.set(-caseEnd.w / 2 + 0.1 + labelW / 2, 0.04 + LABEL_ROW * caseEnd.rowH + 0.1, 0.08);
+  wantLabel.rotation.x = -0.12;
+  wantCase.g.add(wantLabel);
+  shelveAcross([
+    { c: wantC, row: LABEL_ROW, from: -caseEnd.w / 2 + 0.14 + labelW },
+    ...EYE_FIRST.filter((r) => r !== LABEL_ROW).map((row) => ({ c: wantC, row })),
+    // its first 0.4 m sits behind the want case's end, in the corner
+    ...EYE_FIRST.map((row) => ({ c: backLeft, row, from: -backLeft.spec.w / 2 + 0.55 })),
+  ], want, "want", 2000);
 
-  // one game shelf per platform along the right wall
-  buildGameShelves(g, wood, darkWood);
+  // game shelves: two in the room either side of the game gallery, the rest down the gallery
+  buildGameShelves(g, wood, darkWood, stoneM, textures);
 
   // rug in the middle of the room
   const rugTex = canvasTex(512, 384, (ctx, w, h) => {
@@ -327,48 +456,54 @@ export function buildHobbies() {
   });
   const rug = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 3.2), new THREE.MeshStandardMaterial({ map: rugTex, roughness: 1 }));
   rug.rotation.x = -Math.PI / 2;
-  rug.position.set(0, 0.012, -8.9);
+  rug.position.set(0, 0.012, MID);
   g.add(rug);
 
-  // chandelier
-  const chand = new THREE.Group();
-  chand.position.set(0, 3.9, -8.9);
-  g.add(chand);
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.8, 0.035, 8, 40), mat(0x1a1612, { metalness: 0.6, roughness: 0.5 }));
-  ring.rotation.x = Math.PI / 2;
-  chand.add(ring);
+  // two chandeliers down the length of the room
   const flames = [];
-  for (let i = 0; i < 8; i++) {
-    const a = (i / 8) * Math.PI * 2;
-    cyl(0.03, 0.03, 0.2, mat(0xf2e8d0), Math.cos(a) * 0.8, 0.12, Math.sin(a) * 0.8, chand, 10);
-    const f = new THREE.Mesh(new THREE.SphereGeometry(0.03, 8, 8), basic(0xffc866));
-    f.scale.y = 1.6;
-    f.position.set(Math.cos(a) * 0.8, 0.28, Math.sin(a) * 0.8);
-    chand.add(f);
-    flames.push(f);
-  }
-  [0, 2.1, 4.2].forEach((a) => cyl(0.012, 0.012, H - 3.9, mat(0x1a1612), Math.cos(a) * 0.5, (H - 3.9) / 2, Math.sin(a) * 0.5, chand, 6));
+  const CHANDELIERS = [MID + 2.3, MID - 2.3];
+  CHANDELIERS.forEach((cz) => {
+    const chand = new THREE.Group();
+    chand.position.set(0, 3.9, cz);
+    g.add(chand);
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.8, 0.035, 8, 40), mat(0x1a1612, { metalness: 0.6, roughness: 0.5 }));
+    ring.rotation.x = Math.PI / 2;
+    chand.add(ring);
+    for (let i = 0; i < 8; i++) {
+      const a = (i / 8) * Math.PI * 2;
+      cyl(0.03, 0.03, 0.2, mat(0xf2e8d0), Math.cos(a) * 0.8, 0.12, Math.sin(a) * 0.8, chand, 10);
+      const f = new THREE.Mesh(new THREE.SphereGeometry(0.03, 8, 8), basic(0xffc866));
+      f.scale.y = 1.6;
+      f.position.set(Math.cos(a) * 0.8, 0.28, Math.sin(a) * 0.8);
+      chand.add(f);
+      flames.push(f);
+    }
+    [0, 2.1, 4.2].forEach((a) => cyl(0.012, 0.012, H - 3.9, mat(0x1a1612), Math.cos(a) * 0.5, (H - 3.9) / 2, Math.sin(a) * 0.5, chand, 6));
+  });
 
   // wall sconces beside the back window
   [-1.5, 1.5].forEach((x) => {
-    cyl(0.03, 0.03, 0.22, mat(0xf2e8d0), x, 2.2, -(NEAR + RD) + 0.25, g, 10);
+    cyl(0.03, 0.03, 0.22, mat(0xf2e8d0), x, 2.2, BACK + 0.25, g, 10);
     const f = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 8), basic(0xffc866));
-    f.scale.y = 1.6; f.position.set(x, 2.38, -(NEAR + RD) + 0.25); g.add(f);
+    f.scale.y = 1.6; f.position.set(x, 2.38, BACK + 0.25); g.add(f);
     flames.push(f);
   });
   animations.push((t) => flames.forEach((f, i) => { f.scale.y = 1.5 + Math.sin(t * 9 + i * 2.1) * 0.25; }));
 
   // lights: candlelight from the chandelier, coloured light through the glass
-  const candle = new THREE.PointLight(0xffb36b, 36, 12, 2);
-  candle.position.set(0, 3.6, -8.9);
-  g.add(candle);
-  animations.push((t) => { candle.intensity = 36 + Math.sin(t * 7) * 1.4 + Math.sin(t * 13.3) * 0.8; });
+  const candles = CHANDELIERS.map((cz) => {
+    const l = new THREE.PointLight(0xffb36b, 28, 11, 2);
+    l.position.set(0, 3.6, cz);
+    g.add(l);
+    return l;
+  });
+  animations.push((t) => candles.forEach((l, i) => { l.intensity = 28 + Math.sin(t * 7 + i) * 1.2 + Math.sin(t * 13.3 + i * 2) * 0.7; }));
   const blue = new THREE.PointLight(0x5b7bff, 16, 8, 2);
-  blue.position.set(0, 2.4, -12.2);
+  blue.position.set(0, 2.4, BACK + 0.76);
   g.add(blue);
   // soft warm light on the game shelves
   const shelfLight = new THREE.PointLight(0xffc48a, 9, 6.5, 2);
-  shelfLight.position.set(2.4, 1.7, -8.95);
+  shelfLight.position.set(2.4, 1.7, (HALL.z0 + HALL.z1) / 2);
   g.add(shelfLight);
 }
 
@@ -442,89 +577,246 @@ function makeSteamDeck() {
 
 const CONSOLES = { psn: makePS5, switch: makeSwitch, steam: makeSteamDeck };
 const SHELF = { w: 2.3, rows: 5, rowH: 0.54, d: 0.45 };
+const UNIT = SHELF.w + 0.1;      // one shelf unit along a wall, with a small gap
+const MAIN_HOLDS = 36;           // a console unit: 4 on show beside the console, 8 on each other shelf
+const PER_ROW = 8;
 
-function buildPlatformShelf(g, key, z, wood, darkWood) {
+/**
+ * The game gallery: a hallway through the right wall, sized to fit every game. The console
+ * units stand in the room either side of its opening (PlayStation, Steam) and at its far end
+ * (Switch); the rest of each platform's games line the hallway walls.
+ */
+export const HALL = { z0: MID - 1.8, z1: MID + 1.8, h: 3.6 };                     // outer walls, room frame
+export const HALL_OPEN = { z0: HALL.z0 + SHELF.d, z1: HALL.z1 - SHELF.d, h: 3.2 };
+
+/* ---------- covers: loaded on first entry, and shrunk so hundreds fit in graphics memory ---------- */
+
+const coverQueue = [];
+const imageLoader = new THREE.ImageLoader();
+const blankCovers = {};
+const blankCover = (key) => blankCovers[key] || (blankCovers[key] = canvasTex(64, 90, (ctx, w, h) => {
+  const P = platformOf(key), g = ctx.createLinearGradient(0, 0, w, h);
+  g.addColorStop(0, P.g1); g.addColorStop(1, P.g2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+}));
+
+function setCover(material, tex) {
+  material.map = tex;
+  material.emissiveMap = tex;
+  material.needsUpdate = true;
+}
+
+/** Load a cover into a small canvas (cropped to fill), or draw the title if there is none. */
+function loadCover(material, game, aspect) {
+  const titleCard = () => setCover(material, gameCoverTexture(game));
+  const src = game.thumb || game.cover;   // the 200x300 copy when there is one
+  if (!src) { titleCard(); return; }
+  imageLoader.load(src, (img) => {
+    const H = 192, W = Math.round(H * aspect);
+    const a = img.width / img.height;
+    let sw = img.width, sh = img.height, sx = 0, sy = 0;
+    if (a > aspect) { sw = img.height * aspect; sx = (img.width - sw) / 2; }
+    else { sh = img.width / aspect; sy = (img.height - sh) / 2; }
+    setCover(material, canvasTex(W, H, (ctx) => ctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, H)));
+  }, undefined, titleCard);
+}
+
+/* ---------- one shelf unit ---------- */
+
+/** A game box on a shelf. big = the showcase games beside a console. */
+function addGame(shelf, key, game, x, row, big) {
   const P = platformOf(key);
-  const games = (gameData.games || []).filter((x) => x.platform === key).slice(0, 36);
+  const gw = big ? 0.26 : 0.2, gh = big ? 0.37 : 0.29;
+  const faces = mat(P.color);
+  const front = new THREE.MeshStandardMaterial({ map: blankCover(key), emissive: 0xffffff, emissiveMap: blankCover(key), emissiveIntensity: 0.25, roughness: 0.6 });
+  const m = new THREE.Mesh(new THREE.BoxGeometry(gw, gh, 0.03), [faces, faces, faces, faces, front, faces]);
+  const tilt = big ? -0.2 : -0.1;
+  m.position.set(x, 0.04 + row * SHELF.rowH + (gh / 2) * Math.cos(tilt) + 0.01, -SHELF.d / 2 + 0.2 + (big ? 0.03 : 0));
+  m.rotation.x = tilt;
+  shelf.add(m);
+  coverQueue.push(() => loadCover(front, game, gw / gh));
+  interactables.push({
+    mesh: m, hint: "Inspect game: " + game.title, mat: front, base: 0.25,
+    open: () => showPanel({
+      title: game.title,
+      meta: P.label,
+      html: [
+        game.hours ? `<p>${esc(Math.round(game.hours))} hours played in total</p>` : "",
+        game.recentHours ? `<p>${esc(game.recentHours)} hours in the last two weeks</p>` : "",
+        game.lastPlayed ? `<p>Last played ${esc(game.lastPlayed)}</p>` : "",
+        game.trophies ? `<p>Trophies: ${esc(game.trophies.earned)} of ${esc(game.trophies.total)} (${esc(game.trophies.progress ?? 0)}%)</p>` : "",
+        game.achievements ? `<p>Achievements: ${esc(game.achievements.earned)} of ${esc(game.achievements.total)} (${esc(game.achievements.progress)}%)</p>` : "",
+        game.note ? `<p>${esc(game.note)}</p>` : "",
+      ].join(""),
+    }),
+  });
+}
+
+/** A platform sign for the top of a unit. */
+function platformSign(text) {
+  return signMesh(1.7, 0.36, (ctx, w, hh) => {
+    ctx.fillStyle = "#2a1b12"; ctx.fillRect(0, 0, w, hh);
+    ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 5; ctx.strokeRect(8, 8, w - 16, hh - 16);
+    ctx.fillStyle = "#f0d9a8"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = "italic 500 56px 'Literata', Georgia, serif";
+    ctx.fillText(fitText(ctx, text, w - 60), w / 2, hh / 2 + 4);
+  });
+}
+
+/** An empty game case at (x, z), turned rotY, facing the way its front points. */
+function placeUnit(g, x, z, rotY, wood, darkWood) {
   const shelf = new THREE.Group();
-  shelf.position.set(RW / 2 - SHELF.d / 2, 0, z);
-  shelf.rotation.y = -Math.PI / 2;           // faces into the room
+  shelf.position.set(x, 0, z);
+  shelf.rotation.y = rotY;
   g.add(shelf);
   const { h } = buildCase(shelf, SHELF, wood, darkWood);
-  const topOf = (row) => 0.04 + row * SHELF.rowH;
+  return { shelf, h };
+}
 
-  const addGame = (game, x, row, big) => {
-    const gw = big ? 0.26 : 0.2, gh = big ? 0.37 : 0.29;
-    const faces = mat(P.color);
-    const tex = gameCoverTexture(game);
-    const front = new THREE.MeshStandardMaterial({ map: tex, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.25, roughness: 0.6 });
-    const m = new THREE.Mesh(new THREE.BoxGeometry(gw, gh, 0.03), [faces, faces, faces, faces, front, faces]);
-    const tilt = big ? -0.2 : -0.1;
-    m.position.set(x, topOf(row) + (gh / 2) * Math.cos(tilt) + 0.01, -SHELF.d / 2 + 0.2 + (big ? 0.03 : 0));
-    m.rotation.x = tilt;
-    shelf.add(m);
-    loadInto(front, game.cover, gw / gh);
-    interactables.push({
-      mesh: m, hint: "Inspect game: " + game.title, mat: front, base: 0.25,
-      open: () => showPanel({
-        title: game.title,
-        meta: P.label,
-        html: [
-          game.hours ? `<p>${esc(Math.round(game.hours))} hours played in total</p>` : "",
-          game.recentHours ? `<p>${esc(game.recentHours)} hours in the last two weeks</p>` : "",
-          game.lastPlayed ? `<p>Last played ${esc(game.lastPlayed)}</p>` : "",
-          game.trophies ? `<p>Trophies: ${esc(game.trophies.earned)} of ${esc(game.trophies.total)}</p>` : "",
-          game.note ? `<p>${esc(game.note)}</p>` : "",
-        ].join(""),
-      }),
-    });
-  };
+/** Trophy or achievement completion, 0-100 (-1 when the game has neither). */
+const completion = (game) => (game.trophies ? game.trophies.progress ?? 0 : game.achievements ? game.achievements.progress : -1);
 
-  // the console sits in the middle of the third shelf, with two games on show either side
+/**
+ * Split a platform's games (newest first) into the 4 showcase games beside the console (highest
+ * trophy or achievement completion, then most hours) and everything else, still newest first.
+ */
+export function showcaseFirst(games) {
+  const best = [...games].sort((a, b) => completion(b) - completion(a) || (b.hours || 0) - (a.hours || 0)).slice(0, 4);
+  return { showcase: best, rest: games.filter((g) => !best.includes(g)) };
+}
+
+/** The console unit: the console mid-shelf with the 4 most-completed games either side, 32 more around it. */
+function consoleUnit(g, key, games, x, z, rotY, wood, darkWood) {
+  const P = platformOf(key);
+  const { shelf, h } = placeUnit(g, x, z, rotY, wood, darkWood);
   const consoleRow = 2;
-  const showcase = [0.5, -0.5, 0.78, -0.78];
-  games.slice(0, 4).forEach((game, i) => addGame(game, showcase[i], consoleRow, true));
-  const rest = games.slice(4);
+  const spots = [0.5, -0.5, 0.78, -0.78];   // nearest the console first
+  const { showcase, rest: others } = showcaseFirst(games);
+  showcase.forEach((game, i) => addGame(shelf, key, game, spots[i], consoleRow, true));
+  const rest = others.slice(0, MAIN_HOLDS - 4);
   [3, 1, 4, 0].forEach((row, r) => {
-    rest.slice(r * 8, r * 8 + 8).forEach((game, i) => addGame(game, -0.91 + i * 0.26, row, false));
+    rest.slice(r * PER_ROW, r * PER_ROW + PER_ROW).forEach((game, i) => addGame(shelf, key, game, -0.91 + i * 0.26, row, false));
   });
 
   const con = CONSOLES[key]();
-  con.position.set(0, topOf(consoleRow) + 0.005, -0.02);
+  con.position.set(0, 0.04 + consoleRow * SHELF.rowH + 0.005, -0.02);
   shelf.add(con);
   const total = games.reduce((n, x) => n + (x.hours || 0), 0);
   const earned = games.reduce((n, x) => n + (x.trophies ? x.trophies.earned : 0), 0);
   const hit = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.45, 0.3), new THREE.MeshBasicMaterial({ visible: false }));
-  hit.position.set(0, topOf(consoleRow) + 0.22, 0);
+  hit.position.set(0, 0.04 + consoleRow * SHELF.rowH + 0.22, 0);
   shelf.add(hit);
+  const more = games.length - MAIN_HOLDS;
   interactables.push({
     mesh: hit, hint: "Look at the " + P.label + " shelf",
     open: () => showPanel({
       title: P.label,
-      meta: games.length + (games.length === 1 ? " game on this shelf" : " games on this shelf"),
+      meta: games.length + (games.length === 1 ? " game played" : " games played"),
       html: [
         total ? `<p>${esc(Math.round(total))} hours across these games</p>` : "",
         earned ? `<p>${esc(earned)} trophies earned</p>` : "",
         key === "switch" ? "<p>The Switch has no public game history, so these are added by hand in data/games.json.</p>" : "",
         games[0] ? `<p>Most recent: ${esc(games[0].title)}</p>` : "<p>No games here yet.</p>",
+        more > 0 ? `<p>The other ${esc(more)} carry on down the game gallery.</p>` : "",
       ].join(""),
     }),
   });
-
-  const sign = signMesh(1.7, 0.36, (ctx, w, hh) => {
-    ctx.fillStyle = "#2a1b12"; ctx.fillRect(0, 0, w, hh);
-    ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 5; ctx.strokeRect(8, 8, w - 16, hh - 16);
-    ctx.fillStyle = "#f0d9a8"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.font = "italic 500 56px 'Literata', Georgia, serif";
-    ctx.fillText(fitText(ctx, `${P.label} · ${games.length}`, w - 60), w / 2, hh / 2 + 4);
-  });
+  const sign = platformSign(`${P.label} · ${games.length}`);
   sign.position.set(0, h + 0.38, 0.2);
   shelf.add(sign);
 }
 
-function buildGameShelves(g, wood, darkWood) {
-  buildPlatformShelf(g, "psn", -6.5, wood, darkWood);
-  buildPlatformShelf(g, "switch", -8.95, wood, darkWood);
-  buildPlatformShelf(g, "steam", -11.4, wood, darkWood);
-  rooms.hobbies.obstacles.push({ x0: 3.1, x1: 3.8, z0: -12.3, z1: -5.3 });
+/** A hallway unit: up to 40 games, 8 on each shelf, eye height first. */
+function galleryUnit(g, key, games, x, z, rotY, wood, darkWood, label) {
+  const { shelf, h } = placeUnit(g, x, z, rotY, wood, darkWood);
+  [2, 3, 1, 4, 0].forEach((row, r) => {
+    games.slice(r * PER_ROW, r * PER_ROW + PER_ROW).forEach((game, i) => addGame(shelf, key, game, -0.91 + i * 0.26, row, false));
+  });
+  if (label) {
+    const sign = platformSign(label);
+    sign.scale.setScalar(0.8);
+    sign.position.set(0, h + 0.26, 0.2);
+    shelf.add(sign);
+  }
+}
+const GALLERY_HOLDS = PER_ROW * SHELF.rows;
+
+/* ---------- the room's right wall and the hallway ---------- */
+
+function buildGameShelves(g, wood, darkWood, stone, textures) {
+  const all = gameData.games || [];
+  const of = (key) => all.filter((x) => x.platform === key);
+  const psn = of("psn"), steam = of("steam"), sw = of("switch");
+  // the gallery carries on with whatever didn't fit on the console unit
+  const chunks = (list) => {
+    const left = showcaseFirst(list).rest.slice(MAIN_HOLDS - 4), out = [];
+    for (let i = 0; i < left.length; i += GALLERY_HOLDS) out.push(left.slice(i, i + GALLERY_HOLDS));
+    return out;
+  };
+  // PlayStation's overflow lines the hallway wall on its side, Steam's the other; the Switch
+  // (added by hand, usually a short list) stands at the far end
+  const wallA = chunks(psn), wallB = chunks(steam);
+  const X0 = RW / 2;                                           // the room's right wall
+  const L = Math.max(4, 0.15 + Math.max(wallA.length, wallB.length) * UNIT + 0.1);
+  const zc = (HALL.z0 + HALL.z1) / 2, W = HALL.z1 - HALL.z0;
+  const right = -Math.PI / 2;
+
+  // console units in the room, either side of the opening
+  consoleUnit(g, "psn", psn, X0 - SHELF.d / 2, HALL_OPEN.z1 + SHELF.w / 2, right, wood, darkWood);
+  consoleUnit(g, "steam", steam, X0 - SHELF.d / 2, HALL_OPEN.z0 - SHELF.w / 2, right, wood, darkWood);
+  rooms.hobbies.obstacles.push(
+    { x0: 3.1, x1: 3.8, z0: HALL_OPEN.z1, z1: HALL_OPEN.z1 + SHELF.w + 0.05 },
+    { x0: 3.1, x1: 3.8, z0: HALL_OPEN.z0 - SHELF.w - 0.05, z1: HALL_OPEN.z0 },
+  );
+
+  // the hallway shell: floor, ceiling, side walls, far wall, and the hallway side of the opening
+  const plane = (w, h, material, x, y, z, rx, ry) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), material);
+    m.position.set(x, y, z); m.rotation.set(rx, ry, 0);
+    g.add(m);
+  };
+  const wallMat = (w, h) => tiled(textures.wall, w / 2, h / 2);
+  plane(L, W, tiled(textures.floor, L / 2, W / 2, { roughness: 0.75 }), X0 + L / 2, 0, zc, -Math.PI / 2, 0);
+  plane(L, W, tiled(textures.ceil, L / 2, W / 2), X0 + L / 2, HALL.h, zc, Math.PI / 2, 0);
+  plane(L, HALL.h, wallMat(L, HALL.h), X0 + L / 2, HALL.h / 2, HALL.z1, 0, Math.PI);
+  plane(L, HALL.h, wallMat(L, HALL.h), X0 + L / 2, HALL.h / 2, HALL.z0, 0, 0);
+  plane(W, HALL.h, wallMat(W, HALL.h), X0 + L, HALL.h / 2, zc, 0, -Math.PI / 2);
+  plane(SHELF.d, HALL.h, wallMat(SHELF.d, HALL.h), X0 + 0.001, HALL.h / 2, HALL.z1 - SHELF.d / 2, 0, Math.PI / 2);
+  plane(SHELF.d, HALL.h, wallMat(SHELF.d, HALL.h), X0 + 0.001, HALL.h / 2, HALL.z0 + SHELF.d / 2, 0, Math.PI / 2);
+  const openW = HALL_OPEN.z1 - HALL_OPEN.z0;
+  plane(openW, HALL.h - HALL_OPEN.h, wallMat(openW, HALL.h - HALL_OPEN.h), X0 + 0.001, (HALL.h + HALL_OPEN.h) / 2, zc, 0, Math.PI / 2);
+
+  // a dark wooden frame round the opening, and a sign over it
+  [HALL_OPEN.z0, HALL_OPEN.z1].forEach((z) => box(0.2, HALL_OPEN.h, 0.14, darkWood, X0, HALL_OPEN.h / 2, z, g));
+  box(0.2, 0.18, openW + 0.14, darkWood, X0, HALL_OPEN.h + 0.09, zc, g);
+  const sign = platformSign("Game gallery");
+  sign.position.set(X0 - 0.05, HALL_OPEN.h + 0.55, zc);
+  sign.rotation.y = right;
+  g.add(sign);
+
+  // the units along each wall, from the opening outwards, then the Switch at the far end
+  wallA.forEach((list, i) => galleryUnit(g, "psn", list, X0 + 0.15 + UNIT * (i + 0.5), HALL.z1 - SHELF.d / 2, Math.PI, wood, darkWood,
+    i === 0 ? "PlayStation, continued" : ""));
+  wallB.forEach((list, i) => galleryUnit(g, "steam", list, X0 + 0.15 + UNIT * (i + 0.5), HALL.z0 + SHELF.d / 2, 0, wood, darkWood,
+    i === 0 ? "Steam, continued" : ""));
+  consoleUnit(g, "switch", sw, X0 + L - SHELF.d / 2, zc, right, wood, darkWood);
+
+  // lanterns down the hallway
+  const lights = Math.max(1, Math.round(L / 5));
+  for (let i = 0; i < lights; i++) {
+    const x = X0 + (L * (i + 0.5)) / lights;
+    const lamp = new THREE.PointLight(0xffc48a, 7, 6.5, 2);
+    lamp.position.set(x, HALL.h - 0.45, zc);
+    g.add(lamp);
+    cyl(0.012, 0.012, 0.3, mat(0x1a1612), x, HALL.h - 0.15, zc, g, 6);
+    const glow = new THREE.Mesh(new THREE.SphereGeometry(0.08, 10, 8), basic(0xffd9a0));
+    glow.position.set(x, HALL.h - 0.38, zc);
+    g.add(glow);
+  }
+
+  rooms.hobbies.annexes.push({
+    walk: { x0: 3.2, x1: X0 + L - SHELF.d - 0.3, z0: HALL_OPEN.z0 + 0.3, z1: HALL_OPEN.z1 - 0.3 },
+    outline: { x0: X0, x1: X0 + L, z0: HALL.z0, z1: HALL.z1 },
+  });
+  rooms.hobbies.onEnter = () => coverQueue.splice(0).forEach((load) => load());
 }

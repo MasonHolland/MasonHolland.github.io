@@ -261,7 +261,16 @@ export const SIGNS = {
 
 /* ---------- walking area ---------- */
 
-export const rooms = {};   // key -> { angle, label, bounds, obstacles, group }
+export const rooms = {};   // key -> { angle, label, bounds, obstacles, group, annexes, onEnter? }
+
+/**
+ * Is a point (in the room's own frame) inside the room or one of its annexes (such as a hallway)?
+ * pad widens the annexes, for "which area am I in" checks that should include their walls.
+ */
+export function inRoomArea(room, lx, lz, { zNear = -4.95, pad = 0.6 } = {}) {
+  if (lz < zNear && lz > -(NEAR + room.depth) - 0.04 && Math.abs(lx) < 4.05) return true;
+  return room.annexes.some(({ walk: w }) => lx > w.x0 - pad && lx < w.x1 + pad && lz > w.z0 - pad && lz < w.z1 + pad);
+}
 
 /** World position to a room's own frame (undoes the room's turn and its outward SHIFT). */
 export function toLocal(angle, x, z) {
@@ -285,8 +294,8 @@ export function walkable(x, z) {
   for (const room of Object.values(rooms)) {
     const [lx, lz] = toLocal(room.angle, x, z);
     if (Math.abs(lx) <= DOOR_HALF - 0.24 && lz <= -4.0 && lz >= -5.45) return true;
-    const b = room.bounds;
-    if (lx >= b.x0 && lx <= b.x1 && lz >= b.z0 && lz <= b.z1) {
+    const inBox = (b) => lx >= b.x0 && lx <= b.x1 && lz >= b.z0 && lz <= b.z1;
+    if (inBox(room.bounds) || room.annexes.some((a) => inBox(a.walk))) {
       let hit = false;
       for (const o of room.obstacles) {
         if (lx > o.x0 - PR && lx < o.x1 + PR && lz > o.z0 - PR && lz < o.z1 + PR) { hit = true; break; }
@@ -301,7 +310,7 @@ export function areaAt(x, z) {
   if (x * x + z * z <= (R - 0.1) * (R - 0.1)) return "The hall";
   for (const room of Object.values(rooms)) {
     const [lx, lz] = toLocal(room.angle, x, z);
-    if (lz < -4.95 && Math.abs(lx) < 4.05 && lz > -13) return room.label;
+    if (inRoomArea(room, lx, lz)) return room.label;
   }
   return null;
 }
@@ -398,14 +407,20 @@ export function makeSofa(color, w = 2.3) {
 
 /* ---------- room shell: floor, ceiling, walls, arched door wall ---------- */
 
-export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bounds, frameMat }) {
+/**
+ * rightOpening (optional): { z0, z1, h } cuts a doorway of height h into the right wall between
+ * z0 and z1 (room frame, z0 < z1), for an annex such as a hallway.
+ * depth (optional) is how far the room runs from its door wall to its back wall; RD by default.
+ */
+export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bounds, frameMat, rightOpening, depth = RD }) {
   const g = new THREE.Group();          // door wall, frames and sign: always visible
   g.rotation.y = angle;
   g.position.set(-SHIFT * Math.sin(angle), 0, -SHIFT * Math.cos(angle));
   scene.add(g);
   const inner = new THREE.Group();      // everything inside the room: hidden while you are in another room
   g.add(inner);
-  rooms[key] = { angle, label, bounds, obstacles: [], group: inner, H };
+  rooms[key] = { angle, label, bounds, obstacles: [], annexes: [], group: inner, H, depth };
+  const RD = depth;   // the rest of this function builds to this room's own depth
 
   const Hp = Math.max(H, HUB_H);
   const zc = -(NEAR + RD / 2);
@@ -428,10 +443,24 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
   left.rotation.y = Math.PI / 2;
   left.position.set(-RW / 2, H / 2, zc);
   inner.add(left);
-  const right = new THREE.Mesh(new THREE.PlaneGeometry(RD, H), wm());
-  right.rotation.y = -Math.PI / 2;
-  right.position.set(RW / 2, H / 2, zc);
-  inner.add(right);
+  // the right wall, in pieces around the opening if there is one
+  const rightPiece = (zA, zB, yA, yB) => {
+    const len = zB - zA, ht = yB - yA;
+    if (len <= 0.001 || ht <= 0.001) return;
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(len, ht), tiled(wall.tex, len / wall.tw, ht / wall.th, wall.opts));
+    p.rotation.y = -Math.PI / 2;
+    p.position.set(RW / 2, (yA + yB) / 2, (zA + zB) / 2);
+    inner.add(p);
+  };
+  const zFar = -(NEAR + RD), zNear = -NEAR;
+  if (rightOpening) {
+    const { z0, z1, h } = rightOpening;
+    rightPiece(zFar, z0, 0, H);
+    rightPiece(z1, zNear, 0, H);
+    rightPiece(z0, z1, h, H);
+  } else {
+    rightPiece(zFar, zNear, 0, H);
+  }
 
   // the door wall: a thick slab with an arched passage cut through it
   const slab = new THREE.Mesh(archSlabGeo(RW / 2 + 0.3, Hp, WALL_T), tiled(front.tex, 1 / front.tw, 1 / front.th, front.opts));

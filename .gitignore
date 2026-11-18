@@ -1,0 +1,18 @@
+# Local notes, not part of the site
+.chats/
+CLAUDE.md
+
+# Goodreads export: has reviews and private notes, only data/books-archive.json is published
+*library_export*.csv
+
+# Design reference images, not part of the site
+.inspiration/
+
+# The resume PDF has a phone number; the site shows the same content from data/profile.json
+assets/resume/
+
+# Screenshots and notes for requested changes, not part of the site
+.changes/
+
+# Installed packages
+node_modules/

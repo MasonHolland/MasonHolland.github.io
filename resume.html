@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resume and projects</title>
-  <meta name="description" content="Work history, projects and awards on one page.">
+  <meta name="description" content="Work history, skills and education on one page.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
@@ -20,6 +20,7 @@
     <header>
       <h1 id="name"></h1>
       <p class="page__headline" id="headline"></p>
+      <p class="page__location" id="location"></p>
       <p class="page__summary" id="summary"></p>
       <ul class="page__links" id="links"></ul>
     </header>
@@ -28,6 +29,17 @@
       <section aria-labelledby="h-exp">
         <h2 id="h-exp">Experience</h2>
         <div id="experience"></div>
+      </section>
+
+      <section aria-labelledby="h-wins">
+        <h2 id="h-wins">Accomplishments</h2>
+        <ul class="page__list" id="accomplishments"></ul>
+      </section>
+
+      <section aria-labelledby="h-skills">
+        <h2 id="h-skills">Skills</h2>
+        <ul class="tags" id="expertise"></ul>
+        <dl class="skills" id="technical"></dl>
       </section>
 
       <section aria-labelledby="h-proj">
@@ -76,6 +88,9 @@
       document.getElementById("name").textContent = p.name;
       document.getElementById("headline").textContent = p.headline;
       document.getElementById("summary").textContent = p.summary;
+      document.getElementById("location").textContent = p.location || "";
+      // a section with nothing in it is hidden
+      var hide = function (id) { document.getElementById(id).parentNode.hidden = true; };
 
       var links = document.getElementById("links");
       p.links.forEach(function (l) {
@@ -88,10 +103,25 @@
         var ul = x.highlights && x.highlights.length
           ? el("ul", {}, x.highlights.map(function (h) { return el("li", { text: h }); }))
           : null;
-        exp.appendChild(entry(x.role + ", " + x.org, x.start + " to " + x.end, x.summary, [ul]));
+        var where = x.location ? el("p", { "class": "entry__where", text: x.location }) : null;
+        exp.appendChild(entry(x.role + ", " + x.org, x.start + " to " + x.end, x.summary, [where, ul]));
+      });
+
+      var wins = p.accomplishments || [];
+      if (!wins.length) hide("h-wins");
+      wins.forEach(function (w) { document.getElementById("accomplishments").appendChild(el("li", { text: w })); });
+
+      var skills = p.skills || {};
+      if (!(skills.expertise || []).length && !(skills.technical || []).length) hide("h-skills");
+      (skills.expertise || []).forEach(function (t) { document.getElementById("expertise").appendChild(el("li", { text: t })); });
+      (skills.technical || []).forEach(function (t) {
+        var dl = document.getElementById("technical");
+        dl.appendChild(el("dt", { text: t.label }));
+        dl.appendChild(el("dd", { text: t.items }));
       });
 
       var proj = document.getElementById("projects");
+      if (!(p.projects || []).length) hide("h-proj");
       p.projects.forEach(function (x) {
         var tags = x.tags && x.tags.length
           ? el("ul", { "class": "tags" }, x.tags.map(function (t) { return el("li", { text: t }); }))
@@ -101,6 +131,8 @@
       });
 
       var acc = document.getElementById("accolades");
+      if (!(p.accolades || []).length) hide("h-acc");
+      else if (p.accolades.every(function (x) { return x.kind === "degree"; })) document.getElementById("h-acc").textContent = "Education";
       p.accolades.forEach(function (x) {
         acc.appendChild(entry(x.title + ", " + x.from, x.year, x.summary));
       });

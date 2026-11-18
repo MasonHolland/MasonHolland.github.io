@@ -1,6 +1,7 @@
-/* ABOUT ME room (10 o'clock): a bright, modern living room. */
+/* ABOUT ME room (10 o'clock): a bright Scandinavian living room: white panelling, pale pine,
+ * bamboo and rattan, with the Perth skyline through the big window. */
 import * as THREE from "three";
-import { DOOR_ANGLES, NEAR, RD, RW, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, makeArmchair, makePlant, makeSofa, mat, noise, profile, rooms, safeUrl, showPanel } from "./core.js";
+import { DOOR_ANGLES, NEAR, RD, RW, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, mat, noise, profile, rand, rooms, safeUrl, showPanel } from "./core.js";
 import { addPicture, loadInto, plankTex, plasterTex } from "./shared.js";
 
 /* ---------- Perth skyline, drawn for the big window ---------- */
@@ -195,13 +196,227 @@ function addLargeFrame(parent, def, index, x, y, z, rotY, w, h) {
   return f;
 }
 
+/* ---------- Scandinavian furnishings: bamboo, charcoal linen, rattan, glass and palms ---------- */
+
+/** White walls with raised panels: a tall upper panel, a chair rail and a lower panel, 1.2 m wide. */
+function panelWallTex() {
+  return canvasTex(256, 683, (ctx, w, h) => {
+    ctx.fillStyle = "#f7f4ee"; ctx.fillRect(0, 0, w, h);
+    noise(ctx, w, h, 0.025, 900);
+    const panel = (x0, y0, x1, y1) => {
+      ctx.fillStyle = "rgba(0,0,0,0.035)"; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+      ctx.fillStyle = "rgba(255,255,255,0.9)"; ctx.fillRect(x0, y0, x1 - x0, 3); ctx.fillRect(x0, y0, 3, y1 - y0);
+      ctx.fillStyle = "rgba(0,0,0,0.13)"; ctx.fillRect(x0, y1 - 3, x1 - x0, 3); ctx.fillRect(x1 - 3, y0, 3, y1 - y0);
+    };
+    panel(26, 70, w - 26, 395);
+    panel(26, 465, w - 26, 640);
+    ctx.fillStyle = "rgba(0,0,0,0.09)"; ctx.fillRect(0, 428, w, 10);
+    ctx.fillStyle = "rgba(255,255,255,0.95)"; ctx.fillRect(0, 418, w, 10);
+  });
+}
+
+const BAMBOO = mat(0xc99a5f, { roughness: 0.55 });
+const BAMBOO_NODE = mat(0xa5763f, { roughness: 0.6 });
+const cushionSide = mat(0x3a3f47, { roughness: 0.95 });
+
+/** One bamboo pole of length len centred on (x, y, z), along axis "x", "y" or "z", with two nodes. */
+function pole(parent, len, x, y, z, axis) {
+  const p = cyl(0.022, 0.022, len, BAMBOO, x, y, z, parent, 10);
+  if (axis === "x") p.rotation.z = Math.PI / 2;
+  if (axis === "z") p.rotation.x = Math.PI / 2;
+  [-0.3, 0.3].forEach((t) => cyl(0.027, 0.027, 0.016, BAMBOO_NODE, 0, t * len, 0, p, 10));
+  return p;
+}
+
+/** A bamboo-framed seat with charcoal cushions, w wide: an armchair at 0.72, a sofa at 2.3. Faces +z. */
+function makeBambooSeat(w) {
+  const g = new THREE.Group();
+  const d = 0.78, hw = w / 2, hd = d / 2;
+  [[-hw, hd, 0.62], [hw, hd, 0.62], [-hw, -hd, 0.86], [hw, -hd, 0.86]].forEach(([x, z, h]) => pole(g, h, x, h / 2, z, "y"));
+  [-hw, hw].forEach((x) => {
+    [0.62, 0.3, 0.12].forEach((y) => pole(g, d, x, y, 0, "z"));
+    for (let k = 1; k < 4; k++) pole(g, 0.32, x, 0.46, -hd + (k * d) / 4, "y");   // slats under the arm
+  });
+  [hd, -hd].forEach((z) => { pole(g, w, 0, 0.3, z, "x"); pole(g, w, 0, 0.12, z, "x"); });
+  pole(g, w, 0, 0.86, -hd, "x");
+  const n = Math.max(3, Math.round(w / 0.16));
+  for (let k = 1; k < n; k++) pole(g, 0.54, -hw + (k * w) / n, 0.58, -hd, "y");   // back slats
+  box(w - 0.08, 0.13, d - 0.1, cushionSide, 0, 0.38, 0.03, g);
+  const back = box(w - 0.12, 0.42, 0.12, cushionSide, 0, 0.67, -hd + 0.1, g);
+  back.rotation.x = -0.12;
+  return g;
+}
+
+/** Navy chevrons on white, for a cushion. */
+function zigzagTex() {
+  return canvasTex(128, 128, (ctx, w, h) => {
+    ctx.fillStyle = "#f4f2ee"; ctx.fillRect(0, 0, w, h);
+    ctx.strokeStyle = "#1f3354"; ctx.lineWidth = 9; ctx.lineJoin = "miter";
+    for (let y = -8; y < h + 16; y += 22) {
+      ctx.beginPath(); ctx.moveTo(0, y);
+      for (let x = 0; x <= w; x += 16) ctx.lineTo(x, y + ((x / 16) % 2 ? 9 : 0));
+      ctx.stroke();
+    }
+  });
+}
+
+/** A blue diamond lattice on white, for a cushion. */
+function latticeTex() {
+  return canvasTex(128, 128, (ctx, w, h) => {
+    ctx.fillStyle = "#3f5f86"; ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = "#eef1f5";
+    for (let y = 0; y < h + 16; y += 16) for (let x = (y / 16) % 2 ? 8 : 0; x < w + 16; x += 16) {
+      ctx.beginPath(); ctx.moveTo(x, y - 5); ctx.lineTo(x + 5, y); ctx.lineTo(x, y + 5); ctx.lineTo(x - 5, y); ctx.closePath(); ctx.fill();
+    }
+  });
+}
+
+const glassMat = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.16, roughness: 0.05, metalness: 0.1, depthWrite: false });
+
+/** A glass hurricane lantern h tall with a lit candle, standing at (x, y, z). */
+function lantern(parent, x, y, z, h) {
+  const l = new THREE.Group();
+  l.position.set(x, y, z);
+  parent.add(l);
+  const r = h * 0.32;
+  cyl(r * 0.9, r * 0.9, h * 0.04, mat(0xbfc3c7, { metalness: 0.5, roughness: 0.4 }), 0, h * 0.02, 0, l, 20);
+  cyl(r, r * 0.9, h * 0.86, glassMat, 0, h * 0.47, 0, l, 24);
+  cyl(r * 0.5, r * 0.7, h * 0.08, mat(0xbfc3c7, { metalness: 0.5, roughness: 0.4 }), 0, h * 0.93, 0, l, 16);
+  cyl(h * 0.11, h * 0.11, h * 0.42, mat(0xfbf8f0), 0, h * 0.25, 0, l, 16);
+  const flame = new THREE.Mesh(new THREE.SphereGeometry(h * 0.035, 8, 8), basic(0xffc866));
+  flame.scale.y = 1.8;
+  flame.position.set(0, h * 0.5, 0);
+  l.add(flame);
+  return l;
+}
+
+/** A tall black-framed glass cabinet with plants, baskets, blue vases and a photo. Its back is at z. */
+function displayCabinet(g, x, z) {
+  const c = new THREE.Group();
+  c.position.set(x, 0, z - 0.21);
+  c.rotation.y = Math.PI;   // faces into the room
+  g.add(c);
+  const W = 1.1, Hc = 1.95, D = 0.42;
+  const black = mat(0x15161a, { roughness: 0.45, metalness: 0.3 });
+  [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => box(0.03, Hc, 0.03, black, sx * (W / 2 - 0.015), Hc / 2, sz * (D / 2 - 0.015), c));
+  box(W, 0.06, D, black, 0, Hc - 0.03, 0, c);
+  box(W, 0.08, D, black, 0, 0.04, 0, c);
+  box(W, Hc, 0.01, mat(0xf4f1ea), 0, Hc / 2, -D / 2 + 0.005, c);
+  const shelves = [0.08, 0.52, 0.96, 1.4];
+  shelves.forEach((y, i) => {
+    if (i) box(W - 0.04, 0.02, D - 0.04, mat(0xffffff, { roughness: 0.4 }), 0, y, 0, c);
+    box(W, 0.025, 0.025, black, 0, y, D / 2 - 0.0125, c);
+  });
+  [[0, D / 2, W, 0], [-W / 2, 0, D, Math.PI / 2], [W / 2, 0, D, Math.PI / 2]].forEach(([px, pz, pw, ry]) => {
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(pw - 0.02, Hc - 0.1), glassMat);
+    p.position.set(px, Hc / 2, pz); p.rotation.y = ry; c.add(p);
+  });
+  box(0.01, Hc - 0.1, 0.02, black, 0.02, Hc / 2, D / 2 + 0.005, c);   // where the two doors meet
+
+  const leaf = mat(0x5f8a55, { roughness: 0.8 }), pot = mat(0x8a7f74, { roughness: 0.7 });
+  const rattan = mat(0xc49a63, { roughness: 0.9 }), blueGlass = new THREE.MeshStandardMaterial({ color: 0x3a6aa8, transparent: true, opacity: 0.75, roughness: 0.1 });
+  const plant = (px, y) => {
+    cyl(0.08, 0.06, 0.12, pot, px, y + 0.07, 0, c, 16);
+    for (let k = 0; k < 6; k++) {
+      const s = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), leaf);
+      s.position.set(px + Math.cos(k) * 0.06, y + 0.17 + (k % 2) * 0.04, Math.sin(k) * 0.05);
+      c.add(s);
+    }
+  };
+  const basket = (px, y, r, hgt) => cyl(r, r * 0.85, hgt, rattan, px, y + hgt / 2 + 0.01, 0, c, 20);
+  const vase = (px, y, hgt) => cyl(0.05, 0.06, hgt, blueGlass, px, y + hgt / 2 + 0.01, 0, c, 16);
+  const photo = (px, y) => {
+    const f = box(0.18, 0.24, 0.02, black, px, y + 0.13, -0.08, c);
+    f.rotation.x = -0.15;
+    const pic = new THREE.Mesh(new THREE.PlaneGeometry(0.14, 0.2), mat(0xdfe6ea));
+    pic.position.set(0, 0, 0.011); f.add(pic);
+  };
+  plant(-0.25, 1.41); plant(0.2, 1.41);
+  photo(-0.2, 0.97); plant(0.25, 0.97);
+  basket(0.22, 0.53, 0.14, 0.16); vase(-0.3, 0.53, 0.2); vase(-0.18, 0.53, 0.14);
+  basket(-0.22, 0.08, 0.17, 0.22); vase(0.25, 0.08, 0.26);
+}
+
+/** A frond for the palms: a rib with leaflets either side, on a transparent canvas. */
+let frondTexture = null;
+function frondTex() {
+  if (frondTexture) return frondTexture;
+  frondTexture = canvasTex(128, 512, (ctx, w, h) => {
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = "#5b7d3a"; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(w / 2, h); ctx.lineTo(w / 2, 6); ctx.stroke();
+    for (let y = h - 40; y > 10; y -= 14) {
+      const len = 16 + 46 * Math.sin(((h - y) / h) * Math.PI);
+      [-1, 1].forEach((s) => {
+        ctx.fillStyle = (y / 14) % 2 ? "#4f7f3b" : "#5f9346";
+        ctx.beginPath();
+        ctx.moveTo(w / 2, y);
+        ctx.quadraticCurveTo(w / 2 + s * len * 0.6, y - 12, w / 2 + s * len, y - 26);
+        ctx.quadraticCurveTo(w / 2 + s * len * 0.5, y - 6, w / 2, y + 4);
+        ctx.fill();
+      });
+    }
+  });
+  return frondTexture;
+}
+
+/** A kentia palm in a dark woven pot. */
+function makePalm(g, x, z, s) {
+  const p = new THREE.Group();
+  p.position.set(x, 0, z);
+  p.scale.setScalar(s);
+  g.add(p);
+  cyl(0.21, 0.17, 0.45, mat(0x26272b, { roughness: 0.9 }), 0, 0.225, 0, p, 20);
+  cyl(0.2, 0.2, 0.02, mat(0x3b2e22), 0, 0.44, 0, p, 20);
+  const frondMat = new THREE.MeshStandardMaterial({ map: frondTex(), alphaTest: 0.5, side: THREE.DoubleSide, roughness: 0.8 });
+  for (let i = 0; i < 11; i++) {
+    const yaw = new THREE.Group();
+    yaw.position.set(0, 0.44, 0);
+    yaw.rotation.y = (i / 11) * Math.PI * 2 + rand(i + 3) * 0.4;
+    p.add(yaw);
+    const len = 0.9 + rand(i + 11) * 0.5;
+    const geo = new THREE.PlaneGeometry(0.42, len);
+    geo.translate(0, len / 2, 0);
+    const f = new THREE.Mesh(geo, frondMat);
+    f.rotation.x = 0.25 + rand(i + 21) * 0.75;   // lean outwards
+    yaw.add(f);
+  }
+}
+
+/** A woven rattan bell pendant hanging from the ceiling at (x, ceilingY, z). */
+function rattanPendant(g, x, ceilingY, z) {
+  const drop = 0.75, bellH = 0.55;
+  cyl(0.006, 0.006, drop, mat(0x1a1a1a), x, ceilingY - drop / 2, z, g, 6);
+  cyl(0.05, 0.05, 0.03, mat(0x1a1a1a), x, ceilingY - 0.015, z, g, 12);
+  const weave = canvasTex(128, 128, (ctx, w, h) => {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#d3a76c";
+    for (let k = 0; k < 8; k++) { ctx.fillRect(k * 16, 0, 5, h); ctx.fillRect(0, k * 16, w, 4); }
+  });
+  weave.wrapS = weave.wrapT = THREE.RepeatWrapping;
+  weave.repeat.set(10, 6);
+  const pts = [];
+  for (let i = 0; i <= 12; i++) {
+    const t = i / 12;
+    pts.push(new THREE.Vector2(0.06 + 0.24 * Math.sin((t * Math.PI) / 2) ** 0.8, -t * bellH));
+  }
+  const bell = new THREE.Mesh(new THREE.LatheGeometry(pts, 40), new THREE.MeshStandardMaterial({
+    map: weave, alphaTest: 0.5, side: THREE.DoubleSide, roughness: 0.9, emissive: 0x8a5a26, emissiveIntensity: 0.35,
+  }));
+  bell.position.set(x, ceilingY - drop, z);
+  g.add(bell);
+  const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 10), basic(0xffe2a8));
+  bulb.position.set(x, ceilingY - drop - 0.2, z);
+  g.add(bulb);
+}
+
 export function buildAbout() {
   const H = 3.2;
   const g = createRoom("about", {
     angle: DOOR_ANGLES.about, H, label: "About me",
-    wall: { tex: plasterTex("#f4f0e8"), tw: 2, th: 2 },
-    floor: { tex: plankTex("#c9a77c", 0.14), tw: 2, th: 2, opts: { roughness: 0.55 } },
-    ceil: { tex: plasterTex("#e4dfd3", 0.02), tw: 2, th: 2 },
+    wall: { tex: panelWallTex(), tw: 1.2, th: H },
+    floor: { tex: plankTex("#e3cba3", 0.07, 64), tw: 2, th: 2, opts: { roughness: 0.6 } },
+    ceil: { tex: plasterTex("#f6f3ec", 0.015), tw: 2, th: 2 },
     front: { tex: plasterTex("#f4f0e8"), tw: 1, th: 1 },
     bounds: { x0: -3.7, x1: 3.7, z0: -12.66, z1: -5.26 },
     frameMat: mat(0xf2ece0, { roughness: 0.5 }),
@@ -209,56 +424,71 @@ export function buildAbout() {
   const room = rooms.about;
   const white = mat(0xffffff, { roughness: 0.6 });
 
-  // skirting
-  const skirt = mat(0xffffff, { roughness: 0.5 });
-  box(RW, 0.12, 0.03, skirt, 0, 0.06, -(NEAR + RD) + 0.015, g);
-  box(0.03, 0.12, RD, skirt, -RW / 2 + 0.015, 0.06, -(NEAR + RD / 2), g);
-  box(0.03, 0.12, RD, skirt, RW / 2 - 0.015, 0.06, -(NEAR + RD / 2), g);
+  // white wall panelling: a cornice along the top and a deeper skirting
+  const trim = mat(0xffffff, { roughness: 0.5 });
+  const backZ = -(NEAR + RD), midZ = -(NEAR + RD / 2);
+  box(RW, 0.16, 0.035, trim, 0, 0.08, backZ + 0.018, g);
+  box(0.035, 0.16, RD, trim, -RW / 2 + 0.018, 0.08, midZ, g);
+  box(0.035, 0.16, RD, trim, RW / 2 - 0.018, 0.08, midZ, g);
+  box(RW, 0.14, 0.12, trim, 0, H - 0.07, backZ + 0.06, g);
+  box(0.12, 0.14, RD, trim, -RW / 2 + 0.06, H - 0.07, midZ, g);
+  box(0.12, 0.14, RD, trim, RW / 2 - 0.06, H - 0.07, midZ, g);
+  box(RW, 0.05, 0.05, trim, 0, H - 0.17, backZ + 0.025, g);
 
   // big window on the back wall: a daytime view of the Perth skyline
   const sky = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 2.2), new THREE.MeshBasicMaterial({ map: perthSkylineTexture() }));
-  sky.position.set(0, 1.75, -(NEAR + RD) + 0.01);
+  sky.position.set(0, 1.75, backZ + 0.01);
   g.add(sky);
-  box(5.4, 0.08, 0.12, white, 0, 2.89, -(NEAR + RD) + 0.06, g);
-  box(5.4, 0.1, 0.2, white, 0, 0.62, -(NEAR + RD) + 0.1, g);
-  [-2.6, -0.87, 0.87, 2.6].forEach((x) => box(0.07, 2.3, 0.1, white, x, 1.75, -(NEAR + RD) + 0.06, g));
-  box(5.2, 0.05, 0.08, white, 0, 1.78, -(NEAR + RD) + 0.06, g);
+  box(5.4, 0.08, 0.12, white, 0, 2.89, backZ + 0.06, g);
+  box(5.4, 0.1, 0.2, white, 0, 0.62, backZ + 0.1, g);
+  [-2.6, -0.87, 0.87, 2.6].forEach((x) => box(0.07, 2.3, 0.1, white, x, 1.75, backZ + 0.06, g));
+  box(5.2, 0.05, 0.08, white, 0, 1.78, backZ + 0.06, g);
 
-  // rug, sofa, coffee table, armchairs
+  // a pale jute rug
   const rugTex = canvasTex(512, 384, (ctx, w, h) => {
-    ctx.fillStyle = "#efe6d6"; ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = "#a9b8a0"; ctx.lineWidth = 14; ctx.strokeRect(22, 22, w - 44, h - 44);
-    ctx.strokeStyle = "#d9a38a"; ctx.lineWidth = 4; ctx.strokeRect(50, 50, w - 100, h - 100);
-    noise(ctx, w, h, 0.08, 2500);
+    ctx.fillStyle = "#e6dac3"; ctx.fillRect(0, 0, w, h);
+    ctx.strokeStyle = "rgba(120,95,60,0.18)"; ctx.lineWidth = 2;
+    for (let y = 6; y < h; y += 8) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y + 2); ctx.stroke(); }
+    ctx.strokeStyle = "#cdbb9b"; ctx.lineWidth = 12; ctx.strokeRect(14, 14, w - 28, h - 28);
+    noise(ctx, w, h, 0.07, 3000);
   });
   const rug = new THREE.Mesh(new THREE.PlaneGeometry(4.4, 3.3), new THREE.MeshStandardMaterial({ map: rugTex, roughness: 1 }));
   rug.rotation.x = -Math.PI / 2;
   rug.position.set(-0.3, 0.012, -8.7);
   g.add(rug);
 
-  const sofa = makeSofa(0x8d9eab, 2.5);
-  sofa.position.set(-3.3, 0, -8.7);
+  // bamboo sofa against the left wall, with charcoal cushions and blue-and-white pillows
+  const sofa = makeBambooSeat(2.3);
+  sofa.position.set(-3.45, 0, -8.7);
   sofa.rotation.y = Math.PI / 2;
   g.add(sofa);
-  room.obstacles.push({ x0: -3.85, x1: -2.8, z0: -10.0, z1: -7.4 });
-  [[0xd9a38a, -3.15, -9.6], [0xa9b8a0, -3.15, -7.8]].forEach(([c, x, z], i) => {
-    const p = box(0.4, 0.4, 0.12, mat(c), x, 0.78, z, g);
-    p.rotation.set(0, Math.PI / 2 + 0.2 * (i ? -1 : 1), 0.12);
+  room.obstacles.push({ x0: -3.85, x1: -2.9, z0: -9.9, z1: -7.5 });
+  [[zigzagTex(), -9.45, 0.18], [latticeTex(), -9.05, -0.1], [zigzagTex(), -7.95, -0.16]].forEach(([tex, z, r]) => {
+    const p = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.44, 0.13), [cushionSide, cushionSide, cushionSide, cushionSide, mat(0xffffff, { map: tex, roughness: 0.95 }), cushionSide]);
+    p.position.set(-3.38, 0.78, z);
+    p.rotation.set(0, Math.PI / 2, r);
+    p.rotateX(-0.22);
+    g.add(p);
   });
 
+  // round white coffee table with glass candle lanterns
   const table = new THREE.Group();
   table.position.set(-0.9, 0, -8.7);
   g.add(table);
-  box(1.3, 0.05, 0.7, mat(0xb98b5e, { roughness: 0.5 }), 0, 0.42, 0, table);
-  box(1.1, 0.03, 0.5, mat(0xe9dfd0), 0, 0.2, 0, table);
-  [[-0.58, -0.28], [0.58, -0.28], [-0.58, 0.28], [0.58, 0.28]].forEach(([x, z]) => box(0.05, 0.4, 0.05, mat(0x3a2a1c), x, 0.2, z, table));
-  box(0.32, 0.03, 0.24, mat(0x2f4a5c), -0.2, 0.465, 0.05, table);
-  box(0.28, 0.03, 0.2, mat(0xd9a38a), -0.18, 0.495, 0.04, table);
-  cyl(0.06, 0.05, 0.1, mat(0xffffff), 0.35, 0.5, -0.1, table);
-  room.obstacles.push({ x0: -1.55, x1: -0.25, z0: -9.05, z1: -8.35 });
+  cyl(0.55, 0.55, 0.04, mat(0xf3f1ec, { roughness: 0.4 }), 0, 0.46, 0, table, 40);
+  [0, 2.1, 4.2].forEach((a) => {
+    const leg = cyl(0.022, 0.014, 0.46, mat(0xc8a06c, { roughness: 0.6 }), Math.cos(a) * 0.36, 0.22, Math.sin(a) * 0.36, table, 10);
+    leg.rotation.set(Math.sin(a) * 0.12, 0, -Math.cos(a) * 0.12);
+  });
+  lantern(table, -0.15, 0.48, 0.05, 0.3);
+  lantern(table, 0.12, 0.48, -0.12, 0.22);
+  cyl(0.09, 0.06, 0.03, mat(0xdcd7cc), 0.3, 0.495, 0.15, table, 20);
+  room.obstacles.push({ x0: -1.5, x1: -0.3, z0: -9.3, z1: -8.1 });
+  lantern(g, -3.2, 0, -10.25, 0.45);   // a bigger one on the floor at the end of the sofa
 
+  // two bamboo armchairs facing the sofa
   [[2.2, -7.3, -1.9], [2.2, -10.1, -1.25]].forEach(([x, z, r]) => {
-    const a = makeArmchair(0xd9a38a);
+    const a = makeBambooSeat(0.72);
     a.position.set(x, 0, z);
     a.rotation.y = r;
     g.add(a);
@@ -267,24 +497,21 @@ export function buildAbout() {
   const side = new THREE.Group();
   side.position.set(2.2, 0, -8.7);
   g.add(side);
-  cyl(0.28, 0.28, 0.5, mat(0xb98b5e, { roughness: 0.5 }), 0, 0.25, 0, side, 24);
-  cyl(0.07, 0.07, 0.18, mat(0xffffff), 0, 0.59, 0, side);
+  cyl(0.25, 0.25, 0.03, mat(0xf3f1ec, { roughness: 0.4 }), 0, 0.5, 0, side, 28);
+  cyl(0.025, 0.025, 0.5, mat(0xc8a06c), 0, 0.25, 0, side, 10);
+  cyl(0.16, 0.16, 0.02, mat(0xc8a06c), 0, 0.01, 0, side, 20);
+  lantern(side, 0, 0.515, 0, 0.24);
   room.obstacles.push({ x0: 1.9, x1: 2.5, z0: -9.0, z1: -8.4 });
 
-  // sideboard with a lamp by the door wall
-  const sb = new THREE.Group();
-  sb.position.set(2.5, 0, -5.4);
-  g.add(sb);
-  box(1.7, 0.7, 0.45, mat(0xb98b5e, { roughness: 0.5 }), 0, 0.5, 0, sb);
-  [[-0.7], [0.7]].forEach(([x]) => box(0.05, 0.15, 0.05, mat(0x3a2a1c), x, 0.075, 0, sb));
-  cyl(0.05, 0.08, 0.28, mat(0xe9dfd0), -0.5, 0.99, 0, sb);
-  const shade = cyl(0.12, 0.17, 0.2, new THREE.MeshStandardMaterial({ color: 0xfff1d6, emissive: 0xffe2a8, emissiveIntensity: 0.6 }), -0.5, 1.22, 0, sb, 20);
-  room.obstacles.push({ x0: 1.65, x1: 3.35, z0: -5.7, z1: -5.2 });
+  // black-framed glass display cabinet by the door wall
+  displayCabinet(g, 2.55, -5.27);
+  room.obstacles.push({ x0: 1.95, x1: 3.15, z0: -5.6, z1: -5.0 });
 
-  makePlant(g, -3.4, -5.7, 1.1, 0xe9dfd0);
-  makePlant(g, 3.4, -12.3, 1.3, 0xd9a38a);
-  makePlant(g, -3.4, -12.3, 1.0, 0xe9dfd0);
-  room.obstacles.push({ x0: -3.7, x1: -3.1, z0: -6.0, z1: -5.4 }, { x0: 3.1, x1: 3.7, z0: -12.6, z1: -12.0 }, { x0: -3.7, x1: -3.1, z0: -12.6, z1: -12.0 });
+  // palms in the corners
+  makePalm(g, -3.35, -5.75, 1.0);
+  makePalm(g, 3.35, -12.25, 1.25);
+  makePalm(g, -3.35, -12.25, 1.1);
+  room.obstacles.push({ x0: -3.7, x1: -3.0, z0: -6.1, z1: -5.4 }, { x0: 3.0, x1: 3.7, z0: -12.6, z1: -11.9 }, { x0: -3.7, x1: -3.0, z0: -12.6, z1: -11.9 });
 
   // floor lamp
   const lamp = new THREE.Group();
@@ -295,9 +522,10 @@ export function buildAbout() {
   cyl(0.18, 0.25, 0.3, new THREE.MeshStandardMaterial({ color: 0xfff1d6, emissive: 0xffe2a8, emissiveIntensity: 0.7 }), 0, 1.65, 0, lamp, 24);
   room.obstacles.push({ x0: -3.5, x1: -3.1, z0: -11.1, z1: -10.7 });
 
-  // ceiling lights
-  [[-1.6, -7.2], [1.6, -7.2], [0, -10.6]].forEach(([x, z]) => {
-    const d = new THREE.Mesh(new THREE.CircleGeometry(0.34, 28), basic(0xfffaf0));
+  // a woven rattan pendant over the coffee table, and small flush lights elsewhere
+  rattanPendant(g, -0.9, H, -8.7);
+  [[1.6, -7.2], [0, -10.9]].forEach(([x, z]) => {
+    const d = new THREE.Mesh(new THREE.CircleGeometry(0.22, 28), basic(0xfffaf0));
     d.rotation.x = Math.PI / 2;
     d.position.set(x, H - 0.01, z);
     g.add(d);
@@ -331,7 +559,7 @@ export function buildAbout() {
 
   // lights: a warm ceiling light and daylight from the window
   const ceilLight = new THREE.PointLight(0xfff0dc, 16, 12, 2);
-  ceilLight.position.set(0, 1.95, -8.7);
+  ceilLight.position.set(-0.9, 2.1, -8.7);   // the rattan pendant
   g.add(ceilLight);
   const dayLight = new THREE.PointLight(0xe3f0ff, 9, 9, 2);
   dayLight.position.set(0, 1.7, -11.6);

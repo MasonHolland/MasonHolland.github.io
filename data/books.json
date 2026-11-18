@@ -1,29 +1,5609 @@
 {
-  "source": "sample",
-  "updated": "2026-11-11",
+  "source": "goodreads",
+  "updated": "2026-11-18",
   "currentlyReading": [
-    { "title": "The Count of Monte Cristo", "author": "Alexandre Dumas", "rating": 0, "link": "" },
-    { "title": "Middlemarch", "author": "George Eliot", "rating": 0, "link": "" }
+    {
+      "id": "126918599",
+      "title": "Empire of the Damned",
+      "series": "Empire of the Vampire",
+      "seriesNo": 2,
+      "author": "Jay Kristoff",
+      "link": "https://www.goodreads.com/book/show/126918599",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "243051476",
+      "title": "The Thrice-Bound Fool",
+      "series": "Blacktongue",
+      "seriesNo": 2,
+      "author": "Christopher Buehlman",
+      "link": "https://www.goodreads.com/book/show/243051476"
+    },
+    {
+      "id": "38255329",
+      "title": "How Fascism Works: The Politics of Us and Them",
+      "author": "Jason F. Stanley",
+      "link": "https://www.goodreads.com/book/show/38255329",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "23418614",
+      "title": "Baby Signing Essentials: Easy Sign Language for Every Age and Stage (200 Illustrated ASL Signs for Two-Way Communication)",
+      "author": "Nancy Cadjan",
+      "link": "https://www.goodreads.com/book/show/23418614"
+    },
+    {
+      "id": "29093292",
+      "title": "The Daily Stoic: 366 Meditations on Wisdom, Perseverance, and the Art of Living",
+      "author": "Ryan Holiday",
+      "link": "https://www.goodreads.com/book/show/29093292"
+    },
+    {
+      "id": "61992094",
+      "title": "The Daily Dad: 366 Meditations on Parenting, Love and Raising Great Kids",
+      "author": "Ryan Holiday",
+      "link": "https://www.goodreads.com/book/show/61992094",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "40180024",
+      "title": "Cræft: An Inquiry Into the Origins and True Meaning of Traditional Crafts",
+      "author": "Alex Langlands",
+      "link": "https://www.goodreads.com/book/show/40180024",
+      "genre": "History"
+    },
+    {
+      "id": "38819243",
+      "title": "The History of Childhood: A Very Short Introduction",
+      "author": "James Marten",
+      "link": "https://www.goodreads.com/book/show/38819243",
+      "genre": "History"
+    },
+    {
+      "id": "1371",
+      "title": "The Iliad",
+      "author": "Homer",
+      "link": "https://www.goodreads.com/book/show/1371",
+      "genre": "Classics & literature"
+    }
   ],
   "wantToRead": [
-    { "title": "The Brothers Karamazov", "author": "Fyodor Dostoevsky", "link": "" },
-    { "title": "Moby-Dick", "author": "Herman Melville", "link": "" },
-    { "title": "War and Peace", "author": "Leo Tolstoy", "link": "" },
-    { "title": "The Odyssey", "author": "Homer", "link": "" },
-    { "title": "Don Quixote", "author": "Miguel de Cervantes", "link": "" }
+    {
+      "id": "208703053",
+      "title": "Artificial Intelligence in Byte-sized Chunks",
+      "author": "Peter J. Bentley",
+      "link": "https://www.goodreads.com/book/show/208703053"
+    },
+    {
+      "id": "357641",
+      "title": "The Hero Within: Six Archetypes We Live By",
+      "author": "Carol S. Pearson",
+      "link": "https://www.goodreads.com/book/show/357641",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "223889073",
+      "title": "Notes to John",
+      "author": "Joan Didion",
+      "link": "https://www.goodreads.com/book/show/223889073"
+    },
+    {
+      "id": "486298",
+      "title": "Death Be Not Proud",
+      "author": "John Gunther",
+      "link": "https://www.goodreads.com/book/show/486298",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "231127223",
+      "title": "Wild Dark Shore",
+      "author": "Charlotte McConaghy",
+      "link": "https://www.goodreads.com/book/show/231127223",
+      "genre": "Mystery & thriller"
+    },
+    {
+      "id": "23129659",
+      "title": "Adult Children of Emotionally Immature Parents: How to Heal from Distant, Rejecting, or Self-Involved Parents",
+      "author": "Lindsay C. Gibson",
+      "link": "https://www.goodreads.com/book/show/23129659",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "22609391",
+      "title": "The Wright Brothers",
+      "author": "David McCullough",
+      "link": "https://www.goodreads.com/book/show/22609391",
+      "genre": "History"
+    },
+    {
+      "id": "247756858",
+      "title": "Scion",
+      "series": "Scion",
+      "seriesNo": 1,
+      "author": "James Islington",
+      "link": "https://www.goodreads.com/book/show/247756858"
+    },
+    {
+      "id": "450534",
+      "title": "When the Body Says No: The Cost of Hidden Stress",
+      "author": "Gabor Maté",
+      "link": "https://www.goodreads.com/book/show/450534",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "62364592",
+      "title": "The Parenting Map: Step-By-Step Solutions to Consciously Create the Ultimate Parent-Child Relationship",
+      "author": "Shefali Tsabary",
+      "link": "https://www.goodreads.com/book/show/62364592"
+    },
+    {
+      "id": "39058",
+      "title": "The Gormenghast Novels",
+      "series": "Gormenghast",
+      "seriesNo": 1,
+      "author": "Mervyn Peake",
+      "link": "https://www.goodreads.com/book/show/39058",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "304217",
+      "title": "Viriconium",
+      "series": "Viriconium",
+      "seriesNo": 1,
+      "author": "M. John Harrison",
+      "link": "https://www.goodreads.com/book/show/304217",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "6611260",
+      "title": "The Vampire Economy: Doing Business Under Fascism",
+      "author": "Günter Reimann",
+      "link": "https://www.goodreads.com/book/show/6611260",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "263006",
+      "title": "God and the New Physics",
+      "author": "Paul C.W. Davies",
+      "link": "https://www.goodreads.com/book/show/263006",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "62919847",
+      "title": "The Reformatory",
+      "author": "Tananarive Due",
+      "link": "https://www.goodreads.com/book/show/62919847",
+      "genre": "Horror"
+    },
+    {
+      "id": "541132",
+      "title": "Punished by Rewards: The Trouble with Gold Stars, Incentive Plans, A\\'s, Praise and Other Bribes",
+      "author": "Alfie Kohn",
+      "link": "https://www.goodreads.com/book/show/541132",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "241374552",
+      "title": "Songs of the Dead",
+      "series": "The Strata Wars",
+      "seriesNo": 1,
+      "author": "Brandon Sanderson",
+      "link": "https://www.goodreads.com/book/show/241374552",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "231679954",
+      "title": "The Red Winter",
+      "author": "Cameron Sullivan",
+      "link": "https://www.goodreads.com/book/show/231679954",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "31837",
+      "title": "The Consolation of Philosophy",
+      "author": "Boethius",
+      "link": "https://www.goodreads.com/book/show/31837",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "29396",
+      "title": "Furies of Calderon",
+      "series": "Codex Alera",
+      "seriesNo": 1,
+      "author": "Jim  Butcher",
+      "link": "https://www.goodreads.com/book/show/29396",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "35031085",
+      "title": "Frankenstein",
+      "author": "Mary Wollstonecraft Shelley",
+      "link": "https://www.goodreads.com/book/show/35031085",
+      "genre": "Horror"
+    },
+    {
+      "id": "233800039",
+      "title": "The Devils",
+      "series": "The Devils",
+      "seriesNo": 1,
+      "author": "Joe Abercrombie",
+      "link": "https://www.goodreads.com/book/show/233800039",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "210191671",
+      "title": "Katabasis",
+      "author": "R.F. Kuang",
+      "link": "https://www.goodreads.com/book/show/210191671",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "213263148",
+      "title": "Bury Our Bones in the Midnight Soil",
+      "author": "V.E. Schwab",
+      "link": "https://www.goodreads.com/book/show/213263148",
+      "genre": "Horror"
+    },
+    {
+      "id": "46170",
+      "title": "For Whom the Bell Tolls",
+      "author": "Ernest Hemingway",
+      "link": "https://www.goodreads.com/book/show/46170",
+      "genre": "History"
+    },
+    {
+      "id": "6759",
+      "title": "Infinite Jest",
+      "author": "David Foster Wallace",
+      "link": "https://www.goodreads.com/book/show/6759",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "55643287",
+      "title": "How the Word Is Passed: A Reckoning with the History of Slavery Across America",
+      "author": "Clint   Smith",
+      "link": "https://www.goodreads.com/book/show/55643287",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "46347",
+      "title": "All the Shah\\'s Men: An American Coup and the Roots of Middle East Terror",
+      "author": "Stephen Kinzer",
+      "link": "https://www.goodreads.com/book/show/46347"
+    },
+    {
+      "id": "40604846",
+      "title": "Nothing to Envy: Ordinary Lives in North Korea",
+      "author": "Barbara Demick",
+      "link": "https://www.goodreads.com/book/show/40604846",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "54424991",
+      "title": "Churchill & Son",
+      "author": "Josh Ireland",
+      "link": "https://www.goodreads.com/book/show/54424991",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "41795733",
+      "title": "Range: Why Generalists Triumph in a Specialized World",
+      "author": "David   Epstein",
+      "link": "https://www.goodreads.com/book/show/41795733",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "222034397",
+      "title": "Tailored Realities",
+      "author": "Brandon Sanderson",
+      "link": "https://www.goodreads.com/book/show/222034397",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "229098239",
+      "title": "Father Yourself First: Everything You Need to Become the Father Your Family Deserves",
+      "author": "Glen Henry",
+      "link": "https://www.goodreads.com/book/show/229098239"
+    },
+    {
+      "id": "30289",
+      "title": "The Republic",
+      "author": "Plato",
+      "link": "https://www.goodreads.com/book/show/30289",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "122665",
+      "title": "Ravens in Winter",
+      "author": "Bernd Heinrich",
+      "link": "https://www.goodreads.com/book/show/122665"
+    },
+    {
+      "id": "4934",
+      "title": "The Brothers Karamazov",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://www.goodreads.com/book/show/4934",
+      "genre": "Other fiction"
+    },
+    {
+      "id": "87591651",
+      "title": "The Stand",
+      "author": "Stephen  King",
+      "link": "https://www.goodreads.com/book/show/87591651",
+      "genre": "Horror"
+    },
+    {
+      "id": "59219",
+      "title": "The Talisman",
+      "series": "The Talisman",
+      "seriesNo": 1,
+      "author": "Stephen  King",
+      "link": "https://www.goodreads.com/book/show/59219",
+      "genre": "Horror"
+    },
+    {
+      "id": "199798217",
+      "title": "The Lion Women of Tehran",
+      "author": "Marjan Kamali",
+      "link": "https://www.goodreads.com/book/show/199798217"
+    },
+    {
+      "id": "57109107",
+      "title": "The Lincoln Highway",
+      "author": "Amor Towles",
+      "link": "https://www.goodreads.com/book/show/57109107",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "34066798",
+      "title": "A Gentleman in Moscow",
+      "author": "Amor Towles",
+      "link": "https://www.goodreads.com/book/show/34066798",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "18774964",
+      "title": "A Man Called Ove",
+      "author": "Fredrik Backman",
+      "link": "https://www.goodreads.com/book/show/18774964"
+    },
+    {
+      "id": "41824495",
+      "title": "Fall; or, Dodge in Hell",
+      "author": "Neal Stephenson",
+      "link": "https://www.goodreads.com/book/show/41824495",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "823",
+      "title": "Quicksilver",
+      "series": "The Baroque Cycle",
+      "seriesNo": 1,
+      "author": "Neal Stephenson",
+      "link": "https://www.goodreads.com/book/show/823",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "22816087",
+      "title": "Seveneves",
+      "author": "Neal Stephenson",
+      "link": "https://www.goodreads.com/book/show/22816087",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "32758901",
+      "title": "All Systems Red",
+      "series": "The Murderbot Diaries",
+      "seriesNo": 1,
+      "author": "Martha Wells",
+      "link": "https://www.goodreads.com/book/show/32758901",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "37880811",
+      "title": "Make Time: How to Focus on What Matters Every Day",
+      "author": "Jake Knapp",
+      "link": "https://www.goodreads.com/book/show/37880811",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "34051011",
+      "title": "Pachinko",
+      "author": "Min Jin Lee",
+      "link": "https://www.goodreads.com/book/show/34051011",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "5805",
+      "title": "V for Vendetta",
+      "author": "Alan Moore",
+      "link": "https://www.goodreads.com/book/show/5805",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "34454589",
+      "title": "The Handmaid\\'s Tale",
+      "author": "Margaret Atwood",
+      "link": "https://www.goodreads.com/book/show/34454589"
+    },
+    {
+      "id": "34234639",
+      "title": "The Land: Founding",
+      "series": "Chaos Seeds",
+      "seriesNo": 1,
+      "author": "Aleron Kong",
+      "link": "https://www.goodreads.com/book/show/34234639"
+    },
+    {
+      "id": "45449501",
+      "title": "Sand Talk: How Indigenous Thinking Can Save the World — An Indigenous Perspective on History and Education",
+      "author": "Tyson Yunkaporta",
+      "link": "https://www.goodreads.com/book/show/45449501",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "44659",
+      "title": "Pawn of Prophecy",
+      "series": "The Belgariad",
+      "seriesNo": 1,
+      "author": "David Eddings",
+      "link": "https://www.goodreads.com/book/show/44659",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "52317884",
+      "title": "The Jaunt",
+      "author": "Stephen  King",
+      "link": "https://www.goodreads.com/book/show/52317884",
+      "genre": "Horror"
+    },
+    {
+      "id": "61834",
+      "title": "A Night to Remember",
+      "author": "Walter Lord",
+      "link": "https://www.goodreads.com/book/show/61834"
+    },
+    {
+      "id": "55096",
+      "title": "The Piano Tuner",
+      "author": "Daniel       Mason",
+      "link": "https://www.goodreads.com/book/show/55096",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "100237",
+      "title": "Monkey: The Journey to the West",
+      "author": "Wu Cheng\\'en",
+      "link": "https://www.goodreads.com/book/show/100237",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "18693771",
+      "title": "The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma",
+      "author": "Bessel van der Kolk",
+      "link": "https://www.goodreads.com/book/show/18693771",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "41057294",
+      "title": "Normal People",
+      "author": "Sally Rooney",
+      "link": "https://www.goodreads.com/book/show/41057294",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "35291708",
+      "title": "Crisis in the Classroom",
+      "author": "Charles E. Silberman",
+      "link": "https://www.goodreads.com/book/show/35291708",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "75305069",
+      "title": "A Woman of the Sword",
+      "author": "Anna Smith Spark",
+      "link": "https://www.goodreads.com/book/show/75305069"
+    },
+    {
+      "id": "63068377",
+      "title": "The Frugal Wizard\\'s Handbook for Surviving Medieval England",
+      "author": "Brandon Sanderson",
+      "link": "https://www.goodreads.com/book/show/63068377"
+    },
+    {
+      "id": "61361681",
+      "title": "Clytemnestra",
+      "author": "Costanza Casati",
+      "link": "https://www.goodreads.com/book/show/61361681"
+    },
+    {
+      "id": "34617904",
+      "title": "Destiny Disrupted: A History of the World Through Islamic Eyes",
+      "author": "Tamim Ansary",
+      "link": "https://www.goodreads.com/book/show/34617904",
+      "genre": "History"
+    },
+    {
+      "id": "98652084",
+      "title": "A Rome of One\\'s Own: The Forgotten Women of the Roman Empire",
+      "author": "Emma Southon",
+      "link": "https://www.goodreads.com/book/show/98652084"
+    },
+    {
+      "id": "166997",
+      "title": "Stoner",
+      "author": "John  Williams",
+      "link": "https://www.goodreads.com/book/show/166997",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "711037",
+      "title": "Olympias: Mother of Alexander the Great (Women of the Ancient World)",
+      "author": "Elizabeth  Carney",
+      "link": "https://www.goodreads.com/book/show/711037",
+      "genre": "History"
+    },
+    {
+      "id": "62918237",
+      "title": "Messalina: Empress, Adulteress, Libertine: The Story of the Most Notorious Woman of the Roman World",
+      "author": "Honor Cargill-Martin",
+      "link": "https://www.goodreads.com/book/show/62918237"
+    },
+    {
+      "id": "142349855",
+      "title": "This Is Parenting: Demystifying Parenthood",
+      "author": "Leslie Hannans",
+      "link": "https://www.goodreads.com/book/show/142349855"
+    },
+    {
+      "id": "60707",
+      "title": "A Month in the Country",
+      "author": "J.L. Carr",
+      "link": "https://www.goodreads.com/book/show/60707",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "61190770",
+      "title": "Chain-Gang All-Stars",
+      "author": "Nana Kwame Adjei-Brenyah",
+      "link": "https://www.goodreads.com/book/show/61190770",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "7103545",
+      "title": "The Conscious Parent: Transforming Ourselves, Empowering Our Children",
+      "author": "Shefali Tsabary",
+      "link": "https://www.goodreads.com/book/show/7103545",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "44279110",
+      "title": "My Year of Rest and Relaxation",
+      "author": "Ottessa Moshfegh",
+      "link": "https://www.goodreads.com/book/show/44279110",
+      "genre": "Other fiction"
+    },
+    {
+      "id": "6334",
+      "title": "Never Let Me Go",
+      "author": "Kazuo Ishiguro",
+      "link": "https://www.goodreads.com/book/show/6334",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "2761",
+      "title": "The Denial of Death",
+      "author": "Ernest Becker",
+      "link": "https://www.goodreads.com/book/show/2761",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "588138",
+      "title": "The Hero with a Thousand Faces",
+      "author": "Joseph Campbell",
+      "link": "https://www.goodreads.com/book/show/588138",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "51291",
+      "title": "How to Lie with Statistics",
+      "author": "Darrell Huff",
+      "link": "https://www.goodreads.com/book/show/51291",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "74034",
+      "title": "Amusing Ourselves to Death: Public Discourse in the Age of Show Business",
+      "author": "Neil Postman",
+      "link": "https://www.goodreads.com/book/show/74034",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "7799004",
+      "title": "Merchants of Doubt: How a Handful of Scientists Obscured the Truth on Issues from Tobacco Smoke to Global Warming",
+      "author": "Naomi Oreskes",
+      "link": "https://www.goodreads.com/book/show/7799004",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "230733",
+      "title": "Straw Dogs: Thoughts on Humans and Other Animals",
+      "author": "John   Gray",
+      "link": "https://www.goodreads.com/book/show/230733",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "189989",
+      "title": "Finite and Infinite Games: A Vision of Life as Play and Possibility",
+      "author": "James P. Carse",
+      "link": "https://www.goodreads.com/book/show/189989",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "54976986",
+      "title": "Great Circle",
+      "author": "Maggie Shipstead",
+      "link": "https://www.goodreads.com/book/show/54976986",
+      "genre": "Other fiction"
+    },
+    {
+      "id": "6288",
+      "title": "The Road",
+      "author": "Cormac McCarthy",
+      "link": "https://www.goodreads.com/book/show/6288",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "6867",
+      "title": "Atonement",
+      "author": "Ian McEwan",
+      "link": "https://www.goodreads.com/book/show/6867",
+      "genre": "History"
+    },
+    {
+      "id": "7126",
+      "title": "The Count of Monte Cristo",
+      "author": "Alexandre Dumas",
+      "link": "https://www.goodreads.com/book/show/7126",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "4406",
+      "title": "East of Eden",
+      "author": "John Steinbeck",
+      "link": "https://www.goodreads.com/book/show/4406",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "394535",
+      "title": "Blood Meridian, or, the Evening Redness in the West",
+      "author": "Cormac McCarthy",
+      "link": "https://www.goodreads.com/book/show/394535"
+    },
+    {
+      "id": "27418",
+      "title": "Theogony / Works and Days",
+      "author": "Hesiod",
+      "link": "https://www.goodreads.com/book/show/27418",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "7728",
+      "title": "Antigone",
+      "series": "Theban Plays",
+      "seriesNo": 3,
+      "author": "Sophocles",
+      "link": "https://www.goodreads.com/book/show/7728",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "199774593",
+      "title": "Father Time: A Natural History of Men and Babies",
+      "author": "Sarah Blaffer Hrdy",
+      "link": "https://www.goodreads.com/book/show/199774593",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "752156",
+      "title": "Greek Fire, Poison Arrows & Scorpion Bombs: Biological and Chemical Warfare in the Ancient World",
+      "author": "Adrienne Mayor",
+      "link": "https://www.goodreads.com/book/show/752156",
+      "genre": "History"
+    },
+    {
+      "id": "15793575",
+      "title": "The Faithful Executioner: Life and Death, Honor and Shame in the Turbulent Sixteenth Century",
+      "author": "Joel F. Harrington",
+      "link": "https://www.goodreads.com/book/show/15793575",
+      "genre": "History"
+    },
+    {
+      "id": "40701777",
+      "title": "The Trouble with Peace",
+      "series": "The Age of Madness",
+      "seriesNo": 2,
+      "author": "Joe Abercrombie",
+      "link": "https://www.goodreads.com/book/show/40701777",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "60931",
+      "title": "Kindred",
+      "author": "Octavia E. Butler",
+      "link": "https://www.goodreads.com/book/show/60931",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "208430658",
+      "title": "Blood Over Bright Haven",
+      "author": "M.L. Wang",
+      "link": "https://www.goodreads.com/book/show/208430658",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13456414",
+      "title": "A Short Stay in Hell",
+      "author": "Steven L. Peck",
+      "link": "https://www.goodreads.com/book/show/13456414",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "57850265",
+      "title": "How High We Go in the Dark",
+      "author": "Sequoia Nagamatsu",
+      "link": "https://www.goodreads.com/book/show/57850265",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "",
+      "title": "The Lord of Demons",
+      "series": "The Burning",
+      "seriesNo": 3,
+      "author": "Evan Winter",
+      "link": ""
+    },
+    {
+      "id": "227349",
+      "title": "Heading Home with Your Newborn: From Birth to Reality",
+      "author": "Laura A. Jana",
+      "link": "https://www.goodreads.com/book/show/227349",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "22052330",
+      "title": "Elevating Child Care: A Guide to Respectful Parenting",
+      "author": "Janet Lansbury",
+      "link": "https://www.goodreads.com/book/show/22052330",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "21864697",
+      "title": "Becoming Us: 8 Steps to Grow a Family that Thrives",
+      "author": "Elly Taylor",
+      "link": "https://www.goodreads.com/book/show/21864697",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "44139",
+      "title": "The Attachment Parenting Book : A Commonsense Guide to Understanding and Nurturing Your Baby",
+      "author": "Martha Sears",
+      "link": "https://www.goodreads.com/book/show/44139",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "1931105",
+      "title": "The Attachment Connection: Parenting a Secure and Confident Child Using the Science of Attachment Theory",
+      "author": "Ruth P. Newton",
+      "link": "https://www.goodreads.com/book/show/1931105",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "471548",
+      "title": "The Science of Parenting",
+      "author": "Margot Sunderland",
+      "link": "https://www.goodreads.com/book/show/471548",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "132900",
+      "title": "The Happiest Baby on the Block: The New Way to Calm Crying and Help Your Newborn Baby Sleep Longer",
+      "author": "Harvey Karp",
+      "link": "https://www.goodreads.com/book/show/132900",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "8235404",
+      "title": "Your Baby Is Speaking to You: A Visual Guide to the Amazing Behaviors of Your Newborn and Growing Baby",
+      "author": "Kevin Nugent",
+      "link": "https://www.goodreads.com/book/show/8235404"
+    },
+    {
+      "id": "24615",
+      "title": "Enchiridion",
+      "author": "Epictetus",
+      "link": "https://www.goodreads.com/book/show/24615"
+    },
+    {
+      "id": "11297",
+      "title": "Norwegian Wood",
+      "author": "Haruki Murakami",
+      "link": "https://www.goodreads.com/book/show/11297",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "11298",
+      "title": "A Wild Sheep Chase",
+      "series": "The Rat",
+      "seriesNo": 3,
+      "author": "Haruki Murakami",
+      "link": "https://www.goodreads.com/book/show/11298"
+    },
+    {
+      "id": "17800",
+      "title": "Dance Dance Dance",
+      "author": "Haruki Murakami",
+      "link": "https://www.goodreads.com/book/show/17800"
+    },
+    {
+      "id": "60243188",
+      "title": "Bliss Montage",
+      "author": "Ling  Ma",
+      "link": "https://www.goodreads.com/book/show/60243188",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "36348525",
+      "title": "Severance",
+      "author": "Ling  Ma",
+      "link": "https://www.goodreads.com/book/show/36348525",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "57739876",
+      "title": "To Paradise",
+      "author": "Hanya Yanagihara",
+      "link": "https://www.goodreads.com/book/show/57739876",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "61102615",
+      "title": "Stone Blind",
+      "author": "Natalie Haynes",
+      "link": "https://www.goodreads.com/book/show/61102615",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "22822858",
+      "title": "A Little Life",
+      "author": "Hanya Yanagihara",
+      "link": "https://www.goodreads.com/book/show/22822858",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "40718726",
+      "title": "Genghis Khan and the Making of the Modern World",
+      "author": "Jack Weatherford",
+      "link": "https://www.goodreads.com/book/show/40718726",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "30186948",
+      "title": "Think and Grow Rich",
+      "author": "Napoleon Hill",
+      "link": "https://www.goodreads.com/book/show/30186948",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "203647807",
+      "title": "Fall of Civilizations: Stories of Greatness and Decline",
+      "author": "Paul M.M. Cooper",
+      "link": "https://www.goodreads.com/book/show/203647807",
+      "genre": "History"
+    },
+    {
+      "id": "71728",
+      "title": "Jonathan Livingston Seagull",
+      "author": "Richard Bach",
+      "link": "https://www.goodreads.com/book/show/71728"
+    },
+    {
+      "id": "43263540",
+      "title": "For the Love of Men: A New Vision for Mindful Masculinity",
+      "author": "Liz Plank",
+      "link": "https://www.goodreads.com/book/show/43263540"
+    },
+    {
+      "id": "350",
+      "title": "Stranger in a Strange Land",
+      "author": "Robert A. Heinlein",
+      "link": "https://www.goodreads.com/book/show/350",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "59924",
+      "title": "The Lathe of Heaven",
+      "author": "Ursula K. Le Guin",
+      "link": "https://www.goodreads.com/book/show/59924",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "48727813",
+      "title": "She Who Became the Sun",
+      "series": "The Radiant Emperor",
+      "seriesNo": 1,
+      "author": "Shelley Parker-Chan",
+      "link": "https://www.goodreads.com/book/show/48727813",
+      "genre": "History"
+    },
+    {
+      "id": "5367",
+      "title": "The Great Book of Amber",
+      "series": "The Chronicles of Amber",
+      "seriesNo": 1,
+      "author": "Roger Zelazny",
+      "link": "https://www.goodreads.com/book/show/5367",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "915664",
+      "title": "2150 A.D.",
+      "author": "Thea Alexander",
+      "link": "https://www.goodreads.com/book/show/915664",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "201855946",
+      "title": "Shōgun (The Asian Saga)",
+      "author": "James Clavell",
+      "link": "https://www.goodreads.com/book/show/201855946"
+    },
+    {
+      "id": "12111823",
+      "title": "The Winds of Winter",
+      "series": "A Song of Ice and Fire",
+      "seriesNo": 6,
+      "author": "George R.R. Martin",
+      "link": "https://www.goodreads.com/book/show/12111823"
+    },
+    {
+      "id": "60194162",
+      "title": "Demon Copperhead",
+      "author": "Barbara Kingsolver",
+      "link": "https://www.goodreads.com/book/show/60194162",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "61714633",
+      "title": "The Wager: A Tale of Shipwreck, Mutiny and Murder",
+      "author": "David Grann",
+      "link": "https://www.goodreads.com/book/show/61714633"
+    },
+    {
+      "id": "62047984",
+      "title": "Yellowface",
+      "author": "R.F. Kuang",
+      "link": "https://www.goodreads.com/book/show/62047984"
+    },
+    {
+      "id": "60652997",
+      "title": "Hell Bent",
+      "series": "Ninth House Trilogy",
+      "seriesNo": 2,
+      "author": "Leigh Bardugo",
+      "link": "https://www.goodreads.com/book/show/60652997",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "195791015",
+      "title": "What Moves the Dead",
+      "series": "Sworn Soldier",
+      "seriesNo": 1,
+      "author": "T. Kingfisher",
+      "link": "https://www.goodreads.com/book/show/195791015",
+      "genre": "Horror"
+    },
+    {
+      "id": "36529",
+      "title": "Narrative of the Life of Frederick Douglass",
+      "author": "Frederick Douglass",
+      "link": "https://www.goodreads.com/book/show/36529",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "70561",
+      "title": "The Gulag Archipelago 1918–1956 (Abridged)",
+      "author": "Aleksandr Solzhenitsyn",
+      "link": "https://www.goodreads.com/book/show/70561"
+    },
+    {
+      "id": "18505792",
+      "title": "The Ocean at the End of the Lane",
+      "author": "Neil Gaiman",
+      "link": "https://www.goodreads.com/book/show/18505792",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "890",
+      "title": "Of Mice and Men",
+      "author": "John Steinbeck",
+      "link": "https://www.goodreads.com/book/show/890",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "46041199",
+      "title": "Kim Jiyoung, Born 1982",
+      "author": "Cho Nam-Joo",
+      "link": "https://www.goodreads.com/book/show/46041199",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "57693432",
+      "title": "All the Horses of Iceland",
+      "author": "Sarah Tolmie",
+      "link": "https://www.goodreads.com/book/show/57693432"
+    },
+    {
+      "id": "54075385",
+      "title": "The Soul of a Woman",
+      "author": "Isabel Allende",
+      "link": "https://www.goodreads.com/book/show/54075385"
+    },
+    {
+      "id": "34956885",
+      "title": "The Body Is Not an Apology: The Power of Radical Self-Love",
+      "author": "Sonya Renee Taylor",
+      "link": "https://www.goodreads.com/book/show/34956885",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "13099738",
+      "title": "Steal Like an Artist: 10 Things Nobody Told You About Being Creative",
+      "author": "Austin Kleon",
+      "link": "https://www.goodreads.com/book/show/13099738"
+    },
+    {
+      "id": "60693383",
+      "title": "Leveling Up: 12 Questions to Elevate Your Personal and Professional Development",
+      "author": "Ryan Leak",
+      "link": "https://www.goodreads.com/book/show/60693383"
+    },
+    {
+      "id": "77566",
+      "title": "Hyperion",
+      "series": "Hyperion Cantos",
+      "seriesNo": 1,
+      "author": "Dan Simmons",
+      "link": "https://www.goodreads.com/book/show/77566",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "90590091",
+      "title": "The Art of Prophecy",
+      "series": "War Arts",
+      "seriesNo": 1,
+      "author": "Wesley Chu",
+      "link": "https://www.goodreads.com/book/show/90590091"
+    },
+    {
+      "id": "58838847",
+      "title": "The War on the West: An Instant NYT Bestselling History of the Modern World",
+      "author": "Douglas Murray",
+      "link": "https://www.goodreads.com/book/show/58838847",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "48855",
+      "title": "The Diary of a Young Girl",
+      "author": "Anne Frank",
+      "link": "https://www.goodreads.com/book/show/48855",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "11324722",
+      "title": "The Righteous Mind: Why Good People Are Divided by Politics and Religion",
+      "author": "Jonathan Haidt",
+      "link": "https://www.goodreads.com/book/show/11324722",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "61358662",
+      "title": "Your Brain on Art: How the Arts Transform Us",
+      "author": "Susan Magsamen",
+      "link": "https://www.goodreads.com/book/show/61358662"
+    },
+    {
+      "id": "27833494",
+      "title": "Dark Money: The Hidden History of the Billionaires Behind the Rise of the Radical Right",
+      "author": "Jane Mayer",
+      "link": "https://www.goodreads.com/book/show/27833494",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "13724117",
+      "title": "Sappho",
+      "author": "Sappho",
+      "link": "https://www.goodreads.com/book/show/13724117",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "9361589",
+      "title": "The Night Circus",
+      "author": "Erin Morgenstern",
+      "link": "https://www.goodreads.com/book/show/9361589",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "22843271",
+      "title": "Eloquent JavaScript: A Modern Introduction to Programming",
+      "author": "Marijn Haverbeke",
+      "link": "https://www.goodreads.com/book/show/22843271",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "36063739",
+      "title": "Shōgun",
+      "series": "Asian Saga: Chronological Order",
+      "seriesNo": 1,
+      "author": "James Clavell",
+      "link": "https://www.goodreads.com/book/show/36063739",
+      "genre": "History"
+    },
+    {
+      "id": "61294937",
+      "title": "The Adventures of Amina al-Sirafi",
+      "series": "Amina al-Sirafi",
+      "seriesNo": 1,
+      "author": "S.A. Chakraborty",
+      "link": "https://www.goodreads.com/book/show/61294937",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "33647315",
+      "title": "The Lost City of the Monkey God",
+      "author": "Douglas Preston",
+      "link": "https://www.goodreads.com/book/show/33647315",
+      "genre": "History"
+    },
+    {
+      "id": "17910048",
+      "title": "The Goblin Emperor",
+      "series": "The Chronicles of Osreth",
+      "seriesNo": 1,
+      "author": "Katherine Addison",
+      "link": "https://www.goodreads.com/book/show/17910048",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "57405301",
+      "title": "Where They Burn Books, They Also Burn People (Hispanic American Heritage Stories)",
+      "author": "Marcos Antonio Hernandez",
+      "link": "https://www.goodreads.com/book/show/57405301"
+    },
+    {
+      "id": "57057198",
+      "title": "The Boy Who Would Be King: A Fable About Marcus Aurelius",
+      "author": "Ryan Holiday",
+      "link": "https://www.goodreads.com/book/show/57057198"
+    },
+    {
+      "id": "60607155",
+      "title": "The Wife of Bath: A Biography",
+      "author": "Marion Turner",
+      "link": "https://www.goodreads.com/book/show/60607155"
+    },
+    {
+      "id": "10302",
+      "title": "The March of Folly: From Troy to Vietnam",
+      "author": "Barbara W. Tuchman",
+      "link": "https://www.goodreads.com/book/show/10302",
+      "genre": "History"
+    },
+    {
+      "id": "34497",
+      "title": "The Color of Magic",
+      "series": "Discworld, #1; Rincewind",
+      "seriesNo": 1,
+      "author": "Terry Pratchett",
+      "link": "https://www.goodreads.com/book/show/34497"
+    },
+    {
+      "id": "53487148",
+      "title": "A Thousand Ships",
+      "author": "Natalie Haynes",
+      "link": "https://www.goodreads.com/book/show/53487148",
+      "genre": "History"
+    },
+    {
+      "id": "63912246",
+      "title": "Heracles' Bow",
+      "author": "Madeline Miller",
+      "link": "https://www.goodreads.com/book/show/63912246"
+    },
+    {
+      "id": "25669",
+      "title": "How the Irish Saved Civilization: The Untold Story of Ireland's Heroic Role from the Fall of Rome to the Rise of Medieval Europe",
+      "author": "Thomas Cahill",
+      "link": "https://www.goodreads.com/book/show/25669",
+      "genre": "History"
+    },
+    {
+      "id": "37557163",
+      "title": "The Aenied",
+      "author": "Virgil",
+      "link": "https://www.goodreads.com/book/show/37557163"
+    },
+    {
+      "id": "51706734",
+      "title": "The Landmark Xenophon's Anabasis (Landmark Series)",
+      "author": "Xenophon",
+      "link": "https://www.goodreads.com/book/show/51706734"
+    },
+    {
+      "id": "12172",
+      "title": "Memoirs of Hadrian: And, Reflections on the Composition of Memoirs of Hadrian (FSG Classics)",
+      "author": "Marguerite Yourcenar",
+      "link": "https://www.goodreads.com/book/show/12172",
+      "genre": "Other fiction"
+    },
+    {
+      "id": "55298289",
+      "title": "How to Focus",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 9,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/55298289"
+    },
+    {
+      "id": "50997832",
+      "title": "How to Connect",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 8,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/50997832"
+    },
+    {
+      "id": "33776764",
+      "title": "How to Fight",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 6,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/33776764",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "23846205",
+      "title": "How to Relax",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 5,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/23846205",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "22309627",
+      "title": "How to Love",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 3,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/22309627",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "22928976",
+      "title": "How to Walk",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 4,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/22928976",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "18342486",
+      "title": "How to Sit",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 1,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/18342486",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "20763856",
+      "title": "How to Eat",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 2,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/20763856",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "40957777",
+      "title": "How to See",
+      "series": "Mindfulness Essentials",
+      "seriesNo": 7,
+      "author": "Thich Nhat Hanh",
+      "link": "https://www.goodreads.com/book/show/40957777",
+      "genre": "History"
+    },
+    {
+      "id": "61089439",
+      "title": "The Wandering Mind: What Medieval Monks Tell Us About Distraction",
+      "author": "Jamie Kreiner",
+      "link": "https://www.goodreads.com/book/show/61089439"
+    },
+    {
+      "id": "56769533",
+      "title": "Breakfast with Seneca: A Stoic Guide to the Art of Living",
+      "author": "David Fideler",
+      "link": "https://www.goodreads.com/book/show/56769533",
+      "genre": "History"
+    },
+    {
+      "id": "18814253",
+      "title": "Tao Te Ching: A Book about the Way and the Power of the Way",
+      "author": "Lao Tzu",
+      "link": "https://www.goodreads.com/book/show/18814253",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "60070275",
+      "title": "Evidence of Things Not Seen",
+      "author": "James Baldwin",
+      "link": "https://www.goodreads.com/book/show/60070275",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "56269907",
+      "title": "Blood and Iron: The Rise and Fall of the German Empire 1871–1918",
+      "author": "Katja Hoyer",
+      "link": "https://www.goodreads.com/book/show/56269907",
+      "genre": "History"
+    },
+    {
+      "id": "61111302",
+      "title": "Essex Dogs",
+      "series": "Essex Dogs",
+      "seriesNo": 1,
+      "author": "Dan Jones",
+      "link": "https://www.goodreads.com/book/show/61111302"
+    },
+    {
+      "id": "57347786",
+      "title": "Powers and Thrones: A New History of the Middle Ages",
+      "author": "Dan Jones",
+      "link": "https://www.goodreads.com/book/show/57347786",
+      "genre": "History"
+    },
+    {
+      "id": "34312336",
+      "title": "The Templars: The Rise and Spectacular Fall of God's Holy Warriors",
+      "author": "Dan Jones",
+      "link": "https://www.goodreads.com/book/show/34312336",
+      "genre": "History"
+    },
+    {
+      "id": "59350636",
+      "title": "The Wolf Age: The Vikings, the Anglo-Saxons and the Battle for the North Sea Empire",
+      "author": "Tore Skeie",
+      "link": "https://www.goodreads.com/book/show/59350636"
+    },
+    {
+      "id": "53461448",
+      "title": "The Children of Ash and Elm: A History of the Vikings",
+      "author": "Neil Price",
+      "link": "https://www.goodreads.com/book/show/53461448"
+    },
+    {
+      "id": "400906",
+      "title": "The White Rose",
+      "series": "The Chronicles of the Black Company",
+      "seriesNo": 3,
+      "author": "Glen Cook",
+      "link": "https://www.goodreads.com/book/show/400906",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "400881",
+      "title": "Shadows Linger",
+      "series": "The Chronicles of the Black Company",
+      "seriesNo": 2,
+      "author": "Glen Cook",
+      "link": "https://www.goodreads.com/book/show/400881",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "50518244",
+      "title": "Terciel and Elinor",
+      "series": "Abhorsen",
+      "seriesNo": 6,
+      "author": "Garth Nix",
+      "link": "https://www.goodreads.com/book/show/50518244"
+    },
+    {
+      "id": "58103841",
+      "title": "The Goddess of Nothing At All",
+      "author": "Cat Rector",
+      "link": "https://www.goodreads.com/book/show/58103841"
+    },
+    {
+      "id": "41555932",
+      "title": "The God is Not Willing",
+      "series": "Witness",
+      "seriesNo": 1,
+      "author": "Steven Erikson",
+      "link": "https://www.goodreads.com/book/show/41555932",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "39863316",
+      "title": "The Empire's Ruin",
+      "series": "Ashes of the Unhewn Throne",
+      "seriesNo": 1,
+      "author": "Brian Staveley",
+      "link": "https://www.goodreads.com/book/show/39863316",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "56229688",
+      "title": "The Pariah",
+      "series": "Covenant of Steel",
+      "seriesNo": 1,
+      "author": "Anthony Ryan",
+      "link": "https://www.goodreads.com/book/show/56229688",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "60531406",
+      "title": "Tress of the Emerald Sea",
+      "series": "Hoid's Travails",
+      "seriesNo": 1,
+      "author": "Brandon Sanderson",
+      "link": "https://www.goodreads.com/book/show/60531406",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "57124219",
+      "title": "Hellmouth",
+      "author": "Giles Kristian",
+      "link": "https://www.goodreads.com/book/show/57124219"
+    },
+    {
+      "id": "57032570",
+      "title": "Notes on Grief",
+      "author": "Chimamanda Ngozi Adichie",
+      "link": "https://www.goodreads.com/book/show/57032570",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "55077652",
+      "title": "The Past Is Red",
+      "author": "Catherynne M. Valente",
+      "link": "https://www.goodreads.com/book/show/55077652",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "17061",
+      "title": "Coraline",
+      "author": "Neil Gaiman",
+      "link": "https://www.goodreads.com/book/show/17061",
+      "genre": "Horror"
+    },
+    {
+      "id": "5107",
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "link": "https://www.goodreads.com/book/show/5107",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "11394624",
+      "title": "Spellmonger",
+      "series": "The Spellmonger",
+      "seriesNo": 1,
+      "author": "Terry Mancour",
+      "link": "https://www.goodreads.com/book/show/11394624"
+    },
+    {
+      "id": "60870064",
+      "title": "Starting from Scratch: The Life-Changing Lessons of Aeneas",
+      "author": "Andrea Marcolongo",
+      "link": "https://www.goodreads.com/book/show/60870064"
+    },
+    {
+      "id": "34921573",
+      "title": "Lost Connections: Uncovering the Real Causes of Depression - and the Unexpected Solutions",
+      "author": "Johann Hari",
+      "link": "https://www.goodreads.com/book/show/34921573",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "21955937",
+      "title": "More Than Two: A Practical Guide to Ethical Polyamory",
+      "author": "Franklin Veaux",
+      "link": "https://www.goodreads.com/book/show/21955937",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "54944",
+      "title": "The Ethical Slut: A Guide to Infinite Sexual Possibilities",
+      "author": "Dossie Easton",
+      "link": "https://www.goodreads.com/book/show/54944",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "139569",
+      "title": "Stone Butch Blues",
+      "author": "Leslie Feinberg",
+      "link": "https://www.goodreads.com/book/show/139569",
+      "genre": "History"
+    },
+    {
+      "id": "429138",
+      "title": "River God",
+      "series": "Ancient Egypt",
+      "seriesNo": 1,
+      "author": "Wilbur Smith",
+      "link": "https://www.goodreads.com/book/show/429138",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "242242",
+      "title": "Stark",
+      "author": "Ben Elton",
+      "link": "https://www.goodreads.com/book/show/242242",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "57151981",
+      "title": "Beasts of a Little Land",
+      "author": "Juhea Kim",
+      "link": "https://www.goodreads.com/book/show/57151981",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "57355365",
+      "title": "The Bright Ages: A New History of Medieval Europe",
+      "author": "Matthew Gabriele",
+      "link": "https://www.goodreads.com/book/show/57355365",
+      "genre": "History"
+    },
+    {
+      "id": "55440232",
+      "title": "The Women of Troy",
+      "series": "Women of Troy",
+      "seriesNo": 2,
+      "author": "Pat Barker",
+      "link": "https://www.goodreads.com/book/show/55440232",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "34728667",
+      "title": "Children of Blood and Bone",
+      "series": "Legacy of Orïsha",
+      "seriesNo": 1,
+      "author": "Tomi Adeyemi",
+      "link": "https://www.goodreads.com/book/show/34728667",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "18423",
+      "title": "The Left Hand of Darkness",
+      "author": "Ursula K. Le Guin",
+      "link": "https://www.goodreads.com/book/show/18423",
+      "genre": "History"
+    },
+    {
+      "id": "48640658",
+      "title": "The Last God #1",
+      "author": "Phillip Kennedy Johnson",
+      "link": "https://www.goodreads.com/book/show/48640658"
+    },
+    {
+      "id": "57640243",
+      "title": "A Deadly Education",
+      "series": "The Scholomance",
+      "seriesNo": 1,
+      "author": "Naomi Novik",
+      "link": "https://www.goodreads.com/book/show/57640243",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "41543186",
+      "title": "The Golden Rhinoceros: Histories of the African Middle Ages",
+      "author": "François-Xavier Fauvelle",
+      "link": "https://www.goodreads.com/book/show/41543186"
+    },
+    {
+      "id": "33571713",
+      "title": "A Column of Fire",
+      "series": "Kingsbridge",
+      "seriesNo": 3,
+      "author": "Ken Follett",
+      "link": "https://www.goodreads.com/book/show/33571713",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "53231851",
+      "title": "The Sum of Us: What Racism Costs Everyone and How We Can Prosper Together",
+      "author": "Heather  McGhee",
+      "link": "https://www.goodreads.com/book/show/53231851",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "53352118",
+      "title": "Cut and Run",
+      "author": "Ben Acker",
+      "link": "https://www.goodreads.com/book/show/53352118"
+    },
+    {
+      "id": "2465562",
+      "title": "A Great and Terrible King: Edward I and the Forging of Britain",
+      "author": "Marc Morris",
+      "link": "https://www.goodreads.com/book/show/2465562",
+      "genre": "History"
+    },
+    {
+      "id": "20949792",
+      "title": "Augustus: First Emperor of Rome",
+      "author": "Adrian Goldsworthy",
+      "link": "https://www.goodreads.com/book/show/20949792",
+      "genre": "History"
+    },
+    {
+      "id": "25664522",
+      "title": "The Urban Monk: Eastern Wisdom and Modern Hacks to Stop Time and Find Success, Happiness, and Peace",
+      "author": "Pedram Shojai",
+      "link": "https://www.goodreads.com/book/show/25664522",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "22544764",
+      "title": "Uprooted",
+      "author": "Naomi Novik",
+      "link": "https://www.goodreads.com/book/show/22544764",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "23131088",
+      "title": "Nimona",
+      "author": "N.D. Stevenson",
+      "link": "https://www.goodreads.com/book/show/23131088",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "5985499",
+      "title": "Howl's Moving Castle",
+      "series": "Howl's Moving Castle",
+      "seriesNo": 1,
+      "author": "Diana Wynne Jones",
+      "link": "https://www.goodreads.com/book/show/5985499",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "25773001",
+      "title": "Wizard's First Rule",
+      "series": "Sword of Truth",
+      "seriesNo": 1,
+      "author": "Terry Goodkind",
+      "link": "https://www.goodreads.com/book/show/25773001",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "21956219",
+      "title": "Assassin's Apprentice",
+      "series": "Farseer Trilogy",
+      "seriesNo": 1,
+      "author": "Robin Hobb",
+      "link": "https://www.goodreads.com/book/show/21956219",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13642",
+      "title": "A Wizard of Earthsea",
+      "author": "Ursula K. Le Guin",
+      "link": "https://www.goodreads.com/book/show/13642",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "42661131",
+      "title": "The Vikings: A New History",
+      "author": "Neil Oliver",
+      "link": "https://www.goodreads.com/book/show/42661131",
+      "genre": "History"
+    },
+    {
+      "id": "40772002",
+      "title": "The Little Black Book of Workout Motivation",
+      "author": "Michael  Matthews",
+      "link": "https://www.goodreads.com/book/show/40772002"
+    },
+    {
+      "id": "23692271",
+      "title": "Sapiens: A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "link": "https://www.goodreads.com/book/show/23692271",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "38820046",
+      "title": "21 Lessons for the 21st Century",
+      "author": "Yuval Noah Harari",
+      "link": "https://www.goodreads.com/book/show/38820046",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "7282903",
+      "title": "The Crusades: The Authoritative History of the War for the Holy Land",
+      "author": "Thomas Asbridge",
+      "link": "https://www.goodreads.com/book/show/7282903",
+      "genre": "History"
+    },
+    {
+      "id": "68520",
+      "title": "The Winter King",
+      "series": "The Warlord Chronicles",
+      "seriesNo": 1,
+      "author": "Bernard Cornwell",
+      "link": "https://www.goodreads.com/book/show/68520",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "20421960",
+      "title": "The Other Side of History: Daily Life in the Ancient World",
+      "author": "Robert Garland",
+      "link": "https://www.goodreads.com/book/show/20421960",
+      "genre": "History"
+    },
+    {
+      "id": "9553383",
+      "title": "A History of the World in 100 Objects",
+      "author": "Neil MacGregor",
+      "link": "https://www.goodreads.com/book/show/9553383",
+      "genre": "History"
+    },
+    {
+      "id": "2708265",
+      "title": "The Age of Tamerlane (Men-at-Arms)",
+      "author": "David Nicolle",
+      "link": "https://www.goodreads.com/book/show/2708265"
+    },
+    {
+      "id": "991907",
+      "title": "Fighting Techniques of the Ancient World (3000 B.C. to 500 A.D.): Equipment, Combat Skills, and Tactics",
+      "author": "Simon Anglim",
+      "link": "https://www.goodreads.com/book/show/991907"
+    },
+    {
+      "id": "34757960",
+      "title": "The Shortest History of Germany",
+      "author": "James Hawes",
+      "link": "https://www.goodreads.com/book/show/34757960",
+      "genre": "History"
+    },
+    {
+      "id": "6934913",
+      "title": "The Shortest History of Europe",
+      "author": "John Hirst",
+      "link": "https://www.goodreads.com/book/show/6934913",
+      "genre": "History"
+    },
+    {
+      "id": "314722",
+      "title": "Thermopylae: The Battle That Changed the World",
+      "author": "Paul Cartledge",
+      "link": "https://www.goodreads.com/book/show/314722",
+      "genre": "History"
+    },
+    {
+      "id": "28881",
+      "title": "Lamb: The Gospel According to Biff, Christ’s Childhood Pal",
+      "author": "Christopher Moore",
+      "link": "https://www.goodreads.com/book/show/28881",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "480212",
+      "title": "Socialism: A Very Short Introduction",
+      "author": "Michael  Newman",
+      "link": "https://www.goodreads.com/book/show/480212",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "846034",
+      "title": "The Vikings: A Very Short Introduction",
+      "author": "Julian D. Richards",
+      "link": "https://www.goodreads.com/book/show/846034",
+      "genre": "History"
+    },
+    {
+      "id": "677074",
+      "title": "A Brief History of the Vikings: The Last Pagans or the First Modern Europeans?",
+      "author": "Jonathan Clements",
+      "link": "https://www.goodreads.com/book/show/677074",
+      "genre": "History"
+    },
+    {
+      "id": "35068705",
+      "title": "The Poppy War",
+      "series": "The Poppy War",
+      "seriesNo": 1,
+      "author": "R.F. Kuang",
+      "link": "https://www.goodreads.com/book/show/35068705",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "20518872",
+      "title": "The Three-Body Problem",
+      "series": "Remembrance of Earth’s Past",
+      "seriesNo": 1,
+      "author": "Liu Cixin",
+      "link": "https://www.goodreads.com/book/show/20518872",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "32603222",
+      "title": "We Are Legion: We Are Bob",
+      "series": "Bobiverse",
+      "seriesNo": 1,
+      "author": "Dennis E. Taylor",
+      "link": "https://www.goodreads.com/book/show/32603222",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "10357575",
+      "title": "1Q84",
+      "series": "1Q84",
+      "seriesNo": 1,
+      "author": "Haruki Murakami",
+      "link": "https://www.goodreads.com/book/show/10357575",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "43545",
+      "title": "The Once and Future King (The Once and Future King, #1–5)",
+      "author": "T.H. White",
+      "link": "https://www.goodreads.com/book/show/43545"
+    },
+    {
+      "id": "40604556",
+      "title": "Red Seas Under Red Skies",
+      "series": "Gentleman Bastard",
+      "seriesNo": 2,
+      "author": "Scott Lynch",
+      "link": "https://www.goodreads.com/book/show/40604556",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "1362",
+      "title": "The Histories",
+      "author": "Herodotus",
+      "link": "https://www.goodreads.com/book/show/1362",
+      "genre": "History"
+    },
+    {
+      "id": "13616278",
+      "title": "The Red Knight",
+      "series": "The Traitor Son Cycle",
+      "seriesNo": 1,
+      "author": "Miles  Cameron",
+      "link": "https://www.goodreads.com/book/show/13616278",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "33600",
+      "title": "Shantaram",
+      "author": "Gregory David Roberts",
+      "link": "https://www.goodreads.com/book/show/33600",
+      "genre": "Other fiction"
+    }
   ],
   "books": [
-    { "title": "Walden", "author": "Henry David Thoreau", "rating": 4, "dateRead": "2026-10-02", "link": "" },
-    { "title": "Meditations", "author": "Marcus Aurelius", "rating": 5, "dateRead": "2026-09-14", "link": "" },
-    { "title": "Frankenstein", "author": "Mary Shelley", "rating": 4, "dateRead": "2026-08-20", "link": "" },
-    { "title": "The Art of War", "author": "Sun Tzu", "rating": 3, "dateRead": "2026-07-03", "link": "" },
-    { "title": "Dracula", "author": "Bram Stoker", "rating": 4, "dateRead": "2026-06-11", "link": "" },
-    { "title": "Pride and Prejudice", "author": "Jane Austen", "rating": 5, "dateRead": "2026-05-01", "link": "" },
-    { "title": "Moby-Dick", "author": "Herman Melville", "rating": 3, "dateRead": "2026-03-28", "link": "" },
-    { "title": "The Time Machine", "author": "H. G. Wells", "rating": 4, "dateRead": "2026-02-09", "link": "" },
-    { "title": "Siddhartha", "author": "Hermann Hesse", "rating": 5, "dateRead": "2026-01-15", "link": "" },
-    { "title": "Great Expectations", "author": "Charles Dickens", "rating": 4, "dateRead": "2025-12-05", "link": "" },
-    { "title": "The Odyssey", "author": "Homer", "rating": 4, "dateRead": "2025-10-21", "link": "" },
-    { "title": "Jane Eyre", "author": "Charlotte Bronte", "rating": 5, "dateRead": "2025-09-02", "link": "" }
+    {
+      "id": "222376983",
+      "title": "Among the Burning Flowers",
+      "author": "Samantha Shannon",
+      "series": "The Roots of Chaos",
+      "seriesNo": 0.2,
+      "rating": 4,
+      "dateRead": "2026-10-08",
+      "link": "https://www.goodreads.com/book/show/222376983",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "61755703",
+      "title": "The Fury of the Gods",
+      "author": "John Gwynne",
+      "series": "The Bloodsworn Saga",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2026-10-01",
+      "link": "https://www.goodreads.com/book/show/61755703",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "56269205",
+      "title": "Empire of the Vampire",
+      "author": "Jay Kristoff",
+      "series": "Empire of the Vampire",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2026-09-22",
+      "link": "https://www.goodreads.com/book/show/56269205",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "57341045",
+      "title": "The Hunger of the Gods",
+      "author": "John Gwynne",
+      "series": "The Bloodsworn Saga",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2026-09-09",
+      "link": "https://www.goodreads.com/book/show/57341045",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "52694527",
+      "title": "The Shadow of the Gods",
+      "author": "John Gwynne",
+      "series": "The Bloodsworn Saga",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2026-08-24",
+      "link": "https://www.goodreads.com/book/show/52694527",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "211721809",
+      "title": "The Dungeon Anarchist's Cookbook",
+      "author": "Matt Dinniman",
+      "series": "Dungeon Crawler Carl",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "2026-07-29",
+      "link": "https://www.goodreads.com/book/show/211721809",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "18966819",
+      "title": "Golden Son",
+      "author": "Pierce Brown",
+      "series": "Red Rising Saga",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2026-07-08",
+      "link": "https://www.goodreads.com/book/show/18966819",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "212393364",
+      "title": "Carl's Doomsday Scenario",
+      "author": "Matt Dinniman",
+      "series": "Dungeon Crawler Carl",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "2026-06-11",
+      "link": "https://www.goodreads.com/book/show/212393364",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "560818",
+      "title": "Speaking Peace: Connecting with Others Through Non-Violent Communication",
+      "author": "Marshall B. Rosenberg",
+      "rating": 3,
+      "dateRead": "2026-06-08",
+      "link": "https://www.goodreads.com/book/show/560818",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "56791389",
+      "title": "Dungeon Crawler Carl",
+      "author": "Matt Dinniman",
+      "series": "Dungeon Crawler Carl",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2026-06-05",
+      "link": "https://www.goodreads.com/book/show/56791389",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "15839976",
+      "title": "Red Rising",
+      "author": "Pierce Brown",
+      "series": "Red Rising Saga",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2026-06-02",
+      "link": "https://www.goodreads.com/book/show/15839976",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "61887",
+      "title": "The Hallowed Hunt",
+      "author": "Lois McMaster Bujold",
+      "series": "World of the Five Gods",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "2026-05-21",
+      "link": "https://www.goodreads.com/book/show/61887",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "25791216",
+      "title": "Penric’s Demon",
+      "author": "Lois McMaster Bujold",
+      "series": "Penric and Desdemona",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2026-05-06",
+      "link": "https://www.goodreads.com/book/show/25791216",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "71730",
+      "title": "Nonviolent Communication: A Language of Life",
+      "author": "Marshall B. Rosenberg",
+      "rating": 5,
+      "dateRead": "2026-05-04",
+      "link": "https://www.goodreads.com/book/show/71730",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "6597651",
+      "title": "The Windup Girl",
+      "author": "Paolo Bacigalupi",
+      "rating": 4,
+      "dateRead": "2026-04-30",
+      "link": "https://www.goodreads.com/book/show/6597651",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "51152447",
+      "title": "Caste: The Origins of Our Discontents",
+      "author": "Isabel Wilkerson",
+      "rating": 0,
+      "dateRead": "2026-04-05",
+      "link": "https://www.goodreads.com/book/show/51152447",
+      "genre": "History"
+    },
+    {
+      "id": "173754979",
+      "title": "James",
+      "author": "Percival Everett",
+      "rating": 5,
+      "dateRead": "2026-03-23",
+      "link": "https://www.goodreads.com/book/show/173754979",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "2956",
+      "title": "The Adventures of Huckleberry Finn",
+      "author": "Mark Twain",
+      "series": "Adventures of Tom and Huck",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "2026-03-18",
+      "link": "https://www.goodreads.com/book/show/2956",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "169485073",
+      "title": "The Strength of the Few",
+      "author": "James Islington",
+      "series": "Hierarchy",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2026-02-24",
+      "link": "https://www.goodreads.com/book/show/169485073",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "61886",
+      "title": "The Curse of Chalion",
+      "author": "Lois McMaster Bujold",
+      "series": "World of the Five Gods",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2026-01-28",
+      "link": "https://www.goodreads.com/book/show/61886",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "58416952",
+      "title": "The Will of the Many",
+      "author": "James Islington",
+      "series": "Hierarchy",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2025-12-20",
+      "link": "https://www.goodreads.com/book/show/58416952",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "30558257",
+      "title": "Unsouled",
+      "author": "Will Wight",
+      "series": "Cradle",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2025-11-25",
+      "link": "https://www.goodreads.com/book/show/30558257",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "39899253",
+      "title": "Scattered Minds: The Origins and Healing of Attention Deficit Disorder",
+      "author": "Gabor Maté",
+      "rating": 5,
+      "dateRead": "2025-11-10",
+      "link": "https://www.goodreads.com/book/show/39899253",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "254704",
+      "title": "Mind of the Raven",
+      "author": "Bernd Heinrich",
+      "rating": 4,
+      "dateRead": "2025-10-28",
+      "link": "https://www.goodreads.com/book/show/254704",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "9014",
+      "title": "The Long Walk",
+      "author": "Richard  Bachman",
+      "rating": 3,
+      "dateRead": "2025-10-12",
+      "link": "https://www.goodreads.com/book/show/9014",
+      "genre": "Horror"
+    },
+    {
+      "id": "59903149",
+      "title": "Strong Female Character",
+      "author": "Fern  Brady",
+      "rating": 5,
+      "dateRead": "2025-10-01",
+      "link": "https://www.goodreads.com/book/show/59903149",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "8617614",
+      "title": "Babylon: Mesopotamia and the Birth of Civilization",
+      "author": "Paul Kriwaczek",
+      "rating": 4,
+      "dateRead": "2025-09-26",
+      "link": "https://www.goodreads.com/book/show/8617614",
+      "genre": "History"
+    },
+    {
+      "id": "61240297",
+      "title": "Snow Crash",
+      "author": "Neal Stephenson",
+      "rating": 4,
+      "dateRead": "2025-09-16",
+      "link": "https://www.goodreads.com/book/show/61240297",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "15819028",
+      "title": "The Golem and the Jinni",
+      "author": "Helene Wecker",
+      "series": "The Golem and the Jinni",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2025-08-30",
+      "link": "https://www.goodreads.com/book/show/15819028",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "27869637",
+      "title": "The Addictive Brain",
+      "author": "Thad A. Polk",
+      "rating": 4,
+      "dateRead": "2025-08-15",
+      "link": "https://www.goodreads.com/book/show/27869637",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "55868456",
+      "title": "The Spear Cuts Through Water",
+      "author": "Simon Jimenez",
+      "rating": 5,
+      "dateRead": "2025-08-13",
+      "link": "https://www.goodreads.com/book/show/55868456",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "6391876",
+      "title": "The Big Leap: Conquer Your Hidden Fear and Take Life to the Next Level",
+      "author": "Gay Hendricks",
+      "rating": 4,
+      "dateRead": "2025-08-05",
+      "link": "https://www.goodreads.com/book/show/6391876",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "58484901",
+      "title": "How to Be Perfect: The Correct Answer to Every Moral Question",
+      "author": "Michael Schur",
+      "rating": 4,
+      "dateRead": "2025-08-03",
+      "link": "https://www.goodreads.com/book/show/58484901",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "113436",
+      "title": "Eragon",
+      "author": "Christopher Paolini",
+      "series": "The Inheritance Cycle",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2025-07-29",
+      "link": "https://www.goodreads.com/book/show/113436",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "16130549",
+      "title": "Doctor Sleep",
+      "author": "Stephen  King",
+      "series": "The Shining",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2025-07-23",
+      "link": "https://www.goodreads.com/book/show/16130549",
+      "genre": "Horror"
+    },
+    {
+      "id": "11588",
+      "title": "The Shining",
+      "author": "Stephen  King",
+      "series": "The Shining",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2025-06-29",
+      "link": "https://www.goodreads.com/book/show/11588",
+      "genre": "Horror"
+    },
+    {
+      "id": "830502",
+      "title": "It",
+      "author": "Stephen  King",
+      "rating": 5,
+      "dateRead": "2025-05-27",
+      "link": "https://www.goodreads.com/book/show/830502",
+      "genre": "Horror"
+    },
+    {
+      "id": "594574",
+      "title": "The Fortress of the Pearl",
+      "author": "Michael Moorcock",
+      "series": "The Elric Saga",
+      "seriesNo": 8,
+      "rating": 5,
+      "dateRead": "2025-05-20",
+      "link": "https://www.goodreads.com/book/show/594574",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "30076034",
+      "title": "Precious Little Sleep",
+      "author": "Alexis Dubief",
+      "rating": 4,
+      "dateRead": "2025-05-15",
+      "link": "https://www.goodreads.com/book/show/30076034",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "60154",
+      "title": "The Sailor on the Seas of Fate",
+      "author": "Michael Moorcock",
+      "series": "The Elric Saga",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "2025-05-10",
+      "link": "https://www.goodreads.com/book/show/60154",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "30036",
+      "title": "Elric of Melniboné",
+      "author": "Michael Moorcock",
+      "series": "The Elric Saga",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2025-05-05",
+      "link": "https://www.goodreads.com/book/show/30036",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "63068346",
+      "title": "The Sunlit Man (The Cosmere)",
+      "author": "Brandon Sanderson",
+      "rating": 4,
+      "dateRead": "2025-05-01",
+      "link": "https://www.goodreads.com/book/show/63068346",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "54493401",
+      "title": "Project Hail Mary",
+      "author": "Andy Weir",
+      "rating": 5,
+      "dateRead": "2025-04-13",
+      "link": "https://www.goodreads.com/book/show/54493401",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "17568801",
+      "title": "Zealot: The Life and Times of Jesus of Nazareth",
+      "author": "Reza Aslan",
+      "rating": 4,
+      "dateRead": "2025-04-06",
+      "link": "https://www.goodreads.com/book/show/17568801",
+      "genre": "History"
+    },
+    {
+      "id": "203578847",
+      "title": "Wind and Truth",
+      "author": "Brandon Sanderson",
+      "series": "The Stormlight Archive",
+      "seriesNo": 5,
+      "rating": 5,
+      "dateRead": "2025-04-06",
+      "link": "https://www.goodreads.com/book/show/203578847",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "199114861",
+      "title": "Pilgrim: A Medieval Horror",
+      "author": "Mitchell Lüthi",
+      "rating": 5,
+      "dateRead": "2025-04-01",
+      "link": "https://www.goodreads.com/book/show/199114861",
+      "genre": "Horror"
+    },
+    {
+      "id": "54304028",
+      "title": "Hunt, Gather, Parent: What Ancient Cultures Can Teach Us About the Lost Art of Raising Happy, Helpful Little Humans",
+      "author": "Michaeleen Doucleff",
+      "rating": 4,
+      "dateRead": "2025-03-12",
+      "link": "https://www.goodreads.com/book/show/54304028",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "40604658",
+      "title": "Jurassic Park",
+      "author": "Michael Crichton",
+      "series": "Jurassic Park",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2025-02-19",
+      "link": "https://www.goodreads.com/book/show/40604658",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "56347680",
+      "title": "The Right to Sex: Feminism in the Twenty-First Century",
+      "author": "Amia Srinivasan",
+      "rating": 5,
+      "dateRead": "2025-02-12",
+      "link": "https://www.goodreads.com/book/show/56347680",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "617702",
+      "title": "In the Realm of Hungry Ghosts: Close Encounters with Addiction",
+      "author": "Gabor Maté",
+      "rating": 5,
+      "dateRead": "2025-02-07",
+      "link": "https://www.goodreads.com/book/show/617702",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "60932",
+      "title": "Parable of the Talents",
+      "author": "Octavia E. Butler",
+      "series": "Earthseed",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2025-01-30",
+      "link": "https://www.goodreads.com/book/show/60932",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "52397",
+      "title": "Parable of the Sower",
+      "author": "Octavia E. Butler",
+      "series": "Earthseed",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2025-01-15",
+      "link": "https://www.goodreads.com/book/show/52397",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "43919",
+      "title": "Faerie Tale",
+      "author": "Raymond E. Feist",
+      "rating": 4,
+      "dateRead": "2025-01-04",
+      "link": "https://www.goodreads.com/book/show/43919",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "128747007",
+      "title": "Emperor of Rome: Ruling the Ancient Roman World",
+      "author": "Mary Beard",
+      "rating": 4,
+      "dateRead": "2024-12-21",
+      "link": "https://www.goodreads.com/book/show/128747007",
+      "genre": "History"
+    },
+    {
+      "id": "21845220",
+      "title": "The Navigator's Children",
+      "author": "Tad Williams",
+      "series": "The Last King of Osten Ard",
+      "seriesNo": 4,
+      "rating": 5,
+      "dateRead": "2024-12-11",
+      "link": "https://www.goodreads.com/book/show/21845220",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "60630164",
+      "title": "Six Adventure Tales from Medieval Iceland: A  Reader for First-Time Visitors",
+      "author": "T.M. Andersson",
+      "rating": 3,
+      "dateRead": "2024-12-01",
+      "link": "https://www.goodreads.com/book/show/60630164"
+    },
+    {
+      "id": "41180663",
+      "title": "Stop Doing That Sh*t: End Self-Sabotage and Demand Your Life Back",
+      "author": "Gary John Bishop",
+      "rating": 3,
+      "dateRead": "2024-11-17",
+      "link": "https://www.goodreads.com/book/show/41180663",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "97411",
+      "title": "Letters from a Stoic",
+      "author": "Seneca",
+      "rating": 4,
+      "dateRead": "2024-11-11",
+      "link": "https://www.goodreads.com/book/show/97411",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "44667904",
+      "title": "Bumpin': The Modern Guide to Pregnancy: Navigating the Wild, Weird, and Wonderful Journey From Conception Through Birth and Beyond",
+      "author": "Leslie Schrock",
+      "rating": 5,
+      "dateRead": "2024-10-29",
+      "link": "https://www.goodreads.com/book/show/44667904",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "11590",
+      "title": "’Salem’s Lot",
+      "author": "Stephen  King",
+      "rating": 4,
+      "dateRead": "2024-10-20",
+      "link": "https://www.goodreads.com/book/show/11590",
+      "genre": "Horror"
+    },
+    {
+      "id": "8445273",
+      "title": "Brain Rules for Baby: How to Raise a Smart and Happy Child from Zero to Five",
+      "author": "John Medina",
+      "rating": 5,
+      "dateRead": "2024-10-11",
+      "link": "https://www.goodreads.com/book/show/8445273",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "21483760",
+      "title": "Spell or High Water",
+      "author": "Scott  Meyer",
+      "series": "Magic 2.0",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2024-10-08",
+      "link": "https://www.goodreads.com/book/show/21483760",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "59350587",
+      "title": "Into the Narrowdark",
+      "author": "Tad Williams",
+      "series": "The Last King of Osten Ard",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2024-09-26",
+      "link": "https://www.goodreads.com/book/show/59350587",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "21845219",
+      "title": "Empire of Grass",
+      "author": "Tad Williams",
+      "series": "The Last King of Osten Ard",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2024-09-05",
+      "link": "https://www.goodreads.com/book/show/21845219",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "44439415",
+      "title": "God Emperor of Dune",
+      "author": "Frank Herbert",
+      "series": "Dune",
+      "seriesNo": 4,
+      "rating": 5,
+      "dateRead": "2024-08-09",
+      "link": "https://www.goodreads.com/book/show/44439415",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "18616975",
+      "title": "Off to Be the Wizard",
+      "author": "Scott  Meyer",
+      "series": "Magic 2.0",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2024-07-30",
+      "link": "https://www.goodreads.com/book/show/18616975",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "195790571",
+      "title": "The Daughters' War",
+      "author": "Christopher Buehlman",
+      "series": "Blacktongue",
+      "seriesNo": 0,
+      "rating": 5,
+      "dateRead": "2024-07-24",
+      "link": "https://www.goodreads.com/book/show/195790571",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "6088007",
+      "title": "Neuromancer",
+      "author": "William Gibson",
+      "series": "Sprawl",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2024-07-08",
+      "link": "https://www.goodreads.com/book/show/6088007",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "44492286",
+      "title": "Children of Dune",
+      "author": "Frank Herbert",
+      "series": "Dune",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "2024-05-29",
+      "link": "https://www.goodreads.com/book/show/44492286",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "44492285",
+      "title": "Dune Messiah",
+      "author": "Frank Herbert",
+      "series": "Dune",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2024-05-18",
+      "link": "https://www.goodreads.com/book/show/44492285",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "44767458",
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "series": "Dune",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2024-05-06",
+      "link": "https://www.goodreads.com/book/show/44767458",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "31185918",
+      "title": "The Witchwood Crown",
+      "author": "Tad Williams",
+      "series": "The Last King of Osten Ard",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2024-04-19",
+      "link": "https://www.goodreads.com/book/show/31185918",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "28585686",
+      "title": "The Heart of What Was Lost",
+      "author": "Tad Williams",
+      "series": "The Last King of Osten Ard",
+      "seriesNo": 0.5,
+      "rating": 4,
+      "dateRead": "2024-03-22",
+      "link": "https://www.goodreads.com/book/show/28585686",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "28691",
+      "title": "To Green Angel Tower",
+      "author": "Tad Williams",
+      "series": "Memory, Sorrow, and Thorn",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "2024-03-08",
+      "link": "https://www.goodreads.com/book/show/28691",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "60784259",
+      "title": "Feed Them Silence",
+      "author": "Lee Mandelo",
+      "rating": 3,
+      "dateRead": "2024-03-01",
+      "link": "https://www.goodreads.com/book/show/60784259",
+      "genre": "Horror"
+    },
+    {
+      "id": "17214",
+      "title": "Starship Troopers",
+      "author": "Robert A. Heinlein",
+      "rating": 5,
+      "dateRead": "2024-02-13",
+      "link": "https://www.goodreads.com/book/show/17214",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "34807427",
+      "title": "Nolyn",
+      "author": "Michael J. Sullivan",
+      "series": "The Rise and Fall",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2023-12-15",
+      "link": "https://www.goodreads.com/book/show/34807427",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "35960093",
+      "title": "Hadrian's Wall",
+      "author": "Adrian Goldsworthy",
+      "rating": 4,
+      "dateRead": "2023-12-05",
+      "link": "https://www.goodreads.com/book/show/35960093",
+      "genre": "History"
+    },
+    {
+      "id": "41741961",
+      "title": "How to Think about War: An Ancient Guide to Foreign Policy (Ancient Wisdom for Modern Readers)",
+      "author": "Thucydides",
+      "rating": 4,
+      "dateRead": "2023-12-05",
+      "link": "https://www.goodreads.com/book/show/41741961",
+      "genre": "History"
+    },
+    {
+      "id": "157265081",
+      "title": "The Narrow Road Between Desires",
+      "author": "Patrick Rothfuss",
+      "series": "The Kingkiller Chronicle",
+      "seriesNo": 0.6,
+      "rating": 4,
+      "dateRead": "2023-11-22",
+      "link": "https://www.goodreads.com/book/show/157265081",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "61401116",
+      "title": "The Satsuma Complex",
+      "author": "Bob Mortimer",
+      "series": "Gary Thorn",
+      "seriesNo": 1,
+      "rating": 3,
+      "dateRead": "2023-11-21",
+      "link": "https://www.goodreads.com/book/show/61401116",
+      "genre": "Mystery & thriller"
+    },
+    {
+      "id": "60018575",
+      "title": "Discipline Is Destiny: The Power of Self-Control",
+      "author": "Ryan Holiday",
+      "rating": 5,
+      "dateRead": "2023-11-19",
+      "link": "https://www.goodreads.com/book/show/60018575",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "5470",
+      "title": "1984",
+      "author": "George Orwell",
+      "rating": 5,
+      "dateRead": "2023-11-18",
+      "link": "https://www.goodreads.com/book/show/5470",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "34268",
+      "title": "Peter Pan",
+      "author": "J.M. Barrie",
+      "series": "Peter Pan",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "2023-11-13",
+      "link": "https://www.goodreads.com/book/show/34268",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "18765",
+      "title": "I, Claudius",
+      "author": "Robert Graves",
+      "series": "Claudius",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2023-11-13",
+      "link": "https://www.goodreads.com/book/show/18765",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "28689",
+      "title": "Stone of Farewell",
+      "author": "Tad Williams",
+      "series": "Memory, Sorrow, and Thorn",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2023-11-11",
+      "link": "https://www.goodreads.com/book/show/28689",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "382450",
+      "title": "Fevre Dream",
+      "author": "George R.R. Martin",
+      "rating": 4,
+      "dateRead": "2023-09-29",
+      "link": "https://www.goodreads.com/book/show/382450",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "91981",
+      "title": "The Dragonbone Chair",
+      "author": "Tad Williams",
+      "series": "Memory, Sorrow, and Thorn",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2023-09-24",
+      "link": "https://www.goodreads.com/book/show/91981",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "57282621",
+      "title": "Brothers of the Wind",
+      "author": "Tad Williams",
+      "series": "The Last King of Osten Ard",
+      "seriesNo": 0.75,
+      "rating": 5,
+      "dateRead": "2023-08-03",
+      "link": "https://www.goodreads.com/book/show/57282621",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "44010195",
+      "title": "25 Icelandic Folk and Fairy Tales",
+      "author": "Jón R. Hjálmarsson",
+      "rating": 3,
+      "dateRead": "2023-08-03",
+      "link": "https://www.goodreads.com/book/show/44010195",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "27036528",
+      "title": "Ego Is the Enemy",
+      "author": "Ryan Holiday",
+      "rating": 5,
+      "dateRead": "2023-07-28",
+      "link": "https://www.goodreads.com/book/show/27036528",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "58052469",
+      "title": "Simplify Testing with React Testing Library: Create maintainable tests using RTL that do not break with changes",
+      "author": "Scottie Crump",
+      "rating": 3,
+      "dateRead": "2023-07-18",
+      "link": "https://www.goodreads.com/book/show/58052469"
+    },
+    {
+      "id": "60766189",
+      "title": "A Day of Fallen Night",
+      "author": "Samantha Shannon",
+      "series": "The Roots of Chaos",
+      "seriesNo": 0.1,
+      "rating": 5,
+      "dateRead": "2023-07-14",
+      "link": "https://www.goodreads.com/book/show/60766189",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "32078364",
+      "title": "Celtic Mythology: Tales of Gods, Goddesses, and Heroes",
+      "author": "Philip Freeman",
+      "rating": 4,
+      "dateRead": "2023-06-29",
+      "link": "https://www.goodreads.com/book/show/32078364",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "61215384",
+      "title": "The Return of the King",
+      "author": "J.R.R. Tolkien",
+      "series": "The Lord of the Rings",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2023-06-17",
+      "link": "https://www.goodreads.com/book/show/61215384",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "61215372",
+      "title": "The Two Towers",
+      "author": "J.R.R. Tolkien",
+      "series": "The Lord of the Rings",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2023-06-07",
+      "link": "https://www.goodreads.com/book/show/61215372",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "55151",
+      "title": "The Fall of Carthage: The Punic Wars 265–146 BC",
+      "author": "Adrian Goldsworthy",
+      "rating": 4,
+      "dateRead": "2023-05-25",
+      "link": "https://www.goodreads.com/book/show/55151",
+      "genre": "History"
+    },
+    {
+      "id": "41433634",
+      "title": "Heroes: Mortals and Monsters, Quests and Adventures",
+      "author": "Stephen Fry",
+      "series": "Stephen Fry's Great Mythology",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2023-05-05",
+      "link": "https://www.goodreads.com/book/show/41433634",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "52780817",
+      "title": "Philip and Alexander: Kings and Conquerors",
+      "author": "Adrian Goldsworthy",
+      "rating": 4,
+      "dateRead": "2023-04-24",
+      "link": "https://www.goodreads.com/book/show/52780817",
+      "genre": "History"
+    },
+    {
+      "id": "39863499",
+      "title": "How to Think Like a Roman Emperor: The Stoic Philosophy of Marcus Aurelius",
+      "author": "Donald J. Robertson",
+      "rating": 5,
+      "dateRead": "2023-04-12",
+      "link": "https://www.goodreads.com/book/show/39863499",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "1381",
+      "title": "The Odyssey",
+      "author": "Homer",
+      "rating": 0,
+      "dateRead": "2023-04-05",
+      "link": "https://www.goodreads.com/book/show/1381",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "57423631",
+      "title": "Daughters of Sparta",
+      "author": "Claire Heywood",
+      "rating": 4,
+      "dateRead": "2023-03-24",
+      "link": "https://www.goodreads.com/book/show/57423631",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "51042792",
+      "title": "Fleabag: The Scriptures",
+      "author": "Phoebe Waller-Bridge",
+      "rating": 5,
+      "dateRead": "2023-03-20",
+      "link": "https://www.goodreads.com/book/show/51042792",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "60384799",
+      "title": "Shuna's Journey",
+      "author": "Hayao Miyazaki",
+      "rating": 5,
+      "dateRead": "2023-03-17",
+      "link": "https://www.goodreads.com/book/show/60384799",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "57945316",
+      "title": "Babel",
+      "author": "R.F. Kuang",
+      "rating": 5,
+      "dateRead": "2023-03-16",
+      "link": "https://www.goodreads.com/book/show/57945316",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "18162954",
+      "title": "Galatea",
+      "author": "Madeline Miller",
+      "rating": 4,
+      "dateRead": "2023-03-12",
+      "link": "https://www.goodreads.com/book/show/18162954",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "53443339",
+      "title": "Troy",
+      "author": "Stephen Fry",
+      "series": "Stephen Fry's Great Mythology",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "2023-02-27",
+      "link": "https://www.goodreads.com/book/show/53443339",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "140671",
+      "title": "The Black Company",
+      "author": "Glen Cook",
+      "series": "The Chronicles of the Black Company",
+      "seriesNo": 1,
+      "rating": 3,
+      "dateRead": "2023-02-22",
+      "link": "https://www.goodreads.com/book/show/140671",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "30753841",
+      "title": "Salt, Fat, Acid, Heat: Mastering the Elements of Good Cooking",
+      "author": "Samin Nosrat",
+      "rating": 5,
+      "dateRead": "2023-02-20",
+      "link": "https://www.goodreads.com/book/show/30753841",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "57513156",
+      "title": "And Away...",
+      "author": "Bob Mortimer",
+      "rating": 5,
+      "dateRead": "2023-02-12",
+      "link": "https://www.goodreads.com/book/show/57513156",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "58472628",
+      "title": "Truth and Other Lies",
+      "author": "Lyra Wolf",
+      "series": "The Nine Worlds Rising",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2023-02-09",
+      "link": "https://www.goodreads.com/book/show/58472628",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "32507304",
+      "title": "The Wolf of the North",
+      "author": "Duncan M. Hamilton",
+      "series": "Wolf of the North",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2023-02-08",
+      "link": "https://www.goodreads.com/book/show/32507304",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "23947089",
+      "title": "The Lost Metal",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 7,
+      "rating": 5,
+      "dateRead": "2023-02-05",
+      "link": "https://www.goodreads.com/book/show/23947089",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "16065004",
+      "title": "Shadows of Self",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 5,
+      "rating": 5,
+      "dateRead": "2023-01-28",
+      "link": "https://www.goodreads.com/book/show/16065004",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "28698036",
+      "title": "Secret History",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 3.5,
+      "rating": 0,
+      "dateRead": "2023-01-23",
+      "link": "https://www.goodreads.com/book/show/28698036",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "61215351",
+      "title": "The Fellowship of the Ring",
+      "author": "J.R.R. Tolkien",
+      "series": "The Lord of the Rings",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2022-12-04",
+      "link": "https://www.goodreads.com/book/show/61215351",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "58532691",
+      "title": "Not All Robots",
+      "author": "Mark   Russell",
+      "rating": 4,
+      "dateRead": "2022-11-16",
+      "link": "https://www.goodreads.com/book/show/58532691",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "60317493",
+      "title": "Sir Gawain And The Green Knight",
+      "author": "Gawain Poet",
+      "series": "A Tolkien Miscellany",
+      "seriesNo": 5,
+      "rating": 4,
+      "dateRead": "2022-11-11",
+      "link": "https://www.goodreads.com/book/show/60317493",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "22823333",
+      "title": "The Eleventh Metal",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 0.5,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/22823333",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "12796771",
+      "title": "Awakening",
+      "author": "Brandon Sanderson",
+      "series": "Infinity Blade",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/12796771",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "28862254",
+      "title": "White Sand, Volume 1",
+      "author": "Brandon Sanderson",
+      "series": "White Sand",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/28862254",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "23397921",
+      "title": "Sixth of the Dusk (The Cosmere)",
+      "author": "Brandon Sanderson",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/23397921",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13578175",
+      "title": "The Emperor's Soul",
+      "author": "Brandon Sanderson",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/13578175",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "34703445",
+      "title": "Edgedancer",
+      "author": "Brandon Sanderson",
+      "series": "The Stormlight Archive",
+      "seriesNo": 2.5,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/34703445",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "54511226",
+      "title": "Dawnshard",
+      "author": "Brandon Sanderson",
+      "series": "The Stormlight Archive",
+      "seriesNo": 3.5,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/54511226",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "23654840",
+      "title": "Age of Empyre",
+      "author": "Michael J. Sullivan",
+      "series": "The Legends of the First Empire",
+      "seriesNo": 6,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/23654840",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "51914250",
+      "title": "Pile of Bones",
+      "author": "Michael J. Sullivan",
+      "series": "The Legends of the First Empire",
+      "seriesNo": 0.5,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/51914250",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "20893407",
+      "title": "The Lesser Dead",
+      "author": "Christopher Buehlman",
+      "rating": 4,
+      "dateRead": "2022-11-07",
+      "link": "https://www.goodreads.com/book/show/20893407",
+      "genre": "Horror"
+    },
+    {
+      "id": "52319928",
+      "title": "You Ought to Know Adam Wade",
+      "author": "Adam Wade",
+      "rating": 3,
+      "dateRead": "2022-10-29",
+      "link": "https://www.goodreads.com/book/show/52319928",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "7743175",
+      "title": "A Memory of Light",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 14,
+      "rating": 5,
+      "dateRead": "2022-10-27",
+      "link": "https://www.goodreads.com/book/show/7743175",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "8253920",
+      "title": "Towers of Midnight",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 13,
+      "rating": 5,
+      "dateRead": "2022-09-30",
+      "link": "https://www.goodreads.com/book/show/8253920",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "1166599",
+      "title": "The Gathering Storm",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 12,
+      "rating": 5,
+      "dateRead": "2022-09-25",
+      "link": "https://www.goodreads.com/book/show/1166599",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13888",
+      "title": "Knife of Dreams",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 11,
+      "rating": 4,
+      "dateRead": "2022-09-15",
+      "link": "https://www.goodreads.com/book/show/13888",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "113435",
+      "title": "Crossroads of Twilight",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 10,
+      "rating": 3,
+      "dateRead": "2022-09-06",
+      "link": "https://www.goodreads.com/book/show/113435",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13543121",
+      "title": "Between Two Fires",
+      "author": "Christopher Buehlman",
+      "rating": 5,
+      "dateRead": "2022-08-27",
+      "link": "https://www.goodreads.com/book/show/13543121",
+      "genre": "Horror"
+    },
+    {
+      "id": "13891",
+      "title": "Winter's Heart",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 9,
+      "rating": 4,
+      "dateRead": "2022-08-22",
+      "link": "https://www.goodreads.com/book/show/13891",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "140974",
+      "title": "The Path of Daggers",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 8,
+      "rating": 4,
+      "dateRead": "2022-08-15",
+      "link": "https://www.goodreads.com/book/show/140974",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13890",
+      "title": "A Crown of Swords",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 7,
+      "rating": 4,
+      "dateRead": "2022-08-11",
+      "link": "https://www.goodreads.com/book/show/13890",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "35231",
+      "title": "Lord of Chaos",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 6,
+      "rating": 3,
+      "dateRead": "2022-07-30",
+      "link": "https://www.goodreads.com/book/show/35231",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13895",
+      "title": "The Fires of Heaven",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 5,
+      "rating": 4,
+      "dateRead": "2022-06-07",
+      "link": "https://www.goodreads.com/book/show/13895",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "58085232",
+      "title": "Extreme North: A Cultural History",
+      "author": "Bernd Brunner",
+      "rating": 3,
+      "dateRead": "2022-06-07",
+      "link": "https://www.goodreads.com/book/show/58085232",
+      "genre": "History"
+    },
+    {
+      "id": "605663",
+      "title": "Whipping Girl: A Transsexual Woman on Sexism and the Scapegoating of Femininity",
+      "author": "Julia Serano",
+      "rating": 5,
+      "dateRead": "2022-05-31",
+      "link": "https://www.goodreads.com/book/show/605663",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "9539",
+      "title": "The Shadow Rising",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 4,
+      "rating": 4,
+      "dateRead": "2022-05-27",
+      "link": "https://www.goodreads.com/book/show/9539",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "34897",
+      "title": "The Dragon Reborn",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "2022-05-15",
+      "link": "https://www.goodreads.com/book/show/34897",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "57286507",
+      "title": "Ultramega by James Harren, Vol. 1",
+      "author": "James Harren",
+      "rating": 0,
+      "dateRead": "2022-05-10",
+      "link": "https://www.goodreads.com/book/show/57286507",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "22305280",
+      "title": "The Odyssey and The Iliad",
+      "author": "Robert Fitzgerald",
+      "rating": 0,
+      "dateRead": "2022-04-28",
+      "link": "https://www.goodreads.com/book/show/22305280",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "233649",
+      "title": "The Great Hunt",
+      "author": "Robert Jordan",
+      "rating": 4,
+      "dateRead": "2022-04-12",
+      "link": "https://www.goodreads.com/book/show/233649",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "49128045",
+      "title": "The Eye of the World",
+      "author": "Robert Jordan",
+      "series": "The Wheel of Time",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2022-01-31",
+      "link": "https://www.goodreads.com/book/show/49128045",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "35074096",
+      "title": "Mythos - The Greek Myths Retold",
+      "author": "Stephen Fry",
+      "series": "Stephen Fry's Great Mythology",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2021-12-15",
+      "link": "https://www.goodreads.com/book/show/35074096",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "22318585",
+      "title": "The Rift",
+      "author": "Gene Luen Yang",
+      "series": "Avatar: The Last Airbender",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2021-10-16",
+      "link": "https://www.goodreads.com/book/show/22318585"
+    },
+    {
+      "id": "37969723",
+      "title": "The Silence of the Girls",
+      "author": "Pat Barker",
+      "series": "Women of Troy",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2021-10-01",
+      "link": "https://www.goodreads.com/book/show/37969723",
+      "genre": "History"
+    },
+    {
+      "id": "32600758",
+      "title": "The Half-Drowned King",
+      "author": "Linnea Hartsuyker",
+      "series": "The Half-Drowned King",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2021-09-15",
+      "link": "https://www.goodreads.com/book/show/32600758",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "55197188",
+      "title": "How Iceland Changed the World: The Big History of a Small Island",
+      "author": "Egill Bjarnason",
+      "rating": 5,
+      "dateRead": "2021-09-10",
+      "link": "https://www.goodreads.com/book/show/55197188",
+      "genre": "History"
+    },
+    {
+      "id": "56083451",
+      "title": "The Second Blind Son",
+      "author": "Amy Harmon",
+      "series": "The Chronicles of Saylok",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2021-08-25",
+      "link": "https://www.goodreads.com/book/show/56083451",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "35606041",
+      "title": "A Little Hatred",
+      "author": "Joe Abercrombie",
+      "series": "The Age of Madness",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2021-08-19",
+      "link": "https://www.goodreads.com/book/show/35606041",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "30149557",
+      "title": "Egil's Saga: An Icelandic Classic (Real Reads)",
+      "author": "Brynhildar Thorainsdottur",
+      "rating": 0,
+      "dateRead": "2021-08-14",
+      "link": "https://www.goodreads.com/book/show/30149557"
+    },
+    {
+      "id": "13707734",
+      "title": "The Swerve: How the World Became Modern",
+      "author": "Stephen Greenblatt",
+      "rating": 4,
+      "dateRead": "2021-07-30",
+      "link": "https://www.goodreads.com/book/show/13707734",
+      "genre": "History"
+    },
+    {
+      "id": "6437061",
+      "title": "The Hundred Thousand Kingdoms",
+      "author": "N.K. Jemisin",
+      "series": "Inheritance",
+      "seriesNo": 1,
+      "rating": 3,
+      "dateRead": "2021-07-19",
+      "link": "https://www.goodreads.com/book/show/6437061",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "55077697",
+      "title": "The Blacktongue Thief",
+      "author": "Christopher Buehlman",
+      "series": "Blacktongue",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2021-07-06",
+      "link": "https://www.goodreads.com/book/show/55077697",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "43078423",
+      "title": "The First Girl Child",
+      "author": "Amy Harmon",
+      "series": "The Chronicles of Saylok",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2021-06-28",
+      "link": "https://www.goodreads.com/book/show/43078423",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "50202953",
+      "title": "Piranesi",
+      "author": "Susanna Clarke",
+      "rating": 5,
+      "dateRead": "2021-06-21",
+      "link": "https://www.goodreads.com/book/show/50202953",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "34594037",
+      "title": "Magic for Liars",
+      "author": "Sarah Gailey",
+      "rating": 4,
+      "dateRead": "2021-06-17",
+      "link": "https://www.goodreads.com/book/show/34594037",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "671879",
+      "title": "Outside the Gates",
+      "author": "Molly Gloss",
+      "rating": 4,
+      "dateRead": "2021-06-12",
+      "link": "https://www.goodreads.com/book/show/671879",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "17311325",
+      "title": "Irredeemable Digital Omnibus, Volume 2",
+      "author": "Mark Waid",
+      "rating": 0,
+      "dateRead": "2021-05-28",
+      "link": "https://www.goodreads.com/book/show/17311325"
+    },
+    {
+      "id": "15792342",
+      "title": "Irredeemable Digital Omnibus, Volume 1",
+      "author": "Mark Waid",
+      "rating": 0,
+      "dateRead": "2021-05-28",
+      "link": "https://www.goodreads.com/book/show/15792342"
+    },
+    {
+      "id": "40854186",
+      "title": "Invincible, Compendium Three",
+      "author": "Robert Kirkman",
+      "rating": 0,
+      "dateRead": "2021-05-23",
+      "link": "https://www.goodreads.com/book/show/40854186",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "15845163",
+      "title": "Invincible: Digital Omnibus, Vol. 2",
+      "author": "Robert Kirkman",
+      "rating": 4,
+      "dateRead": "2021-05-16",
+      "link": "https://www.goodreads.com/book/show/15845163",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "18459204",
+      "title": "Invincible: Digital Omnibus, Vol. 1",
+      "author": "Robert Kirkman",
+      "rating": 0,
+      "dateRead": "2021-05-14",
+      "link": "https://www.goodreads.com/book/show/18459204",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "52300107",
+      "title": "Caffeine: How Caffeine Created the Modern World",
+      "author": "Michael Pollan",
+      "rating": 0,
+      "dateRead": "2021-05-07",
+      "link": "https://www.goodreads.com/book/show/52300107"
+    },
+    {
+      "id": "27833803",
+      "title": "The Hike",
+      "author": "Drew Magary",
+      "rating": 4,
+      "dateRead": "2021-05-06",
+      "link": "https://www.goodreads.com/book/show/27833803",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "334643",
+      "title": "Abhorsen",
+      "author": "Garth Nix",
+      "series": "Abhorsen",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2021-04-25",
+      "link": "https://www.goodreads.com/book/show/334643",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "100915",
+      "title": "The Lion, the Witch and the Wardrobe",
+      "author": "C.S. Lewis",
+      "series": "Chronicles of Narnia",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2021-04-19",
+      "link": "https://www.goodreads.com/book/show/100915",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "47624",
+      "title": "Lirael",
+      "author": "Garth Nix",
+      "series": "Abhorsen",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2021-04-18",
+      "link": "https://www.goodreads.com/book/show/47624",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "518848",
+      "title": "Sabriel",
+      "author": "Garth Nix",
+      "series": "Abhorsen",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2021-04-09",
+      "link": "https://www.goodreads.com/book/show/518848",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "41970691",
+      "title": "The 3-Day Effect",
+      "author": "NOT A BOOK",
+      "rating": 3,
+      "dateRead": "2021-04-01",
+      "link": "https://www.goodreads.com/book/show/41970691"
+    },
+    {
+      "id": "35052265",
+      "title": "Bloody Rose",
+      "author": "Nicholas Eames",
+      "series": "The Band",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "2021-03-29",
+      "link": "https://www.goodreads.com/book/show/35052265",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "44096745",
+      "title": "Perfect Sound Whatever",
+      "author": "James Acaster",
+      "rating": 0,
+      "dateRead": "2021-03-12",
+      "link": "https://www.goodreads.com/book/show/44096745",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "17601",
+      "title": "The Will to Change: Men, Masculinity, and Love",
+      "author": "bell hooks",
+      "rating": 5,
+      "dateRead": "2021-03-08",
+      "link": "https://www.goodreads.com/book/show/17601",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "18631568",
+      "title": "The Search",
+      "author": "Gene Luen Yang",
+      "series": "Avatar: The Last Airbender",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "2021-03-05",
+      "link": "https://www.goodreads.com/book/show/18631568"
+    },
+    {
+      "id": "236765",
+      "title": "I Don't Want to Talk About It: Overcoming the Secret Legacy of Male Depression",
+      "author": "Terrence Real",
+      "rating": 5,
+      "dateRead": "2021-02-22",
+      "link": "https://www.goodreads.com/book/show/236765",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "28819821",
+      "title": "Lost Gods",
+      "author": "Brom",
+      "rating": 0,
+      "dateRead": "2021-02-19",
+      "link": "https://www.goodreads.com/book/show/28819821",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "30841984",
+      "title": "Kings of the Wyld",
+      "author": "Nicholas Eames",
+      "series": "The Band",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "2021-02-06",
+      "link": "https://www.goodreads.com/book/show/30841984",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "52894214",
+      "title": "The New One: Painfully True Stories from a Reluctant Dad",
+      "author": "Mike Birbiglia",
+      "rating": 0,
+      "dateRead": "2021-01-28",
+      "link": "https://www.goodreads.com/book/show/52894214",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "24611571",
+      "title": "Magna Carta: The Birth of Liberty",
+      "author": "Dan Jones",
+      "rating": 4,
+      "dateRead": "2021-01-18",
+      "link": "https://www.goodreads.com/book/show/24611571",
+      "genre": "History"
+    },
+    {
+      "id": "39738353",
+      "title": "Lanny",
+      "author": "Max Porter",
+      "rating": 4,
+      "dateRead": "2021-01-17",
+      "link": "https://www.goodreads.com/book/show/39738353",
+      "genre": "Other fiction"
+    },
+    {
+      "id": "15811559",
+      "title": "The Plantagenets: The Warrior Kings and Queens Who Made England",
+      "author": "Dan Jones",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2021-01-15",
+      "link": "https://www.goodreads.com/book/show/15811559",
+      "genre": "History"
+    },
+    {
+      "id": "246255",
+      "title": "The Middle Ages",
+      "author": "Morris Bishop",
+      "rating": 5,
+      "dateRead": "2021-01-15",
+      "link": "https://www.goodreads.com/book/show/246255",
+      "genre": "History"
+    },
+    {
+      "id": "52637764",
+      "title": "Monstress, Volume 5: Warchild",
+      "author": "Marjorie M. Liu",
+      "rating": 0,
+      "dateRead": "2021-01-07",
+      "link": "https://www.goodreads.com/book/show/52637764"
+    },
+    {
+      "id": "45899240",
+      "title": "Monstress, Volume 4: The Chosen",
+      "author": "Marjorie M. Liu",
+      "rating": 0,
+      "dateRead": "2021-01-07",
+      "link": "https://www.goodreads.com/book/show/45899240"
+    },
+    {
+      "id": "37168303",
+      "title": "Spinning Silver",
+      "author": "Naomi Novik",
+      "rating": 4,
+      "dateRead": "2020-12-27",
+      "link": "https://www.goodreads.com/book/show/37168303",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "43174603",
+      "title": "The Fires of Vengeance",
+      "author": "Evan Winter",
+      "series": "The Burning",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "2020-12-15",
+      "link": "https://www.goodreads.com/book/show/43174603"
+    },
+    {
+      "id": "41952489",
+      "title": "The Rage of Dragons",
+      "author": "Evan Winter",
+      "series": "The Burning",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2020-12-11",
+      "link": "https://www.goodreads.com/book/show/41952489",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "34184069",
+      "title": "The Storm Before the Storm: The Beginning of the End of the Roman Republic",
+      "author": "Mike     Duncan",
+      "rating": 0,
+      "dateRead": "2020-12-06",
+      "link": "https://www.goodreads.com/book/show/34184069",
+      "genre": "History"
+    },
+    {
+      "id": "17250966",
+      "title": "Rhythm of War",
+      "author": "Brandon Sanderson",
+      "series": "The Stormlight Archive",
+      "seriesNo": 4,
+      "rating": 0,
+      "dateRead": "2020-11-23",
+      "link": "https://www.goodreads.com/book/show/17250966",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "53300479",
+      "title": "How to Defeat a Demon King in Ten Easy Steps",
+      "author": "Andrew Rowe",
+      "series": "Error: Hero Not Found",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2020-09-04",
+      "link": "https://www.goodreads.com/book/show/53300479"
+    },
+    {
+      "id": "31817749",
+      "title": "The Stone Sky",
+      "author": "N.K. Jemisin",
+      "series": "The Broken Earth",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2020-08-28",
+      "link": "https://www.goodreads.com/book/show/31817749",
+      "genre": "History"
+    },
+    {
+      "id": "26228034",
+      "title": "The Obelisk Gate",
+      "author": "N.K. Jemisin",
+      "series": "The Broken Earth",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2020-08-12",
+      "link": "https://www.goodreads.com/book/show/26228034",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "19161852",
+      "title": "The Fifth Season",
+      "author": "N.K. Jemisin",
+      "series": "The Broken Earth",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2020-08-06",
+      "link": "https://www.goodreads.com/book/show/19161852",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "9969571",
+      "title": "Ready Player One",
+      "author": "Ernest Cline",
+      "series": "Ready Player One",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2020-07-24",
+      "link": "https://www.goodreads.com/book/show/9969571",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "45427527",
+      "title": "A Mark of Kings",
+      "author": "Bryce O'Connor",
+      "series": "The Shattered Reigns",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2020-06-13",
+      "link": "https://www.goodreads.com/book/show/45427527"
+    },
+    {
+      "id": "43848929",
+      "title": "Talking to Strangers: What We Should Know About the People We Don't Know",
+      "author": "Malcolm Gladwell",
+      "rating": 0,
+      "dateRead": "2020-05-29",
+      "link": "https://www.goodreads.com/book/show/43848929",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "30613608",
+      "title": "Age of Death",
+      "author": "Michael J. Sullivan",
+      "series": "The Legends of the First Empire",
+      "seriesNo": 5,
+      "rating": 4,
+      "dateRead": "2020-04-30",
+      "link": "https://www.goodreads.com/book/show/30613608",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "42361141",
+      "title": "Rivals! Frenemies Who Changed the World",
+      "author": "Scott McCormick",
+      "series": "Rivals",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2020-02-21",
+      "link": "https://www.goodreads.com/book/show/42361141"
+    },
+    {
+      "id": "43890590",
+      "title": "Dishonesty Is the Second-Best Policy: And Other Rules to Live By",
+      "author": "David   Mitchell",
+      "rating": 0,
+      "dateRead": "2020-02-09",
+      "link": "https://www.goodreads.com/book/show/43890590",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "49744485",
+      "title": "The Burnout Generation",
+      "author": "Anne Helen Petersen",
+      "rating": 3,
+      "dateRead": "2020-01-27",
+      "link": "https://www.goodreads.com/book/show/49744485"
+    },
+    {
+      "id": "51212034",
+      "title": "A Grown-Up Guide to Dinosaurs",
+      "author": "Ben Garrod",
+      "rating": 4,
+      "dateRead": "2020-01-23",
+      "link": "https://www.goodreads.com/book/show/51212034"
+    },
+    {
+      "id": "43259817",
+      "title": "Folsom Untold: The Strange True Story of Johnny Cash's Greatest Album",
+      "author": "Danny Robins",
+      "rating": 0,
+      "dateRead": "2020-01-20",
+      "link": "https://www.goodreads.com/book/show/43259817"
+    },
+    {
+      "id": "36612245",
+      "title": "Legion versus Phalanx",
+      "author": "Myke Cole",
+      "rating": 5,
+      "dateRead": "2020-01-14",
+      "link": "https://www.goodreads.com/book/show/36612245",
+      "genre": "History"
+    },
+    {
+      "id": "15734715",
+      "title": "Back Story",
+      "author": "David   Mitchell",
+      "rating": 0,
+      "dateRead": "2019-12-30",
+      "link": "https://www.goodreads.com/book/show/15734715"
+    },
+    {
+      "id": "29774026",
+      "title": "The Priory of the Orange Tree",
+      "author": "Samantha Shannon",
+      "series": "The Roots of Chaos",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2019-12-25",
+      "link": "https://www.goodreads.com/book/show/29774026",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "1",
+      "title": "Harry Potter and the Half-Blood Prince",
+      "author": "J.K. Rowling",
+      "series": "Harry Potter",
+      "seriesNo": 6,
+      "rating": 0,
+      "dateRead": "2019-11-18",
+      "link": "https://www.goodreads.com/book/show/1",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "136251",
+      "title": "Harry Potter and the Deathly Hallows",
+      "author": "J.K. Rowling",
+      "series": "Harry Potter",
+      "seriesNo": 7,
+      "rating": 0,
+      "dateRead": "2019-11-17",
+      "link": "https://www.goodreads.com/book/show/136251",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "42592353",
+      "title": "Age of Legend",
+      "author": "Michael J. Sullivan",
+      "series": "The Legends of the First Empire",
+      "seriesNo": 4,
+      "rating": 0,
+      "dateRead": "2019-08-15",
+      "link": "https://www.goodreads.com/book/show/42592353",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "2",
+      "title": "Harry Potter and the Order of the Phoenix",
+      "author": "J.K. Rowling",
+      "series": "Harry Potter",
+      "seriesNo": 5,
+      "rating": 0,
+      "dateRead": "2019-08-15",
+      "link": "https://www.goodreads.com/book/show/2",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "26135825",
+      "title": "Fun Home: A Family Tragicomic",
+      "author": "Alison Bechdel",
+      "rating": 0,
+      "dateRead": "2019-08-10",
+      "link": "https://www.goodreads.com/book/show/26135825",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "7613",
+      "title": "Animal Farm",
+      "author": "George Orwell",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2019-07-31",
+      "link": "https://www.goodreads.com/book/show/7613",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "1898",
+      "title": "Into Thin Air: A Personal Account of the Mt. Everest Disaster",
+      "author": "Jon Krakauer",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-07-31",
+      "link": "https://www.goodreads.com/book/show/1898",
+      "genre": "History"
+    },
+    {
+      "id": "5043",
+      "title": "The Pillars of the Earth",
+      "author": "Ken Follett",
+      "series": "Kingsbridge",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-07-31",
+      "link": "https://www.goodreads.com/book/show/5043",
+      "genre": "Mystery & thriller"
+    },
+    {
+      "id": "27833670",
+      "title": "Dark Matter",
+      "author": "Blake Crouch",
+      "rating": 0,
+      "dateRead": "2019-06-25",
+      "link": "https://www.goodreads.com/book/show/27833670",
+      "genre": "Mystery & thriller"
+    },
+    {
+      "id": "38494610",
+      "title": "Own the Day, Own Your Life: Optimised practices for waking, working, learning, eating, training, playing, sleeping and sex",
+      "author": "Aubrey Marcus",
+      "rating": 0,
+      "dateRead": "2019-06-11",
+      "link": "https://www.goodreads.com/book/show/38494610",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "6",
+      "title": "Harry Potter and the Goblet of Fire",
+      "author": "J.K. Rowling",
+      "series": "Harry Potter",
+      "seriesNo": 4,
+      "rating": 0,
+      "dateRead": "2019-05-31",
+      "link": "https://www.goodreads.com/book/show/6",
+      "genre": "History"
+    },
+    {
+      "id": "35959740",
+      "title": "Circe",
+      "author": "Madeline Miller",
+      "rating": 5,
+      "dateRead": "2019-05-30",
+      "link": "https://www.goodreads.com/book/show/35959740",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "7841459",
+      "title": "Alexander the Great",
+      "author": "Philip Freeman",
+      "rating": 5,
+      "dateRead": "2019-05-24",
+      "link": "https://www.goodreads.com/book/show/7841459",
+      "genre": "History"
+    },
+    {
+      "id": "11250317",
+      "title": "The Song of Achilles",
+      "author": "Madeline Miller",
+      "rating": 5,
+      "dateRead": "2019-05-21",
+      "link": "https://www.goodreads.com/book/show/11250317",
+      "genre": "History"
+    },
+    {
+      "id": "28954189",
+      "title": "Scythe",
+      "author": "Neal Shusterman",
+      "series": "Arc of a Scythe",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "2019-05-09",
+      "link": "https://www.goodreads.com/book/show/28954189",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "39821861",
+      "title": "Neverwhere",
+      "author": "Neil Gaiman",
+      "rating": 0,
+      "dateRead": "2019-05-06",
+      "link": "https://www.goodreads.com/book/show/39821861",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "5",
+      "title": "Harry Potter and the Prisoner of Azkaban",
+      "author": "J.K. Rowling",
+      "series": "Harry Potter",
+      "seriesNo": 3,
+      "rating": 0,
+      "dateRead": "2019-05-05",
+      "link": "https://www.goodreads.com/book/show/5",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "40603587",
+      "title": "The Last Wish",
+      "author": "Andrzej Sapkowski",
+      "series": "The Witcher",
+      "seriesNo": 0.5,
+      "rating": 0,
+      "dateRead": "2019-04-21",
+      "link": "https://www.goodreads.com/book/show/40603587",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "16685187",
+      "title": "The Trojan War: A Very Short Introduction",
+      "author": "Eric H. Cline",
+      "rating": 4,
+      "dateRead": "2019-03-13",
+      "link": "https://www.goodreads.com/book/show/16685187",
+      "genre": "History"
+    },
+    {
+      "id": "55883882",
+      "title": "Monstress, Volume 1: Awakening",
+      "author": "Marjorie M. Liu",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-25",
+      "link": "https://www.goodreads.com/book/show/55883882"
+    },
+    {
+      "id": "15881",
+      "title": "Harry Potter and the Chamber of Secrets",
+      "author": "J.K. Rowling",
+      "series": "Harry Potter",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "2019-02-25",
+      "link": "https://www.goodreads.com/book/show/15881",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "21",
+      "title": "A Short History of Nearly Everything",
+      "author": "Bill  Bryson",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-25",
+      "link": "https://www.goodreads.com/book/show/21",
+      "genre": "Science & nature"
+    },
+    {
+      "id": "3",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "author": "J.K. Rowling",
+      "series": "Harry Potter",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-25",
+      "link": "https://www.goodreads.com/book/show/3",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "30257963",
+      "title": "12 Rules for Life: An Antidote to Chaos",
+      "author": "Jordan B. Peterson",
+      "rating": 0,
+      "dateRead": "2019-02-25",
+      "link": "https://www.goodreads.com/book/show/30257963",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "37491890",
+      "title": "Monstress, Volume 3: Haven",
+      "author": "Marjorie M. Liu",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-25",
+      "link": "https://www.goodreads.com/book/show/37491890"
+    },
+    {
+      "id": "33540347",
+      "title": "Monstress, Volume 2: The Blood",
+      "author": "Marjorie M. Liu",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-25",
+      "link": "https://www.goodreads.com/book/show/33540347"
+    },
+    {
+      "id": "2744",
+      "title": "Anansi Boys",
+      "author": "Neil Gaiman",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-19",
+      "link": "https://www.goodreads.com/book/show/2744",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "17182126",
+      "title": "Steelheart",
+      "author": "Brandon Sanderson",
+      "series": "The Reckoners",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-19",
+      "link": "https://www.goodreads.com/book/show/17182126",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "25066567",
+      "title": "Skyborn",
+      "author": "David Dalglish",
+      "series": "Seraphim",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-19",
+      "link": "https://www.goodreads.com/book/show/25066567",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "36496221",
+      "title": "Awakening Your Ikigai: How the Japanese Wake Up to Joy and Purpose Every Day",
+      "author": "Ken Mogi",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-19",
+      "link": "https://www.goodreads.com/book/show/36496221",
+      "genre": "History"
+    },
+    {
+      "id": "29780253",
+      "title": "Born a Crime: Stories from a South African Childhood",
+      "author": "Trevor Noah",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-19",
+      "link": "https://www.goodreads.com/book/show/29780253",
+      "genre": "Biography & memoir"
+    },
+    {
+      "id": "27154427",
+      "title": "The Wheel of Osheim",
+      "author": "Mark  Lawrence",
+      "series": "The Red Queen's War",
+      "seriesNo": 3,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-19",
+      "link": "https://www.goodreads.com/book/show/27154427",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "22852698",
+      "title": "The Liar's Key",
+      "author": "Mark  Lawrence",
+      "series": "The Red Queen's War",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2019-02-19",
+      "link": "https://www.goodreads.com/book/show/22852698",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "41016100",
+      "title": "The Coming Storm",
+      "author": "Michael   Lewis",
+      "rating": 0,
+      "dateRead": "2019-02-10",
+      "link": "https://www.goodreads.com/book/show/41016100",
+      "genre": "History"
+    },
+    {
+      "id": "37925478",
+      "title": "Girls & Boys",
+      "author": "Dennis Kelly",
+      "rating": 0,
+      "dateRead": "2019-01-06",
+      "link": "https://www.goodreads.com/book/show/37925478",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "34948120",
+      "title": "Instant Focus: How to Beat Procrastination, Skyrocket Your Productivity, and Double Your Output - 27 Small Tweaks to Do More In Less Time",
+      "author": "Patrick King",
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2018-10-07",
+      "link": "https://www.goodreads.com/book/show/34948120"
+    },
+    {
+      "id": "18693743",
+      "title": "Prince of Fools",
+      "author": "Mark  Lawrence",
+      "series": "The Red Queen's War",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2018-09-10",
+      "link": "https://www.goodreads.com/book/show/18693743",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "18739426",
+      "title": "The Bands of Mourning",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 6,
+      "rating": 5,
+      "dateRead": "2018-08-20",
+      "link": "https://www.goodreads.com/book/show/18739426",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "30659",
+      "title": "Meditations",
+      "author": "Marcus Aurelius",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-08-13",
+      "link": "https://www.goodreads.com/book/show/30659",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "10803121",
+      "title": "The Alloy of Law",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 4,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2018-08-13",
+      "link": "https://www.goodreads.com/book/show/10803121",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "33538599",
+      "title": "James Acaster's Classic Scrapes",
+      "author": "James Acaster",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-08-13",
+      "link": "https://www.goodreads.com/book/show/33538599"
+    },
+    {
+      "id": "18052169",
+      "title": "Age of War",
+      "author": "Michael J. Sullivan",
+      "series": "The Legends of the First Empire",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-08-13",
+      "link": "https://www.goodreads.com/book/show/18052169",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "28789711",
+      "title": "SPQR: A History of Ancient Rome",
+      "author": "Mary Beard",
+      "rating": 5,
+      "dateRead": "2018-08-13",
+      "link": "https://www.goodreads.com/book/show/28789711",
+      "genre": "History"
+    },
+    {
+      "id": "32738672",
+      "title": "Unfu*k Yourself: Get Out of Your Head and Into Your Life",
+      "author": "Gary John Bishop",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-04-11",
+      "link": "https://www.goodreads.com/book/show/32738672",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "55399",
+      "title": "Gardens of the Moon",
+      "author": "Steven Erikson",
+      "series": "Malazan Book of the Fallen",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2018-03-19",
+      "link": "https://www.goodreads.com/book/show/55399",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "32337902",
+      "title": "Age of Swords",
+      "author": "Michael J. Sullivan",
+      "series": "The Legends of the First Empire",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2018-01-18",
+      "link": "https://www.goodreads.com/book/show/32337902",
+      "genre": "History"
+    },
+    {
+      "id": "127455",
+      "title": "The Lies of Locke Lamora",
+      "author": "Scott Lynch",
+      "series": "Gentleman Bastard",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2018-01-07",
+      "link": "https://www.goodreads.com/book/show/127455",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "7776209",
+      "title": "The Rational Optimist: How Prosperity Evolves",
+      "author": "Matt Ridley",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/7776209",
+      "genre": "History"
+    },
+    {
+      "id": "157993",
+      "title": "The Little Prince",
+      "author": "Antoine de Saint-Exupéry",
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/157993",
+      "genre": "Other fiction"
+    },
+    {
+      "id": "865",
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/865",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "629",
+      "title": "Zen and the Art of Motorcycle Maintenance: An Inquiry Into Values",
+      "author": "Robert M. Pirsig",
+      "series": "Phaedrus",
+      "seriesNo": 1,
+      "rating": 3,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/629",
+      "genre": "Philosophy & religion"
+    },
+    {
+      "id": "68526",
+      "title": "Lords of the North",
+      "author": "Bernard Cornwell",
+      "series": "The Saxon Stories",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/68526",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "68528",
+      "title": "The Pale Horseman",
+      "author": "Bernard Cornwell",
+      "series": "The Saxon Stories",
+      "seriesNo": 2,
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/68528",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "68527",
+      "title": "The Last Kingdom",
+      "author": "Bernard Cornwell",
+      "series": "The Saxon Stories",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/68527",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "25101",
+      "title": "The Sandman, Vol. 4: Season of Mists",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/25101"
+    },
+    {
+      "id": "92377",
+      "title": "The Sandman: Book of Dreams",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/92377",
+      "genre": "Horror"
+    },
+    {
+      "id": "25099",
+      "title": "The Sandman, Vol. 2: The Doll's House",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/25099",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "47720",
+      "title": "The Sandman: Endless Nights",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/47720",
+      "genre": "Horror"
+    },
+    {
+      "id": "25106",
+      "title": "The Sandman, Vol. 6: Fables & Reflections",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/25106"
+    },
+    {
+      "id": "25105",
+      "title": "The Sandman, Vol. 7: Brief Lives",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/25105"
+    },
+    {
+      "id": "25102",
+      "title": "The Sandman, Vol. 5: A Game of You",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/25102"
+    },
+    {
+      "id": "25104",
+      "title": "The Sandman, Vol. 10: The Wake",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/25104"
+    },
+    {
+      "id": "71252",
+      "title": "The Sandman, Vol. 9: The Kindly Ones",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/71252"
+    },
+    {
+      "id": "25100",
+      "title": "The Sandman, Vol. 3: Dream Country",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/25100",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "25103",
+      "title": "The Sandman, Vol. 8: Worlds' End",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/25103"
+    },
+    {
+      "id": "23754",
+      "title": "The Sandman, Vol. 1: Preludes & Nocturnes",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/23754",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "18208495",
+      "title": "Berserk, Vol. 37",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/18208495"
+    },
+    {
+      "id": "15894058",
+      "title": "Berserk, Vol. 36",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/15894058"
+    },
+    {
+      "id": "11452849",
+      "title": "Berserk, Vol. 35",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/11452849"
+    },
+    {
+      "id": "8728667",
+      "title": "Berserk, Vol. 34",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/8728667"
+    },
+    {
+      "id": "7608213",
+      "title": "Berserk, Vol. 33",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/7608213"
+    },
+    {
+      "id": "7399514",
+      "title": "Berserk, Vol. 32",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/7399514"
+    },
+    {
+      "id": "1875541",
+      "title": "Berserk, Vol. 31",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/1875541"
+    },
+    {
+      "id": "6337758",
+      "title": "Berserk, Vol. 30",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/6337758"
+    },
+    {
+      "id": "6276142",
+      "title": "Berserk, Vol. 29",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/6276142"
+    },
+    {
+      "id": "5083854",
+      "title": "Berserk, Vol. 28",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/5083854"
+    },
+    {
+      "id": "5083852",
+      "title": "Berserk, Vol. 27",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/5083852"
+    },
+    {
+      "id": "248936",
+      "title": "Berserk, Vol. 26",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248936"
+    },
+    {
+      "id": "3586999",
+      "title": "Berserk, Vol. 25",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/3586999"
+    },
+    {
+      "id": "2901744",
+      "title": "Berserk, Vol. 24",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/2901744"
+    },
+    {
+      "id": "2571937",
+      "title": "Berserk, Vol. 23",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/2571937"
+    },
+    {
+      "id": "2571920",
+      "title": "Berserk, Vol. 22",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/2571920"
+    },
+    {
+      "id": "2001695",
+      "title": "Berserk, Vol. 21",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/2001695"
+    },
+    {
+      "id": "1898914",
+      "title": "Berserk, Vol. 20",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/1898914"
+    },
+    {
+      "id": "1501850",
+      "title": "Berserk, Vol. 19",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/1501850"
+    },
+    {
+      "id": "248886",
+      "title": "Berserk, Vol. 18",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248886"
+    },
+    {
+      "id": "248885",
+      "title": "Berserk, Vol. 17",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248885"
+    },
+    {
+      "id": "248868",
+      "title": "Berserk, Vol. 16",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248868"
+    },
+    {
+      "id": "248866",
+      "title": "Berserk, Vol. 15",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248866"
+    },
+    {
+      "id": "248867",
+      "title": "Berserk, Vol. 14",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248867"
+    },
+    {
+      "id": "248869",
+      "title": "Berserk, Vol. 13",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248869"
+    },
+    {
+      "id": "248876",
+      "title": "Berserk, Vol. 12",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248876"
+    },
+    {
+      "id": "248879",
+      "title": "Berserk, Vol. 11",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248879"
+    },
+    {
+      "id": "248872",
+      "title": "Berserk, Vol. 10",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248872"
+    },
+    {
+      "id": "248878",
+      "title": "Berserk, Vol. 8",
+      "author": "Kentaro Miura",
+      "series": "Berserk",
+      "seriesNo": 8,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248878"
+    },
+    {
+      "id": "248883",
+      "title": "Berserk, Vol. 7",
+      "author": "Kentaro Miura",
+      "series": "Berserk",
+      "seriesNo": 7,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248883",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "248884",
+      "title": "Berserk, Vol. 6",
+      "author": "Kentaro Miura",
+      "series": "Berserk",
+      "seriesNo": 6,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248884",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "248881",
+      "title": "Berserk, Vol. 5",
+      "author": "Kentaro Miura",
+      "series": "Berserk",
+      "seriesNo": 5,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248881"
+    },
+    {
+      "id": "248870",
+      "title": "Berserk, Vol. 4",
+      "author": "Kentaro Miura",
+      "series": "Berserk",
+      "seriesNo": 4,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248870",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "248874",
+      "title": "Berserk, Vol. 3",
+      "author": "Kentaro Miura",
+      "series": "Berserk",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248874"
+    },
+    {
+      "id": "248873",
+      "title": "Berserk, Vol. 2",
+      "author": "Kentaro Miura",
+      "series": "Berserk",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248873"
+    },
+    {
+      "id": "248871",
+      "title": "Berserk, Vol. 1",
+      "author": "Kentaro Miura",
+      "series": "Berserk",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248871"
+    },
+    {
+      "id": "248882",
+      "title": "Berserk, Vol. 9",
+      "author": "Kentaro Miura",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/248882",
+      "genre": "Comics & graphic novels"
+    },
+    {
+      "id": "7260188",
+      "title": "Mockingjay",
+      "author": "Suzanne Collins",
+      "series": "The Hunger Games",
+      "seriesNo": 3,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/7260188",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "6148028",
+      "title": "Catching Fire",
+      "author": "Suzanne Collins",
+      "series": "The Hunger Games",
+      "seriesNo": 2,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/6148028",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "2767052",
+      "title": "The Hunger Games",
+      "author": "Suzanne Collins",
+      "series": "The Hunger Games",
+      "seriesNo": 1,
+      "rating": 0,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/2767052",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "13812",
+      "title": "Magician: Apprentice",
+      "author": "Raymond E. Feist",
+      "series": "The Riftwar Saga",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/13812",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "2657",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/2657",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "18302455",
+      "title": "The Circle",
+      "author": "Dave Eggers",
+      "series": "The Circle",
+      "seriesNo": 1,
+      "rating": 3,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/18302455",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "11",
+      "title": "The Hitchhiker's Guide to the Galaxy",
+      "author": "Douglas Adams",
+      "series": "The Hitchhiker's Guide to the Galaxy",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/11",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "9791",
+      "title": "A Walk in the Woods: Rediscovering America on the Appalachian Trail",
+      "author": "Bill  Bryson",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/9791",
+      "genre": "History"
+    },
+    {
+      "id": "24",
+      "title": "In a Sunburned Country",
+      "author": "Bill  Bryson",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/24",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "40102",
+      "title": "Blink: The Power of Thinking Without Thinking",
+      "author": "Malcolm Gladwell",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/40102",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "3228917",
+      "title": "Outliers: The Story of Success",
+      "author": "Malcolm Gladwell",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/3228917",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "2612",
+      "title": "The Tipping Point: How Little Things Can Make a Big Difference",
+      "author": "Malcolm Gladwell",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/2612",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "15751404",
+      "title": "David and Goliath: Underdogs, Misfits, and the Art of Battling Giants",
+      "author": "Malcolm Gladwell",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/15751404",
+      "genre": "Self-help & family"
+    },
+    {
+      "id": "22738563",
+      "title": "We Should All Be Feminists",
+      "author": "Chimamanda Ngozi Adichie",
+      "rating": 5,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/22738563",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "1618",
+      "title": "The Curious Incident of the Dog in the Night-Time",
+      "author": "Mark Haddon",
+      "rating": 4,
+      "dateRead": "",
+      "seen": "2018-01-01",
+      "link": "https://www.goodreads.com/book/show/1618",
+      "genre": "Mystery & thriller"
+    },
+    {
+      "id": "30831912",
+      "title": "Norse Mythology",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "2017-12-01",
+      "link": "https://www.goodreads.com/book/show/30831912",
+      "genre": "Classics & literature"
+    },
+    {
+      "id": "25110977",
+      "title": "Son of the Black Sword",
+      "author": "Larry Correia",
+      "series": "Saga of the Forgotten Warrior",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2017-12-01",
+      "link": "https://www.goodreads.com/book/show/25110977",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "34002132",
+      "title": "Oathbringer",
+      "author": "Brandon Sanderson",
+      "series": "The Stormlight Archive",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2017-12-01",
+      "link": "https://www.goodreads.com/book/show/34002132",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "68427",
+      "title": "Elantris",
+      "author": "Brandon Sanderson",
+      "series": "Elantris",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/68427",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "18104725",
+      "title": "The Almost Nearly Perfect People: Behind the Myth of the Scandinavian Utopia",
+      "author": "Michael Booth",
+      "rating": 5,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/18104725",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "8695",
+      "title": "The Restaurant at the End of the Universe",
+      "author": "Douglas Adams",
+      "series": "The Hitchhiker's Guide to the Galaxy",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/8695",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "28595941",
+      "title": "Arcanum Unbounded: The Cosmere Collection",
+      "author": "Brandon Sanderson",
+      "rating": 5,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/28595941",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "116445",
+      "title": "Dies the Fire",
+      "author": "S.M. Stirling",
+      "series": "Emberverse",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/116445",
+      "genre": "Science fiction"
+    },
+    {
+      "id": "11100431",
+      "title": "Heir of Novron",
+      "author": "Michael J. Sullivan",
+      "series": "The Riyria Revelations",
+      "seriesNo": 5,
+      "rating": 5,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/11100431",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "10790277",
+      "title": "Rise of Empire",
+      "author": "Michael J. Sullivan",
+      "series": "The Riyria Revelations",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/10790277",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "10790290",
+      "title": "Theft of Swords",
+      "author": "Michael J. Sullivan",
+      "series": "The Riyria Revelations",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/10790290",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "26863057",
+      "title": "Age of Myth",
+      "author": "Michael J. Sullivan",
+      "series": "The Legends of the First Empire",
+      "seriesNo": 1,
+      "rating": 4,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/26863057",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "4981",
+      "title": "Slaughterhouse-Five",
+      "author": "Kurt Vonnegut Jr.",
+      "rating": 4,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/4981",
+      "genre": "History"
+    },
+    {
+      "id": "16096968",
+      "title": "The Core",
+      "author": "Peter V. Brett",
+      "series": "The Demon Cycle",
+      "seriesNo": 5,
+      "rating": 4,
+      "dateRead": "2017-01-01",
+      "link": "https://www.goodreads.com/book/show/16096968",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "10534",
+      "title": "The Art of War",
+      "author": "Sun Tzu",
+      "rating": 5,
+      "dateRead": "2016-01-01",
+      "link": "https://www.goodreads.com/book/show/10534",
+      "genre": "History"
+    },
+    {
+      "id": "21535271",
+      "title": "The Slow Regard of Silent Things",
+      "author": "Patrick Rothfuss",
+      "series": "The Kingkiller Chronicle",
+      "seriesNo": 2.5,
+      "rating": 5,
+      "dateRead": "2016-01-01",
+      "link": "https://www.goodreads.com/book/show/21535271"
+    },
+    {
+      "id": "1268479",
+      "title": "Warbreaker",
+      "author": "Brandon Sanderson",
+      "rating": 5,
+      "dateRead": "2016-01-01",
+      "link": "https://www.goodreads.com/book/show/1268479",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "2767793",
+      "title": "The Hero of Ages",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2016-01-01",
+      "link": "https://www.goodreads.com/book/show/2767793",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "68429",
+      "title": "The Well of Ascension",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2016-01-01",
+      "link": "https://www.goodreads.com/book/show/68429",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "68428",
+      "title": "Mistborn: The Final Empire",
+      "author": "Brandon Sanderson",
+      "series": "Mistborn",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2016-01-01",
+      "link": "https://www.goodreads.com/book/show/68428",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13630171",
+      "title": "The Skull Throne",
+      "author": "Peter V. Brett",
+      "series": "Demon Cycle",
+      "seriesNo": 4,
+      "rating": 4,
+      "dateRead": "2015-01-01",
+      "link": "https://www.goodreads.com/book/show/13630171",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "17332218",
+      "title": "Words of Radiance",
+      "author": "Brandon Sanderson",
+      "series": "The Stormlight Archive",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2015-01-01",
+      "link": "https://www.goodreads.com/book/show/17332218",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "7235533",
+      "title": "The Way of Kings",
+      "author": "Brandon Sanderson",
+      "series": "The Stormlight Archive",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2015-01-01",
+      "link": "https://www.goodreads.com/book/show/7235533",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "5907",
+      "title": "The Hobbit, or There and Back Again",
+      "author": "J.R.R. Tolkien",
+      "rating": 5,
+      "dateRead": "2014-02-01",
+      "link": "https://www.goodreads.com/book/show/5907"
+    },
+    {
+      "id": "49552",
+      "title": "The Stranger",
+      "author": "Albert Camus",
+      "rating": 3,
+      "dateRead": "2013-01-01",
+      "link": "https://www.goodreads.com/book/show/49552",
+      "genre": "Mystery & thriller"
+    },
+    {
+      "id": "24800",
+      "title": "House of Leaves",
+      "author": "Mark Z. Danielewski",
+      "rating": 4,
+      "dateRead": "2013-01-01",
+      "link": "https://www.goodreads.com/book/show/24800",
+      "genre": "Horror"
+    },
+    {
+      "id": "30165203",
+      "title": "American Gods",
+      "author": "Neil Gaiman",
+      "rating": 5,
+      "dateRead": "2013-01-01",
+      "link": "https://www.goodreads.com/book/show/30165203",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "2495567",
+      "title": "The Name of the Wind",
+      "author": "Patrick Rothfuss",
+      "series": "The Kingkiller Chronicle",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2012-01-01",
+      "link": "https://www.goodreads.com/book/show/2495567",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "9268487",
+      "title": "The Daylight War",
+      "author": "Peter V. Brett",
+      "series": "Demon Cycle",
+      "seriesNo": 3,
+      "rating": 4,
+      "dateRead": "2012-01-01",
+      "link": "https://www.goodreads.com/book/show/9268487",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "2595138",
+      "title": "The Gargoyle",
+      "author": "Andrew  Davidson",
+      "rating": 0,
+      "dateRead": "2011-01-01",
+      "link": "https://www.goodreads.com/book/show/2595138",
+      "genre": "Historical fiction"
+    },
+    {
+      "id": "10664113",
+      "title": "A Dance with Dragons",
+      "author": "George R.R. Martin",
+      "series": "A Song of Ice and Fire",
+      "seriesNo": 5,
+      "rating": 5,
+      "dateRead": "2011-01-01",
+      "link": "https://www.goodreads.com/book/show/10664113",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13497",
+      "title": "A Feast for Crows",
+      "author": "George R.R. Martin",
+      "series": "A Song of Ice and Fire",
+      "seriesNo": 4,
+      "rating": 5,
+      "dateRead": "2011-01-01",
+      "link": "https://www.goodreads.com/book/show/13497",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "62291",
+      "title": "A Storm of Swords",
+      "author": "George R.R. Martin",
+      "series": "A Song of Ice and Fire",
+      "seriesNo": 3,
+      "rating": 5,
+      "dateRead": "2011-01-01",
+      "link": "https://www.goodreads.com/book/show/62291",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "10572",
+      "title": "A Clash of Kings",
+      "author": "George R.R. Martin",
+      "series": "A Song of Ice and Fire",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2011-01-01",
+      "link": "https://www.goodreads.com/book/show/10572",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "13496",
+      "title": "A Game of Thrones",
+      "author": "George R.R. Martin",
+      "series": "A Song of Ice and Fire",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2011-01-01",
+      "link": "https://www.goodreads.com/book/show/13496",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "9127479",
+      "title": "Brayan's Gold",
+      "author": "Peter V. Brett",
+      "series": "The Demon Cycle",
+      "seriesNo": 1.5,
+      "rating": 5,
+      "dateRead": "2011-01-01",
+      "link": "https://www.goodreads.com/book/show/9127479",
+      "genre": "Other fiction"
+    },
+    {
+      "id": "1215032",
+      "title": "The Wise Man's Fear",
+      "author": "Patrick Rothfuss",
+      "series": "The Kingkiller Chronicle",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2011-01-01",
+      "link": "https://www.goodreads.com/book/show/1215032",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "693208",
+      "title": "The Absolutely True Diary of a Part-Time Indian",
+      "author": "Sherman Alexie",
+      "rating": 0,
+      "dateRead": "2009-02-01",
+      "link": "https://www.goodreads.com/book/show/693208",
+      "genre": "Society & politics"
+    },
+    {
+      "id": "6736971",
+      "title": "The Desert Spear",
+      "author": "Peter V. Brett",
+      "series": "The Demon Cycle",
+      "seriesNo": 2,
+      "rating": 5,
+      "dateRead": "2009-01-01",
+      "link": "https://www.goodreads.com/book/show/6736971",
+      "genre": "Fantasy"
+    },
+    {
+      "id": "3428935",
+      "title": "The Warded Man",
+      "author": "Peter V. Brett",
+      "series": "Demon Cycle",
+      "seriesNo": 1,
+      "rating": 5,
+      "dateRead": "2007-01-01",
+      "link": "https://www.goodreads.com/book/show/3428935",
+      "genre": "Fantasy"
+    }
   ]
 }

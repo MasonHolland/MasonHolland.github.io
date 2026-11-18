@@ -2,12 +2,13 @@
   "name": "portfolio",
   "private": true,
   "type": "module",
-  "description": "Static portfolio site. The only dependency is for the optional PlayStation sync script.",
+  "description": "Static portfolio site. The dependencies are only for the sync scripts: psn-api for PlayStation, sharp for small game covers.",
   "scripts": {
     "sync:books": "node scripts/sync-goodreads.mjs",
     "sync:games": "node scripts/sync-games.mjs"
   },
   "dependencies": {
-    "psn-api": "^2.18.0"
+    "psn-api": "^2.18.0",
+    "sharp": "^0.33.5"
   }
 }

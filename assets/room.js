@@ -1,7 +1,7 @@
 /* Entry point: builds the hall and the rooms, then handles input, picking and the render loop.
  * The rooms themselves live in assets/rooms/. */
 import * as THREE from "three";
-import { $, EYE, NEAR, SPEED, TOUCH, animations, areaAt, camera, closePanel, crossEl, hintEl, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, toWorld, walkable } from "./rooms/core.js";
+import { $, EYE, NEAR, SPEED, TOUCH, animations, areaAt, camera, closePanel, crossEl, hintEl, inRoomArea, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, toWorld, walkable } from "./rooms/core.js";
 import { buildMap, updateMap } from "./rooms/map.js";
 import { buildHub } from "./rooms/hub.js";
 import { buildAbout } from "./rooms/about.js";
@@ -188,7 +188,7 @@ let shownRoom = null;
 function roomAt(x, z) {
   for (const [key, room] of Object.entries(rooms)) {
     const [lx, lz] = toLocal(room.angle, x, z);
-    if (lz < -5.6 && lz > -13 && Math.abs(lx) < 4.05) return key;
+    if (inRoomArea(room, lx, lz, { zNear: -5.6, pad: 0 })) return key;
   }
   return null;
 }
@@ -197,6 +197,9 @@ function roomAt(x, z) {
 function showOnly(key) {
   shownRoom = key;
   for (const [k, room] of Object.entries(rooms)) room.group.visible = !key || k === key;
+  // heavy things (like hundreds of game covers) load the first time you walk into their room
+  const room = rooms[key];
+  if (room && room.onEnter) { const once = room.onEnter; room.onEnter = null; once(); }
 }
 const clock = new THREE.Clock();
 let bob = 0;

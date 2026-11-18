@@ -1,6 +1,6 @@
 /* The floor-plan map in the Esc menu. Drawn as SVG from the same numbers that place the rooms,
  * so it stays right if the layout changes. Each room (and the hall) is a button that takes you there. */
-import { DOOR_HALF, FACE, NEAR, R, RD, RW, esc, hubObstacles, rooms, toWorld } from "./core.js";
+import { DOOR_HALF, FACE, NEAR, R, RW, esc, hubObstacles, rooms, toWorld } from "./core.js";
 
 const NS = "http://www.w3.org/2000/svg";
 let playerEl = null;
@@ -14,14 +14,21 @@ export function buildMap(container, onGo) {
   const grow = ([x, z]) => { minX = Math.min(minX, x); maxX = Math.max(maxX, x); minZ = Math.min(minZ, z); maxZ = Math.max(maxZ, z); };
 
   for (const [key, room] of Object.entries(rooms)) {
-    const a = room.angle;
+    const a = room.angle, RD = room.depth;
     const corners = [[-RW / 2, -NEAR], [RW / 2, -NEAR], [RW / 2, -NEAR - RD], [-RW / 2, -NEAR - RD]].map(([x, z]) => toWorld(a, x, z));
     const passage = [[-DOOR_HALF, -FACE + 0.3], [DOOR_HALF, -FACE + 0.3], [DOOR_HALF, -NEAR - 0.05], [-DOOR_HALF, -NEAR - 0.05]].map(([x, z]) => toWorld(a, x, z));
     corners.forEach(grow);
+    // annexes such as a hallway: drawn under the room so the room's outline stays on top
+    const annexes = (room.annexes || []).map(({ outline: o }) => {
+      const c = [[o.x0, o.z0], [o.x1, o.z0], [o.x1, o.z1], [o.x0, o.z1]].map(([x, z]) => toWorld(a, x, z));
+      c.forEach(grow);
+      return `<polygon class="map__room" points="${pts(c)}"/>`;
+    }).join("");
     const [cx, cz] = toWorld(a, 0, -NEAR - RD / 2);
     parts.push(`
       <g class="map__place map__place--${esc(key)}" data-go="${esc(key)}" tabindex="0" role="button" aria-label="Go to ${esc(room.label)}">
         <polygon class="map__passage" points="${pts(passage)}"/>
+        ${annexes}
         <polygon class="map__room" points="${pts(corners)}"/>
         <text x="${cx.toFixed(2)}" y="${cz.toFixed(2)}">${esc(room.label)}</text>
       </g>`);

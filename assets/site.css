@@ -256,6 +256,7 @@ a { color: inherit; }
   margin: 0 0 1.25rem;
 }
 
+.page__location { font-family: var(--display); color: var(--muted); margin: -0.75rem 0 1.25rem; }
 .page__summary { color: var(--muted); max-width: 38rem; margin: 0 0 1.5rem; }
 
 .page__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0 0 4rem; padding: 0; list-style: none; font-family: var(--display); }
@@ -281,3 +282,10 @@ a { color: inherit; }
 .entry .tags { padding-left: 0; }
 .tags li { font-family: var(--display); font-size: 0.8125rem; padding: 0.15rem 0.6rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; margin: 0; }
 .page section { margin-bottom: 3.5rem; }
+.entry .entry__where { color: var(--muted); font-size: 0.9375rem; margin-top: 0.15rem; }
+.page__list { margin: 0; padding-left: 1.2rem; max-width: 38rem; }
+.page__list li { margin-bottom: 0.5rem; }
+.skills { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1.25rem; margin: 1.5rem 0 0; max-width: 38rem; }
+.skills dt { font-family: var(--display); font-weight: 600; }
+.skills dd { margin: 0; color: var(--muted); }
+@media (max-width: 30rem) { .skills { grid-template-columns: 1fr; gap: 0.1rem; } .skills dd { margin-bottom: 0.6rem; } }
