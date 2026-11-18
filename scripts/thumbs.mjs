@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Makes small copies of the game covers for the room: 200x300 JPEGs (cropped to fill, like a
- * game box) in assets/covers/small/. The full-size originals in assets/covers/ are kept, so the
+ * Makes small copies of the game covers for the room: 200x300 JPEGs (the whole image, centred,
+ * with a blurred copy filling any space around it) in assets/covers/small/. The full-size originals in assets/covers/ are kept, so the
  * size can change later: edit SIZE and run this again with --force.
  *
  * sync-games.mjs calls this after saving covers. To run it on its own:
@@ -36,8 +36,14 @@ export async function addThumbs(games, { force = false } = {}) {
     const rel = thumbPath(g.cover), abs = path.join(ROOT, rel);
     if (force || !(await exists(abs))) {
       try {
-        const buf = await sharp(await readFile(path.join(ROOT, g.cover)))
-          .resize(SIZE.w, SIZE.h, { fit: "cover", position: "attention" })
+        const src = await readFile(path.join(ROOT, g.cover));
+        // the whole image, centred, over a blurred and darkened copy of itself filling the box,
+        // so square PlayStation art and wide Steam banners aren't cut off
+        const backdrop = await sharp(src).resize(SIZE.w, SIZE.h, { fit: "cover" })
+          .blur(12).modulate({ brightness: 0.6 }).toBuffer();
+        const front = await sharp(src).resize(SIZE.w, SIZE.h, { fit: "inside" }).toBuffer();
+        const buf = await sharp(backdrop)
+          .composite([{ input: front, gravity: "center" }])
           .jpeg({ quality: 78, mozjpeg: true })
           .toBuffer();
         await writeFile(abs, buf);

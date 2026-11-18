@@ -646,12 +646,18 @@ function loadCover(material, game, aspect) {
   if (!src) { titleCard(); return; }
   const fallback = guess ? () => imageLoader.load(game.cover, drawn, undefined, titleCard) : titleCard;
   const drawn = (img) => {
+    // the whole image, centred; any space around it (a full-size cover that isn't 2:3) gets a
+    // blurred, darkened copy stretched to fill
     const H = 192, W = Math.round(H * aspect);
-    const a = img.width / img.height;
-    let sw = img.width, sh = img.height, sx = 0, sy = 0;
-    if (a > aspect) { sw = img.height * aspect; sx = (img.width - sw) / 2; }
-    else { sh = img.width / aspect; sy = (img.height - sh) / 2; }
-    setCover(material, canvasTex(W, H, (ctx) => ctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, H)));
+    const s = Math.min(W / img.width, H / img.height), dw = img.width * s, dh = img.height * s;
+    setCover(material, canvasTex(W, H, (ctx) => {
+      if (Math.abs(dw - W) > 1 || Math.abs(dh - H) > 1) {
+        ctx.filter = "blur(6px) brightness(0.6)";
+        ctx.drawImage(img, -8, -8, W + 16, H + 16);
+        ctx.filter = "none";
+      }
+      ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    }));
   };
   imageLoader.load(src, drawn, undefined, fallback);
 }
@@ -661,7 +667,7 @@ function loadCover(material, game, aspect) {
 /** A game box on a shelf. big = the showcase games beside a console. */
 function addGame(shelf, key, game, x, row, big) {
   const P = platformOf(key);
-  const gw = big ? 0.26 : 0.2, gh = big ? 0.37 : 0.29;
+  const gw = big ? 0.26 : 0.2, gh = gw * 1.5;          // 2:3, the shape of the cover images
   const faces = mat(P.color);
   const front = new THREE.MeshStandardMaterial({ map: blankCover(key), emissive: 0xffffff, emissiveMap: blankCover(key), emissiveIntensity: 0.25, roughness: 0.6 });
   const m = new THREE.Mesh(new THREE.BoxGeometry(gw, gh, 0.03), [faces, faces, faces, faces, front, faces]);
@@ -713,13 +719,26 @@ function placeUnit(g, x, z, rotY, wood, darkWood) {
 const completion = (game) => (game.trophies ? game.trophies.progress ?? 0 : game.achievements ? game.achievements.progress
   : typeof game.completion === "number" ? game.completion : -1);   // completion: set by hand for Switch games
 
+/** Games kept out of the showcase and put on a console unit's top shelf instead. */
+const NOT_FEATURED = [/^PUBG\b/i];
+const notFeatured = (game) => NOT_FEATURED.some((re) => re.test(game.title || ""));
+/** Platforms whose showcase is picked by most hours, with completion as the tie-breaker. */
+const BY_HOURS = new Set(["steam"]);
+const TOP_SHELF_AT = PER_ROW * 2;          // the console unit fills rows 3, 1, 4, 0: row 4 is the top
+
 /**
- * Split a platform's games (newest first) into the 4 showcase games beside the console (highest
- * trophy or achievement completion, then most hours) and everything else, still newest first.
+ * Split a platform's games (newest first) into the 4 showcase games beside the console and
+ * everything else, still newest first. The showcase is the highest trophy or achievement
+ * completion, then most hours; on Steam, most hours, then achievements. NOT_FEATURED games never
+ * make the showcase and go to the start of the top shelf.
  */
 export function showcaseFirst(games) {
-  const best = [...games].sort((a, b) => completion(b) - completion(a) || (b.hours || 0) - (a.hours || 0)).slice(0, 4);
-  return { showcase: best, rest: games.filter((g) => !best.includes(g)) };
+  const hours = (a, b) => (b.hours || 0) - (a.hours || 0), done = (a, b) => completion(b) - completion(a);
+  const rank = BY_HOURS.has(games[0] && games[0].platform) ? (a, b) => hours(a, b) || done(a, b) : (a, b) => done(a, b) || hours(a, b);
+  const best = games.filter((g) => !notFeatured(g)).sort(rank).slice(0, 4);
+  const rest = games.filter((g) => !best.includes(g) && !notFeatured(g));
+  rest.splice(Math.min(TOP_SHELF_AT, rest.length), 0, ...games.filter(notFeatured));
+  return { showcase: best, rest };
 }
 
 /** The console unit: the console mid-shelf with the 4 most-completed games either side, 32 more around it. */
