@@ -1,6 +1,17 @@
 {
   "source": "sample",
   "updated": "2026-11-11",
+  "currentlyReading": [
+    { "title": "The Count of Monte Cristo", "author": "Alexandre Dumas", "rating": 0, "link": "" },
+    { "title": "Middlemarch", "author": "George Eliot", "rating": 0, "link": "" }
+  ],
+  "wantToRead": [
+    { "title": "The Brothers Karamazov", "author": "Fyodor Dostoevsky", "link": "" },
+    { "title": "Moby-Dick", "author": "Herman Melville", "link": "" },
+    { "title": "War and Peace", "author": "Leo Tolstoy", "link": "" },
+    { "title": "The Odyssey", "author": "Homer", "link": "" },
+    { "title": "Don Quixote", "author": "Miguel de Cervantes", "link": "" }
+  ],
   "books": [
     { "title": "Walden", "author": "Henry David Thoreau", "rating": 4, "dateRead": "2026-10-02", "link": "" },
     { "title": "Meditations", "author": "Marcus Aurelius", "rating": 5, "dateRead": "2026-09-14", "link": "" },

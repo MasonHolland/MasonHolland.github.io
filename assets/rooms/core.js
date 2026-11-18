@@ -5,26 +5,32 @@ import * as THREE from "three";
 
 /* ------------------------------------------------------------------ *
  * A round hall with three arched doors:
- *   9 o'clock  About me   a bright, modern living room
+ *   10 o'clock  About me   a bright, modern living room
  *   12 o'clock Work       a modern tech office
- *   3 o'clock  Hobbies    an old castle library (books and a game case)
+ *   2 o'clock  Hobbies    an old castle library (books and a game case)
  * Content comes from data/profile.json, data/books.json, data/games.json.
  * Everything is built from simple shapes and canvas textures; there are
  * no model files.
  * ------------------------------------------------------------------ */
 
-export const R = 4.5;                 // hall radius
-export const HUB_H = 3.8;             // hall ceiling height
-export const FACE = 4.36;             // distance from the hall centre to the flat face of each door wall
-export const NEAR = 4.96;             // distance from the hall centre to where a room starts
+export const R = 8;                   // hall radius (big enough that rooms 60 degrees apart don't overlap)
+export const HUB_H = 6;               // height of the hall wall, where the dome begins
+export const DOME_RISE = 5;           // how far the dome rises above the wall (its top is HUB_H + DOME_RISE)
+// Each room is built in its own frame, as if the hall had a 4.5 m radius, then pushed out by SHIFT.
+export const FACE = 4.36;             // room frame: distance to the flat face of the door wall
+export const NEAR = 4.96;             // room frame: distance to where the room starts
 export const WALL_T = NEAR - FACE;    // thickness of the door wall (the passage length)
 export const RW = 8, RD = 8;          // room width and depth
 export const DOOR_HALF = 0.7;         // half the width of a doorway
 export const SPRING = 2.15;           // height where the door arch begins
 export const ARCH_TOP = SPRING + DOOR_HALF;
 export const GAP = 1.12;              // half the width of the gap in the hall wall at each door
+// how far each room is pushed out so its door wall meets the curved hall wall at the edge of the gap
+export const SHIFT = Math.sqrt(R * R - GAP * GAP) - FACE;
+// door directions: 0 is 12 o'clock, positive turns left. 10 o'clock and 2 o'clock are 60 degrees either side.
+export const DOOR_ANGLES = { about: Math.PI / 3, work: 0, hobbies: -Math.PI / 3 };
 export const EYE = 1.6;
-export const SPEED = 2.6;
+export const SPEED = 3.5;
 export const PR = 0.25;               // player radius for collisions
 export const TOUCH = matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
 if (TOUCH) document.body.classList.add("touch");
@@ -84,7 +90,7 @@ scene.background = new THREE.Color(0x0b0f14);
 
 export const camera = new THREE.PerspectiveCamera(70, 1, 0.05, 60);
 camera.rotation.order = "YXZ";
-camera.position.set(0, EYE, 3.3);
+camera.position.set(0, EYE, 5.5);
 
 export function resize() {
   const w = innerWidth, h = innerHeight;
@@ -257,14 +263,25 @@ export const SIGNS = {
 
 export const rooms = {};   // key -> { angle, label, bounds, obstacles, group }
 
+/** World position to a room's own frame (undoes the room's turn and its outward SHIFT). */
 export function toLocal(angle, x, z) {
   const c = Math.cos(angle), s = Math.sin(angle);
-  return [x * c - z * s, x * s + z * c];
+  return [x * c - z * s, x * s + z * c + SHIFT];
 }
+
+/** A point in a room's own frame to the world (the reverse of toLocal). */
+export function toWorld(angle, lx, lz) {
+  const c = Math.cos(angle), s = Math.sin(angle), z = lz - SHIFT;
+  return [lx * c + z * s, -lx * s + z * c];
+}
+
+export const hubObstacles = [];   // world-space boxes in the hall, e.g. the mailbox: { x0, x1, z0, z1 }
 
 export function walkable(x, z) {
   const hubR = R - 0.28;
-  if (x * x + z * z <= hubR * hubR) return true;
+  if (x * x + z * z <= hubR * hubR) {
+    return !hubObstacles.some((o) => x > o.x0 - PR && x < o.x1 + PR && z > o.z0 - PR && z < o.z1 + PR);
+  }
   for (const room of Object.values(rooms)) {
     const [lx, lz] = toLocal(room.angle, x, z);
     if (Math.abs(lx) <= DOOR_HALF - 0.24 && lz <= -4.0 && lz >= -5.45) return true;
@@ -384,6 +401,7 @@ export function makeSofa(color, w = 2.3) {
 export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bounds, frameMat }) {
   const g = new THREE.Group();          // door wall, frames and sign: always visible
   g.rotation.y = angle;
+  g.position.set(-SHIFT * Math.sin(angle), 0, -SHIFT * Math.cos(angle));
   scene.add(g);
   const inner = new THREE.Group();      // everything inside the room: hidden while you are in another room
   g.add(inner);

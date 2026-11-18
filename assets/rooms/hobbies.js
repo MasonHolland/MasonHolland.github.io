@@ -1,10 +1,10 @@
-/* HOBBIES room (3 o'clock): a castle library with the bookcase and the game shelves. */
+/* HOBBIES room (2 o'clock): a castle library with the bookcase and the game shelves. */
 import * as THREE from "three";
-import { NEAR, RD, RW, animations, archFrameGeo, basic, bookData, box, canvasTex, createRoom, cyl, esc, fitText, gameData, interactables, makeArmchair, mat, noise, rand, rooms, safeUrl, showPanel, signMesh, wrapText } from "./core.js";
+import { DOOR_ANGLES, NEAR, RD, RW, animations, archFrameGeo, basic, bookData, box, canvasTex, createRoom, cyl, esc, fitText, gameData, interactables, mat, noise, rand, rooms, safeUrl, showPanel, signMesh, wrapText } from "./core.js";
 import { loadInto, plankTex } from "./shared.js";
 
 /* ================================================================== *
- * HOBBIES (3 o'clock): a castle library with a game case
+ * HOBBIES (2 o'clock): a castle library with a game case
  * ================================================================== */
 
 function stoneTex() {
@@ -156,6 +156,73 @@ function decorativeBooks(caseGroup, { w, rows, rowH, d }, seed, startX = []) {
   caseGroup.add(mesh);
 }
 
+const BOOK_KINDS = {
+  read: { hint: "Inspect book: ", note: "" },
+  current: { hint: "Currently reading: ", note: "Currently reading" },
+  want: { hint: "Want to read: ", note: "On my want-to-read list" },
+};
+
+/** Put one real, clickable book on a case at (x, row). kind is "read", "current" or "want". Returns its width. */
+function placeBook(caseGroup, spec, b, i, x, row, kind) {
+  const K = BOOK_KINDS[kind];
+  const bw = 0.07 + rand(i + 1) * 0.04;
+  const bh = 0.31 + rand(i + 50) * 0.13;
+  const bd = 0.22 + rand(i + 99) * 0.06;
+  const color = SPINES[i % SPINES.length];
+  const plain = mat(color);
+  const spine = new THREE.MeshStandardMaterial({ map: spineTexture(b.title, color), roughness: 0.8 });
+  const m = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), [plain, plain, plain, plain, spine, plain]);
+  m.position.set(x + bw / 2, 0.04 + row * spec.rowH + bh / 2, 0.02 + (0.27 - bd) * 0.5);
+  m.rotation.z = kind === "read" && rand(i + 7) > 0.93 ? 0.12 : 0;
+  caseGroup.add(m);
+  const stars = kind === "read" && b.rating ? "★".repeat(b.rating) + "☆".repeat(5 - b.rating) : "";
+  interactables.push({
+    mesh: m, hint: K.hint + b.title, mat: spine,
+    open: () => showPanel({
+      title: b.title, meta: b.author ? "by " + b.author : "",
+      html: [
+        K.note ? `<p>${K.note}</p>` : "",
+        stars ? `<p aria-label="Rated ${b.rating} out of 5">${stars}</p>` : "",
+        kind === "read" && b.dateRead ? `<p>Finished ${esc(b.dateRead)}</p>` : "",
+        safeUrl(b.link) ? `<p><a href="${esc(safeUrl(b.link))}" target="_blank" rel="noopener">View on Goodreads</a></p>` : "",
+      ].join(""),
+    }),
+  });
+  return bw;
+}
+
+/**
+ * Shelve a list of real books row by row (in rowOrder), then fill the rest of those rows with plain
+ * filler books so the case looks full and the real ones stand out. Rows in skipRows get no filler.
+ */
+function shelveBooks(caseGroup, spec, list, rowOrder, kind, seed, fillSeed, skipRows) {
+  const start = -spec.w / 2 + 0.12, end = spec.w / 2 - 0.1;
+  const cursor = rowOrder.map(() => start);
+  let rIdx = 0;
+  list.forEach((b, i) => {
+    while (rIdx < rowOrder.length && cursor[rIdx] + 0.11 > end) rIdx++;
+    if (rIdx >= rowOrder.length) return;
+    cursor[rIdx] += placeBook(caseGroup, spec, b, seed + i, cursor[rIdx], rowOrder[rIdx], kind) + 0.004;
+  });
+  const fillFrom = [];
+  rowOrder.forEach((row, k) => { if (cursor[k] > start + 0.01) fillFrom[row] = cursor[k] + 0.01; });
+  skipRows.forEach((row) => { fillFrom[row] = spec.w; });   // starting past the end leaves the row empty
+  decorativeBooks(caseGroup, spec, fillSeed, fillFrom);
+}
+
+/** A dark wooden sign with brass trim, for the top of a bookcase (in the case's own frame). */
+function caseSign(w, h, text, x, y) {
+  const s = signMesh(w, h, (ctx, cw, ch) => {
+    ctx.fillStyle = "#2a1b12"; ctx.fillRect(0, 0, cw, ch);
+    ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 5; ctx.strokeRect(8, 8, cw - 16, ch - 16);
+    ctx.fillStyle = "#f0d9a8"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = "italic 500 64px 'Literata', Georgia, serif";
+    ctx.fillText(fitText(ctx, text, cw - 60), cw / 2, ch / 2 + 4);
+  });
+  s.position.set(x, y, -0.11);
+  return s;
+}
+
 const PLATFORMS = {
   steam: { label: "Steam", color: 0x1b2838, g1: "#1b2838", g2: "#2a475e" },
   psn: { label: "PlayStation", color: 0x0b57d0, g1: "#0b57d0", g2: "#0a2a6b" },
@@ -181,7 +248,7 @@ function gameCoverTexture(game) {
 export function buildHobbies() {
   const H = 5.0;
   const g = createRoom("hobbies", {
-    angle: -Math.PI / 2, H, label: "Hobbies",
+    angle: DOOR_ANGLES.hobbies, H, label: "Hobbies",
     wall: { tex: stoneTex(), tw: 2, th: 1.5 },
     floor: { tex: flagstoneTex(), tw: 2, th: 2, opts: { roughness: 0.75 } },
     ceil: { tex: plankTex("#2a1b12", 0.2, 64), tw: 2, th: 2 },
@@ -189,11 +256,9 @@ export function buildHobbies() {
     bounds: { x0: -3.3, x1: 3.3, z0: -12.26, z1: -5.26 },
     frameMat: mat(0x3a2619, { roughness: 0.7 }),
   });
-  const room = rooms.hobbies;
   const stoneM = mat(0x6c665c, { roughness: 0.95 });
   const wood = mat(0x4a3020, { roughness: 0.7 });
   const darkWood = mat(0x2a1a10, { roughness: 0.8 });
-  const brass = mat(0xb08a45, { metalness: 0.6, roughness: 0.4 });
 
   // ceiling beams
   [-6.2, -8.0, -9.8, -11.6].forEach((z) => box(RW, 0.3, 0.3, darkWood, 0, H - 0.15, z, g));
@@ -202,7 +267,8 @@ export function buildHobbies() {
   // stained glass: one tall window behind, jewel-coloured lattice with a single sword
   addGlassWindow(g, 0, 0.7, -(NEAR + RD) + 0.01, 0, 2.2, 2.8, 3, stoneM);
 
-  // bookcases: two decorative ones on the back wall, the read-books case in the middle of the left wall
+  // bookcases: two decorative ones on the back wall. Along the left wall, from the entrance:
+  // a decorative case, the read-books case (with the currently-reading shelf), and the want-to-read case.
   const caseBack = { w: 2.8, rows: 8, rowH: 0.5, d: 0.42 };
   [-2.6, 2.6].forEach((x, i) => {
     const c = buildCase(g, caseBack, wood, darkWood);
@@ -210,69 +276,48 @@ export function buildHobbies() {
     decorativeBooks(c.g, caseBack, 100 + i * 50);
   });
   const caseEnd = { w: 1.5, rows: 8, rowH: 0.5, d: 0.42 };
-  [-6.0, -11.9].forEach((z, i) => {
-    const c = buildCase(g, caseEnd, wood, darkWood);
-    c.g.position.set(-RW / 2 + caseEnd.d / 2, 0, z);
+  const leftCase = (spec, z) => {
+    const c = buildCase(g, spec, wood, darkWood);
+    c.g.position.set(-RW / 2 + spec.d / 2, 0, z);
     c.g.rotation.y = Math.PI / 2;
-    decorativeBooks(c.g, caseEnd, 400 + i * 50);
-  });
+    return c;
+  };
+  const nearCase = leftCase(caseEnd, -6.0);
+  decorativeBooks(nearCase.g, caseEnd, 400);
 
+  // centre: books you have finished, with the eye-height shelf kept for what you are reading now
   const readCase = { w: 4.4, rows: 5, rowH: 0.5, d: 0.42 };
-  const rc = buildCase(g, readCase, wood, darkWood);
-  rc.g.position.set(-RW / 2 + readCase.d / 2, 0, -8.95);
-  rc.g.rotation.y = Math.PI / 2;
-  const books = (bookData.books || []).slice(0, 220);
-  const rowOrder = [2, 3, 1, 4, 0];
-  const cursor = rowOrder.map(() => -readCase.w / 2 + 0.12);
-  let rIdx = 0;
-  books.forEach((b, i) => {
-    const bw = 0.07 + rand(i + 1) * 0.04;
-    const bh = 0.31 + rand(i + 50) * 0.13;
-    const bd = 0.22 + rand(i + 99) * 0.06;
-    while (rIdx < rowOrder.length && cursor[rIdx] + bw > readCase.w / 2 - 0.1) rIdx++;
-    if (rIdx >= rowOrder.length) return;
-    const row = rowOrder[rIdx];
-    const color = SPINES[i % SPINES.length];
-    const plain = mat(color);
-    const spine = new THREE.MeshStandardMaterial({ map: spineTexture(b.title, color), roughness: 0.8 });
-    const m = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), [plain, plain, plain, plain, spine, plain]);
-    m.position.set(cursor[rIdx] + bw / 2, 0.04 + row * readCase.rowH + bh / 2, 0.02 + (0.27 - bd) * 0.5);
-    m.rotation.z = rand(i + 7) > 0.93 ? 0.12 : 0;
-    rc.g.add(m);
-    cursor[rIdx] += bw + 0.004;
-    const stars = b.rating ? "★".repeat(b.rating) + "☆".repeat(5 - b.rating) : "";
-    interactables.push({
-      mesh: m, hint: "Inspect book: " + b.title, mat: spine,
-      open: () => showPanel({
-        title: b.title, meta: "by " + b.author,
-        html: [
-          stars ? `<p aria-label="Rated ${b.rating} out of 5">${stars}</p>` : "",
-          b.dateRead ? `<p>Finished ${esc(b.dateRead)}</p>` : "",
-          safeUrl(b.link) ? `<p><a href="${esc(safeUrl(b.link))}" target="_blank" rel="noopener">View on Goodreads</a></p>` : "",
-        ].join(""),
-      }),
-    });
+  const rc = leftCase(readCase, -8.95);
+  const CURRENT_ROW = 2;
+  let cx = -readCase.w / 2 + 0.12;
+  (bookData.currentlyReading || []).forEach((b, i) => {
+    if (cx + 0.11 > readCase.w / 2 - 0.75) return;    // leave room for the label at the right end
+    cx += placeBook(rc.g, readCase, b, 900 + i, cx, CURRENT_ROW, "current") + 0.004;
   });
-  // plain books fill whatever space is left, so the case always looks full and your own books stand out in brighter colours
-  const fillFrom = [];
-  rowOrder.forEach((row, k) => { if (cursor[k] > -readCase.w / 2 + 0.13) fillFrom[row] = cursor[k] + 0.01; });
-  decorativeBooks(rc.g, readCase, 700, fillFrom);
-
-  const bookSign = signMesh(1.9, 0.4, (ctx, w, h) => {
+  const curLabel = signMesh(0.56, 0.15, (ctx, w, h) => {
     ctx.fillStyle = "#2a1b12"; ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 5; ctx.strokeRect(8, 8, w - 16, h - 16);
+    ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 10; ctx.strokeRect(10, 10, w - 20, h - 20);
     ctx.fillStyle = "#f0d9a8"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.font = "italic 500 64px 'Literata', Georgia, serif";
-    ctx.fillText(`${(bookData.books || []).length} books read`, w / 2, h / 2 + 4);
+    ctx.font = "italic 500 104px 'Literata', Georgia, serif";
+    ctx.fillText("Currently reading", w / 2, h / 2 + 6);
   });
-  bookSign.position.set(-RW / 2 + 0.1, 3.05, -8.95);
-  bookSign.rotation.y = Math.PI / 2;
-  g.add(bookSign);
+  curLabel.position.set(readCase.w / 2 - 0.42, 0.04 + CURRENT_ROW * readCase.rowH + 0.09, 0.08);
+  curLabel.rotation.x = -0.12;
+  rc.g.add(curLabel);
+  // the other rows, nearest eye height first; plain filler books skip the currently-reading shelf
+  shelveBooks(rc.g, readCase, (bookData.books || []).slice(0, 220), [3, 1, 4, 0], "read", 0, 700, [CURRENT_ROW]);
+  rc.g.add(caseSign(1.9, 0.4, `${(bookData.books || []).length} books read`, 0, rc.h + 0.47));
+
+  // far end: books you want to read
+  const want = bookData.wantToRead || [];
+  const wantCase = leftCase(caseEnd, -11.9);
+  shelveBooks(wantCase.g, caseEnd, want.slice(0, 100), [3, 2, 4, 1, 5, 0, 6, 7], "want", 2000, 450, []);
+  wantCase.g.add(caseSign(1.4, 0.34, want.length ? `Want to read · ${want.length}` : "Want to read", 0, wantCase.h + 0.32));
 
   // one game shelf per platform along the right wall
   buildGameShelves(g, wood, darkWood);
 
-  // reading table, chairs, rug, globe, candle
+  // rug in the middle of the room
   const rugTex = canvasTex(512, 384, (ctx, w, h) => {
     ctx.fillStyle = "#5a1d22"; ctx.fillRect(0, 0, w, h);
     ctx.strokeStyle = "#b08a45"; ctx.lineWidth = 10; ctx.strokeRect(24, 24, w - 48, h - 48);
@@ -285,34 +330,6 @@ export function buildHobbies() {
   rug.position.set(0, 0.012, -8.9);
   g.add(rug);
 
-  const table = new THREE.Group();
-  table.position.set(0.3, 0, -8.9);
-  g.add(table);
-  box(1.7, 0.07, 0.9, wood, 0, 0.78, 0, table);
-  [[-0.75, -0.35], [0.75, -0.35], [-0.75, 0.35], [0.75, 0.35]].forEach(([x, z]) => box(0.1, 0.75, 0.1, darkWood, x, 0.375, z, table));
-  box(0.5, 0.03, 0.34, mat(0xe8dcc0), -0.2, 0.835, 0.05, table);
-  box(0.02, 0.03, 0.34, mat(0x5c4033), -0.2, 0.84, 0.05, table);
-  cyl(0.03, 0.03, 0.2, mat(0xf2e8d0), 0.5, 0.92, -0.2, table, 12);
-  const flame = new THREE.Mesh(new THREE.SphereGeometry(0.025, 8, 8), basic(0xffc866));
-  flame.scale.y = 1.6;
-  flame.position.set(0.5, 1.05, -0.2);
-  table.add(flame);
-  const globe = new THREE.Group();
-  globe.position.set(0.6, 0.82, 0.2);
-  table.add(globe);
-  cyl(0.08, 0.1, 0.03, brass, 0, 0.015, 0, globe, 16);
-  const ball = new THREE.Mesh(new THREE.SphereGeometry(0.14, 20, 16), mat(0x2f5a7a, { roughness: 0.5 }));
-  ball.position.y = 0.2; globe.add(ball);
-  room.obstacles.push({ x0: -0.6, x1: 1.2, z0: -9.4, z1: -8.4 });
-
-  [[0.3, -7.6, Math.PI], [0.3, -10.2, 0]].forEach(([x, z, r]) => {
-    const a = makeArmchair(0x6b2d2d);
-    a.position.set(x, 0, z);
-    a.rotation.y = r;
-    g.add(a);
-    room.obstacles.push({ x0: x - 0.5, x1: x + 0.5, z0: z - 0.5, z1: z + 0.5 });
-  });
-  // the armchairs face the table, which is at z=-8.9
   // chandelier
   const chand = new THREE.Group();
   chand.position.set(0, 3.9, -8.9);

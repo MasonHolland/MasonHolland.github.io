@@ -63,6 +63,40 @@
       font: 700 1.0625rem var(--display); padding: 0.75rem 1.6rem; cursor: pointer; text-decoration: none;
     }
     .btn--ghost { background: transparent; color: var(--paper); border: 1px solid rgba(255,255,255,0.3); }
+    .btn:disabled { opacity: 0.6; cursor: default; }
+
+    /* Esc menu: floor-plan map */
+    .overlay.is-paused .overlay__box { max-width: 44rem; width: 100%; }
+    .overlay.is-paused { overflow-y: auto; }
+    .map { margin: 0.5rem 0 0; }
+    .map__help { font: 500 0.9375rem var(--display); color: var(--paper) !important; }
+    .map__svg { display: block; width: 100%; max-height: 52vh; margin: 0 auto; }
+    .map__svg text { font: 600 1.05px var(--display); fill: var(--ink); text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
+    .map__svg .map__small { font-size: 0.75px; font-weight: 500; fill: var(--muted); }
+    .map__place { cursor: pointer; outline: none; }
+    .map__room { fill: #d9d2c4; stroke: #8a7a5c; stroke-width: 0.12; transition: fill 0.15s; }
+    .map__passage { fill: #b8ad97; }
+    .map__place--hobbies .map__room { fill: #b9a68a; }
+    .map__place--work .map__room { fill: #d6dee6; }
+    .map__place--about .map__room { fill: #eadfcf; }
+    .map__place:hover .map__room, .map__place:focus-visible .map__room { fill: var(--brass); }
+    .map__place:focus-visible .map__room { stroke: var(--paper); stroke-width: 0.25; }
+    .map__exit { fill: var(--oxblood); }
+    .map__thing { fill: #23395b; }
+    .map__player path { fill: var(--oxblood); stroke: var(--paper); stroke-width: 0.12; }
+
+    /* contact form in the info card */
+    .contact label { display: block; font: 600 0.9375rem var(--display); margin: 0 0 0.85rem; }
+    .contact input, .contact textarea {
+      display: block; width: 100%; box-sizing: border-box; margin-top: 0.3rem;
+      font: 400 1rem var(--body); color: var(--ink); background: #fff;
+      border: 1px solid rgba(27, 37, 48, 0.3); border-radius: 0.4rem; padding: 0.55rem 0.7rem;
+    }
+    .contact textarea { resize: vertical; min-height: 7rem; }
+    .contact input:focus-visible, .contact textarea:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 1px; }
+    .contact__trap { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .contact__status { min-height: 1.4em; font: 500 0.9375rem var(--display); color: var(--oxblood); }
+    .contact .btn { margin-top: 0.25rem; }
 
     #panel {
       position: fixed; z-index: 12; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -99,9 +133,9 @@
   <div id="stick" aria-hidden="true"><i></i></div>
 
   <div class="hud hud--top">
-    <a class="pill" href="index.html">Leave the room</a>
     <span class="pill" id="where" role="status" aria-live="polite">The hall</span>
-    <a class="pill" href="resume.html">Read the simple version</a>
+    <span class="pill" id="optHint">Press Esc to see options</span>
+    <button class="pill" id="optBtn" type="button" hidden>Options and map</button>
   </div>
 
   <div id="loading">Switching on the lamp…</div>
@@ -110,10 +144,14 @@
     <div class="overlay__box">
       <h1 id="startTitle">The study</h1>
       <p class="keys" id="keysHelp"></p>
-      <p>Three doors lead off the hall: About me on the left, Work straight ahead, and Hobbies on the right.</p>
+      <div class="map" id="mapWrap" hidden>
+        <p class="map__help">Choose a room to go straight there.</p>
+        <div id="map"></div>
+      </div>
       <div class="actions">
         <button class="btn" id="enter" type="button">Enter</button>
         <a class="btn btn--ghost" href="resume.html">Read the simple version</a>
+        <a class="btn btn--ghost" id="leave" href="index.html" hidden>Leave the room</a>
       </div>
     </div>
   </div>

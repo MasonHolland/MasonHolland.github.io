@@ -1,6 +1,6 @@
 /* WORK room (12 o'clock): a modern office. */
 import * as THREE from "three";
-import { NEAR, RD, RW, animations, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, makePlant, mat, noise, profile, projectsHtml, rand, resumeHtml, rooms, showPanel, wrapText } from "./core.js";
+import { DOOR_ANGLES, NEAR, RD, RW, animations, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, makePlant, mat, noise, profile, projectsHtml, rand, resumeHtml, rooms, showPanel, wrapText } from "./core.js";
 import { plasterTex } from "./shared.js";
 
 /* ================================================================== *
@@ -414,7 +414,7 @@ export function buildWork() {
   const Zc = -(NEAR + RD / 2);           // z of the room's middle
   const wallTex = plasterTex("#e9e7e2", 0.025);
   const g = createRoom("work", {
-    angle: 0, H, label: "Work",
+    angle: DOOR_ANGLES.work, H, label: "Work",
     wall: { tex: wallTex, tw: 2, th: 2 },
     floor: { tex: carpetTexture(), tw: 2, th: 2, opts: { roughness: 0.95, metalness: 0 } },
     ceil: { tex: plasterTex("#cfcac0", 0.02), tw: 2, th: 2 },

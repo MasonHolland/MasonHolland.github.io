@@ -1,6 +1,6 @@
-/* ABOUT ME room (9 o'clock): a bright, modern living room. */
+/* ABOUT ME room (10 o'clock): a bright, modern living room. */
 import * as THREE from "three";
-import { NEAR, RD, RW, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, makeArmchair, makePlant, makeSofa, mat, noise, profile, rooms, safeUrl, showPanel } from "./core.js";
+import { DOOR_ANGLES, NEAR, RD, RW, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, makeArmchair, makePlant, makeSofa, mat, noise, profile, rooms, safeUrl, showPanel } from "./core.js";
 import { addPicture, loadInto, plankTex, plasterTex } from "./shared.js";
 
 /* ---------- Perth skyline, drawn for the big window ---------- */
@@ -198,7 +198,7 @@ function addLargeFrame(parent, def, index, x, y, z, rotY, w, h) {
 export function buildAbout() {
   const H = 3.2;
   const g = createRoom("about", {
-    angle: Math.PI / 2, H, label: "About me",
+    angle: DOOR_ANGLES.about, H, label: "About me",
     wall: { tex: plasterTex("#f4f0e8"), tw: 2, th: 2 },
     floor: { tex: plankTex("#c9a77c", 0.14), tw: 2, th: 2, opts: { roughness: 0.55 } },
     ceil: { tex: plasterTex("#e4dfd3", 0.02), tw: 2, th: 2 },

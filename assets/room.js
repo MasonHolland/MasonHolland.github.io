@@ -1,7 +1,8 @@
 /* Entry point: builds the hall and the rooms, then handles input, picking and the render loop.
  * The rooms themselves live in assets/rooms/. */
 import * as THREE from "three";
-import { $, EYE, SPEED, TOUCH, animations, areaAt, camera, closePanel, crossEl, hintEl, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, walkable } from "./rooms/core.js";
+import { $, EYE, NEAR, SPEED, TOUCH, animations, areaAt, camera, closePanel, crossEl, hintEl, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, toWorld, walkable } from "./rooms/core.js";
+import { buildMap, updateMap } from "./rooms/map.js";
 import { buildHub } from "./rooms/hub.js";
 import { buildAbout } from "./rooms/about.js";
 import { buildWork } from "./rooms/work.js";
@@ -35,20 +36,55 @@ addEventListener("blur", () => keys.clear());
 const startEl = $("start");
 function lockPointer() {
   if (TOUCH) return;
-  renderer.domElement.requestPointerLock?.();
+  try { renderer.domElement.requestPointerLock?.()?.catch?.(() => {}); } catch (e) {}
 }
-$("enter").addEventListener("click", () => {
+function resume() {
   started = true;
   startEl.hidden = true;
   lockPointer();
-});
+}
+$("enter").addEventListener("click", resume);
+
+/** The Esc menu: the same overlay as the welcome screen, plus the map and a way out. */
+function showMenu() {
+  keys.clear();
+  $("enter").textContent = "Keep exploring";
+  startEl.classList.add("is-paused");
+  $("mapWrap").hidden = false;
+  $("leave").hidden = false;
+  updateMap(camera.position.x, camera.position.z, yaw);
+  startEl.hidden = false;
+}
 document.addEventListener("pointerlockchange", () => {
-  if (!document.pointerLockElement && started && !panelOpen) {
-    startEl.hidden = false;
-    $("enter").textContent = "Keep exploring";
-    keys.clear();
-  }
+  if (!document.pointerLockElement && started && !panelOpen) showMenu();
 });
+
+// on touch screens there is no Esc key, so the top bar has a button instead
+if (TOUCH) {
+  $("optHint").hidden = true;
+  $("optBtn").hidden = false;
+  $("optBtn").addEventListener("click", () => { if (started && !panelOpen) showMenu(); });
+}
+
+const HOME = { x: camera.position.x, z: camera.position.z };
+/** Jump to the hall, or to just inside a room's doorway, facing into the room. */
+function goTo(key) {
+  let x = HOME.x, z = HOME.z, facing = 0;
+  const room = rooms[key];
+  if (room) {
+    facing = room.angle;
+    for (let d = NEAR + 0.9; d < NEAR + 4; d += 0.2) {
+      [x, z] = toWorld(room.angle, 0, -d);
+      if (walkable(x, z)) break;
+    }
+  }
+  camera.position.x = x;
+  camera.position.z = z;
+  yaw = facing;
+  pitch = 0;
+  resume();
+}
+buildMap($("map"), goTo);
 document.addEventListener("mousemove", (e) => {
   if (document.pointerLockElement !== renderer.domElement) return;
   yaw -= e.movementX * 0.0022;

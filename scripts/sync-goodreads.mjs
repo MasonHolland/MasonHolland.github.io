@@ -14,6 +14,8 @@
  *   GOODREADS_USER_ID   required. The digits after /user/show/ in your profile address.
  *   GOODREADS_RSS_KEY   optional. Only needed if your profile is private.
  *   GOODREADS_SHELF     optional. Defaults to "read".
+ *   GOODREADS_CURRENT_SHELF optional. Defaults to "currently-reading".
+ *   GOODREADS_WANT_SHELF    optional. Defaults to "to-read" (the "Want to Read" shelf).
  *   MAX_PAGES           optional. Defaults to 10.
  *
  * Goodreads limits how much a feed returns (around 100 recent books per shelf),
@@ -61,21 +63,13 @@ export function parseFeed(xml) {
   });
 }
 
-async function main() {
-  const userId = process.env.GOODREADS_USER_ID;
-  if (!userId) {
-    console.error("Set GOODREADS_USER_ID to the digits in your Goodreads profile address.");
-    process.exit(1);
-  }
-  const shelf = process.env.GOODREADS_SHELF || "read";
-  const key = process.env.GOODREADS_RSS_KEY || "";
-  const maxPages = parseInt(process.env.MAX_PAGES || "10", 10);
-
+/** Read every page of one shelf. Returns null if Goodreads refuses the first page. */
+async function fetchShelf(userId, shelf, key, maxPages, sort) {
   const seen = new Map();
   for (let page = 1; page <= maxPages; page++) {
     const url = new URL(`https://www.goodreads.com/review/list_rss/${userId}`);
     url.searchParams.set("shelf", shelf);
-    url.searchParams.set("sort", "date_read");
+    url.searchParams.set("sort", sort);
     url.searchParams.set("order", "d");
     url.searchParams.set("per_page", "100");
     url.searchParams.set("page", String(page));
@@ -83,8 +77,8 @@ async function main() {
 
     const res = await fetch(url, { headers: { "User-Agent": "portfolio-sync/1.0" } });
     if (!res.ok) {
-      console.error(`Goodreads answered ${res.status} for page ${page}.`);
-      if (page === 1) process.exit(1);
+      console.error(`Goodreads answered ${res.status} for the "${shelf}" shelf, page ${page}.`);
+      if (page === 1) return null;
       break;
     }
     const books = parseFeed(await res.text());
@@ -92,8 +86,24 @@ async function main() {
     for (const b of books) if (b.id && !seen.has(b.id)) seen.set(b.id, b);
     if (books.length === 0 || seen.size === before) break;   // no new books: we have reached the end
   }
+  return [...seen.values()];
+}
 
-  const books = [...seen.values()]
+async function main() {
+  const userId = process.env.GOODREADS_USER_ID;
+  if (!userId) {
+    console.error("Set GOODREADS_USER_ID to the digits in your Goodreads profile address.");
+    process.exit(1);
+  }
+  const shelf = process.env.GOODREADS_SHELF || "read";
+  const currentShelf = process.env.GOODREADS_CURRENT_SHELF || "currently-reading";
+  const wantShelf = process.env.GOODREADS_WANT_SHELF || "to-read";
+  const key = process.env.GOODREADS_RSS_KEY || "";
+  const maxPages = parseInt(process.env.MAX_PAGES || "10", 10);
+
+  const read = await fetchShelf(userId, shelf, key, maxPages, "date_read");
+  if (!read) process.exit(1);
+  const books = read
     .sort((a, b) => (b.dateRead || "").localeCompare(a.dateRead || ""))
     .map(({ id, ...rest }) => rest);
 
@@ -102,9 +112,15 @@ async function main() {
     process.exit(1);
   }
 
+  // currently reading and want to read are optional: if either fails, its shelf in the room is just empty
+  const current = (await fetchShelf(userId, currentShelf, key, 1, "date_added")) || [];
+  const currentlyReading = current.map(({ id, dateRead, rating, ...rest }) => rest);
+  const wanted = (await fetchShelf(userId, wantShelf, key, maxPages, "date_added")) || [];
+  const wantToRead = wanted.map(({ id, dateRead, rating, ...rest }) => rest);
+
   const out = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "data", "books.json");
-  await writeFile(out, JSON.stringify({ source: "goodreads", updated: new Date().toISOString().slice(0, 10), books }, null, 2) + "\n");
-  console.log(`Wrote ${books.length} books to data/books.json`);
+  await writeFile(out, JSON.stringify({ source: "goodreads", updated: new Date().toISOString().slice(0, 10), currentlyReading, wantToRead, books }, null, 2) + "\n");
+  console.log(`Wrote ${books.length} read, ${currentlyReading.length} currently reading and ${wantToRead.length} want to read to data/books.json`);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {

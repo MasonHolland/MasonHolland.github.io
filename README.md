@@ -4,9 +4,9 @@ A landing page with two doors:
 
 - **Read the short version** opens `resume.html`, a plain page with your experience, projects, awards and recent reads.
 - **Walk into the room** opens `room.html`, a round hall with three arched doors. Each door has a sign and leads to a room with its own look:
-  - **9 o'clock, About me:** a bright, modern living room with a Perth skyline window, large photo frames, and smaller frames for photos and info cards.
+  - **10 o'clock, About me:** a bright, modern living room with a Perth skyline window, large photo frames, and smaller frames for photos and info cards.
   - **12 o'clock, Work:** a bright modern office with your awards, a resume monitor and a projects monitor.
-  - **3 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), a bookcase of the books you've read, and three game shelves: PlayStation, Nintendo Switch and Steam, each with its console in the middle.
+  - **2 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), bookcases for the books you've read (with a shelf for what you're reading now) and want to read, and three game shelves: PlayStation, Nintendo Switch and Steam, each with its console in the middle.
 
 ## Make it yours
 
@@ -102,9 +102,19 @@ It is a static site with no build step. Upload the folder to GitHub Pages, Netli
 
 ## Controls in the room
 
-- Desktop: W A S D or the arrow keys to walk, mouse to look, click or press E to inspect, Esc to close a card or release the mouse.
-- Touch: drag on the left to walk, drag on the right to look, tap things to inspect.
-- The exit door is behind you when you arrive. A "Read the simple version" link stays on screen throughout.
+- Desktop: W A S D or the arrow keys to walk, mouse to look, click or press E to inspect, Esc to close a card or open the options menu.
+- Touch: drag on the left to walk, drag on the right to look, tap things to inspect. The "Options and map" button at the top opens the menu.
+- The options menu has a floor-plan map (choose a room to jump to its doorway), "Read the simple version" and "Leave the room".
+- The exit door is behind you when you arrive.
+
+## Contact form (the mailbox)
+
+The mailbox in the hall opens a contact form. A static site can't send email by itself, so set `contact` in `data/profile.json` one of two ways:
+
+- **Form service (recommended):** create a free form at a service such as [Formspree](https://formspree.io), then put its address in `contact.endpoint`, e.g. `"https://formspree.io/f/abcdwxyz"`. Messages arrive in your inbox and visitors stay on the page.
+- **Email app:** leave `endpoint` empty and set `contact.email`. Sending opens the visitor's own email app with the message filled in. Without `contact.email`, the `mailto:` link in `links` is used.
+
+With the email-app option your address is in the site's public files. With a form service only the form's address is public.
 
 ## How the room is built
 
@@ -113,6 +123,8 @@ There are no 3D model files. Everything is built from simple shapes, lighting an
 - `assets/room.js`: entry point (input, picking, render loop).
 - `assets/rooms/core.js`: renderer, helpers, doorway and sign builder, shared props.
 - `assets/rooms/shared.js`: textures and picture frames used by several rooms.
-- `assets/rooms/hub.js`: the round hall.
+- `assets/rooms/hub.js`: the round hall, its dome and the mailbox.
+- `assets/rooms/map.js`: the floor-plan map in the options menu.
+- `assets/rooms/contact.js`: the contact form behind the mailbox.
 - `assets/rooms/about.js`, `work.js`, `hobbies.js`: one file per room. Colours, light levels, furniture and layout live there.
 - `assets/world/`: unused leftovers, safe to delete.

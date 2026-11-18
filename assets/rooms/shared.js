@@ -25,7 +25,7 @@ export function plankTex(base, variance, plankPx = 42) {
 }
 
 /* ================================================================== *
- * ABOUT ME (9 o'clock): a bright modern living room
+ * ABOUT ME (10 o'clock): a bright modern living room
  * ================================================================== */
 
 export function skyTexture() {
