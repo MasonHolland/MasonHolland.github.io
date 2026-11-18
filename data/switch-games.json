@@ -1,0 +1,13 @@
+{
+  "_how": "Your Switch games, added by hand (Nintendo has no API). Copy _example into games, one entry per game. Find hours on the Switch: open your user page from the Home screen, then Play Activity. Save each cover image in assets/covers/ under the name you put in cover; the daily sync makes the small 200x300 copy. The sync never edits this file. The room shows the 36 most recent on the Switch shelf, newest lastPlayed first; the 4 beside the console are the most-completed (set completion 0-100 if you like).",
+  "_example": {
+    "id": "zelda-totk",
+    "title": "The Legend of Zelda: Tears of the Kingdom",
+    "hours": 120,
+    "lastPlayed": "2026-09-14",
+    "cover": "assets/covers/switch-zelda-totk.jpg",
+    "completion": 75,
+    "note": "Optional: a line shown when you click the game"
+  },
+  "games": []
+}

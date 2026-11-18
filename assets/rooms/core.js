@@ -58,7 +58,16 @@ export async function loadJSON(url, fallback) {
 export const [profile, bookData, gameData] = await Promise.all([
   loadJSON("data/profile.json", { name: "Mason", accolades: [], projects: [], experience: [], about: { frames: [] } }),
   loadJSON("data/books.json", { books: [] }),
-  loadJSON("data/games.json", { games: [] }),
+  // Steam and PlayStation come from the sync; Switch games from the file you edit by hand
+  Promise.all([loadJSON("data/games.json", { games: [] }), loadJSON("data/switch-games.json", { games: [] })])
+    .then(([synced, sw]) => ({
+      ...synced,
+      games: [
+        ...(synced.games || []).filter((g) => g.platform !== "switch"),
+        ...(sw.games || []).filter((g) => g && g.title).map((g) => ({ ...g, platform: "switch" }))
+          .sort((a, b) => String(b.lastPlayed || "").localeCompare(String(a.lastPlayed || "")) || (b.hours || 0) - (a.hours || 0)),
+      ],
+    })),
 ]);
 
 // Fonts must be ready before text is painted onto canvas textures. Give up after two seconds.

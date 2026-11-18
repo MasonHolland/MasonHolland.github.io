@@ -55,8 +55,14 @@ export async function addThumbs(games, { force = false } = {}) {
 async function main() {
   const file = path.join(ROOT, "data", "games.json");
   const data = JSON.parse(await readFile(file, "utf8"));
-  const made = await addThumbs(data.games || [], { force: process.argv.includes("--force") });
+  const force = process.argv.includes("--force");
+  let made = await addThumbs(data.games || [], { force });
   await writeFile(file, JSON.stringify(data, null, 2) + "\n");
+  // Switch covers too; data/switch-games.json itself is left as you wrote it
+  try {
+    const sw = JSON.parse(await readFile(path.join(ROOT, "data", "switch-games.json"), "utf8"));
+    made += await addThumbs((sw.games || []).map((g) => ({ ...g })), { force });
+  } catch { /* no Switch file */ }
   console.log(`Made ${made} small covers in ${SMALL_DIR}`);
 }
 

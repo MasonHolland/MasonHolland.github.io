@@ -14,464 +14,466 @@
     "Biography & memoir",
     "Comics & graphic novels",
     "Self-help & family",
-    "Other fiction"
+    "Comedy",
+    "Other fiction",
+    "Other nonfiction"
   ],
   "books": {
     "5907": {
       "title": "The Hobbit, or There and Back Again",
       "author": "J.R.R. Tolkien",
       "shelf": "read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "11298": {
       "title": "A Wild Sheep Chase",
       "author": "Haruki Murakami",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Other fiction"
     },
     "17800": {
       "title": "Dance Dance Dance",
       "author": "Haruki Murakami",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Other fiction"
     },
     "24615": {
       "title": "Enchiridion",
       "author": "Epictetus",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Philosophy & religion"
     },
     "25101": {
       "title": "The Sandman, Vol. 4: Season of Mists",
       "author": "Neil Gaiman",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "25102": {
       "title": "The Sandman, Vol. 5: A Game of You",
       "author": "Neil Gaiman",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "25103": {
       "title": "The Sandman, Vol. 8: Worlds' End",
       "author": "Neil Gaiman",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "25104": {
       "title": "The Sandman, Vol. 10: The Wake",
       "author": "Neil Gaiman",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "25105": {
       "title": "The Sandman, Vol. 7: Brief Lives",
       "author": "Neil Gaiman",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "25106": {
       "title": "The Sandman, Vol. 6: Fables & Reflections",
       "author": "Neil Gaiman",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "34497": {
       "title": "The Color of Magic",
       "author": "Terry Pratchett",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "43545": {
       "title": "The Once and Future King (The Once and Future King, #1–5)",
       "author": "T.H. White",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "46347": {
       "title": "All the Shah\\'s Men: An American Coup and the Roots of Middle East Terror",
       "author": "Stephen Kinzer",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "61834": {
       "title": "A Night to Remember",
       "author": "Walter Lord",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "70561": {
       "title": "The Gulag Archipelago 1918–1956 (Abridged)",
       "author": "Aleksandr Solzhenitsyn",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "71252": {
       "title": "The Sandman, Vol. 9: The Kindly Ones",
       "author": "Neil Gaiman",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "71728": {
       "title": "Jonathan Livingston Seagull",
       "author": "Richard Bach",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Philosophy & religion"
     },
     "122665": {
       "title": "Ravens in Winter",
       "author": "Bernd Heinrich",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Science & nature"
     },
     "248866": {
       "title": "Berserk, Vol. 15",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248867": {
       "title": "Berserk, Vol. 14",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248868": {
       "title": "Berserk, Vol. 16",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248869": {
       "title": "Berserk, Vol. 13",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248871": {
       "title": "Berserk, Vol. 1",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248872": {
       "title": "Berserk, Vol. 10",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248873": {
       "title": "Berserk, Vol. 2",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248874": {
       "title": "Berserk, Vol. 3",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248876": {
       "title": "Berserk, Vol. 12",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248878": {
       "title": "Berserk, Vol. 8",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248879": {
       "title": "Berserk, Vol. 11",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248881": {
       "title": "Berserk, Vol. 5",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248885": {
       "title": "Berserk, Vol. 17",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248886": {
       "title": "Berserk, Vol. 18",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "248936": {
       "title": "Berserk, Vol. 26",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "394535": {
       "title": "Blood Meridian, or, the Evening Redness in the West",
       "author": "Cormac McCarthy",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "991907": {
       "title": "Fighting Techniques of the Ancient World (3000 B.C. to 500 A.D.): Equipment, Combat Skills, and Tactics",
       "author": "Simon Anglim",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "1501850": {
       "title": "Berserk, Vol. 19",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "1875541": {
       "title": "Berserk, Vol. 31",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "1898914": {
       "title": "Berserk, Vol. 20",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "2001695": {
       "title": "Berserk, Vol. 21",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "2571920": {
       "title": "Berserk, Vol. 22",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "2571937": {
       "title": "Berserk, Vol. 23",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "2708265": {
       "title": "The Age of Tamerlane (Men-at-Arms)",
       "author": "David Nicolle",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "2901744": {
       "title": "Berserk, Vol. 24",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "3586999": {
       "title": "Berserk, Vol. 25",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "5083852": {
       "title": "Berserk, Vol. 27",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "5083854": {
       "title": "Berserk, Vol. 28",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "6276142": {
       "title": "Berserk, Vol. 29",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "6337758": {
       "title": "Berserk, Vol. 30",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "7399514": {
       "title": "Berserk, Vol. 32",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "7608213": {
       "title": "Berserk, Vol. 33",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "8235404": {
       "title": "Your Baby Is Speaking to You: A Visual Guide to the Amazing Behaviors of Your Newborn and Growing Baby",
       "author": "Kevin Nugent",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "8728667": {
       "title": "Berserk, Vol. 34",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "11394624": {
       "title": "Spellmonger",
       "author": "Terry Mancour",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "11452849": {
       "title": "Berserk, Vol. 35",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "12111823": {
       "title": "The Winds of Winter",
       "author": "George R.R. Martin",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "13099738": {
       "title": "Steal Like an Artist: 10 Things Nobody Told You About Being Creative",
       "author": "Austin Kleon",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "15734715": {
       "title": "Back Story",
-      "author": "David   Mitchell",
+      "author": "David Mitchell",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comedy"
     },
     "15792342": {
       "title": "Irredeemable Digital Omnibus, Volume 1",
       "author": "Mark Waid",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "15894058": {
       "title": "Berserk, Vol. 36",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "17311325": {
       "title": "Irredeemable Digital Omnibus, Volume 2",
       "author": "Mark Waid",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "18208495": {
       "title": "Berserk, Vol. 37",
       "author": "Kentaro Miura",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "18631568": {
       "title": "The Search",
       "author": "Gene Luen Yang",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "18774964": {
       "title": "A Man Called Ove",
       "author": "Fredrik Backman",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Comedy"
     },
     "21535271": {
       "title": "The Slow Regard of Silent Things",
       "author": "Patrick Rothfuss",
       "shelf": "read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "22318585": {
       "title": "The Rift",
       "author": "Gene Luen Yang",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "23418614": {
       "title": "Baby Signing Essentials: Easy Sign Language for Every Age and Stage (200 Illustrated ASL Signs for Two-Way Communication)",
       "author": "Nancy Cadjan",
       "shelf": "currently reading",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "29093292": {
       "title": "The Daily Stoic: 366 Meditations on Wisdom, Perseverance, and the Art of Living",
       "author": "Ryan Holiday",
       "shelf": "currently reading",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "30149557": {
       "title": "Egil's Saga: An Icelandic Classic (Real Reads)",
       "author": "Brynhildar Thorainsdottur",
       "shelf": "read",
-      "genre": ""
+      "genre": "History"
     },
     "33538599": {
       "title": "James Acaster's Classic Scrapes",
       "author": "James Acaster",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comedy"
     },
     "33540347": {
       "title": "Monstress, Volume 2: The Blood",
       "author": "Marjorie M. Liu",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "34234639": {
       "title": "The Land: Founding",
       "author": "Aleron Kong",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "34454589": {
       "title": "The Handmaid\\'s Tale",
       "author": "Margaret Atwood",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Other fiction"
     },
     "34948120": {
       "title": "Instant Focus: How to Beat Procrastination, Skyrocket Your Productivity, and Double Your Output - 27 Small Tweaks to Do More In Less Time",
       "author": "Patrick King",
       "shelf": "read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "37491890": {
       "title": "Monstress, Volume 3: Haven",
       "author": "Marjorie M. Liu",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "37557163": {
       "title": "The Aenied",
       "author": "Virgil",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "40772002": {
       "title": "The Little Black Book of Workout Motivation",
       "author": "Michael  Matthews",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "40854186": {
       "title": "Invincible, Compendium Three",
@@ -483,325 +485,325 @@
       "title": "The Golden Rhinoceros: Histories of the African Middle Ages",
       "author": "François-Xavier Fauvelle",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "41970691": {
       "title": "The 3-Day Effect",
       "author": "NOT A BOOK",
       "shelf": "read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "42361141": {
       "title": "Rivals! Frenemies Who Changed the World",
       "author": "Scott McCormick",
       "shelf": "read",
-      "genre": ""
+      "genre": "History"
     },
     "43174603": {
       "title": "The Fires of Vengeance",
       "author": "Evan Winter",
       "shelf": "read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "43259817": {
       "title": "Folsom Untold: The Strange True Story of Johnny Cash's Greatest Album",
       "author": "Danny Robins",
       "shelf": "read",
-      "genre": ""
+      "genre": "History"
     },
     "43263540": {
       "title": "For the Love of Men: A New Vision for Mindful Masculinity",
       "author": "Liz Plank",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "45427527": {
       "title": "A Mark of Kings",
       "author": "Bryce O'Connor",
       "shelf": "read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "45899240": {
       "title": "Monstress, Volume 4: The Chosen",
       "author": "Marjorie M. Liu",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "48640658": {
       "title": "The Last God #1",
       "author": "Phillip Kennedy Johnson",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "49744485": {
       "title": "The Burnout Generation",
       "author": "Anne Helen Petersen",
       "shelf": "read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "50518244": {
       "title": "Terciel and Elinor",
       "author": "Garth Nix",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "50997832": {
       "title": "How to Connect",
       "author": "Thich Nhat Hanh",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "51212034": {
       "title": "A Grown-Up Guide to Dinosaurs",
       "author": "Ben Garrod",
       "shelf": "read",
-      "genre": ""
+      "genre": "History"
     },
     "51706734": {
       "title": "The Landmark Xenophon's Anabasis (Landmark Series)",
       "author": "Xenophon",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "52300107": {
       "title": "Caffeine: How Caffeine Created the Modern World",
       "author": "Michael Pollan",
       "shelf": "read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "52637764": {
       "title": "Monstress, Volume 5: Warchild",
       "author": "Marjorie M. Liu",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "53300479": {
       "title": "How to Defeat a Demon King in Ten Easy Steps",
       "author": "Andrew Rowe",
       "shelf": "read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "53352118": {
       "title": "Cut and Run",
       "author": "Ben Acker",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Mystery & thriller"
     },
     "53461448": {
       "title": "The Children of Ash and Elm: A History of the Vikings",
       "author": "Neil Price",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "54075385": {
       "title": "The Soul of a Woman",
       "author": "Isabel Allende",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Society & politics"
     },
     "55298289": {
       "title": "How to Focus",
       "author": "Thich Nhat Hanh",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "55883882": {
       "title": "Monstress, Volume 1: Awakening",
       "author": "Marjorie M. Liu",
       "shelf": "read",
-      "genre": ""
+      "genre": "Comics & graphic novels"
     },
     "57057198": {
       "title": "The Boy Who Would Be King: A Fable About Marcus Aurelius",
       "author": "Ryan Holiday",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Philosophy & religion"
     },
     "57124219": {
       "title": "Hellmouth",
       "author": "Giles Kristian",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "57405301": {
       "title": "Where They Burn Books, They Also Burn People (Hispanic American Heritage Stories)",
       "author": "Marcos Antonio Hernandez",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "57693432": {
       "title": "All the Horses of Iceland",
       "author": "Sarah Tolmie",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "58052469": {
       "title": "Simplify Testing with React Testing Library: Create maintainable tests using RTL that do not break with changes",
       "author": "Scottie Crump",
       "shelf": "read",
-      "genre": ""
+      "genre": "Science & nature"
     },
     "58103841": {
       "title": "The Goddess of Nothing At All",
       "author": "Cat Rector",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "59350636": {
       "title": "The Wolf Age: The Vikings, the Anglo-Saxons and the Battle for the North Sea Empire",
       "author": "Tore Skeie",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "60607155": {
       "title": "The Wife of Bath: A Biography",
       "author": "Marion Turner",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "60630164": {
       "title": "Six Adventure Tales from Medieval Iceland: A  Reader for First-Time Visitors",
       "author": "T.M. Andersson",
       "shelf": "read",
-      "genre": ""
+      "genre": "History"
     },
     "60693383": {
       "title": "Leveling Up: 12 Questions to Elevate Your Personal and Professional Development",
       "author": "Ryan Leak",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "60870064": {
       "title": "Starting from Scratch: The Life-Changing Lessons of Aeneas",
       "author": "Andrea Marcolongo",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "61089439": {
       "title": "The Wandering Mind: What Medieval Monks Tell Us About Distraction",
       "author": "Jamie Kreiner",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "61111302": {
       "title": "Essex Dogs",
       "author": "Dan Jones",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "61358662": {
       "title": "Your Brain on Art: How the Arts Transform Us",
       "author": "Susan Magsamen",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Science & nature"
     },
     "61361681": {
       "title": "Clytemnestra",
       "author": "Costanza Casati",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "61714633": {
       "title": "The Wager: A Tale of Shipwreck, Mutiny and Murder",
       "author": "David Grann",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "62047984": {
       "title": "Yellowface",
       "author": "R.F. Kuang",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "62364592": {
       "title": "The Parenting Map: Step-By-Step Solutions to Consciously Create the Ultimate Parent-Child Relationship",
       "author": "Shefali Tsabary",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "62918237": {
       "title": "Messalina: Empress, Adulteress, Libertine: The Story of the Most Notorious Woman of the Roman World",
       "author": "Honor Cargill-Martin",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "63068377": {
       "title": "The Frugal Wizard\\'s Handbook for Surviving Medieval England",
       "author": "Brandon Sanderson",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "63912246": {
       "title": "Heracles' Bow",
       "author": "Madeline Miller",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "75305069": {
       "title": "A Woman of the Sword",
       "author": "Anna Smith Spark",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "90590091": {
       "title": "The Art of Prophecy",
       "author": "Wesley Chu",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "98652084": {
       "title": "A Rome of One\\'s Own: The Forgotten Women of the Roman Empire",
       "author": "Emma Southon",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "History"
     },
     "142349855": {
       "title": "This Is Parenting: Demystifying Parenthood",
       "author": "Leslie Hannans",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "199798217": {
       "title": "The Lion Women of Tehran",
       "author": "Marjan Kamali",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "201855946": {
       "title": "Shōgun (The Asian Saga)",
       "author": "James Clavell",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Historical fiction"
     },
     "208703053": {
       "title": "Artificial Intelligence in Byte-sized Chunks",
       "author": "Peter J. Bentley",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Science & nature"
     },
     "223889073": {
       "title": "Notes to John",
       "author": "Joan Didion",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Other nonfiction"
     },
     "229098239": {
       "title": "Father Yourself First: Everything You Need to Become the Father Your Family Deserves",
       "author": "Glen Henry",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Self-help & family"
     },
     "243051476": {
       "title": "The Thrice-Bound Fool",
       "author": "Christopher Buehlman",
       "shelf": "currently reading",
-      "genre": ""
+      "genre": "Fantasy"
     },
     "247756858": {
       "title": "Scion",
       "author": "James Islington",
       "shelf": "want to read",
-      "genre": ""
+      "genre": "Science fiction"
     }
   }
 }

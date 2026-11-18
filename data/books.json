@@ -17,7 +17,8 @@
       "series": "Blacktongue",
       "seriesNo": 2,
       "author": "Christopher Buehlman",
-      "link": "https://www.goodreads.com/book/show/243051476"
+      "link": "https://www.goodreads.com/book/show/243051476",
+      "genre": "Fantasy"
     },
     {
       "id": "38255329",
@@ -30,13 +31,15 @@
       "id": "23418614",
       "title": "Baby Signing Essentials: Easy Sign Language for Every Age and Stage (200 Illustrated ASL Signs for Two-Way Communication)",
       "author": "Nancy Cadjan",
-      "link": "https://www.goodreads.com/book/show/23418614"
+      "link": "https://www.goodreads.com/book/show/23418614",
+      "genre": "Self-help & family"
     },
     {
       "id": "29093292",
       "title": "The Daily Stoic: 366 Meditations on Wisdom, Perseverance, and the Art of Living",
       "author": "Ryan Holiday",
-      "link": "https://www.goodreads.com/book/show/29093292"
+      "link": "https://www.goodreads.com/book/show/29093292",
+      "genre": "Self-help & family"
     },
     {
       "id": "61992094",
@@ -72,7 +75,8 @@
       "id": "208703053",
       "title": "Artificial Intelligence in Byte-sized Chunks",
       "author": "Peter J. Bentley",
-      "link": "https://www.goodreads.com/book/show/208703053"
+      "link": "https://www.goodreads.com/book/show/208703053",
+      "genre": "Science & nature"
     },
     {
       "id": "357641",
@@ -85,7 +89,8 @@
       "id": "223889073",
       "title": "Notes to John",
       "author": "Joan Didion",
-      "link": "https://www.goodreads.com/book/show/223889073"
+      "link": "https://www.goodreads.com/book/show/223889073",
+      "genre": "Other nonfiction"
     },
     {
       "id": "486298",
@@ -121,7 +126,8 @@
       "series": "Scion",
       "seriesNo": 1,
       "author": "James Islington",
-      "link": "https://www.goodreads.com/book/show/247756858"
+      "link": "https://www.goodreads.com/book/show/247756858",
+      "genre": "Science fiction"
     },
     {
       "id": "450534",
@@ -134,7 +140,8 @@
       "id": "62364592",
       "title": "The Parenting Map: Step-By-Step Solutions to Consciously Create the Ultimate Parent-Child Relationship",
       "author": "Shefali Tsabary",
-      "link": "https://www.goodreads.com/book/show/62364592"
+      "link": "https://www.goodreads.com/book/show/62364592",
+      "genre": "Self-help & family"
     },
     {
       "id": "39058",
@@ -269,7 +276,8 @@
       "id": "46347",
       "title": "All the Shah\\'s Men: An American Coup and the Roots of Middle East Terror",
       "author": "Stephen Kinzer",
-      "link": "https://www.goodreads.com/book/show/46347"
+      "link": "https://www.goodreads.com/book/show/46347",
+      "genre": "History"
     },
     {
       "id": "40604846",
@@ -303,7 +311,8 @@
       "id": "229098239",
       "title": "Father Yourself First: Everything You Need to Become the Father Your Family Deserves",
       "author": "Glen Henry",
-      "link": "https://www.goodreads.com/book/show/229098239"
+      "link": "https://www.goodreads.com/book/show/229098239",
+      "genre": "Self-help & family"
     },
     {
       "id": "30289",
@@ -316,7 +325,8 @@
       "id": "122665",
       "title": "Ravens in Winter",
       "author": "Bernd Heinrich",
-      "link": "https://www.goodreads.com/book/show/122665"
+      "link": "https://www.goodreads.com/book/show/122665",
+      "genre": "Science & nature"
     },
     {
       "id": "4934",
@@ -345,7 +355,8 @@
       "id": "199798217",
       "title": "The Lion Women of Tehran",
       "author": "Marjan Kamali",
-      "link": "https://www.goodreads.com/book/show/199798217"
+      "link": "https://www.goodreads.com/book/show/199798217",
+      "genre": "Historical fiction"
     },
     {
       "id": "57109107",
@@ -365,7 +376,8 @@
       "id": "18774964",
       "title": "A Man Called Ove",
       "author": "Fredrik Backman",
-      "link": "https://www.goodreads.com/book/show/18774964"
+      "link": "https://www.goodreads.com/book/show/18774964",
+      "genre": "Comedy"
     },
     {
       "id": "41824495",
@@ -424,7 +436,8 @@
       "id": "34454589",
       "title": "The Handmaid\\'s Tale",
       "author": "Margaret Atwood",
-      "link": "https://www.goodreads.com/book/show/34454589"
+      "link": "https://www.goodreads.com/book/show/34454589",
+      "genre": "Other fiction"
     },
     {
       "id": "34234639",
@@ -432,7 +445,8 @@
       "series": "Chaos Seeds",
       "seriesNo": 1,
       "author": "Aleron Kong",
-      "link": "https://www.goodreads.com/book/show/34234639"
+      "link": "https://www.goodreads.com/book/show/34234639",
+      "genre": "Fantasy"
     },
     {
       "id": "45449501",
@@ -461,7 +475,8 @@
       "id": "61834",
       "title": "A Night to Remember",
       "author": "Walter Lord",
-      "link": "https://www.goodreads.com/book/show/61834"
+      "link": "https://www.goodreads.com/book/show/61834",
+      "genre": "History"
     },
     {
       "id": "55096",
@@ -502,19 +517,22 @@
       "id": "75305069",
       "title": "A Woman of the Sword",
       "author": "Anna Smith Spark",
-      "link": "https://www.goodreads.com/book/show/75305069"
+      "link": "https://www.goodreads.com/book/show/75305069",
+      "genre": "Fantasy"
     },
     {
       "id": "63068377",
       "title": "The Frugal Wizard\\'s Handbook for Surviving Medieval England",
       "author": "Brandon Sanderson",
-      "link": "https://www.goodreads.com/book/show/63068377"
+      "link": "https://www.goodreads.com/book/show/63068377",
+      "genre": "Fantasy"
     },
     {
       "id": "61361681",
       "title": "Clytemnestra",
       "author": "Costanza Casati",
-      "link": "https://www.goodreads.com/book/show/61361681"
+      "link": "https://www.goodreads.com/book/show/61361681",
+      "genre": "Historical fiction"
     },
     {
       "id": "34617904",
@@ -527,7 +545,8 @@
       "id": "98652084",
       "title": "A Rome of One\\'s Own: The Forgotten Women of the Roman Empire",
       "author": "Emma Southon",
-      "link": "https://www.goodreads.com/book/show/98652084"
+      "link": "https://www.goodreads.com/book/show/98652084",
+      "genre": "History"
     },
     {
       "id": "166997",
@@ -547,13 +566,15 @@
       "id": "62918237",
       "title": "Messalina: Empress, Adulteress, Libertine: The Story of the Most Notorious Woman of the Roman World",
       "author": "Honor Cargill-Martin",
-      "link": "https://www.goodreads.com/book/show/62918237"
+      "link": "https://www.goodreads.com/book/show/62918237",
+      "genre": "History"
     },
     {
       "id": "142349855",
       "title": "This Is Parenting: Demystifying Parenthood",
       "author": "Leslie Hannans",
-      "link": "https://www.goodreads.com/book/show/142349855"
+      "link": "https://www.goodreads.com/book/show/142349855",
+      "genre": "Self-help & family"
     },
     {
       "id": "60707",
@@ -678,7 +699,8 @@
       "id": "394535",
       "title": "Blood Meridian, or, the Evening Redness in the West",
       "author": "Cormac McCarthy",
-      "link": "https://www.goodreads.com/book/show/394535"
+      "link": "https://www.goodreads.com/book/show/394535",
+      "genre": "Historical fiction"
     },
     {
       "id": "27418",
@@ -815,13 +837,15 @@
       "id": "8235404",
       "title": "Your Baby Is Speaking to You: A Visual Guide to the Amazing Behaviors of Your Newborn and Growing Baby",
       "author": "Kevin Nugent",
-      "link": "https://www.goodreads.com/book/show/8235404"
+      "link": "https://www.goodreads.com/book/show/8235404",
+      "genre": "Self-help & family"
     },
     {
       "id": "24615",
       "title": "Enchiridion",
       "author": "Epictetus",
-      "link": "https://www.goodreads.com/book/show/24615"
+      "link": "https://www.goodreads.com/book/show/24615",
+      "genre": "Philosophy & religion"
     },
     {
       "id": "11297",
@@ -836,13 +860,15 @@
       "series": "The Rat",
       "seriesNo": 3,
       "author": "Haruki Murakami",
-      "link": "https://www.goodreads.com/book/show/11298"
+      "link": "https://www.goodreads.com/book/show/11298",
+      "genre": "Other fiction"
     },
     {
       "id": "17800",
       "title": "Dance Dance Dance",
       "author": "Haruki Murakami",
-      "link": "https://www.goodreads.com/book/show/17800"
+      "link": "https://www.goodreads.com/book/show/17800",
+      "genre": "Other fiction"
     },
     {
       "id": "60243188",
@@ -904,13 +930,15 @@
       "id": "71728",
       "title": "Jonathan Livingston Seagull",
       "author": "Richard Bach",
-      "link": "https://www.goodreads.com/book/show/71728"
+      "link": "https://www.goodreads.com/book/show/71728",
+      "genre": "Philosophy & religion"
     },
     {
       "id": "43263540",
       "title": "For the Love of Men: A New Vision for Mindful Masculinity",
       "author": "Liz Plank",
-      "link": "https://www.goodreads.com/book/show/43263540"
+      "link": "https://www.goodreads.com/book/show/43263540",
+      "genre": "Self-help & family"
     },
     {
       "id": "350",
@@ -955,7 +983,8 @@
       "id": "201855946",
       "title": "Shōgun (The Asian Saga)",
       "author": "James Clavell",
-      "link": "https://www.goodreads.com/book/show/201855946"
+      "link": "https://www.goodreads.com/book/show/201855946",
+      "genre": "Historical fiction"
     },
     {
       "id": "12111823",
@@ -963,7 +992,8 @@
       "series": "A Song of Ice and Fire",
       "seriesNo": 6,
       "author": "George R.R. Martin",
-      "link": "https://www.goodreads.com/book/show/12111823"
+      "link": "https://www.goodreads.com/book/show/12111823",
+      "genre": "Fantasy"
     },
     {
       "id": "60194162",
@@ -976,13 +1006,15 @@
       "id": "61714633",
       "title": "The Wager: A Tale of Shipwreck, Mutiny and Murder",
       "author": "David Grann",
-      "link": "https://www.goodreads.com/book/show/61714633"
+      "link": "https://www.goodreads.com/book/show/61714633",
+      "genre": "History"
     },
     {
       "id": "62047984",
       "title": "Yellowface",
       "author": "R.F. Kuang",
-      "link": "https://www.goodreads.com/book/show/62047984"
+      "link": "https://www.goodreads.com/book/show/62047984",
+      "genre": "Historical fiction"
     },
     {
       "id": "60652997",
@@ -1013,7 +1045,8 @@
       "id": "70561",
       "title": "The Gulag Archipelago 1918–1956 (Abridged)",
       "author": "Aleksandr Solzhenitsyn",
-      "link": "https://www.goodreads.com/book/show/70561"
+      "link": "https://www.goodreads.com/book/show/70561",
+      "genre": "History"
     },
     {
       "id": "18505792",
@@ -1040,13 +1073,15 @@
       "id": "57693432",
       "title": "All the Horses of Iceland",
       "author": "Sarah Tolmie",
-      "link": "https://www.goodreads.com/book/show/57693432"
+      "link": "https://www.goodreads.com/book/show/57693432",
+      "genre": "Historical fiction"
     },
     {
       "id": "54075385",
       "title": "The Soul of a Woman",
       "author": "Isabel Allende",
-      "link": "https://www.goodreads.com/book/show/54075385"
+      "link": "https://www.goodreads.com/book/show/54075385",
+      "genre": "Society & politics"
     },
     {
       "id": "34956885",
@@ -1059,13 +1094,15 @@
       "id": "13099738",
       "title": "Steal Like an Artist: 10 Things Nobody Told You About Being Creative",
       "author": "Austin Kleon",
-      "link": "https://www.goodreads.com/book/show/13099738"
+      "link": "https://www.goodreads.com/book/show/13099738",
+      "genre": "Self-help & family"
     },
     {
       "id": "60693383",
       "title": "Leveling Up: 12 Questions to Elevate Your Personal and Professional Development",
       "author": "Ryan Leak",
-      "link": "https://www.goodreads.com/book/show/60693383"
+      "link": "https://www.goodreads.com/book/show/60693383",
+      "genre": "Self-help & family"
     },
     {
       "id": "77566",
@@ -1082,7 +1119,8 @@
       "series": "War Arts",
       "seriesNo": 1,
       "author": "Wesley Chu",
-      "link": "https://www.goodreads.com/book/show/90590091"
+      "link": "https://www.goodreads.com/book/show/90590091",
+      "genre": "Fantasy"
     },
     {
       "id": "58838847",
@@ -1109,7 +1147,8 @@
       "id": "61358662",
       "title": "Your Brain on Art: How the Arts Transform Us",
       "author": "Susan Magsamen",
-      "link": "https://www.goodreads.com/book/show/61358662"
+      "link": "https://www.goodreads.com/book/show/61358662",
+      "genre": "Science & nature"
     },
     {
       "id": "27833494",
@@ -1177,19 +1216,22 @@
       "id": "57405301",
       "title": "Where They Burn Books, They Also Burn People (Hispanic American Heritage Stories)",
       "author": "Marcos Antonio Hernandez",
-      "link": "https://www.goodreads.com/book/show/57405301"
+      "link": "https://www.goodreads.com/book/show/57405301",
+      "genre": "History"
     },
     {
       "id": "57057198",
       "title": "The Boy Who Would Be King: A Fable About Marcus Aurelius",
       "author": "Ryan Holiday",
-      "link": "https://www.goodreads.com/book/show/57057198"
+      "link": "https://www.goodreads.com/book/show/57057198",
+      "genre": "Philosophy & religion"
     },
     {
       "id": "60607155",
       "title": "The Wife of Bath: A Biography",
       "author": "Marion Turner",
-      "link": "https://www.goodreads.com/book/show/60607155"
+      "link": "https://www.goodreads.com/book/show/60607155",
+      "genre": "History"
     },
     {
       "id": "10302",
@@ -1204,7 +1246,8 @@
       "series": "Discworld, #1; Rincewind",
       "seriesNo": 1,
       "author": "Terry Pratchett",
-      "link": "https://www.goodreads.com/book/show/34497"
+      "link": "https://www.goodreads.com/book/show/34497",
+      "genre": "Fantasy"
     },
     {
       "id": "53487148",
@@ -1217,7 +1260,8 @@
       "id": "63912246",
       "title": "Heracles' Bow",
       "author": "Madeline Miller",
-      "link": "https://www.goodreads.com/book/show/63912246"
+      "link": "https://www.goodreads.com/book/show/63912246",
+      "genre": "Historical fiction"
     },
     {
       "id": "25669",
@@ -1230,13 +1274,15 @@
       "id": "37557163",
       "title": "The Aenied",
       "author": "Virgil",
-      "link": "https://www.goodreads.com/book/show/37557163"
+      "link": "https://www.goodreads.com/book/show/37557163",
+      "genre": "History"
     },
     {
       "id": "51706734",
       "title": "The Landmark Xenophon's Anabasis (Landmark Series)",
       "author": "Xenophon",
-      "link": "https://www.goodreads.com/book/show/51706734"
+      "link": "https://www.goodreads.com/book/show/51706734",
+      "genre": "History"
     },
     {
       "id": "12172",
@@ -1251,7 +1297,8 @@
       "series": "Mindfulness Essentials",
       "seriesNo": 9,
       "author": "Thich Nhat Hanh",
-      "link": "https://www.goodreads.com/book/show/55298289"
+      "link": "https://www.goodreads.com/book/show/55298289",
+      "genre": "Self-help & family"
     },
     {
       "id": "50997832",
@@ -1259,7 +1306,8 @@
       "series": "Mindfulness Essentials",
       "seriesNo": 8,
       "author": "Thich Nhat Hanh",
-      "link": "https://www.goodreads.com/book/show/50997832"
+      "link": "https://www.goodreads.com/book/show/50997832",
+      "genre": "Self-help & family"
     },
     {
       "id": "33776764",
@@ -1328,7 +1376,8 @@
       "id": "61089439",
       "title": "The Wandering Mind: What Medieval Monks Tell Us About Distraction",
       "author": "Jamie Kreiner",
-      "link": "https://www.goodreads.com/book/show/61089439"
+      "link": "https://www.goodreads.com/book/show/61089439",
+      "genre": "Self-help & family"
     },
     {
       "id": "56769533",
@@ -1364,7 +1413,8 @@
       "series": "Essex Dogs",
       "seriesNo": 1,
       "author": "Dan Jones",
-      "link": "https://www.goodreads.com/book/show/61111302"
+      "link": "https://www.goodreads.com/book/show/61111302",
+      "genre": "Historical fiction"
     },
     {
       "id": "57347786",
@@ -1384,13 +1434,15 @@
       "id": "59350636",
       "title": "The Wolf Age: The Vikings, the Anglo-Saxons and the Battle for the North Sea Empire",
       "author": "Tore Skeie",
-      "link": "https://www.goodreads.com/book/show/59350636"
+      "link": "https://www.goodreads.com/book/show/59350636",
+      "genre": "History"
     },
     {
       "id": "53461448",
       "title": "The Children of Ash and Elm: A History of the Vikings",
       "author": "Neil Price",
-      "link": "https://www.goodreads.com/book/show/53461448"
+      "link": "https://www.goodreads.com/book/show/53461448",
+      "genre": "History"
     },
     {
       "id": "400906",
@@ -1416,13 +1468,15 @@
       "series": "Abhorsen",
       "seriesNo": 6,
       "author": "Garth Nix",
-      "link": "https://www.goodreads.com/book/show/50518244"
+      "link": "https://www.goodreads.com/book/show/50518244",
+      "genre": "Fantasy"
     },
     {
       "id": "58103841",
       "title": "The Goddess of Nothing At All",
       "author": "Cat Rector",
-      "link": "https://www.goodreads.com/book/show/58103841"
+      "link": "https://www.goodreads.com/book/show/58103841",
+      "genre": "Historical fiction"
     },
     {
       "id": "41555932",
@@ -1464,7 +1518,8 @@
       "id": "57124219",
       "title": "Hellmouth",
       "author": "Giles Kristian",
-      "link": "https://www.goodreads.com/book/show/57124219"
+      "link": "https://www.goodreads.com/book/show/57124219",
+      "genre": "Historical fiction"
     },
     {
       "id": "57032570",
@@ -1500,13 +1555,15 @@
       "series": "The Spellmonger",
       "seriesNo": 1,
       "author": "Terry Mancour",
-      "link": "https://www.goodreads.com/book/show/11394624"
+      "link": "https://www.goodreads.com/book/show/11394624",
+      "genre": "Fantasy"
     },
     {
       "id": "60870064",
       "title": "Starting from Scratch: The Life-Changing Lessons of Aeneas",
       "author": "Andrea Marcolongo",
-      "link": "https://www.goodreads.com/book/show/60870064"
+      "link": "https://www.goodreads.com/book/show/60870064",
+      "genre": "Self-help & family"
     },
     {
       "id": "34921573",
@@ -1595,7 +1652,8 @@
       "id": "48640658",
       "title": "The Last God #1",
       "author": "Phillip Kennedy Johnson",
-      "link": "https://www.goodreads.com/book/show/48640658"
+      "link": "https://www.goodreads.com/book/show/48640658",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "57640243",
@@ -1610,7 +1668,8 @@
       "id": "41543186",
       "title": "The Golden Rhinoceros: Histories of the African Middle Ages",
       "author": "François-Xavier Fauvelle",
-      "link": "https://www.goodreads.com/book/show/41543186"
+      "link": "https://www.goodreads.com/book/show/41543186",
+      "genre": "History"
     },
     {
       "id": "33571713",
@@ -1632,7 +1691,8 @@
       "id": "53352118",
       "title": "Cut and Run",
       "author": "Ben Acker",
-      "link": "https://www.goodreads.com/book/show/53352118"
+      "link": "https://www.goodreads.com/book/show/53352118",
+      "genre": "Mystery & thriller"
     },
     {
       "id": "2465562",
@@ -1714,7 +1774,8 @@
       "id": "40772002",
       "title": "The Little Black Book of Workout Motivation",
       "author": "Michael  Matthews",
-      "link": "https://www.goodreads.com/book/show/40772002"
+      "link": "https://www.goodreads.com/book/show/40772002",
+      "genre": "Self-help & family"
     },
     {
       "id": "23692271",
@@ -1764,13 +1825,15 @@
       "id": "2708265",
       "title": "The Age of Tamerlane (Men-at-Arms)",
       "author": "David Nicolle",
-      "link": "https://www.goodreads.com/book/show/2708265"
+      "link": "https://www.goodreads.com/book/show/2708265",
+      "genre": "History"
     },
     {
       "id": "991907",
       "title": "Fighting Techniques of the Ancient World (3000 B.C. to 500 A.D.): Equipment, Combat Skills, and Tactics",
       "author": "Simon Anglim",
-      "link": "https://www.goodreads.com/book/show/991907"
+      "link": "https://www.goodreads.com/book/show/991907",
+      "genre": "History"
     },
     {
       "id": "34757960",
@@ -1861,7 +1924,8 @@
       "id": "43545",
       "title": "The Once and Future King (The Once and Future King, #1–5)",
       "author": "T.H. White",
-      "link": "https://www.goodreads.com/book/show/43545"
+      "link": "https://www.goodreads.com/book/show/43545",
+      "genre": "Historical fiction"
     },
     {
       "id": "40604556",
@@ -2456,7 +2520,8 @@
       "author": "T.M. Andersson",
       "rating": 3,
       "dateRead": "2024-12-01",
-      "link": "https://www.goodreads.com/book/show/60630164"
+      "link": "https://www.goodreads.com/book/show/60630164",
+      "genre": "History"
     },
     {
       "id": "41180663",
@@ -2821,7 +2886,8 @@
       "author": "Scottie Crump",
       "rating": 3,
       "dateRead": "2023-07-18",
-      "link": "https://www.goodreads.com/book/show/58052469"
+      "link": "https://www.goodreads.com/book/show/58052469",
+      "genre": "Science & nature"
     },
     {
       "id": "60766189",
@@ -3421,7 +3487,8 @@
       "seriesNo": 3,
       "rating": 5,
       "dateRead": "2021-10-16",
-      "link": "https://www.goodreads.com/book/show/22318585"
+      "link": "https://www.goodreads.com/book/show/22318585",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "37969723",
@@ -3482,7 +3549,8 @@
       "author": "Brynhildar Thorainsdottur",
       "rating": 0,
       "dateRead": "2021-08-14",
-      "link": "https://www.goodreads.com/book/show/30149557"
+      "link": "https://www.goodreads.com/book/show/30149557",
+      "genre": "History"
     },
     {
       "id": "13707734",
@@ -3559,7 +3627,8 @@
       "author": "Mark Waid",
       "rating": 0,
       "dateRead": "2021-05-28",
-      "link": "https://www.goodreads.com/book/show/17311325"
+      "link": "https://www.goodreads.com/book/show/17311325",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "15792342",
@@ -3567,7 +3636,8 @@
       "author": "Mark Waid",
       "rating": 0,
       "dateRead": "2021-05-28",
-      "link": "https://www.goodreads.com/book/show/15792342"
+      "link": "https://www.goodreads.com/book/show/15792342",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "40854186",
@@ -3602,7 +3672,8 @@
       "author": "Michael Pollan",
       "rating": 0,
       "dateRead": "2021-05-07",
-      "link": "https://www.goodreads.com/book/show/52300107"
+      "link": "https://www.goodreads.com/book/show/52300107",
+      "genre": "Self-help & family"
     },
     {
       "id": "27833803",
@@ -3664,7 +3735,8 @@
       "author": "NOT A BOOK",
       "rating": 3,
       "dateRead": "2021-04-01",
-      "link": "https://www.goodreads.com/book/show/41970691"
+      "link": "https://www.goodreads.com/book/show/41970691",
+      "genre": "Self-help & family"
     },
     {
       "id": "35052265",
@@ -3703,7 +3775,8 @@
       "seriesNo": 2,
       "rating": 0,
       "dateRead": "2021-03-05",
-      "link": "https://www.goodreads.com/book/show/18631568"
+      "link": "https://www.goodreads.com/book/show/18631568",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "236765",
@@ -3786,7 +3859,8 @@
       "author": "Marjorie M. Liu",
       "rating": 0,
       "dateRead": "2021-01-07",
-      "link": "https://www.goodreads.com/book/show/52637764"
+      "link": "https://www.goodreads.com/book/show/52637764",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "45899240",
@@ -3794,7 +3868,8 @@
       "author": "Marjorie M. Liu",
       "rating": 0,
       "dateRead": "2021-01-07",
-      "link": "https://www.goodreads.com/book/show/45899240"
+      "link": "https://www.goodreads.com/book/show/45899240",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "37168303",
@@ -3813,7 +3888,8 @@
       "seriesNo": 2,
       "rating": 4,
       "dateRead": "2020-12-15",
-      "link": "https://www.goodreads.com/book/show/43174603"
+      "link": "https://www.goodreads.com/book/show/43174603",
+      "genre": "Fantasy"
     },
     {
       "id": "41952489",
@@ -3855,7 +3931,8 @@
       "rating": 0,
       "dateRead": "",
       "seen": "2020-09-04",
-      "link": "https://www.goodreads.com/book/show/53300479"
+      "link": "https://www.goodreads.com/book/show/53300479",
+      "genre": "Fantasy"
     },
     {
       "id": "31817749",
@@ -3909,7 +3986,8 @@
       "seriesNo": 1,
       "rating": 4,
       "dateRead": "2020-06-13",
-      "link": "https://www.goodreads.com/book/show/45427527"
+      "link": "https://www.goodreads.com/book/show/45427527",
+      "genre": "Fantasy"
     },
     {
       "id": "43848929",
@@ -3939,7 +4017,8 @@
       "seriesNo": 1,
       "rating": 5,
       "dateRead": "2020-02-21",
-      "link": "https://www.goodreads.com/book/show/42361141"
+      "link": "https://www.goodreads.com/book/show/42361141",
+      "genre": "History"
     },
     {
       "id": "43890590",
@@ -3956,7 +4035,8 @@
       "author": "Anne Helen Petersen",
       "rating": 3,
       "dateRead": "2020-01-27",
-      "link": "https://www.goodreads.com/book/show/49744485"
+      "link": "https://www.goodreads.com/book/show/49744485",
+      "genre": "Self-help & family"
     },
     {
       "id": "51212034",
@@ -3964,7 +4044,8 @@
       "author": "Ben Garrod",
       "rating": 4,
       "dateRead": "2020-01-23",
-      "link": "https://www.goodreads.com/book/show/51212034"
+      "link": "https://www.goodreads.com/book/show/51212034",
+      "genre": "History"
     },
     {
       "id": "43259817",
@@ -3972,7 +4053,8 @@
       "author": "Danny Robins",
       "rating": 0,
       "dateRead": "2020-01-20",
-      "link": "https://www.goodreads.com/book/show/43259817"
+      "link": "https://www.goodreads.com/book/show/43259817",
+      "genre": "History"
     },
     {
       "id": "36612245",
@@ -3989,7 +4071,8 @@
       "author": "David   Mitchell",
       "rating": 0,
       "dateRead": "2019-12-30",
-      "link": "https://www.goodreads.com/book/show/15734715"
+      "link": "https://www.goodreads.com/book/show/15734715",
+      "genre": "Comedy"
     },
     {
       "id": "29774026",
@@ -4201,7 +4284,8 @@
       "rating": 0,
       "dateRead": "",
       "seen": "2019-02-25",
-      "link": "https://www.goodreads.com/book/show/55883882"
+      "link": "https://www.goodreads.com/book/show/55883882",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "15881",
@@ -4252,7 +4336,8 @@
       "rating": 0,
       "dateRead": "",
       "seen": "2019-02-25",
-      "link": "https://www.goodreads.com/book/show/37491890"
+      "link": "https://www.goodreads.com/book/show/37491890",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "33540347",
@@ -4261,7 +4346,8 @@
       "rating": 0,
       "dateRead": "",
       "seen": "2019-02-25",
-      "link": "https://www.goodreads.com/book/show/33540347"
+      "link": "https://www.goodreads.com/book/show/33540347",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "2744",
@@ -4366,7 +4452,8 @@
       "rating": 0,
       "dateRead": "",
       "seen": "2018-10-07",
-      "link": "https://www.goodreads.com/book/show/34948120"
+      "link": "https://www.goodreads.com/book/show/34948120",
+      "genre": "Self-help & family"
     },
     {
       "id": "18693743",
@@ -4419,7 +4506,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-08-13",
-      "link": "https://www.goodreads.com/book/show/33538599"
+      "link": "https://www.goodreads.com/book/show/33538599",
+      "genre": "Comedy"
     },
     {
       "id": "18052169",
@@ -4570,7 +4658,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/25101"
+      "link": "https://www.goodreads.com/book/show/25101",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "92377",
@@ -4609,7 +4698,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/25106"
+      "link": "https://www.goodreads.com/book/show/25106",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "25105",
@@ -4618,7 +4708,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/25105"
+      "link": "https://www.goodreads.com/book/show/25105",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "25102",
@@ -4627,7 +4718,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/25102"
+      "link": "https://www.goodreads.com/book/show/25102",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "25104",
@@ -4636,7 +4728,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/25104"
+      "link": "https://www.goodreads.com/book/show/25104",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "71252",
@@ -4645,7 +4738,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/71252"
+      "link": "https://www.goodreads.com/book/show/71252",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "25100",
@@ -4664,7 +4758,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/25103"
+      "link": "https://www.goodreads.com/book/show/25103",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "23754",
@@ -4683,7 +4778,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/18208495"
+      "link": "https://www.goodreads.com/book/show/18208495",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "15894058",
@@ -4692,7 +4788,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/15894058"
+      "link": "https://www.goodreads.com/book/show/15894058",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "11452849",
@@ -4701,7 +4798,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/11452849"
+      "link": "https://www.goodreads.com/book/show/11452849",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "8728667",
@@ -4710,7 +4808,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/8728667"
+      "link": "https://www.goodreads.com/book/show/8728667",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "7608213",
@@ -4719,7 +4818,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/7608213"
+      "link": "https://www.goodreads.com/book/show/7608213",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "7399514",
@@ -4728,7 +4828,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/7399514"
+      "link": "https://www.goodreads.com/book/show/7399514",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "1875541",
@@ -4737,7 +4838,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/1875541"
+      "link": "https://www.goodreads.com/book/show/1875541",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "6337758",
@@ -4746,7 +4848,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/6337758"
+      "link": "https://www.goodreads.com/book/show/6337758",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "6276142",
@@ -4755,7 +4858,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/6276142"
+      "link": "https://www.goodreads.com/book/show/6276142",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "5083854",
@@ -4764,7 +4868,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/5083854"
+      "link": "https://www.goodreads.com/book/show/5083854",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "5083852",
@@ -4773,7 +4878,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/5083852"
+      "link": "https://www.goodreads.com/book/show/5083852",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248936",
@@ -4782,7 +4888,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248936"
+      "link": "https://www.goodreads.com/book/show/248936",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "3586999",
@@ -4791,7 +4898,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/3586999"
+      "link": "https://www.goodreads.com/book/show/3586999",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "2901744",
@@ -4800,7 +4908,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/2901744"
+      "link": "https://www.goodreads.com/book/show/2901744",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "2571937",
@@ -4809,7 +4918,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/2571937"
+      "link": "https://www.goodreads.com/book/show/2571937",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "2571920",
@@ -4818,7 +4928,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/2571920"
+      "link": "https://www.goodreads.com/book/show/2571920",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "2001695",
@@ -4827,7 +4938,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/2001695"
+      "link": "https://www.goodreads.com/book/show/2001695",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "1898914",
@@ -4836,7 +4948,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/1898914"
+      "link": "https://www.goodreads.com/book/show/1898914",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "1501850",
@@ -4845,7 +4958,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/1501850"
+      "link": "https://www.goodreads.com/book/show/1501850",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248886",
@@ -4854,7 +4968,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248886"
+      "link": "https://www.goodreads.com/book/show/248886",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248885",
@@ -4863,7 +4978,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248885"
+      "link": "https://www.goodreads.com/book/show/248885",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248868",
@@ -4872,7 +4988,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248868"
+      "link": "https://www.goodreads.com/book/show/248868",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248866",
@@ -4881,7 +4998,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248866"
+      "link": "https://www.goodreads.com/book/show/248866",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248867",
@@ -4890,7 +5008,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248867"
+      "link": "https://www.goodreads.com/book/show/248867",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248869",
@@ -4899,7 +5018,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248869"
+      "link": "https://www.goodreads.com/book/show/248869",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248876",
@@ -4908,7 +5028,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248876"
+      "link": "https://www.goodreads.com/book/show/248876",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248879",
@@ -4917,7 +5038,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248879"
+      "link": "https://www.goodreads.com/book/show/248879",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248872",
@@ -4926,7 +5048,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248872"
+      "link": "https://www.goodreads.com/book/show/248872",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248878",
@@ -4937,7 +5060,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248878"
+      "link": "https://www.goodreads.com/book/show/248878",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248883",
@@ -4972,7 +5096,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248881"
+      "link": "https://www.goodreads.com/book/show/248881",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248870",
@@ -4995,7 +5120,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248874"
+      "link": "https://www.goodreads.com/book/show/248874",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248873",
@@ -5006,7 +5132,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248873"
+      "link": "https://www.goodreads.com/book/show/248873",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248871",
@@ -5017,7 +5144,8 @@
       "rating": 5,
       "dateRead": "",
       "seen": "2018-01-01",
-      "link": "https://www.goodreads.com/book/show/248871"
+      "link": "https://www.goodreads.com/book/show/248871",
+      "genre": "Comics & graphic novels"
     },
     {
       "id": "248882",
@@ -5354,7 +5482,8 @@
       "seriesNo": 2.5,
       "rating": 5,
       "dateRead": "2016-01-01",
-      "link": "https://www.goodreads.com/book/show/21535271"
+      "link": "https://www.goodreads.com/book/show/21535271",
+      "genre": "Fantasy"
     },
     {
       "id": "1268479",
@@ -5437,7 +5566,8 @@
       "author": "J.R.R. Tolkien",
       "rating": 5,
       "dateRead": "2014-02-01",
-      "link": "https://www.goodreads.com/book/show/5907"
+      "link": "https://www.goodreads.com/book/show/5907",
+      "genre": "Fantasy"
     },
     {
       "id": "49552",

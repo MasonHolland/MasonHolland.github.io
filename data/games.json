@@ -69,24 +69,6 @@
     },
     {
       "platform": "psn",
-      "id": "PPSA01650_00",
-      "title": "YouTube",
-      "hours": 42.2,
-      "lastPlayed": "2026-11-15",
-      "cover": "assets/covers/psn-a6af0fa628.jpg",
-      "thumb": "assets/covers/small/psn-a6af0fa628.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA01604_00",
-      "title": "Disney+",
-      "hours": 31.1,
-      "lastPlayed": "2026-11-14",
-      "cover": "assets/covers/psn-94481abc20.jpg",
-      "thumb": "assets/covers/small/psn-94481abc20.jpg"
-    },
-    {
-      "platform": "psn",
       "id": "PPSA28000_00",
       "title": "The Blood of Dawnwalker",
       "hours": 68,
@@ -112,15 +94,6 @@
         "progress": 15
       },
       "thumb": "assets/covers/small/psn-88c7aace2b.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "CUSA00129_00",
-      "title": "Netflix",
-      "hours": 90,
-      "lastPlayed": "2026-11-07",
-      "cover": "assets/covers/psn-aa4e6e55b1.jpg",
-      "thumb": "assets/covers/small/psn-aa4e6e55b1.jpg"
     },
     {
       "platform": "psn",

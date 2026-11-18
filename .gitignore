@@ -16,3 +16,6 @@ assets/resume/
 
 # Installed packages
 node_modules/
+
+# Personal to-do list
+TODO.md

@@ -120,7 +120,9 @@ export const GENRE_COLORS = {
   "Society & politics": "#5a6470",
   "Comics & graphic novels": "#c2a21f",
   "Self-help & family": "#b8407e",
+  "Comedy": "#86b02c",
   "Other fiction": "#6e5a4a",
+  "Other nonfiction": "#2f8f9d",
 };
 const NO_GENRE = "#7d6a55";
 const genreColor = (g) => GENRE_COLORS[g] || NO_GENRE;
@@ -354,7 +356,7 @@ export function buildHobbies() {
     wall: { tex: textures.wall, tw: 2, th: 2 },
     floor: { tex: textures.floor, tw: 2, th: 2, opts: { roughness: 0.75 } },
     ceil: { tex: textures.ceil, tw: 2, th: 2 },
-    rightOpening: HALL_OPEN,
+    rightOpening: needsGallery() ? HALL_OPEN : undefined,
     front: { tex: stoneTex(), tw: 2, th: 2 },
     depth: DEPTH,
     bounds: { x0: -3.3, x1: 3.3, z0: BACK + 0.7, z1: -5.26 },
@@ -443,7 +445,7 @@ export function buildHobbies() {
     ...EYE_FIRST.map((row) => ({ c: backLeft, row, from: -backLeft.spec.w / 2 + 0.55 })),
   ], want, "want", 2000);
 
-  // game shelves: two in the room either side of the game gallery, the rest down the gallery
+  // game shelves along the right wall, or either side of the game gallery when there are too many
   buildGameShelves(g, wood, darkWood, stoneM, textures);
 
   // rug in the middle of the room
@@ -503,7 +505,7 @@ export function buildHobbies() {
   g.add(blue);
   // soft warm light on the game shelves
   const shelfLight = new THREE.PointLight(0xffc48a, 9, 6.5, 2);
-  shelfLight.position.set(2.4, 1.7, (HALL.z0 + HALL.z1) / 2);
+  shelfLight.position.set(2.4, 1.7, MID);
   g.add(shelfLight);
 }
 
@@ -582,9 +584,37 @@ const MAIN_HOLDS = 36;           // a console unit: 4 on show beside the console
 const PER_ROW = 8;
 
 /**
- * The game gallery: a hallway through the right wall, sized to fit every game. The console
- * units stand in the room either side of its opening (PlayStation, Steam) and at its far end
- * (Switch); the rest of each platform's games line the hallway walls.
+ * Only games played at least this long go on the shelves. data/games.json keeps every game the
+ * sync finds (5 hours or more, see MIN_HOURS in scripts/sync-games.mjs), so lowering this brings
+ * the rest back. Games without hours (a Switch game you left them off) always show.
+ */
+export const SHOW_MIN_HOURS = 30;
+const WALL_UNITS = 4;            // shelf units that fit along the right wall
+
+function shownGames() {
+  const all = (gameData.games || []).filter((x) => typeof x.hours !== "number" || x.hours >= SHOW_MIN_HOURS);
+  const of = (key) => all.filter((x) => x.platform === key);
+  return { psn: of("psn"), steam: of("steam"), sw: of("switch") };
+}
+
+/** What doesn't fit on a platform's console unit, in shelf-unit-sized chunks. */
+function overflowUnits(list) {
+  const left = showcaseFirst(list).rest.slice(MAIN_HOLDS - 4), out = [];
+  for (let i = 0; i < left.length; i += GALLERY_HOLDS) out.push(left.slice(i, i + GALLERY_HOLDS));
+  return out;
+}
+
+/** True when the games need more shelf units than the right wall holds. */
+export function needsGallery() {
+  const { psn, steam, sw } = shownGames();
+  return 3 + overflowUnits(psn).length + overflowUnits(steam).length + overflowUnits(sw).length > WALL_UNITS;
+}
+
+/**
+ * The game gallery: a hallway through the right wall, built only when the games don't fit on the
+ * wall (see needsGallery). The console units stand in the room either side of its opening
+ * (PlayStation, Steam) and at its far end (Switch); the rest of each platform's games line the
+ * hallway walls.
  */
 export const HALL = { z0: MID - 1.8, z1: MID + 1.8, h: 3.6 };                     // outer walls, room frame
 export const HALL_OPEN = { z0: HALL.z0 + SHELF.d, z1: HALL.z1 - SHELF.d, h: 3.2 };
@@ -609,16 +639,21 @@ function setCover(material, tex) {
 /** Load a cover into a small canvas (cropped to fill), or draw the title if there is none. */
 function loadCover(material, game, aspect) {
   const titleCard = () => setCover(material, gameCoverTexture(game));
-  const src = game.thumb || game.cover;   // the 200x300 copy when there is one
+  // the 200x300 copy when there is one: named in the data, or (for hand-added Switch games) found
+  // by name in assets/covers/small/, falling back to the full-size cover if it isn't there
+  const guess = !game.thumb && /^assets\/covers\/[^/]+$/.test(game.cover || "") ? game.cover.replace("assets/covers/", "assets/covers/small/") : "";
+  const src = game.thumb || guess || game.cover;
   if (!src) { titleCard(); return; }
-  imageLoader.load(src, (img) => {
+  const fallback = guess ? () => imageLoader.load(game.cover, drawn, undefined, titleCard) : titleCard;
+  const drawn = (img) => {
     const H = 192, W = Math.round(H * aspect);
     const a = img.width / img.height;
     let sw = img.width, sh = img.height, sx = 0, sy = 0;
     if (a > aspect) { sw = img.height * aspect; sx = (img.width - sw) / 2; }
     else { sh = img.width / aspect; sy = (img.height - sh) / 2; }
     setCover(material, canvasTex(W, H, (ctx) => ctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, H)));
-  }, undefined, titleCard);
+  };
+  imageLoader.load(src, drawn, undefined, fallback);
 }
 
 /* ---------- one shelf unit ---------- */
@@ -646,6 +681,7 @@ function addGame(shelf, key, game, x, row, big) {
         game.lastPlayed ? `<p>Last played ${esc(game.lastPlayed)}</p>` : "",
         game.trophies ? `<p>Trophies: ${esc(game.trophies.earned)} of ${esc(game.trophies.total)} (${esc(game.trophies.progress ?? 0)}%)</p>` : "",
         game.achievements ? `<p>Achievements: ${esc(game.achievements.earned)} of ${esc(game.achievements.total)} (${esc(game.achievements.progress)}%)</p>` : "",
+        typeof game.completion === "number" ? `<p>${esc(game.completion)}% complete</p>` : "",
         game.note ? `<p>${esc(game.note)}</p>` : "",
       ].join(""),
     }),
@@ -674,7 +710,8 @@ function placeUnit(g, x, z, rotY, wood, darkWood) {
 }
 
 /** Trophy or achievement completion, 0-100 (-1 when the game has neither). */
-const completion = (game) => (game.trophies ? game.trophies.progress ?? 0 : game.achievements ? game.achievements.progress : -1);
+const completion = (game) => (game.trophies ? game.trophies.progress ?? 0 : game.achievements ? game.achievements.progress
+  : typeof game.completion === "number" ? game.completion : -1);   // completion: set by hand for Switch games
 
 /**
  * Split a platform's games (newest first) into the 4 showcase games beside the console (highest
@@ -715,9 +752,9 @@ function consoleUnit(g, key, games, x, z, rotY, wood, darkWood) {
       html: [
         total ? `<p>${esc(Math.round(total))} hours across these games</p>` : "",
         earned ? `<p>${esc(earned)} trophies earned</p>` : "",
-        key === "switch" ? "<p>The Switch has no public game history, so these are added by hand in data/games.json.</p>" : "",
+        key === "switch" ? "<p>The Switch has no public game history, so these are added by hand.</p>" : "",
         games[0] ? `<p>Most recent: ${esc(games[0].title)}</p>` : "<p>No games here yet.</p>",
-        more > 0 ? `<p>The other ${esc(more)} carry on down the game gallery.</p>` : "",
+        more > 0 ? `<p>The other ${esc(more)} carry on ${needsGallery() ? "down the game gallery" : "on the next shelf"}.</p>` : "",
       ].join(""),
     }),
   });
@@ -743,19 +780,32 @@ const GALLERY_HOLDS = PER_ROW * SHELF.rows;
 
 /* ---------- the room's right wall and the hallway ---------- */
 
+/** Everything fits on the right wall: each platform's console unit, then its overflow units. */
+function buildGameWall(g, wood, darkWood) {
+  const { psn, steam, sw } = shownGames();
+  const units = [];
+  for (const [key, list] of [["psn", psn], ["steam", steam], ["switch", sw]]) {
+    units.push({ key, list, console: true });
+    overflowUnits(list).forEach((more, i) => units.push({ key, list: more, label: i === 0 ? platformOf(key).label + ", continued" : "" }));
+  }
+  const X = RW / 2 - SHELF.d / 2, right = -Math.PI / 2;
+  const zNear = -5.3, zFar = BACK + 0.45;                        // clear of the doorway and the back bookcase
+  const zStart = zNear - (zNear - zFar - units.length * UNIT) / 2;
+  units.forEach((u, i) => {
+    const z = zStart - UNIT * (i + 0.5);
+    if (u.console) consoleUnit(g, u.key, u.list, X, z, right, wood, darkWood);
+    else galleryUnit(g, u.key, u.list, X, z, right, wood, darkWood, u.label);
+  });
+  rooms.hobbies.obstacles.push({ x0: 3.1, x1: 3.8, z0: zStart - UNIT * units.length, z1: zStart });
+  rooms.hobbies.onEnter = () => coverQueue.splice(0).forEach((load) => load());
+}
+
 function buildGameShelves(g, wood, darkWood, stone, textures) {
-  const all = gameData.games || [];
-  const of = (key) => all.filter((x) => x.platform === key);
-  const psn = of("psn"), steam = of("steam"), sw = of("switch");
-  // the gallery carries on with whatever didn't fit on the console unit
-  const chunks = (list) => {
-    const left = showcaseFirst(list).rest.slice(MAIN_HOLDS - 4), out = [];
-    for (let i = 0; i < left.length; i += GALLERY_HOLDS) out.push(left.slice(i, i + GALLERY_HOLDS));
-    return out;
-  };
+  if (!needsGallery()) return buildGameWall(g, wood, darkWood);
+  const { psn, steam, sw } = shownGames();
   // PlayStation's overflow lines the hallway wall on its side, Steam's the other; the Switch
   // (added by hand, usually a short list) stands at the far end
-  const wallA = chunks(psn), wallB = chunks(steam);
+  const wallA = overflowUnits(psn), wallB = overflowUnits(steam);
   const X0 = RW / 2;                                           // the room's right wall
   const L = Math.max(4, 0.15 + Math.max(wallA.length, wallB.length) * UNIT + 0.1);
   const zc = (HALL.z0 + HALL.z1) / 2, W = HALL.z1 - HALL.z0;

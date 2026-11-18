@@ -129,7 +129,11 @@ const GENRE_RULES = [
   ["Comics & graphic novels", /comic|graphic novel|manga/],
   ["Self-help & family", /self help|self-help|self-realization|self-actualization|success|motivation|parenting|child rearing|personal development|productivity|business|psychology|leadership|health|relationships|education|how to/],
 ];
-const GENERIC = /^(fiction|nonfiction|audiobook|adult|novels|book club|adult fiction|young adult|middle grade|childrens|contemporary|adventure|humor|romance|lgbt|unfinished)$/i;
+/** Every group name, catch-alls last: the names data/genre-overrides.json may use. */
+export const GENRES = [...GENRE_RULES.map(([name]) => name), "Comedy", "Other fiction", "Other nonfiction"];
+/** Lots of books carry a humour tag, so Comedy is only used when nothing else matches. */
+const COMEDY = /humou?r|comedy|comedians|comic fiction|satire/i;
+const GENERIC = /^(fiction|nonfiction|audiobook|adult|novels|book club|adult fiction|young adult|middle grade|childrens|contemporary|adventure|romance|lgbt|unfinished)$/i;
 const bucketOf = (tag) => {
   const name = tag.toLowerCase();
   if (GENERIC.test(name) || /^nyt:|bestseller|large type|accessible book|protected daisy|in library/.test(name)) return null;
@@ -147,7 +151,8 @@ export function genreOf(entry) {
   if (Array.isArray(entry)) {
     for (const g of entry) { const b = bucketOf(g); if (b) return b; }
     const all = entry.join(" ").toLowerCase();
-    return /nonfiction/.test(all) ? "Society & politics" : all ? "Other fiction" : "";
+    if (COMEDY.test(all)) return "Comedy";
+    return /nonfiction/.test(all) ? "Other nonfiction" : all ? "Other fiction" : "";
   }
   const subjects = (entry && entry.ol) || [];
   const score = new Map();
@@ -155,7 +160,9 @@ export function genreOf(entry) {
   let best = "", top = 0;
   for (const [bucket] of GENRE_RULES) if ((score.get(bucket) || 0) > top) { best = bucket; top = score.get(bucket); }
   if (best) return best;
-  return subjects.some((s) => /^fiction/i.test(s)) ? "Other fiction" : "";
+  if (subjects.some((s) => /^fiction/i.test(s))) return "Other fiction";
+  if (subjects.some((s) => COMEDY.test(s))) return "Comedy";
+  return subjects.some((s) => /^non-?fiction/i.test(s)) ? "Other nonfiction" : "";
 }
 
 /**
@@ -301,7 +308,7 @@ async function main() {
   const all = [...books, ...current, ...wantToRead];
   const genres = await updateGenres(all, maxLookups, today);
   // genres you set by hand in data/genre-overrides.json win over the lookup
-  const valid = new Set([...GENRE_RULES.map(([name]) => name), "Other fiction"]);
+  const valid = new Set(GENRES);
   const overrides = ((await readJson("genre-overrides.json")) || {}).books || {};
   for (const [id, o] of Object.entries(overrides)) {
     if (o.genre && !valid.has(o.genre)) console.error(`  genre-overrides.json: "${o.genre}" for ${o.title || id} isn't one of _genres, so it's ignored.`);

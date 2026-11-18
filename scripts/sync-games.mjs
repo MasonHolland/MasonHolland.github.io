@@ -22,12 +22,14 @@
  *   out by the MIN_HOURS filter.
  *
  * Usage:  node scripts/sync-games.mjs
- * Optional: MIN_HOURS  only keep games played at least this long (default 5)
+ * Optional: MIN_HOURS  only keep games played at least this long (default 5). The room
+ *                      shows a shorter list (SHOW_MIN_HOURS in assets/rooms/hobbies.js,
+ *                      30 hours), so the rest stay saved here in case you want them back.
  *           MAX_GAMES  caps how many games each platform keeps (default: no cap;
- *                      the room grows its game gallery to fit)
+ *                      the room adds a game gallery when they don't fit on the wall)
  *
- * NINTENDO SWITCH has no API. Add Switch games by hand to data/games.json with
- * "platform": "switch" (see the README). The sync leaves them untouched.
+ * NINTENDO SWITCH has no API. Add Switch games by hand to data/switch-games.json (see the
+ * README). This script never writes to that file; it only makes small copies of its covers.
  */
 import { readFile, writeFile, mkdir, access } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -74,6 +76,15 @@ export function isoHours(d) {
   return Math.round(h * 10) / 10;
 }
 
+/** Streaming and media apps by name, for when PlayStation doesn't label them as apps. */
+const APPS = /^(netflix|youtube|disney\+?|spotify|prime video|amazon prime video|twitch|plex|apple tv|crunchyroll|max|hbo max|paramount\+?|hulu|stan|binge|kayo|foxtel|abc iview|sbs on demand|9now|7plus|10 play|media player|web browser)$/i;
+
+/** Is this play-history entry an app rather than a game? Games have a category ending in "_game". */
+export function isApp(g) {
+  if (g.category && !/_game$/.test(g.category) && g.category !== "unknown") return true;
+  return APPS.test(String(g.name || "").replace(/[™®]/g, "").trim());
+}
+
 /** PSN played games (with play time) + trophy titles -> game records. */
 export function psnToGames(playedGames, trophyTitles) {
   const trophyByName = new Map();
@@ -86,6 +97,7 @@ export function psnToGames(playedGames, trophyTitles) {
 
   const out = new Map();
   for (const g of playedGames || []) {
+    if (isApp(g)) continue;   // Netflix, YouTube and other apps show up in play history too
     const key = norm(g.name);
     const t = trophyByName.get(key);
     const prev = out.get(key);   // the same game on PS4 and PS5: add the play time together
@@ -233,7 +245,8 @@ async function main() {
   let current = { games: [] };
   try { current = JSON.parse(await readFile(DATA, "utf8")); } catch { /* first run */ }
   // sample data is replaced as soon as a real platform syncs
-  let games = current.source === "sample" ? [] : current.games || [];
+  // Switch games come from data/switch-games.json, so any left in this file are dropped
+  let games = current.source === "sample" ? [] : (current.games || []).filter((g) => g.platform !== "switch");
   const sources = new Set(current.source === "sample" ? [] : String(current.source || "").split("+").filter(Boolean));
   let ok = 0;
 
@@ -265,6 +278,12 @@ async function main() {
   }
   // 200x300 copies for the room; the full-size covers stay in assets/covers
   await addThumbs(games);
+  // Switch games live in data/switch-games.json, which only you edit. Make their small covers
+  // too, without writing to that file (the room finds the copies by name).
+  try {
+    const sw = JSON.parse(await readFile(path.join(ROOT, "data", "switch-games.json"), "utf8"));
+    await addThumbs((sw.games || []).map((g) => ({ ...g })));
+  } catch { /* no Switch file */ }
   await mkdir(path.dirname(DATA), { recursive: true });
   await writeFile(DATA, JSON.stringify({ source: [...sources].join("+"), updated: day(new Date()), games }, null, 2) + "\n");
   console.log(`Wrote ${games.length} games to data/games.json`);
