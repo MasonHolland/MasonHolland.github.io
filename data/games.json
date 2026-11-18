@@ -3,9 +3,61 @@
   "updated": "2026-11-18",
   "games": [
     {
+      "platform": "steam",
+      "id": "892970",
+      "title": "Valheim",
+      "hours": 1490.4,
+      "lastPlayed": "2026-11-18",
+      "cover": "assets/covers/steam-2c6698ddcd.jpg",
+      "achievements": {
+        "earned": 18,
+        "total": 53,
+        "progress": 34
+      },
+      "thumb": "assets/covers/small/steam-2c6698ddcd.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "607050",
+      "title": "Wargroove",
+      "hours": 58.7,
+      "lastPlayed": "2026-11-18",
+      "cover": "assets/covers/steam-d4727d6d77.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 23,
+        "progress": 52
+      },
+      "thumb": "assets/covers/small/steam-d4727d6d77.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA10664_00",
+      "title": "FINAL FANTASY XVI",
+      "hours": 53.2,
+      "lastPlayed": "2026-11-16",
+      "cover": "assets/covers/psn-edd2de8982.jpg",
+      "trophies": {
+        "earned": 30,
+        "total": 69,
+        "progress": 34
+      },
+      "thumb": "assets/covers/small/psn-edd2de8982.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01781_00",
+      "title": "Apple TV",
+      "hours": 14,
+      "lastPlayed": "2026-11-16",
+      "cover": "assets/covers/psn-5f2ed87bbd.jpg",
+      "thumb": "assets/covers/small/psn-5f2ed87bbd.jpg"
+    },
+    {
       "platform": "psn",
       "id": "PPSA29920_00",
       "title": "Aliens: Fireteam Elite 2",
+      "hours": 5.8,
       "lastPlayed": "2026-11-16",
       "cover": "assets/covers/psn-c1259d982c.jpg",
       "trophies": {
@@ -17,30 +69,27 @@
     },
     {
       "platform": "psn",
-      "id": "PPSA10664_00",
-      "title": "FINAL FANTASY XVI",
-      "lastPlayed": "2026-11-16",
-      "cover": "assets/covers/psn-edd2de8982.jpg",
-      "trophies": {
-        "earned": 30,
-        "total": 69,
-        "progress": 34
-      },
-      "thumb": "assets/covers/small/psn-edd2de8982.jpg"
+      "id": "PPSA01650_00",
+      "title": "YouTube",
+      "hours": 42.2,
+      "lastPlayed": "2026-11-15",
+      "cover": "assets/covers/psn-a6af0fa628.jpg",
+      "thumb": "assets/covers/small/psn-a6af0fa628.jpg"
     },
     {
-      "platform": "steam",
-      "id": "892970",
-      "title": "Valheim",
-      "hours": 1489.4,
-      "lastPlayed": "2026-11-11",
-      "cover": "assets/covers/steam-2c6698ddcd.jpg",
-      "thumb": "assets/covers/small/steam-2c6698ddcd.jpg"
+      "platform": "psn",
+      "id": "PPSA01604_00",
+      "title": "Disney+",
+      "hours": 31.1,
+      "lastPlayed": "2026-11-14",
+      "cover": "assets/covers/psn-94481abc20.jpg",
+      "thumb": "assets/covers/small/psn-94481abc20.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA28000_00",
       "title": "The Blood of Dawnwalker",
+      "hours": 68,
       "lastPlayed": "2026-11-10",
       "cover": "assets/covers/psn-569c9670da.jpg",
       "trophies": {
@@ -54,6 +103,7 @@
       "platform": "psn",
       "id": "PPSA01593_00",
       "title": "Hogwarts Legacy",
+      "hours": 29.6,
       "lastPlayed": "2026-11-10",
       "cover": "assets/covers/psn-88c7aace2b.jpg",
       "trophies": {
@@ -65,8 +115,18 @@
     },
     {
       "platform": "psn",
+      "id": "CUSA00129_00",
+      "title": "Netflix",
+      "hours": 90,
+      "lastPlayed": "2026-11-07",
+      "cover": "assets/covers/psn-aa4e6e55b1.jpg",
+      "thumb": "assets/covers/small/psn-aa4e6e55b1.jpg"
+    },
+    {
+      "platform": "psn",
       "id": "PPSA01413_00",
       "title": "HELLDIVERS™ 2",
+      "hours": 292.4,
       "lastPlayed": "2026-11-05",
       "cover": "assets/covers/psn-b425ee3e40.jpg",
       "trophies": {
@@ -80,6 +140,7 @@
       "platform": "psn",
       "id": "PPSA04998_00",
       "title": "ARC Raiders",
+      "hours": 230.4,
       "lastPlayed": "2026-11-05",
       "cover": "assets/covers/psn-ab370bb6ae.jpg",
       "trophies": {
@@ -91,21 +152,9 @@
     },
     {
       "platform": "psn",
-      "id": "PPSA03974_00",
-      "title": "Cyberpunk 2077",
-      "lastPlayed": "2026-11-03",
-      "cover": "assets/covers/psn-6eb54f965f.jpg",
-      "trophies": {
-        "earned": 1,
-        "total": 58,
-        "progress": 1
-      },
-      "thumb": "assets/covers/small/psn-6eb54f965f.jpg"
-    },
-    {
-      "platform": "psn",
       "id": "PPSA36921_00",
-      "title": "No More Room In Hell 2",
+      "title": "No More Room in Hell 2",
+      "hours": 7.2,
       "lastPlayed": "2026-10-29",
       "cover": "assets/covers/psn-5eb549ff2e.jpg",
       "trophies": {
@@ -116,40 +165,10 @@
       "thumb": "assets/covers/small/psn-5eb549ff2e.jpg"
     },
     {
-      "platform": "steam",
-      "id": "431240",
-      "title": "Golf With Your Friends",
-      "hours": 1.6,
-      "lastPlayed": "2026-10-28",
-      "cover": "assets/covers/steam-1e8b730e4b.jpg",
-      "thumb": "assets/covers/small/steam-1e8b730e4b.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA33764_00",
-      "title": "Big Walk",
-      "lastPlayed": "2026-10-27",
-      "cover": "assets/covers/psn-91dd2b481d.jpg",
-      "trophies": {
-        "earned": 1,
-        "total": 13,
-        "progress": 9
-      },
-      "thumb": "assets/covers/small/psn-91dd2b481d.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "1604030",
-      "title": "V Rising",
-      "hours": 7.3,
-      "lastPlayed": "2026-10-25",
-      "cover": "assets/covers/steam-5713e1c93a.jpg",
-      "thumb": "assets/covers/small/steam-5713e1c93a.jpg"
-    },
-    {
       "platform": "psn",
       "id": "PPSA08560_00",
       "title": "Split Fiction",
+      "hours": 16.8,
       "lastPlayed": "2026-10-25",
       "cover": "assets/covers/psn-d0c71c60bb.jpg",
       "trophies": {
@@ -161,11 +180,26 @@
     },
     {
       "platform": "steam",
-      "id": "1867240",
-      "title": "WARDOGS",
-      "hours": 2.1,
-      "lastPlayed": "2026-10-14",
-      "cover": ""
+      "id": "1604030",
+      "title": "V Rising",
+      "hours": 7.3,
+      "lastPlayed": "2026-10-25",
+      "cover": "assets/covers/steam-5713e1c93a.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 49,
+        "progress": 14
+      },
+      "thumb": "assets/covers/small/steam-5713e1c93a.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA03933_00",
+      "title": "Paramount+",
+      "hours": 15.5,
+      "lastPlayed": "2026-10-15",
+      "cover": "assets/covers/psn-87be44087a.jpg",
+      "thumb": "assets/covers/small/psn-87be44087a.jpg"
     },
     {
       "platform": "steam",
@@ -174,43 +208,30 @@
       "hours": 6.5,
       "lastPlayed": "2026-10-04",
       "cover": "assets/covers/steam-71dce5150d.jpg",
+      "achievements": {
+        "earned": 21,
+        "total": 137,
+        "progress": 15
+      },
       "thumb": "assets/covers/small/steam-71dce5150d.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA06693_00",
-      "title": "Remnant 2",
+      "title": "Remnant II®",
+      "hours": 29.3,
       "lastPlayed": "2026-10-01",
       "cover": "assets/covers/psn-489e53cdb1.jpg",
-      "trophies": {
-        "earned": 30,
-        "total": 66,
-        "progress": 36
-      },
       "thumb": "assets/covers/small/psn-489e53cdb1.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA02110_00",
       "title": "No Man's Sky",
+      "hours": 5.1,
       "lastPlayed": "2026-09-24",
       "cover": "assets/covers/psn-4b84af1923.jpg",
       "thumb": "assets/covers/small/psn-4b84af1923.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "NPWR20654_00",
-      "title": "No Man's Sky Trophies",
-      "hours": 0,
-      "recentHours": 0,
-      "lastPlayed": "2026-09-24",
-      "cover": "assets/covers/psn-fdd00ca27b.jpg",
-      "trophies": {
-        "earned": 2,
-        "total": 28,
-        "progress": 2
-      },
-      "thumb": "assets/covers/small/psn-fdd00ca27b.jpg"
     },
     {
       "platform": "steam",
@@ -223,34 +244,9 @@
     },
     {
       "platform": "psn",
-      "id": "PPSA14632_00",
-      "title": "LEGO® Horizon Adventures™",
-      "lastPlayed": "2026-09-17",
-      "cover": "assets/covers/psn-88f67d1a01.jpg",
-      "trophies": {
-        "earned": 1,
-        "total": 24,
-        "progress": 1
-      },
-      "thumb": "assets/covers/small/psn-88f67d1a01.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "CUSA10863_00",
-      "title": "Plants vs. Zombies: Battle for Neighborville™",
-      "lastPlayed": "2026-09-16",
-      "cover": "assets/covers/psn-3e0229a82b.jpg",
-      "trophies": {
-        "earned": 0,
-        "total": 51,
-        "progress": 0
-      },
-      "thumb": "assets/covers/small/psn-3e0229a82b.jpg"
-    },
-    {
-      "platform": "psn",
       "id": "PPSA08329_00",
       "title": "God of War Ragnarök",
+      "hours": 101.2,
       "lastPlayed": "2026-09-16",
       "cover": "assets/covers/psn-6ea689deb1.jpg",
       "trophies": {
@@ -261,48 +257,18 @@
       "thumb": "assets/covers/small/psn-6ea689deb1.jpg"
     },
     {
-      "platform": "psn",
-      "id": "CUSA01623_00",
-      "title": "God of War® III Remastered",
-      "lastPlayed": "2026-09-11",
-      "cover": "assets/covers/psn-be9790e8f7.jpg",
-      "trophies": {
-        "earned": 1,
-        "total": 35,
-        "progress": 1
-      },
-      "thumb": "assets/covers/small/psn-be9790e8f7.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA01317_00",
-      "title": "Gran Turismo® 7",
-      "lastPlayed": "2026-09-01",
-      "cover": "assets/covers/psn-9a64473138.jpg",
-      "trophies": {
-        "earned": 8,
-        "total": 54,
-        "progress": 11
-      },
-      "thumb": "assets/covers/small/psn-9a64473138.jpg"
-    },
-    {
       "platform": "steam",
       "id": "374320",
       "title": "DARK SOULS™ III",
       "hours": 139.4,
       "lastPlayed": "2026-08-10",
       "cover": "assets/covers/steam-4bb975859c.jpg",
+      "achievements": {
+        "earned": 35,
+        "total": 43,
+        "progress": 81
+      },
       "thumb": "assets/covers/small/steam-4bb975859c.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "1497440",
-      "title": "COCOON",
-      "hours": 0.7,
-      "lastPlayed": "2026-08-06",
-      "cover": "assets/covers/steam-de452479ed.jpg",
-      "thumb": "assets/covers/small/steam-de452479ed.jpg"
     },
     {
       "platform": "steam",
@@ -311,20 +277,18 @@
       "hours": 73.9,
       "lastPlayed": "2026-08-05",
       "cover": "assets/covers/steam-8fe85b37eb.jpg",
+      "achievements": {
+        "earned": 34,
+        "total": 42,
+        "progress": 81
+      },
       "thumb": "assets/covers/small/steam-8fe85b37eb.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "4704690",
-      "title": "MECCHA CHAMELEON",
-      "hours": 4.7,
-      "lastPlayed": "2026-08-05",
-      "cover": ""
     },
     {
       "platform": "psn",
       "id": "PPSA04610_00",
-      "title": "ELDEN RING™",
+      "title": "ELDEN RING",
+      "hours": 261,
       "lastPlayed": "2026-08-04",
       "cover": "assets/covers/psn-e4db859b18.jpg",
       "trophies": {
@@ -336,51 +300,9 @@
     },
     {
       "platform": "psn",
-      "id": "PPSA28311_00",
-      "title": "Absolum",
-      "lastPlayed": "2026-07-23",
-      "cover": "assets/covers/psn-97d856ae00.jpg",
-      "trophies": {
-        "earned": 0,
-        "total": 38,
-        "progress": 0
-      },
-      "thumb": "assets/covers/small/psn-97d856ae00.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "2004680",
-      "title": "Voidling Bound",
-      "hours": 0.6,
-      "lastPlayed": "2026-07-18",
-      "cover": "assets/covers/steam-7287d1aa65.jpg",
-      "thumb": "assets/covers/small/steam-7287d1aa65.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "CUSA13283_00",
-      "title": "EARTH DEFENSE FORCE: IRON RAIN",
-      "lastPlayed": "2026-07-14",
-      "cover": "assets/covers/psn-5f50eadd23.jpg",
-      "trophies": {
-        "earned": 2,
-        "total": 44,
-        "progress": 2
-      },
-      "thumb": "assets/covers/small/psn-5f50eadd23.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "CUSA05933_00",
-      "title": "KINGDOM HEARTS - HD 1.5+2.5 ReMIX -",
-      "lastPlayed": "2026-07-09",
-      "cover": "assets/covers/psn-cf34ecfae8.jpg",
-      "thumb": "assets/covers/small/psn-cf34ecfae8.jpg"
-    },
-    {
-      "platform": "psn",
       "id": "PPSA05132_00",
       "title": "Sifu",
+      "hours": 18.7,
       "lastPlayed": "2026-07-04",
       "cover": "assets/covers/psn-92a746ccd9.jpg",
       "trophies": {
@@ -392,36 +314,9 @@
     },
     {
       "platform": "psn",
-      "id": "PPSA15211_00",
-      "title": "DRAGON BALL: Sparking! ZERO",
-      "lastPlayed": "2026-06-18",
-      "cover": "assets/covers/psn-875da92dfa.jpg",
-      "trophies": {
-        "earned": 0,
-        "total": 50,
-        "progress": 0
-      },
-      "thumb": "assets/covers/small/psn-875da92dfa.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "NPWR12334_00",
-      "title": "KINGDOM HEARTS FINAL MIX",
-      "hours": 0,
-      "recentHours": 0,
-      "lastPlayed": "2026-06-18",
-      "cover": "assets/covers/psn-e8e6a1956c.jpg",
-      "trophies": {
-        "earned": 0,
-        "total": 56,
-        "progress": 0
-      },
-      "thumb": "assets/covers/small/psn-e8e6a1956c.jpg"
-    },
-    {
-      "platform": "psn",
       "id": "PPSA24487_00",
       "title": "Marathon",
+      "hours": 10.4,
       "lastPlayed": "2026-05-15",
       "cover": "assets/covers/psn-9550151aa8.jpg",
       "trophies": {
@@ -438,6 +333,11 @@
       "hours": 1344.5,
       "lastPlayed": "2026-05-01",
       "cover": "assets/covers/steam-fcfc8b7784.jpg",
+      "achievements": {
+        "earned": 37,
+        "total": 37,
+        "progress": 100
+      },
       "thumb": "assets/covers/small/steam-fcfc8b7784.jpg"
     },
     {
@@ -447,6 +347,11 @@
       "hours": 38.9,
       "lastPlayed": "2026-03-31",
       "cover": "assets/covers/steam-84e8a04b1c.jpg",
+      "achievements": {
+        "earned": 19,
+        "total": 69,
+        "progress": 28
+      },
       "thumb": "assets/covers/small/steam-84e8a04b1c.jpg"
     },
     {
@@ -456,20 +361,12 @@
       "hours": 39.9,
       "lastPlayed": "2026-03-30",
       "cover": "assets/covers/steam-d96af49840.jpg",
-      "thumb": "assets/covers/small/steam-d96af49840.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA07867_00",
-      "title": "Forever Skies",
-      "lastPlayed": "2026-03-19",
-      "cover": "assets/covers/psn-70a0302ea0.jpg",
-      "trophies": {
-        "earned": 5,
-        "total": 21,
-        "progress": 8
+      "achievements": {
+        "earned": 37,
+        "total": 37,
+        "progress": 100
       },
-      "thumb": "assets/covers/small/psn-70a0302ea0.jpg"
+      "thumb": "assets/covers/small/steam-d96af49840.jpg"
     },
     {
       "platform": "steam",
@@ -477,81 +374,26 @@
       "title": "Diablo II: Resurrected – Infernal Edition",
       "hours": 6.9,
       "lastPlayed": "2026-03-18",
-      "cover": ""
-    },
-    {
-      "platform": "steam",
-      "id": "1409830",
-      "title": "Sons of Valhalla",
-      "hours": 1.5,
-      "lastPlayed": "2026-03-16",
-      "cover": "assets/covers/steam-f19469acb7.jpg",
-      "thumb": "assets/covers/small/steam-f19469acb7.jpg"
+      "cover": "",
+      "achievements": {
+        "earned": 2,
+        "total": 43,
+        "progress": 5
+      }
     },
     {
       "platform": "psn",
-      "id": "PPSA13428_00",
-      "title": "Horizon Zero Dawn™ Remastered",
-      "lastPlayed": "2026-03-16",
-      "cover": "assets/covers/psn-ba17acbbee.jpg",
-      "trophies": {
-        "earned": 4,
-        "total": 79,
-        "progress": 4
-      },
-      "thumb": "assets/covers/small/psn-ba17acbbee.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "2778610",
-      "title": "Over The Top: WWI",
-      "hours": 2.7,
-      "lastPlayed": "2026-03-13",
-      "cover": "assets/covers/steam-5660d5a2c2.jpg",
-      "thumb": "assets/covers/small/steam-5660d5a2c2.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA28997_00",
-      "title": "God of War Sons of Sparta",
-      "lastPlayed": "2026-03-08",
-      "cover": "assets/covers/psn-a56ea94252.jpg",
-      "trophies": {
-        "earned": 3,
-        "total": 36,
-        "progress": 4
-      },
-      "thumb": "assets/covers/small/psn-a56ea94252.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA19576_00",
+      "id": "PPSA21640_00",
       "title": "Kunitsu-Gami: Path of the Goddess",
+      "hours": 17.3,
       "lastPlayed": "2026-03-08",
-      "cover": "assets/covers/psn-38405a8bbc.jpg",
+      "cover": "assets/covers/psn-d7894edbd2.jpg",
       "trophies": {
         "earned": 20,
         "total": 48,
         "progress": 28
       },
-      "thumb": "assets/covers/small/psn-38405a8bbc.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "22380",
-      "title": "Fallout: New Vegas",
-      "hours": 2.8,
-      "lastPlayed": "2026-03-06",
-      "cover": "assets/covers/steam-46011ca3f6.jpg",
-      "thumb": "assets/covers/small/steam-46011ca3f6.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA33065_00",
-      "title": "PRAGMATA SKETCHBOOK",
-      "lastPlayed": "2026-03-05",
-      "cover": "assets/covers/psn-1be4bd4083.jpg",
-      "thumb": "assets/covers/small/psn-1be4bd4083.jpg"
+      "thumb": "assets/covers/small/psn-d7894edbd2.jpg"
     },
     {
       "platform": "steam",
@@ -560,59 +402,12 @@
       "hours": 7.2,
       "lastPlayed": "2026-03-03",
       "cover": "assets/covers/steam-8300f8e4b3.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 59,
+        "progress": 20
+      },
       "thumb": "assets/covers/small/steam-8300f8e4b3.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA35800_00",
-      "title": "God of War Sons of Sparta Digital Artbook and Soundtrack",
-      "lastPlayed": "2026-03-02",
-      "cover": "assets/covers/psn-58a7fe9304.jpg",
-      "thumb": "assets/covers/small/psn-58a7fe9304.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "1369630",
-      "title": "ENDER LILIES: Quietus of the Knights",
-      "hours": 1.2,
-      "lastPlayed": "2026-02-28",
-      "cover": "assets/covers/steam-6f8f0c4d6f.jpg",
-      "thumb": "assets/covers/small/steam-6f8f0c4d6f.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "365360",
-      "title": "Battle Brothers",
-      "hours": 1.2,
-      "lastPlayed": "2026-02-24",
-      "cover": "assets/covers/steam-985682331f.jpg",
-      "thumb": "assets/covers/small/steam-985682331f.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "362490",
-      "title": "Exanima",
-      "hours": 0.7,
-      "lastPlayed": "2026-02-23",
-      "cover": "assets/covers/steam-102c361b63.jpg",
-      "thumb": "assets/covers/small/steam-102c361b63.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "1371980",
-      "title": "No Rest for the Wicked",
-      "hours": 2.2,
-      "lastPlayed": "2026-02-18",
-      "cover": "assets/covers/steam-0b3f4868f0.jpg",
-      "thumb": "assets/covers/small/steam-0b3f4868f0.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "2934220",
-      "title": "Monsters are Coming!",
-      "hours": 0.6,
-      "lastPlayed": "2026-02-15",
-      "cover": ""
     },
     {
       "platform": "steam",
@@ -620,15 +415,12 @@
       "title": "BALL x PIT",
       "hours": 55,
       "lastPlayed": "2026-02-14",
-      "cover": ""
-    },
-    {
-      "platform": "steam",
-      "id": "3834090",
-      "title": "YAPYAP",
-      "hours": 3.5,
-      "lastPlayed": "2026-02-13",
-      "cover": ""
+      "cover": "",
+      "achievements": {
+        "earned": 63,
+        "total": 82,
+        "progress": 77
+      }
     },
     {
       "platform": "steam",
@@ -637,37 +429,21 @@
       "hours": 8.7,
       "lastPlayed": "2026-02-10",
       "cover": "assets/covers/steam-56476b238c.jpg",
+      "achievements": {
+        "earned": 10,
+        "total": 99,
+        "progress": 10
+      },
       "thumb": "assets/covers/small/steam-56476b238c.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA22040_00",
-      "title": "Path of Exile 2 Beta",
+      "title": "Path of Exile 2",
+      "hours": 59.4,
       "lastPlayed": "2026-02-06",
       "cover": "assets/covers/psn-54a3c9904c.jpg",
       "thumb": "assets/covers/small/psn-54a3c9904c.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "644390",
-      "title": "D&D Lords of Waterdeep",
-      "hours": 3.3,
-      "lastPlayed": "2026-01-30",
-      "cover": "assets/covers/steam-354ceac9b8.jpg",
-      "thumb": "assets/covers/small/steam-354ceac9b8.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA02183_00",
-      "title": "Chivalry 2",
-      "lastPlayed": "2026-01-26",
-      "cover": "assets/covers/psn-c3293ff4fd.jpg",
-      "trophies": {
-        "earned": 3,
-        "total": 42,
-        "progress": 4
-      },
-      "thumb": "assets/covers/small/psn-c3293ff4fd.jpg"
     },
     {
       "platform": "steam",
@@ -676,6 +452,11 @@
       "hours": 65.1,
       "lastPlayed": "2026-01-23",
       "cover": "assets/covers/steam-c7b763f5a4.jpg",
+      "achievements": {
+        "earned": 57,
+        "total": 205,
+        "progress": 28
+      },
       "thumb": "assets/covers/small/steam-c7b763f5a4.jpg"
     },
     {
@@ -685,6 +466,11 @@
       "hours": 15.5,
       "lastPlayed": "2026-01-06",
       "cover": "assets/covers/steam-cf873cd5d5.jpg",
+      "achievements": {
+        "earned": 21,
+        "total": 35,
+        "progress": 60
+      },
       "thumb": "assets/covers/small/steam-cf873cd5d5.jpg"
     },
     {
@@ -694,68 +480,32 @@
       "hours": 39.7,
       "lastPlayed": "2026-01-05",
       "cover": "assets/covers/steam-e46cebb87e.jpg",
+      "achievements": {
+        "earned": 53,
+        "total": 74,
+        "progress": 72
+      },
       "thumb": "assets/covers/small/steam-e46cebb87e.jpg"
     },
     {
       "platform": "steam",
-      "id": "1808500",
-      "title": "ARC Raiders",
-      "hours": 1.1,
-      "lastPlayed": "2025-12-29",
-      "cover": "assets/covers/steam-6ff893dfba.jpg",
-      "thumb": "assets/covers/small/steam-6ff893dfba.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "1374490",
-      "title": "RuneScape: Dragonwilds",
-      "hours": 3.3,
-      "lastPlayed": "2025-11-21",
-      "cover": ""
-    },
-    {
-      "platform": "steam",
-      "id": "2824490",
-      "title": "He is Coming",
-      "hours": 1.4,
-      "lastPlayed": "2025-10-31",
-      "cover": "assets/covers/steam-9484ee4a89.jpg",
-      "thumb": "assets/covers/small/steam-9484ee4a89.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "1494810",
-      "title": "Mortal Sin",
-      "hours": 0.2,
-      "lastPlayed": "2025-10-31",
-      "cover": "assets/covers/steam-8b348a6074.jpg",
-      "thumb": "assets/covers/small/steam-8b348a6074.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "3527290",
-      "title": "PEAK",
-      "hours": 1.3,
-      "lastPlayed": "2025-10-27",
-      "cover": ""
-    },
-    {
-      "platform": "psn",
-      "id": "CUSA11952_00",
-      "title": "Stick Fight: The Game",
-      "lastPlayed": "2025-07-21",
-      "cover": "assets/covers/psn-11bfd5fe4d.jpg",
-      "trophies": {
-        "earned": 0,
-        "total": 28,
-        "progress": 0
+      "id": "367520",
+      "title": "Hollow Knight",
+      "hours": 8.1,
+      "lastPlayed": "2025-09-23",
+      "cover": "assets/covers/steam-f327f68384.jpg",
+      "achievements": {
+        "earned": 3,
+        "total": 63,
+        "progress": 5
       },
-      "thumb": "assets/covers/small/psn-11bfd5fe4d.jpg"
+      "thumb": "assets/covers/small/steam-f327f68384.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA03016_00",
       "title": "Marvel's Spider-Man 2",
+      "hours": 36.9,
       "lastPlayed": "2025-07-12",
       "cover": "assets/covers/psn-ec9d566aa9.jpg",
       "trophies": {
@@ -764,6 +514,2081 @@
         "progress": 97
       },
       "thumb": "assets/covers/small/psn-ec9d566aa9.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "581320",
+      "title": "Insurgency: Sandstorm",
+      "hours": 36.2,
+      "lastPlayed": "2025-07-06",
+      "cover": "assets/covers/steam-22e7da751c.jpg",
+      "achievements": {
+        "earned": 19,
+        "total": 35,
+        "progress": 54
+      },
+      "thumb": "assets/covers/small/steam-22e7da751c.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA02299_00",
+      "title": "Marvel's Spider-Man",
+      "hours": 33.3,
+      "lastPlayed": "2025-07-04",
+      "cover": "assets/covers/psn-64b5d31c49.jpg",
+      "trophies": {
+        "earned": 35,
+        "total": 74,
+        "progress": 36
+      },
+      "thumb": "assets/covers/small/psn-64b5d31c49.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA21203_00",
+      "title": "The Elder Scrolls IV: Oblivion Remastered",
+      "hours": 24.2,
+      "lastPlayed": "2025-05-22",
+      "cover": "assets/covers/psn-c09002438c.jpg",
+      "trophies": {
+        "earned": 5,
+        "total": 61,
+        "progress": 6
+      },
+      "thumb": "assets/covers/small/psn-c09002438c.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA08495_00",
+      "title": "DARK SOULS™: REMASTERED",
+      "hours": 44.7,
+      "lastPlayed": "2025-05-05",
+      "cover": "assets/covers/psn-5ca1a947a8.jpg",
+      "trophies": {
+        "earned": 41,
+        "total": 41,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-5ca1a947a8.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA24189_00",
+      "title": "Monster Hunter Wilds",
+      "hours": 101.8,
+      "lastPlayed": "2025-04-13",
+      "cover": "assets/covers/psn-64b988850d.jpg",
+      "trophies": {
+        "earned": 38,
+        "total": 50,
+        "progress": 65
+      },
+      "thumb": "assets/covers/small/psn-64b988850d.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1789480",
+      "title": "Marauders",
+      "hours": 142.3,
+      "lastPlayed": "2025-02-23",
+      "cover": "assets/covers/steam-00d3e7543a.jpg",
+      "thumb": "assets/covers/small/steam-00d3e7543a.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA20422_00",
+      "title": "Another Crab’s Treasure",
+      "hours": 30,
+      "lastPlayed": "2024-12-29",
+      "cover": "assets/covers/psn-4e0a659443.jpg",
+      "trophies": {
+        "earned": 33,
+        "total": 39,
+        "progress": 91
+      },
+      "thumb": "assets/covers/small/psn-4e0a659443.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01922_00",
+      "title": "Fortnite",
+      "hours": 9.8,
+      "lastPlayed": "2024-12-11",
+      "cover": "assets/covers/psn-09488ce73a.jpg",
+      "thumb": "assets/covers/small/psn-09488ce73a.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA00900_00",
+      "title": "Bloodborne™",
+      "hours": 29,
+      "lastPlayed": "2024-11-07",
+      "cover": "assets/covers/psn-0701a476c4.jpg",
+      "trophies": {
+        "earned": 13,
+        "total": 40,
+        "progress": 18
+      },
+      "thumb": "assets/covers/small/psn-0701a476c4.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA04452_00",
+      "title": "Warhammer 40,000: Space Marine 2",
+      "hours": 6.3,
+      "lastPlayed": "2024-10-29",
+      "cover": "assets/covers/psn-6f0eaef029.jpg",
+      "trophies": {
+        "earned": 5,
+        "total": 50,
+        "progress": 7
+      },
+      "thumb": "assets/covers/small/psn-6f0eaef029.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA07439_00",
+      "title": "DARK SOULS™ III",
+      "hours": 154.3,
+      "lastPlayed": "2024-10-07",
+      "cover": "assets/covers/psn-2840410625.jpg",
+      "trophies": {
+        "earned": 43,
+        "total": 43,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-2840410625.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1422450",
+      "title": "Deadlock",
+      "hours": 5.2,
+      "lastPlayed": "2024-10-05",
+      "cover": "assets/covers/steam-79ef753577.jpg",
+      "thumb": "assets/covers/small/steam-79ef753577.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA23226_00",
+      "title": "Black Myth: Wukong",
+      "hours": 80.3,
+      "lastPlayed": "2024-09-30",
+      "cover": "assets/covers/psn-6223f82a16.jpg",
+      "trophies": {
+        "earned": 36,
+        "total": 36,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-6223f82a16.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "692890",
+      "title": "Roboquest",
+      "hours": 45.7,
+      "lastPlayed": "2024-09-27",
+      "cover": "assets/covers/steam-b7d2d64f7e.jpg",
+      "achievements": {
+        "earned": 55,
+        "total": 86,
+        "progress": 64
+      },
+      "thumb": "assets/covers/small/steam-b7d2d64f7e.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1934680",
+      "title": "Age of Mythology: Retold",
+      "hours": 11.5,
+      "lastPlayed": "2024-09-27",
+      "cover": "assets/covers/steam-15e51eb234.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 132,
+        "progress": 9
+      },
+      "thumb": "assets/covers/small/steam-15e51eb234.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "526870",
+      "title": "Satisfactory",
+      "hours": 7.4,
+      "lastPlayed": "2024-09-24",
+      "cover": "assets/covers/steam-501d12214f.jpg",
+      "achievements": {
+        "earned": 3,
+        "total": 44,
+        "progress": 7
+      },
+      "thumb": "assets/covers/small/steam-501d12214f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "2230110",
+      "title": "Fae Farm",
+      "hours": 52.1,
+      "lastPlayed": "2024-09-06",
+      "cover": "assets/covers/steam-ad4db93f58.jpg",
+      "achievements": {
+        "earned": 21,
+        "total": 51,
+        "progress": 41
+      },
+      "thumb": "assets/covers/small/steam-ad4db93f58.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "686810",
+      "title": "Hell Let Loose",
+      "hours": 11.6,
+      "lastPlayed": "2024-04-04",
+      "cover": "assets/covers/steam-0fd1765cf5.jpg",
+      "achievements": {
+        "earned": 13,
+        "total": 195,
+        "progress": 7
+      },
+      "thumb": "assets/covers/small/steam-0fd1765cf5.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA19867_00",
+      "title": "Dragon's Dogma 2",
+      "hours": 11.3,
+      "lastPlayed": "2024-04-03",
+      "cover": "assets/covers/psn-ea8b9e8323.jpg",
+      "trophies": {
+        "earned": 4,
+        "total": 61,
+        "progress": 4
+      },
+      "thumb": "assets/covers/small/psn-ea8b9e8323.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "620",
+      "title": "Portal 2",
+      "hours": 7.4,
+      "lastPlayed": "2024-03-19",
+      "cover": "assets/covers/steam-cf32406111.jpg",
+      "achievements": {
+        "earned": 9,
+        "total": 51,
+        "progress": 18
+      },
+      "thumb": "assets/covers/small/steam-cf32406111.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA06954_00",
+      "title": "Granblue Fantasy: Relink",
+      "hours": 6.5,
+      "lastPlayed": "2024-02-07",
+      "cover": "assets/covers/psn-c4d2538069.jpg",
+      "trophies": {
+        "earned": 16,
+        "total": 96,
+        "progress": 11
+      },
+      "thumb": "assets/covers/small/psn-c4d2538069.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1086940",
+      "title": "Baldur's Gate 3",
+      "hours": 89.8,
+      "lastPlayed": "2024-02-05",
+      "cover": "assets/covers/steam-b87b02f4a3.jpg",
+      "achievements": {
+        "earned": 18,
+        "total": 54,
+        "progress": 33
+      },
+      "thumb": "assets/covers/small/steam-b87b02f4a3.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA07783_00",
+      "title": "STAR WARS Jedi: Survivor™",
+      "hours": 51.1,
+      "lastPlayed": "2024-02-05",
+      "cover": "assets/covers/psn-0f5a28e72d.jpg",
+      "trophies": {
+        "earned": 36,
+        "total": 54,
+        "progress": 60
+      },
+      "thumb": "assets/covers/small/psn-0f5a28e72d.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1203620",
+      "title": "Enshrouded",
+      "hours": 10.2,
+      "lastPlayed": "2024-02-01",
+      "cover": "assets/covers/steam-a06e50c1aa.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 58,
+        "progress": 21
+      },
+      "thumb": "assets/covers/small/steam-a06e50c1aa.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1623730",
+      "title": "Palworld",
+      "hours": 6.6,
+      "lastPlayed": "2024-01-29",
+      "cover": "assets/covers/steam-9c1a6e2e5b.jpg",
+      "achievements": {
+        "earned": 2,
+        "total": 75,
+        "progress": 3
+      },
+      "thumb": "assets/covers/small/steam-9c1a6e2e5b.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1282730",
+      "title": "Loop Hero",
+      "hours": 45.6,
+      "lastPlayed": "2024-01-21",
+      "cover": "assets/covers/steam-4e53aa9973.jpg",
+      "achievements": {
+        "earned": 34,
+        "total": 50,
+        "progress": 68
+      },
+      "thumb": "assets/covers/small/steam-4e53aa9973.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1637320",
+      "title": "Dome Keeper",
+      "hours": 9.7,
+      "lastPlayed": "2024-01-21",
+      "cover": "assets/covers/steam-fca2c50ad6.jpg",
+      "achievements": {
+        "earned": 16,
+        "total": 47,
+        "progress": 34
+      },
+      "thumb": "assets/covers/small/steam-fca2c50ad6.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA00419_00",
+      "title": "Grand Theft Auto V (PlayStation®5)",
+      "hours": 37.4,
+      "lastPlayed": "2024-01-15",
+      "cover": "assets/covers/psn-f4bbee55f6.jpg",
+      "thumb": "assets/covers/small/psn-f4bbee55f6.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "377840",
+      "title": "FINAL FANTASY IX",
+      "hours": 86.2,
+      "lastPlayed": "2024-01-10",
+      "cover": "assets/covers/steam-c0d1e0cd46.jpg",
+      "achievements": {
+        "earned": 20,
+        "total": 85,
+        "progress": 24
+      },
+      "thumb": "assets/covers/small/steam-c0d1e0cd46.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "588650",
+      "title": "Dead Cells",
+      "hours": 21.5,
+      "lastPlayed": "2023-12-24",
+      "cover": "assets/covers/steam-2f867a60b3.jpg",
+      "achievements": {
+        "earned": 20,
+        "total": 121,
+        "progress": 17
+      },
+      "thumb": "assets/covers/small/steam-2f867a60b3.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1314000",
+      "title": "Achilles: Legends Untold",
+      "hours": 14.5,
+      "lastPlayed": "2023-12-15",
+      "cover": "assets/covers/steam-22a8188fce.jpg",
+      "achievements": {
+        "earned": 9,
+        "total": 39,
+        "progress": 23
+      },
+      "thumb": "assets/covers/small/steam-22a8188fce.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1284210",
+      "title": "Guild Wars 2®",
+      "hours": 6.4,
+      "lastPlayed": "2023-12-12",
+      "cover": "assets/covers/steam-5193170a1f.jpg",
+      "thumb": "assets/covers/small/steam-5193170a1f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1361210",
+      "title": "Warhammer 40,000: Darktide",
+      "hours": 17.2,
+      "lastPlayed": "2023-12-08",
+      "cover": "assets/covers/steam-c95c557437.jpg",
+      "achievements": {
+        "earned": 9,
+        "total": 36,
+        "progress": 25
+      },
+      "thumb": "assets/covers/small/steam-c95c557437.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1966720",
+      "title": "Lethal Company",
+      "hours": 11.5,
+      "lastPlayed": "2023-12-08",
+      "cover": "assets/covers/steam-38bc40dc8d.jpg",
+      "thumb": "assets/covers/small/steam-38bc40dc8d.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1562430",
+      "title": "DREDGE",
+      "hours": 22.7,
+      "lastPlayed": "2023-12-07",
+      "cover": "assets/covers/steam-0df006c0e5.jpg",
+      "achievements": {
+        "earned": 40,
+        "total": 60,
+        "progress": 67
+      },
+      "thumb": "assets/covers/small/steam-0df006c0e5.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1268750",
+      "title": "Starship Troopers: Extermination",
+      "hours": 23.7,
+      "lastPlayed": "2023-11-28",
+      "cover": "assets/covers/steam-e6e741799f.jpg",
+      "achievements": {
+        "earned": 0,
+        "total": 25,
+        "progress": 0
+      },
+      "thumb": "assets/covers/small/steam-e6e741799f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "552500",
+      "title": "Warhammer: Vermintide 2",
+      "hours": 102.7,
+      "lastPlayed": "2023-11-13",
+      "cover": "assets/covers/steam-9e0ee7784d.jpg",
+      "achievements": {
+        "earned": 26,
+        "total": 26,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/steam-9e0ee7784d.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1286680",
+      "title": "Tiny Tina's Wonderlands",
+      "hours": 5,
+      "lastPlayed": "2023-10-21",
+      "cover": "assets/covers/steam-3a36d70c83.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 47,
+        "progress": 15
+      },
+      "thumb": "assets/covers/small/steam-3a36d70c83.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1627720",
+      "title": "Lies of P",
+      "hours": 35.8,
+      "lastPlayed": "2023-10-20",
+      "cover": "assets/covers/steam-82d94ca60b.jpg",
+      "achievements": {
+        "earned": 32,
+        "total": 53,
+        "progress": 60
+      },
+      "thumb": "assets/covers/small/steam-82d94ca60b.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "924070",
+      "title": "Arboria",
+      "hours": 68.5,
+      "lastPlayed": "2023-10-07",
+      "cover": "assets/covers/steam-3c4b07c865.jpg",
+      "achievements": {
+        "earned": 21,
+        "total": 25,
+        "progress": 84
+      },
+      "thumb": "assets/covers/small/steam-3c4b07c865.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01342_00",
+      "title": "Demon's Souls",
+      "hours": 74.3,
+      "lastPlayed": "2023-10-03",
+      "cover": "assets/covers/psn-c60c9ae4ac.jpg",
+      "trophies": {
+        "earned": 37,
+        "total": 37,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-c60c9ae4ac.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "2342950",
+      "title": "God Of Weapons",
+      "hours": 8.5,
+      "lastPlayed": "2023-09-29",
+      "cover": "assets/covers/steam-ec886fb3ea.jpg",
+      "achievements": {
+        "earned": 28,
+        "total": 115,
+        "progress": 24
+      },
+      "thumb": "assets/covers/small/steam-ec886fb3ea.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1282100",
+      "title": "Remnant II",
+      "hours": 5.2,
+      "lastPlayed": "2023-09-10",
+      "cover": "assets/covers/steam-5c0bc43a73.jpg",
+      "achievements": {
+        "earned": 6,
+        "total": 65,
+        "progress": 9
+      },
+      "thumb": "assets/covers/small/steam-5c0bc43a73.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "227860",
+      "title": "Castle Story",
+      "hours": 15.2,
+      "lastPlayed": "2023-08-14",
+      "cover": "assets/covers/steam-9141631168.jpg",
+      "achievements": {
+        "earned": 3,
+        "total": 12,
+        "progress": 25
+      },
+      "thumb": "assets/covers/small/steam-9141631168.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA09311_00",
+      "title": "Assassin's Creed® Odyssey",
+      "hours": 10.6,
+      "lastPlayed": "2023-08-13",
+      "cover": "assets/covers/psn-c772c9401f.jpg",
+      "trophies": {
+        "earned": 3,
+        "total": 94,
+        "progress": 2
+      },
+      "thumb": "assets/covers/small/psn-c772c9401f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1062520",
+      "title": "Dinkum",
+      "hours": 157.8,
+      "lastPlayed": "2023-08-11",
+      "cover": "assets/covers/steam-874f35cb48.jpg",
+      "achievements": {
+        "earned": 0,
+        "total": 25,
+        "progress": 0
+      },
+      "thumb": "assets/covers/small/steam-874f35cb48.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "569480",
+      "title": "Kingdoms and Castles",
+      "hours": 16.7,
+      "lastPlayed": "2023-08-09",
+      "cover": "assets/covers/steam-197365db04.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 23,
+        "progress": 30
+      },
+      "thumb": "assets/covers/small/steam-197365db04.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "261550",
+      "title": "Mount & Blade II: Bannerlord",
+      "hours": 232.6,
+      "lastPlayed": "2023-08-08",
+      "cover": "assets/covers/steam-5388d900b9.jpg",
+      "achievements": {
+        "earned": 10,
+        "total": 50,
+        "progress": 20
+      },
+      "thumb": "assets/covers/small/steam-5388d900b9.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA02442_00",
+      "title": "Diablo® IV",
+      "hours": 63.2,
+      "lastPlayed": "2023-07-08",
+      "cover": "assets/covers/psn-9bea259ec2.jpg",
+      "trophies": {
+        "earned": 10,
+        "total": 46,
+        "progress": 15
+      },
+      "thumb": "assets/covers/small/psn-9bea259ec2.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "433340",
+      "title": "Slime Rancher",
+      "hours": 13.2,
+      "lastPlayed": "2023-05-15",
+      "cover": "assets/covers/steam-118a27a4e6.jpg",
+      "achievements": {
+        "earned": 24,
+        "total": 57,
+        "progress": 42
+      },
+      "thumb": "assets/covers/small/steam-118a27a4e6.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "48700",
+      "title": "Mount & Blade: Warband",
+      "hours": 547.9,
+      "lastPlayed": "2023-05-09",
+      "cover": "assets/covers/steam-d1d911a754.jpg",
+      "achievements": {
+        "earned": 71,
+        "total": 80,
+        "progress": 89
+      },
+      "thumb": "assets/covers/small/steam-d1d911a754.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "257850",
+      "title": "Hyper Light Drifter",
+      "hours": 14.3,
+      "lastPlayed": "2023-03-30",
+      "cover": "assets/covers/steam-24b56fcc9b.jpg",
+      "achievements": {
+        "earned": 3,
+        "total": 23,
+        "progress": 13
+      },
+      "thumb": "assets/covers/small/steam-24b56fcc9b.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1145360",
+      "title": "Hades",
+      "hours": 33.8,
+      "lastPlayed": "2023-01-25",
+      "cover": "assets/covers/steam-618ec58131.jpg",
+      "achievements": {
+        "earned": 15,
+        "total": 49,
+        "progress": 31
+      },
+      "thumb": "assets/covers/small/steam-618ec58131.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "281690",
+      "title": "The Legend of Korra™",
+      "hours": 58.9,
+      "lastPlayed": "2022-12-23",
+      "cover": "assets/covers/steam-cf2726490d.jpg",
+      "achievements": {
+        "earned": 22,
+        "total": 30,
+        "progress": 73
+      },
+      "thumb": "assets/covers/small/steam-cf2726490d.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA02342_00",
+      "title": "It Takes Two  PS4™ & PS5™",
+      "hours": 21.4,
+      "lastPlayed": "2022-12-07",
+      "cover": "assets/covers/psn-6f855f3a9d.jpg",
+      "thumb": "assets/covers/small/psn-6f855f3a9d.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA04408_00",
+      "title": "Middle-earth™: Shadow of War™",
+      "hours": 18.8,
+      "lastPlayed": "2022-11-10",
+      "cover": "assets/covers/psn-4a16058126.jpg",
+      "trophies": {
+        "earned": 13,
+        "total": 73,
+        "progress": 14
+      },
+      "thumb": "assets/covers/small/psn-4a16058126.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "976730",
+      "title": "Halo: The Master Chief Collection",
+      "hours": 28.5,
+      "lastPlayed": "2022-11-07",
+      "cover": "assets/covers/steam-719792bbac.jpg",
+      "achievements": {
+        "earned": 49,
+        "total": 700,
+        "progress": 7
+      },
+      "thumb": "assets/covers/small/steam-719792bbac.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "293780",
+      "title": "Crawl",
+      "hours": 24.4,
+      "lastPlayed": "2022-11-01",
+      "cover": "assets/covers/steam-8b4fbfe573.jpg",
+      "achievements": {
+        "earned": 4,
+        "total": 45,
+        "progress": 9
+      },
+      "thumb": "assets/covers/small/steam-8b4fbfe573.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "356650",
+      "title": "Death's Gambit: Afterlife",
+      "hours": 13.6,
+      "lastPlayed": "2022-10-02",
+      "cover": "assets/covers/steam-c3a4fece7c.jpg",
+      "achievements": {
+        "earned": 9,
+        "total": 43,
+        "progress": 21
+      },
+      "thumb": "assets/covers/small/steam-c3a4fece7c.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "590380",
+      "title": "Into the Breach",
+      "hours": 6.5,
+      "lastPlayed": "2022-09-22",
+      "cover": "assets/covers/steam-b8e2808086.jpg",
+      "achievements": {
+        "earned": 5,
+        "total": 70,
+        "progress": 7
+      },
+      "thumb": "assets/covers/small/steam-b8e2808086.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA05166_00",
+      "title": "SD GUNDAM BATTLE ALLIANCE PS4 & PS5",
+      "hours": 37.7,
+      "lastPlayed": "2022-09-20",
+      "cover": "assets/covers/psn-36604fb2b3.jpg",
+      "thumb": "assets/covers/small/psn-36604fb2b3.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "529660",
+      "title": "Mages of Mystralia",
+      "hours": 5.8,
+      "lastPlayed": "2022-08-07",
+      "cover": "assets/covers/steam-704e1793af.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 30,
+        "progress": 23
+      },
+      "thumb": "assets/covers/small/steam-704e1793af.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1087760",
+      "title": "The Gunk",
+      "hours": 7.7,
+      "lastPlayed": "2022-07-29",
+      "cover": "assets/covers/steam-6ac6194ca9.jpg",
+      "achievements": {
+        "earned": 17,
+        "total": 17,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/steam-6ac6194ca9.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "286690",
+      "title": "Metro 2033 Redux",
+      "hours": 11.8,
+      "lastPlayed": "2022-07-25",
+      "cover": "assets/covers/steam-d6876a8569.jpg",
+      "achievements": {
+        "earned": 21,
+        "total": 49,
+        "progress": 43
+      },
+      "thumb": "assets/covers/small/steam-d6876a8569.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "780290",
+      "title": "Gloomhaven",
+      "hours": 21.3,
+      "lastPlayed": "2022-07-08",
+      "cover": "assets/covers/steam-d76a09f4ea.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 61,
+        "progress": 20
+      },
+      "thumb": "assets/covers/small/steam-d76a09f4ea.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "527230",
+      "title": "For The King",
+      "hours": 30.1,
+      "lastPlayed": "2022-07-07",
+      "cover": "assets/covers/steam-ee33d809e1.jpg",
+      "achievements": {
+        "earned": 34,
+        "total": 78,
+        "progress": 44
+      },
+      "thumb": "assets/covers/small/steam-ee33d809e1.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA02261_00",
+      "title": "Dying Light 2",
+      "hours": 6.2,
+      "lastPlayed": "2022-07-07",
+      "cover": "assets/covers/psn-25a73be44a.jpg",
+      "thumb": "assets/covers/small/psn-25a73be44a.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "570940",
+      "title": "DARK SOULS™: REMASTERED",
+      "hours": 30.4,
+      "lastPlayed": "2022-07-06",
+      "cover": "assets/covers/steam-08a3156024.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 41,
+        "progress": 29
+      },
+      "thumb": "assets/covers/small/steam-08a3156024.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1216320",
+      "title": "Shieldwall",
+      "hours": 14.5,
+      "lastPlayed": "2022-07-06",
+      "cover": "assets/covers/steam-df1df231f7.jpg",
+      "achievements": {
+        "earned": 0,
+        "total": 43,
+        "progress": 0
+      },
+      "thumb": "assets/covers/small/steam-df1df231f7.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "489830",
+      "title": "The Elder Scrolls V: Skyrim Special Edition",
+      "hours": 106.6,
+      "lastPlayed": "2022-07-05",
+      "cover": "assets/covers/steam-6d8187fcaf.jpg",
+      "achievements": {
+        "earned": 40,
+        "total": 75,
+        "progress": 53
+      },
+      "thumb": "assets/covers/small/steam-6d8187fcaf.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "331670",
+      "title": "The Jackbox Party Pack",
+      "hours": 15.3,
+      "lastPlayed": "2022-05-29",
+      "cover": "assets/covers/steam-6a6a039462.jpg",
+      "achievements": {
+        "earned": 8,
+        "total": 20,
+        "progress": 40
+      },
+      "thumb": "assets/covers/small/steam-6a6a039462.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1005300",
+      "title": "The Jackbox Party Pack 6",
+      "hours": 7.7,
+      "lastPlayed": "2022-05-01",
+      "cover": "assets/covers/steam-ffaca3a01d.jpg",
+      "achievements": {
+        "earned": 4,
+        "total": 20,
+        "progress": 20
+      },
+      "thumb": "assets/covers/small/steam-ffaca3a01d.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA12031_00",
+      "title": "KINGDOM HEARTS Ⅲ",
+      "hours": 6.8,
+      "lastPlayed": "2022-02-04",
+      "cover": "assets/covers/psn-ee89fe5db4.jpg",
+      "thumb": "assets/covers/small/psn-ee89fe5db4.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01746_00",
+      "title": "Kena: Bridge of Spirits",
+      "hours": 15.8,
+      "lastPlayed": "2022-02-01",
+      "cover": "assets/covers/psn-c447e8371a.jpg",
+      "trophies": {
+        "earned": 40,
+        "total": 42,
+        "progress": 90
+      },
+      "thumb": "assets/covers/small/psn-c447e8371a.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA12047_00",
+      "title": "Sekiro™: Shadows Die Twice",
+      "hours": 90.2,
+      "lastPlayed": "2022-01-31",
+      "cover": "assets/covers/psn-c64374e2de.jpg",
+      "trophies": {
+        "earned": 34,
+        "total": 34,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-c64374e2de.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01411_00",
+      "title": "Marvel's Spider-Man: Miles Morales",
+      "hours": 24.8,
+      "lastPlayed": "2021-12-26",
+      "cover": "assets/covers/psn-b16f74a945.jpg",
+      "trophies": {
+        "earned": 50,
+        "total": 50,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-b16f74a945.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA01589_00",
+      "title": "DARK SOULS™ II: Scholar of the First Sin",
+      "hours": 90.5,
+      "lastPlayed": "2021-12-23",
+      "cover": "assets/covers/psn-c9c3a66e17.jpg",
+      "thumb": "assets/covers/small/psn-c9c3a66e17.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA02954_00",
+      "title": "FINAL FANTASY XIV Online",
+      "hours": 15.7,
+      "lastPlayed": "2021-10-13",
+      "cover": "assets/covers/psn-89771413e8.jpg",
+      "trophies": {
+        "earned": 0,
+        "total": 247,
+        "progress": 0
+      },
+      "thumb": "assets/covers/small/psn-89771413e8.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "39210",
+      "title": "FINAL FANTASY XIV Online",
+      "hours": 6.6,
+      "lastPlayed": "2021-10-11",
+      "cover": "assets/covers/steam-2c9e4d5f63.jpg",
+      "thumb": "assets/covers/small/steam-2c9e4d5f63.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA08829_00",
+      "title": "Call of Duty®: Modern Warfare®",
+      "hours": 474.2,
+      "lastPlayed": "2021-10-04",
+      "cover": "assets/covers/psn-6734476248.jpg",
+      "trophies": {
+        "earned": 2,
+        "total": 28,
+        "progress": 4
+      },
+      "thumb": "assets/covers/small/psn-6734476248.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "823130",
+      "title": "Totally Accurate Battlegrounds",
+      "hours": 9.6,
+      "lastPlayed": "2021-09-27",
+      "cover": "assets/covers/steam-9005839fe5.jpg",
+      "thumb": "assets/covers/small/steam-9005839fe5.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA09943_00",
+      "title": "God of War",
+      "hours": 39.6,
+      "lastPlayed": "2021-08-21",
+      "cover": "assets/covers/psn-e262c07d4f.jpg",
+      "trophies": {
+        "earned": 37,
+        "total": 37,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-e262c07d4f.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01410_00",
+      "title": "Tribes of Midgard",
+      "hours": 38.6,
+      "lastPlayed": "2021-08-09",
+      "cover": "assets/covers/psn-8d6fb4108a.jpg",
+      "trophies": {
+        "earned": 21,
+        "total": 27,
+        "progress": 73
+      },
+      "thumb": "assets/covers/small/psn-8d6fb4108a.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA11456_00",
+      "title": "Ghost of Tsushima",
+      "hours": 12.5,
+      "lastPlayed": "2021-07-18",
+      "cover": "assets/covers/psn-ef9539a6e5.jpg",
+      "trophies": {
+        "earned": 4,
+        "total": 77,
+        "progress": 3
+      },
+      "thumb": "assets/covers/small/psn-ef9539a6e5.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01473_00",
+      "title": "Ratchet & Clank: Rift Apart",
+      "hours": 20.8,
+      "lastPlayed": "2021-07-13",
+      "cover": "assets/covers/psn-d87bccab8a.jpg",
+      "trophies": {
+        "earned": 47,
+        "total": 47,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-d87bccab8a.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01347_00",
+      "title": "Godfall",
+      "hours": 7.6,
+      "lastPlayed": "2021-05-27",
+      "cover": "assets/covers/psn-cc9804ada7.jpg",
+      "trophies": {
+        "earned": 5,
+        "total": 64,
+        "progress": 4
+      },
+      "thumb": "assets/covers/small/psn-cc9804ada7.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA17271_00",
+      "title": "Kingdoms of Amalur: Re-Reckoning",
+      "hours": 21.7,
+      "lastPlayed": "2021-05-14",
+      "cover": "assets/covers/psn-5dd438092f.jpg",
+      "trophies": {
+        "earned": 14,
+        "total": 69,
+        "progress": 16
+      },
+      "thumb": "assets/covers/small/psn-5dd438092f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "945360",
+      "title": "Among Us",
+      "hours": 8.8,
+      "lastPlayed": "2021-04-22",
+      "cover": "assets/covers/steam-6e28864a09.jpg",
+      "achievements": {
+        "earned": 0,
+        "total": 33,
+        "progress": 0
+      },
+      "thumb": "assets/covers/small/steam-6e28864a09.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA01047_00",
+      "title": "Ratchet & Clank™",
+      "hours": 30.1,
+      "lastPlayed": "2021-03-25",
+      "cover": "assets/covers/psn-dff0de4e5a.jpg",
+      "trophies": {
+        "earned": 47,
+        "total": 47,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-dff0de4e5a.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA07345_00",
+      "title": "Ni no Kuni™ II: Revenant Kingdom",
+      "hours": 161.5,
+      "lastPlayed": "2021-03-24",
+      "cover": "assets/covers/psn-9b66904109.jpg",
+      "trophies": {
+        "earned": 38,
+        "total": 63,
+        "progress": 46
+      },
+      "thumb": "assets/covers/small/psn-9b66904109.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "814380",
+      "title": "Sekiro™: Shadows Die Twice",
+      "hours": 8.7,
+      "lastPlayed": "2021-03-16",
+      "cover": "assets/covers/steam-6df35fb310.jpg",
+      "achievements": {
+        "earned": 3,
+        "total": 34,
+        "progress": 9
+      },
+      "thumb": "assets/covers/small/steam-6df35fb310.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1217060",
+      "title": "Gunfire Reborn",
+      "hours": 11.1,
+      "lastPlayed": "2021-03-10",
+      "cover": "assets/covers/steam-3055db72a0.jpg",
+      "achievements": {
+        "earned": 25,
+        "total": 134,
+        "progress": 19
+      },
+      "thumb": "assets/covers/small/steam-3055db72a0.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "434170",
+      "title": "The Jackbox Party Pack 3",
+      "hours": 16.2,
+      "lastPlayed": "2021-03-03",
+      "cover": "assets/covers/steam-59bda336f2.jpg",
+      "achievements": {
+        "earned": 8,
+        "total": 20,
+        "progress": 40
+      },
+      "thumb": "assets/covers/small/steam-59bda336f2.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "727850",
+      "title": "ELDERBORN",
+      "hours": 7.3,
+      "lastPlayed": "2021-02-02",
+      "cover": "assets/covers/steam-72fe9a95c7.jpg",
+      "achievements": {
+        "earned": 4,
+        "total": 27,
+        "progress": 15
+      },
+      "thumb": "assets/covers/small/steam-72fe9a95c7.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "601150",
+      "title": "Devil May Cry 5",
+      "hours": 13.2,
+      "lastPlayed": "2021-01-30",
+      "cover": "assets/covers/steam-ab46da8570.jpg",
+      "achievements": {
+        "earned": 18,
+        "total": 55,
+        "progress": 33
+      },
+      "thumb": "assets/covers/small/steam-ab46da8570.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "582010",
+      "title": "Monster Hunter: World",
+      "hours": 10.4,
+      "lastPlayed": "2021-01-29",
+      "cover": "assets/covers/steam-1f81cd2389.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 100,
+        "progress": 12
+      },
+      "thumb": "assets/covers/small/steam-1f81cd2389.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "285900",
+      "title": "Gang Beasts",
+      "hours": 10.3,
+      "lastPlayed": "2021-01-29",
+      "cover": "assets/covers/steam-e6f5ec9edc.jpg",
+      "achievements": {
+        "earned": 5,
+        "total": 19,
+        "progress": 26
+      },
+      "thumb": "assets/covers/small/steam-e6f5ec9edc.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "610180",
+      "title": "The Jackbox Party Pack 4",
+      "hours": 10.4,
+      "lastPlayed": "2021-01-17",
+      "cover": "assets/covers/steam-5339c7bf8f.jpg",
+      "achievements": {
+        "earned": 5,
+        "total": 20,
+        "progress": 25
+      },
+      "thumb": "assets/covers/small/steam-5339c7bf8f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "379430",
+      "title": "Kingdom Come: Deliverance",
+      "hours": 99.7,
+      "lastPlayed": "2021-01-05",
+      "cover": "assets/covers/steam-ffb8688eae.jpg",
+      "achievements": {
+        "earned": 23,
+        "total": 82,
+        "progress": 28
+      },
+      "thumb": "assets/covers/small/steam-ffb8688eae.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "397460",
+      "title": "The Jackbox Party Pack 2",
+      "hours": 9.5,
+      "lastPlayed": "2020-09-20",
+      "cover": "assets/covers/steam-7421dbbbbc.jpg",
+      "achievements": {
+        "earned": 6,
+        "total": 20,
+        "progress": 30
+      },
+      "thumb": "assets/covers/small/steam-7421dbbbbc.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "386360",
+      "title": "SMITE",
+      "hours": 49.2,
+      "lastPlayed": "2020-09-13",
+      "cover": "assets/covers/steam-4e266754a4.jpg",
+      "achievements": {
+        "earned": 39,
+        "total": 319,
+        "progress": 12
+      },
+      "thumb": "assets/covers/small/steam-4e266754a4.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "688420",
+      "title": "Bad North: Jotunn Edition",
+      "hours": 19.3,
+      "lastPlayed": "2020-08-09",
+      "cover": "assets/covers/steam-e91deca212.jpg",
+      "achievements": {
+        "earned": 8,
+        "total": 11,
+        "progress": 73
+      },
+      "thumb": "assets/covers/small/steam-e91deca212.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "367500",
+      "title": "Dragon's Dogma: Dark Arisen",
+      "hours": 55.2,
+      "lastPlayed": "2020-04-29",
+      "cover": "assets/covers/steam-b7f90a4fb0.jpg",
+      "achievements": {
+        "earned": 22,
+        "total": 59,
+        "progress": 37
+      },
+      "thumb": "assets/covers/small/steam-b7f90a4fb0.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "410320",
+      "title": "EARTH DEFENSE FORCE 4.1  The Shadow of New Despair",
+      "hours": 5.2,
+      "lastPlayed": "2020-04-14",
+      "cover": "assets/covers/steam-ff2ceb4216.jpg",
+      "achievements": {
+        "earned": 1,
+        "total": 51,
+        "progress": 2
+      },
+      "thumb": "assets/covers/small/steam-ff2ceb4216.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "424370",
+      "title": "Wolcen: Lords of Mayhem",
+      "hours": 24.9,
+      "lastPlayed": "2020-02-23",
+      "cover": "assets/covers/steam-c63e41085a.jpg",
+      "achievements": {
+        "earned": 10,
+        "total": 64,
+        "progress": 16
+      },
+      "thumb": "assets/covers/small/steam-c63e41085a.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "445980",
+      "title": "Wizard of Legend",
+      "hours": 38.2,
+      "lastPlayed": "2020-01-11",
+      "cover": "assets/covers/steam-c1413d605f.jpg",
+      "achievements": {
+        "earned": 15,
+        "total": 19,
+        "progress": 79
+      },
+      "thumb": "assets/covers/small/steam-c1413d605f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "292030",
+      "title": "The Witcher 3: Wild Hunt — Remastered",
+      "hours": 25.4,
+      "lastPlayed": "2020-01-04",
+      "cover": "assets/covers/steam-df66b8cc0f.jpg",
+      "achievements": {
+        "earned": 8,
+        "total": 78,
+        "progress": 10
+      },
+      "thumb": "assets/covers/small/steam-df66b8cc0f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "466560",
+      "title": "Northgard: Definitive Edition",
+      "hours": 14.2,
+      "lastPlayed": "2019-12-21",
+      "cover": "assets/covers/steam-9050b6c772.jpg",
+      "achievements": {
+        "earned": 8,
+        "total": 289,
+        "progress": 3
+      },
+      "thumb": "assets/covers/small/steam-9050b6c772.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "674940",
+      "title": "Stick Fight: The Game",
+      "hours": 6.9,
+      "lastPlayed": "2019-10-19",
+      "cover": "assets/covers/steam-9c1c700b3a.jpg",
+      "achievements": {
+        "earned": 19,
+        "total": 28,
+        "progress": 68
+      },
+      "thumb": "assets/covers/small/steam-9c1c700b3a.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA12125_00",
+      "title": "Spyro™ Reignited Trilogy",
+      "hours": 10.7,
+      "lastPlayed": "2019-09-16",
+      "cover": "assets/covers/psn-7ecb202d15.jpg",
+      "thumb": "assets/covers/small/psn-7ecb202d15.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "47890",
+      "title": "The Sims™ 3",
+      "hours": 40.3,
+      "lastPlayed": "2019-08-02",
+      "cover": "assets/covers/steam-1b3717e5a6.jpg",
+      "thumb": "assets/covers/small/steam-1b3717e5a6.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "570",
+      "title": "Dota 2",
+      "hours": 253.6,
+      "lastPlayed": "2019-07-04",
+      "cover": "assets/covers/steam-4260e7eabc.jpg",
+      "thumb": "assets/covers/small/steam-4260e7eabc.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "448510",
+      "title": "Overcooked",
+      "hours": 26.4,
+      "lastPlayed": "2019-06-20",
+      "cover": "assets/covers/steam-7f49b6cddb.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 12,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/steam-7f49b6cddb.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "435150",
+      "title": "Divinity: Original Sin 2",
+      "hours": 13,
+      "lastPlayed": "2019-06-09",
+      "cover": "assets/covers/steam-b78a0cd1b2.jpg",
+      "achievements": {
+        "earned": 5,
+        "total": 97,
+        "progress": 5
+      },
+      "thumb": "assets/covers/small/steam-b78a0cd1b2.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "485510",
+      "title": "Nioh: Complete Edition",
+      "hours": 41.7,
+      "lastPlayed": "2019-03-09",
+      "cover": "assets/covers/steam-aedc1b267e.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 79,
+        "progress": 15
+      },
+      "thumb": "assets/covers/small/steam-aedc1b267e.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "462780",
+      "title": "Darksiders Warmastered Edition",
+      "hours": 22.9,
+      "lastPlayed": "2019-03-03",
+      "cover": "assets/covers/steam-6a123cadec.jpg",
+      "achievements": {
+        "earned": 34,
+        "total": 43,
+        "progress": 79
+      },
+      "thumb": "assets/covers/small/steam-6a123cadec.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "219640",
+      "title": "Chivalry: Medieval Warfare",
+      "hours": 18.5,
+      "lastPlayed": "2019-01-18",
+      "cover": "assets/covers/steam-0884cd089c.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 49,
+        "progress": 14
+      },
+      "thumb": "assets/covers/small/steam-0884cd089c.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "94400",
+      "title": "Nidhogg",
+      "hours": 12.4,
+      "lastPlayed": "2018-12-23",
+      "cover": "assets/covers/steam-b637143749.jpg",
+      "achievements": {
+        "earned": 4,
+        "total": 12,
+        "progress": 33
+      },
+      "thumb": "assets/covers/small/steam-b637143749.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "755790",
+      "title": "Ring of Elysium",
+      "hours": 20.4,
+      "lastPlayed": "2018-11-25",
+      "cover": "assets/covers/steam-bc18bd8c61.jpg",
+      "thumb": "assets/covers/small/steam-bc18bd8c61.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "236430",
+      "title": "DARK SOULS™ II",
+      "hours": 74.6,
+      "lastPlayed": "2018-11-11",
+      "cover": "assets/covers/steam-f1dabdc2a0.jpg",
+      "achievements": {
+        "earned": 20,
+        "total": 38,
+        "progress": 53
+      },
+      "thumb": "assets/covers/small/steam-f1dabdc2a0.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "462770",
+      "title": "Pyre",
+      "hours": 22.4,
+      "lastPlayed": "2018-10-26",
+      "cover": "assets/covers/steam-56d6a27e33.jpg",
+      "achievements": {
+        "earned": 38,
+        "total": 51,
+        "progress": 75
+      },
+      "thumb": "assets/covers/small/steam-56d6a27e33.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "416600",
+      "title": "Full Metal Furies",
+      "hours": 24.2,
+      "lastPlayed": "2018-10-05",
+      "cover": "assets/covers/steam-d915cc3031.jpg",
+      "achievements": {
+        "earned": 9,
+        "total": 36,
+        "progress": 25
+      },
+      "thumb": "assets/covers/small/steam-d915cc3031.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "730",
+      "title": "Counter-Strike 2",
+      "hours": 13.9,
+      "lastPlayed": "2018-10-03",
+      "cover": "assets/covers/steam-16a9efea48.jpg",
+      "achievements": {
+        "earned": 0,
+        "total": 1,
+        "progress": 0
+      },
+      "thumb": "assets/covers/small/steam-16a9efea48.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "304390",
+      "title": "FOR HONOR",
+      "hours": 5.6,
+      "lastPlayed": "2018-09-18",
+      "cover": "assets/covers/steam-8a0de4e0c1.jpg",
+      "achievements": {
+        "earned": 0,
+        "total": 60,
+        "progress": 0
+      },
+      "thumb": "assets/covers/small/steam-8a0de4e0c1.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "224480",
+      "title": "Octodad: Dadliest Catch",
+      "hours": 10.3,
+      "lastPlayed": "2018-09-03",
+      "cover": "assets/covers/steam-54b0088577.jpg",
+      "achievements": {
+        "earned": 5,
+        "total": 32,
+        "progress": 16
+      },
+      "thumb": "assets/covers/small/steam-54b0088577.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "240",
+      "title": "Counter-Strike: Source",
+      "hours": 46.5,
+      "lastPlayed": "2018-08-20",
+      "cover": "assets/covers/steam-cae91e45ae.jpg",
+      "achievements": {
+        "earned": 48,
+        "total": 147,
+        "progress": 33
+      },
+      "thumb": "assets/covers/small/steam-cae91e45ae.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "268910",
+      "title": "Cuphead",
+      "hours": 9.1,
+      "lastPlayed": "2018-07-16",
+      "cover": "assets/covers/steam-9caf27747b.jpg",
+      "achievements": {
+        "earned": 5,
+        "total": 42,
+        "progress": 12
+      },
+      "thumb": "assets/covers/small/steam-9caf27747b.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "368230",
+      "title": "Kingdom: Classic",
+      "hours": 16.8,
+      "lastPlayed": "2018-07-11",
+      "cover": "assets/covers/steam-4a88ec88c8.jpg",
+      "achievements": {
+        "earned": 13,
+        "total": 34,
+        "progress": 38
+      },
+      "thumb": "assets/covers/small/steam-4a88ec88c8.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "249990",
+      "title": "FORCED",
+      "hours": 9.1,
+      "lastPlayed": "2018-05-28",
+      "cover": "assets/covers/steam-b4eba0dffe.jpg",
+      "achievements": {
+        "earned": 4,
+        "total": 24,
+        "progress": 17
+      },
+      "thumb": "assets/covers/small/steam-b4eba0dffe.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "258970",
+      "title": "Gauntlet™ ",
+      "hours": 9,
+      "lastPlayed": "2018-05-28",
+      "cover": "assets/covers/steam-dcd7965e73.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 46,
+        "progress": 15
+      },
+      "thumb": "assets/covers/small/steam-dcd7965e73.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "237990",
+      "title": "The Banner Saga",
+      "hours": 9.4,
+      "lastPlayed": "2018-02-07",
+      "cover": "assets/covers/steam-efacc550fb.jpg",
+      "achievements": {
+        "earned": 13,
+        "total": 39,
+        "progress": 33
+      },
+      "thumb": "assets/covers/small/steam-efacc550fb.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "4000",
+      "title": "Garry's Mod",
+      "hours": 69.4,
+      "lastPlayed": "2018-01-27",
+      "cover": "assets/covers/steam-e0b2d81c80.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 29,
+        "progress": 24
+      },
+      "thumb": "assets/covers/small/steam-e0b2d81c80.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "320040",
+      "title": "Moon Hunters",
+      "hours": 10.9,
+      "lastPlayed": "2018-01-23",
+      "cover": "assets/covers/steam-041c44560d.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 47,
+        "progress": 26
+      },
+      "thumb": "assets/covers/small/steam-041c44560d.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "258030",
+      "title": "Earthlock: Festival of Magic",
+      "hours": 7.1,
+      "lastPlayed": "2017-12-24",
+      "cover": "assets/covers/steam-38cc89db5d.jpg",
+      "achievements": {
+        "earned": 6,
+        "total": 25,
+        "progress": 24
+      },
+      "thumb": "assets/covers/small/steam-38cc89db5d.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "323580",
+      "title": "Jotun: Valhalla Edition",
+      "hours": 5.7,
+      "lastPlayed": "2017-12-07",
+      "cover": "assets/covers/steam-3ed4a25ebf.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 36,
+        "progress": 19
+      },
+      "thumb": "assets/covers/small/steam-3ed4a25ebf.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "440",
+      "title": "Team Fortress 2",
+      "hours": 17.1,
+      "lastPlayed": "2017-11-19",
+      "cover": "assets/covers/steam-6d0e105079.jpg",
+      "achievements": {
+        "earned": 27,
+        "total": 520,
+        "progress": 5
+      },
+      "thumb": "assets/covers/small/steam-6d0e105079.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "8930",
+      "title": "Sid Meier's Civilization V",
+      "hours": 20.3,
+      "lastPlayed": "2017-09-15",
+      "cover": "assets/covers/steam-654c1676d9.jpg",
+      "achievements": {
+        "earned": 8,
+        "total": 286,
+        "progress": 3
+      },
+      "thumb": "assets/covers/small/steam-654c1676d9.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "269030",
+      "title": "The Yawhg",
+      "hours": 8.4,
+      "lastPlayed": "2017-09-03",
+      "cover": "assets/covers/steam-265632be30.jpg",
+      "thumb": "assets/covers/small/steam-265632be30.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "394510",
+      "title": "HELLDIVERS™",
+      "hours": 11.3,
+      "lastPlayed": "2017-07-14",
+      "cover": "assets/covers/steam-17f3088ad0.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 39,
+        "progress": 18
+      },
+      "thumb": "assets/covers/small/steam-17f3088ad0.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "255710",
+      "title": "Cities: Skylines",
+      "hours": 27.7,
+      "lastPlayed": "2017-03-08",
+      "cover": "assets/covers/steam-db3d644906.jpg",
+      "achievements": {
+        "earned": 8,
+        "total": 135,
+        "progress": 6
+      },
+      "thumb": "assets/covers/small/steam-db3d644906.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "201790",
+      "title": "Orcs Must Die! 2",
+      "hours": 17.6,
+      "lastPlayed": "2017-02-18",
+      "cover": "assets/covers/steam-31bb9d0eb4.jpg",
+      "achievements": {
+        "earned": 6,
+        "total": 27,
+        "progress": 22
+      },
+      "thumb": "assets/covers/small/steam-31bb9d0eb4.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "204360",
+      "title": "Castle Crashers",
+      "hours": 9.9,
+      "lastPlayed": "2017-02-15",
+      "cover": "assets/covers/steam-911815ab65.jpg",
+      "achievements": {
+        "earned": 2,
+        "total": 12,
+        "progress": 17
+      },
+      "thumb": "assets/covers/small/steam-911815ab65.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "323470",
+      "title": "DRAGON BALL XENOVERSE",
+      "hours": 16.3,
+      "lastPlayed": "2016-12-11",
+      "cover": "assets/covers/steam-135d350c93.jpg",
+      "achievements": {
+        "earned": 6,
+        "total": 50,
+        "progress": 12
+      },
+      "thumb": "assets/covers/small/steam-135d350c93.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "386940",
+      "title": "Ultimate Chicken Horse",
+      "hours": 8.3,
+      "lastPlayed": "2016-11-25",
+      "cover": "assets/covers/steam-84fabb3264.jpg",
+      "achievements": {
+        "earned": 12,
+        "total": 31,
+        "progress": 39
+      },
+      "thumb": "assets/covers/small/steam-84fabb3264.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "330840",
+      "title": "Game of Thrones - A Telltale Games Series",
+      "hours": 18.3,
+      "lastPlayed": "2016-03-22",
+      "cover": "assets/covers/steam-4f3e2402b1.jpg",
+      "achievements": {
+        "earned": 26,
+        "total": 48,
+        "progress": 54
+      },
+      "thumb": "assets/covers/small/steam-4f3e2402b1.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "265300",
+      "title": "Lords Of The Fallen",
+      "hours": 30.9,
+      "lastPlayed": "2016-01-26",
+      "cover": "assets/covers/steam-e2f0f72811.jpg",
+      "achievements": {
+        "earned": 32,
+        "total": 56,
+        "progress": 57
+      },
+      "thumb": "assets/covers/small/steam-e2f0f72811.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "221380",
+      "title": "Age of Empires II (2013)",
+      "hours": 6.8,
+      "lastPlayed": "2015-12-12",
+      "cover": "assets/covers/steam-b1cd49fdd2.jpg",
+      "achievements": {
+        "earned": 4,
+        "total": 294,
+        "progress": 1
+      },
+      "thumb": "assets/covers/small/steam-b1cd49fdd2.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "211420",
+      "title": "DARK SOULS™: Prepare To Die Edition",
+      "hours": 143.5,
+      "lastPlayed": "2015-10-18",
+      "cover": "assets/covers/steam-8cec338469.jpg",
+      "achievements": {
+        "earned": 4,
+        "total": 41,
+        "progress": 10
+      },
+      "thumb": "assets/covers/small/steam-8cec338469.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "40300",
+      "title": "Risen",
+      "hours": 5.6,
+      "lastPlayed": "2015-01-26",
+      "cover": "assets/covers/steam-22a19950d3.jpg",
+      "achievements": {
+        "earned": 0,
+        "total": 50,
+        "progress": 0
+      },
+      "thumb": "assets/covers/small/steam-22a19950d3.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "72850",
+      "title": "The Elder Scrolls V: Skyrim",
+      "hours": 82.7,
+      "lastPlayed": "2014-12-20",
+      "cover": "assets/covers/steam-475172c741.jpg",
+      "achievements": {
+        "earned": 20,
+        "total": 75,
+        "progress": 27
+      },
+      "thumb": "assets/covers/small/steam-475172c741.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "3480",
+      "title": "Peggle Deluxe",
+      "hours": 6.5,
+      "lastPlayed": "2014-07-20",
+      "cover": "assets/covers/steam-4ea7e03e6b.jpg",
+      "thumb": "assets/covers/small/steam-4ea7e03e6b.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "42910",
+      "title": "Magicka",
+      "hours": 17.6,
+      "lastPlayed": "2014-07-15",
+      "cover": "assets/covers/steam-d23fc3dca2.jpg",
+      "achievements": {
+        "earned": 22,
+        "total": 88,
+        "progress": 25
+      },
+      "thumb": "assets/covers/small/steam-d23fc3dca2.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "227220",
+      "title": "Sang-Froid - Tales of Werewolves",
+      "hours": 10.4,
+      "lastPlayed": "2014-07-14",
+      "cover": "assets/covers/steam-6960a89cf8.jpg",
+      "achievements": {
+        "earned": 8,
+        "total": 33,
+        "progress": 24
+      },
+      "thumb": "assets/covers/small/steam-6960a89cf8.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "207170",
+      "title": "Legend of Grimrock",
+      "hours": 5.2,
+      "lastPlayed": "2014-02-18",
+      "cover": "assets/covers/steam-e82f7160ca.jpg",
+      "achievements": {
+        "earned": 3,
+        "total": 40,
+        "progress": 8
+      },
+      "thumb": "assets/covers/small/steam-e82f7160ca.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "41500",
+      "title": "Torchlight",
+      "hours": 9,
+      "lastPlayed": "2011-08-07",
+      "cover": "assets/covers/steam-9d38d617b8.jpg",
+      "achievements": {
+        "earned": 7,
+        "total": 66,
+        "progress": 11
+      },
+      "thumb": "assets/covers/small/steam-9d38d617b8.jpg"
     }
   ]
 }
