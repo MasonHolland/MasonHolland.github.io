@@ -1,194 +1,705 @@
 {
-  "source": "sample",
-  "updated": "2026-11-11",
+  "source": "steam+psn",
+  "updated": "2026-11-18",
   "games": [
     {
+      "platform": "psn",
+      "id": "PPSA29920_00",
+      "title": "Aliens: Fireteam Elite 2",
+      "lastPlayed": "2026-11-16",
+      "cover": "assets/covers/psn-c1259d982c.jpg",
+      "trophies": {
+        "earned": 3,
+        "total": 31,
+        "progress": 4
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA10664_00",
+      "title": "FINAL FANTASY XVI",
+      "lastPlayed": "2026-11-16",
+      "cover": "assets/covers/psn-edd2de8982.jpg",
+      "trophies": {
+        "earned": 30,
+        "total": 69,
+        "progress": 34
+      }
+    },
+    {
       "platform": "steam",
-      "title": "Hades",
-      "hours": 212,
-      "recentHours": 6.5,
+      "id": "892970",
+      "title": "Valheim",
+      "hours": 1489.4,
+      "lastPlayed": "2026-11-11",
+      "cover": "assets/covers/steam-2c6698ddcd.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA28000_00",
+      "title": "The Blood of Dawnwalker",
+      "lastPlayed": "2026-11-10",
+      "cover": "assets/covers/psn-569c9670da.jpg",
+      "trophies": {
+        "earned": 47,
+        "total": 47,
+        "progress": 100
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01593_00",
+      "title": "Hogwarts Legacy",
+      "lastPlayed": "2026-11-10",
+      "cover": "assets/covers/psn-88c7aace2b.jpg",
+      "trophies": {
+        "earned": 10,
+        "total": 46,
+        "progress": 15
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01413_00",
+      "title": "HELLDIVERS™ 2",
       "lastPlayed": "2026-11-05",
-      "cover": "",
-      "id": "0"
-    },
-    {
-      "platform": "steam",
-      "title": "Stardew Valley",
-      "hours": 340,
-      "recentHours": 0,
-      "lastPlayed": "2026-10-20",
-      "cover": "",
-      "id": "1"
+      "cover": "assets/covers/psn-b425ee3e40.jpg",
+      "trophies": {
+        "earned": 39,
+        "total": 39,
+        "progress": 100
+      }
     },
     {
       "platform": "psn",
-      "title": "God of War Ragnar\u00f6k",
-      "hours": 64,
-      "recentHours": 0,
-      "lastPlayed": "2026-09-30",
-      "cover": "",
-      "id": "2"
-    },
-    {
-      "platform": "steam",
-      "title": "Portal 2",
-      "hours": 31,
-      "recentHours": 0,
-      "lastPlayed": "2026-08-12",
-      "cover": "",
-      "id": "3"
-    },
-    {
-      "platform": "steam",
-      "title": "Celeste",
-      "hours": 18,
-      "recentHours": 0,
-      "lastPlayed": "2026-07-01",
-      "cover": "",
-      "id": "4"
+      "id": "PPSA04998_00",
+      "title": "ARC Raiders",
+      "lastPlayed": "2026-11-05",
+      "cover": "assets/covers/psn-ab370bb6ae.jpg",
+      "trophies": {
+        "earned": 51,
+        "total": 51,
+        "progress": 100
+      }
     },
     {
       "platform": "psn",
-      "title": "Astro Bot",
-      "hours": 22,
-      "recentHours": 3.2,
-      "lastPlayed": "2026-11-08",
-      "cover": "",
-      "id": "5"
-    },
-    {
-      "platform": "steam",
-      "title": "Hollow Knight",
-      "hours": 57,
-      "recentHours": 0,
-      "lastPlayed": "2026-06-10",
-      "cover": "",
-      "id": "6"
+      "id": "PPSA03974_00",
+      "title": "Cyberpunk 2077",
+      "lastPlayed": "2026-11-03",
+      "cover": "assets/covers/psn-6eb54f965f.jpg",
+      "trophies": {
+        "earned": 1,
+        "total": 58,
+        "progress": 1
+      }
     },
     {
       "platform": "psn",
-      "title": "Marvel's Spider-Man 2",
-      "hours": 41,
-      "recentHours": 0,
-      "lastPlayed": "2026-05-22",
-      "cover": "",
-      "id": "7"
+      "id": "PPSA36921_00",
+      "title": "No More Room In Hell 2",
+      "lastPlayed": "2026-10-29",
+      "cover": "assets/covers/psn-5eb549ff2e.jpg",
+      "trophies": {
+        "earned": 3,
+        "total": 35,
+        "progress": 4
+      }
     },
     {
       "platform": "steam",
-      "title": "Baldur's Gate 3",
-      "hours": 188,
-      "recentHours": 0,
-      "lastPlayed": "2026-04-18",
-      "cover": "",
-      "id": "8"
+      "id": "431240",
+      "title": "Golf With Your Friends",
+      "hours": 1.6,
+      "lastPlayed": "2026-10-28",
+      "cover": "assets/covers/steam-1e8b730e4b.jpg"
     },
     {
       "platform": "psn",
-      "title": "Helldivers 2",
-      "hours": 96,
-      "recentHours": 1.4,
-      "lastPlayed": "2026-11-09",
-      "cover": "",
-      "id": "9"
+      "id": "PPSA33764_00",
+      "title": "Big Walk",
+      "lastPlayed": "2026-10-27",
+      "cover": "assets/covers/psn-91dd2b481d.jpg",
+      "trophies": {
+        "earned": 1,
+        "total": 13,
+        "progress": 9
+      }
     },
     {
       "platform": "steam",
-      "title": "Balatro",
-      "hours": 73,
-      "recentHours": 0,
-      "lastPlayed": "2026-03-03",
-      "cover": "",
-      "id": "10"
+      "id": "1604030",
+      "title": "V Rising",
+      "hours": 7.3,
+      "lastPlayed": "2026-10-25",
+      "cover": "assets/covers/steam-5713e1c93a.jpg"
     },
     {
       "platform": "psn",
-      "title": "Ghost of Tsushima",
-      "hours": 52,
-      "recentHours": 0,
-      "lastPlayed": "2026-02-14",
-      "cover": "",
-      "id": "11"
+      "id": "PPSA08560_00",
+      "title": "Split Fiction",
+      "lastPlayed": "2026-10-25",
+      "cover": "assets/covers/psn-d0c71c60bb.jpg",
+      "trophies": {
+        "earned": 4,
+        "total": 21,
+        "progress": 23
+      }
     },
     {
-      "platform": "switch",
-      "id": "sw-0",
-      "title": "The Legend of Zelda: Tears of the Kingdom",
-      "hours": 120,
-      "recentHours": 0,
-      "lastPlayed": "2026-09-14",
-      "cover": "",
-      "note": "Added by hand."
+      "platform": "steam",
+      "id": "1867240",
+      "title": "WARDOGS",
+      "hours": 2.1,
+      "lastPlayed": "2026-10-14",
+      "cover": ""
     },
     {
-      "platform": "switch",
-      "id": "sw-1",
-      "title": "Super Mario Odyssey",
-      "hours": 60,
-      "recentHours": 0,
-      "lastPlayed": "2026-07-02",
-      "cover": "",
-      "note": "Added by hand."
+      "platform": "steam",
+      "id": "105600",
+      "title": "Terraria",
+      "hours": 6.5,
+      "lastPlayed": "2026-10-04",
+      "cover": "assets/covers/steam-71dce5150d.jpg"
     },
     {
-      "platform": "switch",
-      "id": "sw-2",
-      "title": "Mario Kart 8 Deluxe",
-      "hours": 90,
-      "recentHours": 0,
+      "platform": "psn",
+      "id": "PPSA06693_00",
+      "title": "Remnant 2",
       "lastPlayed": "2026-10-01",
-      "cover": "",
-      "note": "Added by hand."
+      "cover": "assets/covers/psn-489e53cdb1.jpg",
+      "trophies": {
+        "earned": 30,
+        "total": 66,
+        "progress": 36
+      }
     },
     {
-      "platform": "switch",
-      "id": "sw-3",
-      "title": "Animal Crossing: New Horizons",
-      "hours": 210,
-      "recentHours": 0,
-      "lastPlayed": "2026-05-20",
-      "cover": "",
-      "note": "Added by hand."
+      "platform": "psn",
+      "id": "PPSA02110_00",
+      "title": "No Man's Sky",
+      "lastPlayed": "2026-09-24",
+      "cover": "assets/covers/psn-4b84af1923.jpg"
     },
     {
-      "platform": "switch",
-      "id": "sw-4",
-      "title": "Hollow Knight",
-      "hours": 35,
+      "platform": "psn",
+      "id": "NPWR20654_00",
+      "title": "No Man's Sky Trophies",
+      "hours": 0,
       "recentHours": 0,
-      "lastPlayed": "2026-03-11",
-      "cover": "",
-      "note": "Added by hand."
+      "lastPlayed": "2026-09-24",
+      "cover": "assets/covers/psn-fdd00ca27b.jpg",
+      "trophies": {
+        "earned": 2,
+        "total": 28,
+        "progress": 2
+      }
     },
     {
-      "platform": "switch",
-      "id": "sw-5",
-      "title": "Hades",
-      "hours": 48,
-      "recentHours": 0,
-      "lastPlayed": "2026-02-02",
-      "cover": "",
-      "note": "Added by hand."
+      "platform": "steam",
+      "id": "108600",
+      "title": "Project Zomboid",
+      "hours": 13.3,
+      "lastPlayed": "2026-09-23",
+      "cover": "assets/covers/steam-417c9778d6.jpg"
     },
     {
-      "platform": "switch",
-      "id": "sw-6",
-      "title": "Metroid Dread",
-      "hours": 14,
-      "recentHours": 0,
-      "lastPlayed": "2025-12-08",
-      "cover": "",
-      "note": "Added by hand."
+      "platform": "psn",
+      "id": "PPSA14632_00",
+      "title": "LEGO® Horizon Adventures™",
+      "lastPlayed": "2026-09-17",
+      "cover": "assets/covers/psn-88f67d1a01.jpg",
+      "trophies": {
+        "earned": 1,
+        "total": 24,
+        "progress": 1
+      }
     },
     {
-      "platform": "switch",
-      "id": "sw-7",
-      "title": "Stardew Valley",
-      "hours": 75,
+      "platform": "psn",
+      "id": "CUSA10863_00",
+      "title": "Plants vs. Zombies: Battle for Neighborville™",
+      "lastPlayed": "2026-09-16",
+      "cover": "assets/covers/psn-3e0229a82b.jpg",
+      "trophies": {
+        "earned": 0,
+        "total": 51,
+        "progress": 0
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA08329_00",
+      "title": "God of War Ragnarök",
+      "lastPlayed": "2026-09-16",
+      "cover": "assets/covers/psn-6ea689deb1.jpg",
+      "trophies": {
+        "earned": 38,
+        "total": 48,
+        "progress": 86
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA01623_00",
+      "title": "God of War® III Remastered",
+      "lastPlayed": "2026-09-11",
+      "cover": "assets/covers/psn-be9790e8f7.jpg",
+      "trophies": {
+        "earned": 1,
+        "total": 35,
+        "progress": 1
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA01317_00",
+      "title": "Gran Turismo® 7",
+      "lastPlayed": "2026-09-01",
+      "cover": "assets/covers/psn-9a64473138.jpg",
+      "trophies": {
+        "earned": 8,
+        "total": 54,
+        "progress": 11
+      }
+    },
+    {
+      "platform": "steam",
+      "id": "374320",
+      "title": "DARK SOULS™ III",
+      "hours": 139.4,
+      "lastPlayed": "2026-08-10",
+      "cover": "assets/covers/steam-4bb975859c.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1497440",
+      "title": "COCOON",
+      "hours": 0.7,
+      "lastPlayed": "2026-08-06",
+      "cover": "assets/covers/steam-de452479ed.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1245620",
+      "title": "ELDEN RING",
+      "hours": 73.9,
+      "lastPlayed": "2026-08-05",
+      "cover": "assets/covers/steam-8fe85b37eb.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "4704690",
+      "title": "MECCHA CHAMELEON",
+      "hours": 4.7,
+      "lastPlayed": "2026-08-05",
+      "cover": ""
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA04610_00",
+      "title": "ELDEN RING™",
+      "lastPlayed": "2026-08-04",
+      "cover": "assets/covers/psn-e4db859b18.jpg",
+      "trophies": {
+        "earned": 42,
+        "total": 42,
+        "progress": 100
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA28311_00",
+      "title": "Absolum",
+      "lastPlayed": "2026-07-23",
+      "cover": "assets/covers/psn-97d856ae00.jpg",
+      "trophies": {
+        "earned": 0,
+        "total": 38,
+        "progress": 0
+      }
+    },
+    {
+      "platform": "steam",
+      "id": "2004680",
+      "title": "Voidling Bound",
+      "hours": 0.6,
+      "lastPlayed": "2026-07-18",
+      "cover": "assets/covers/steam-7287d1aa65.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA13283_00",
+      "title": "EARTH DEFENSE FORCE: IRON RAIN",
+      "lastPlayed": "2026-07-14",
+      "cover": "assets/covers/psn-5f50eadd23.jpg",
+      "trophies": {
+        "earned": 2,
+        "total": 44,
+        "progress": 2
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA05933_00",
+      "title": "KINGDOM HEARTS - HD 1.5+2.5 ReMIX -",
+      "lastPlayed": "2026-07-09",
+      "cover": "assets/covers/psn-cf34ecfae8.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA05132_00",
+      "title": "Sifu",
+      "lastPlayed": "2026-07-04",
+      "cover": "assets/covers/psn-92a746ccd9.jpg",
+      "trophies": {
+        "earned": 22,
+        "total": 61,
+        "progress": 26
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA15211_00",
+      "title": "DRAGON BALL: Sparking! ZERO",
+      "lastPlayed": "2026-06-18",
+      "cover": "assets/covers/psn-875da92dfa.jpg",
+      "trophies": {
+        "earned": 0,
+        "total": 50,
+        "progress": 0
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "NPWR12334_00",
+      "title": "KINGDOM HEARTS FINAL MIX",
+      "hours": 0,
       "recentHours": 0,
-      "lastPlayed": "2026-08-19",
-      "cover": "",
-      "note": "Added by hand."
+      "lastPlayed": "2026-06-18",
+      "cover": "assets/covers/psn-e8e6a1956c.jpg",
+      "trophies": {
+        "earned": 0,
+        "total": 56,
+        "progress": 0
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA24487_00",
+      "title": "Marathon",
+      "lastPlayed": "2026-05-15",
+      "cover": "assets/covers/psn-9550151aa8.jpg",
+      "trophies": {
+        "earned": 6,
+        "total": 14,
+        "progress": 36
+      }
+    },
+    {
+      "platform": "steam",
+      "id": "578080",
+      "title": "PUBG: BATTLEGROUNDS",
+      "hours": 1344.5,
+      "lastPlayed": "2026-05-01",
+      "cover": "assets/covers/steam-fcfc8b7784.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "548430",
+      "title": "Deep Rock Galactic",
+      "hours": 38.9,
+      "lastPlayed": "2026-03-31",
+      "cover": "assets/covers/steam-84e8a04b1c.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1904480",
+      "title": "Absolum",
+      "hours": 39.9,
+      "lastPlayed": "2026-03-30",
+      "cover": "assets/covers/steam-d96af49840.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA07867_00",
+      "title": "Forever Skies",
+      "lastPlayed": "2026-03-19",
+      "cover": "assets/covers/psn-70a0302ea0.jpg",
+      "trophies": {
+        "earned": 5,
+        "total": 21,
+        "progress": 8
+      }
+    },
+    {
+      "platform": "steam",
+      "id": "2536520",
+      "title": "Diablo II: Resurrected – Infernal Edition",
+      "hours": 6.9,
+      "lastPlayed": "2026-03-18",
+      "cover": ""
+    },
+    {
+      "platform": "steam",
+      "id": "1409830",
+      "title": "Sons of Valhalla",
+      "hours": 1.5,
+      "lastPlayed": "2026-03-16",
+      "cover": "assets/covers/steam-f19469acb7.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA13428_00",
+      "title": "Horizon Zero Dawn™ Remastered",
+      "lastPlayed": "2026-03-16",
+      "cover": "assets/covers/psn-ba17acbbee.jpg",
+      "trophies": {
+        "earned": 4,
+        "total": 79,
+        "progress": 4
+      }
+    },
+    {
+      "platform": "steam",
+      "id": "2778610",
+      "title": "Over The Top: WWI",
+      "hours": 2.7,
+      "lastPlayed": "2026-03-13",
+      "cover": "assets/covers/steam-5660d5a2c2.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA28997_00",
+      "title": "God of War Sons of Sparta",
+      "lastPlayed": "2026-03-08",
+      "cover": "assets/covers/psn-a56ea94252.jpg",
+      "trophies": {
+        "earned": 3,
+        "total": 36,
+        "progress": 4
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA19576_00",
+      "title": "Kunitsu-Gami: Path of the Goddess",
+      "lastPlayed": "2026-03-08",
+      "cover": "assets/covers/psn-38405a8bbc.jpg",
+      "trophies": {
+        "earned": 20,
+        "total": 48,
+        "progress": 28
+      }
+    },
+    {
+      "platform": "steam",
+      "id": "22380",
+      "title": "Fallout: New Vegas",
+      "hours": 2.8,
+      "lastPlayed": "2026-03-06",
+      "cover": "assets/covers/steam-46011ca3f6.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA33065_00",
+      "title": "PRAGMATA SKETCHBOOK",
+      "lastPlayed": "2026-03-05",
+      "cover": "assets/covers/psn-1be4bd4083.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "2334730",
+      "title": "Death Must Die",
+      "hours": 7.2,
+      "lastPlayed": "2026-03-03",
+      "cover": "assets/covers/steam-8300f8e4b3.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA35800_00",
+      "title": "God of War Sons of Sparta Digital Artbook and Soundtrack",
+      "lastPlayed": "2026-03-02",
+      "cover": "assets/covers/psn-58a7fe9304.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1369630",
+      "title": "ENDER LILIES: Quietus of the Knights",
+      "hours": 1.2,
+      "lastPlayed": "2026-02-28",
+      "cover": "assets/covers/steam-6f8f0c4d6f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "365360",
+      "title": "Battle Brothers",
+      "hours": 1.2,
+      "lastPlayed": "2026-02-24",
+      "cover": "assets/covers/steam-985682331f.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "362490",
+      "title": "Exanima",
+      "hours": 0.7,
+      "lastPlayed": "2026-02-23",
+      "cover": "assets/covers/steam-102c361b63.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1371980",
+      "title": "No Rest for the Wicked",
+      "hours": 2.2,
+      "lastPlayed": "2026-02-18",
+      "cover": "assets/covers/steam-0b3f4868f0.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "2934220",
+      "title": "Monsters are Coming!",
+      "hours": 0.6,
+      "lastPlayed": "2026-02-15",
+      "cover": ""
+    },
+    {
+      "platform": "steam",
+      "id": "2062430",
+      "title": "BALL x PIT",
+      "hours": 55,
+      "lastPlayed": "2026-02-14",
+      "cover": ""
+    },
+    {
+      "platform": "steam",
+      "id": "3834090",
+      "title": "YAPYAP",
+      "hours": 3.5,
+      "lastPlayed": "2026-02-13",
+      "cover": ""
+    },
+    {
+      "platform": "steam",
+      "id": "2784470",
+      "title": "9 Kings",
+      "hours": 8.7,
+      "lastPlayed": "2026-02-10",
+      "cover": "assets/covers/steam-56476b238c.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA22040_00",
+      "title": "Path of Exile 2 Beta",
+      "lastPlayed": "2026-02-06",
+      "cover": "assets/covers/psn-54a3c9904c.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "644390",
+      "title": "D&D Lords of Waterdeep",
+      "hours": 3.3,
+      "lastPlayed": "2026-01-30",
+      "cover": "assets/covers/steam-354ceac9b8.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA02183_00",
+      "title": "Chivalry 2",
+      "lastPlayed": "2026-01-26",
+      "cover": "assets/covers/psn-c3293ff4fd.jpg",
+      "trophies": {
+        "earned": 3,
+        "total": 42,
+        "progress": 4
+      }
+    },
+    {
+      "platform": "steam",
+      "id": "632360",
+      "title": "Risk of Rain 2",
+      "hours": 65.1,
+      "lastPlayed": "2026-01-23",
+      "cover": "assets/covers/steam-c7b763f5a4.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "2687400",
+      "title": "GODBREAKERS",
+      "hours": 15.5,
+      "lastPlayed": "2026-01-06",
+      "cover": "assets/covers/steam-cf873cd5d5.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "241930",
+      "title": "Middle-earth™: Shadow of Mordor™",
+      "hours": 39.7,
+      "lastPlayed": "2026-01-05",
+      "cover": "assets/covers/steam-e46cebb87e.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1808500",
+      "title": "ARC Raiders",
+      "hours": 1.1,
+      "lastPlayed": "2025-12-29",
+      "cover": "assets/covers/steam-6ff893dfba.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1374490",
+      "title": "RuneScape: Dragonwilds",
+      "hours": 3.3,
+      "lastPlayed": "2025-11-21",
+      "cover": ""
+    },
+    {
+      "platform": "steam",
+      "id": "2824490",
+      "title": "He is Coming",
+      "hours": 1.4,
+      "lastPlayed": "2025-10-31",
+      "cover": "assets/covers/steam-9484ee4a89.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "1494810",
+      "title": "Mortal Sin",
+      "hours": 0.2,
+      "lastPlayed": "2025-10-31",
+      "cover": "assets/covers/steam-8b348a6074.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "3527290",
+      "title": "PEAK",
+      "hours": 1.3,
+      "lastPlayed": "2025-10-27",
+      "cover": ""
+    },
+    {
+      "platform": "psn",
+      "id": "CUSA11952_00",
+      "title": "Stick Fight: The Game",
+      "lastPlayed": "2025-07-21",
+      "cover": "assets/covers/psn-11bfd5fe4d.jpg",
+      "trophies": {
+        "earned": 0,
+        "total": 28,
+        "progress": 0
+      }
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA03016_00",
+      "title": "Marvel's Spider-Man 2",
+      "lastPlayed": "2025-07-12",
+      "cover": "assets/covers/psn-ec9d566aa9.jpg",
+      "trophies": {
+        "earned": 42,
+        "total": 43,
+        "progress": 97
+      }
     }
   ]
 }
