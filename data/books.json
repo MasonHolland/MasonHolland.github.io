@@ -9,6 +9,7 @@
       "seriesNo": 2,
       "author": "Jay Kristoff",
       "link": "https://www.goodreads.com/book/show/126918599",
+      "cover": "assets/books/covers/126918599.jpg",
       "genre": "Fantasy"
     },
     {
@@ -18,6 +19,7 @@
       "seriesNo": 2,
       "author": "Christopher Buehlman",
       "link": "https://www.goodreads.com/book/show/243051476",
+      "cover": "assets/books/covers/243051476.jpg",
       "genre": "Fantasy"
     },
     {
@@ -25,6 +27,7 @@
       "title": "How Fascism Works: The Politics of Us and Them",
       "author": "Jason F. Stanley",
       "link": "https://www.goodreads.com/book/show/38255329",
+      "cover": "assets/books/covers/38255329.jpg",
       "genre": "Society & politics"
     },
     {
@@ -32,6 +35,7 @@
       "title": "Baby Signing Essentials: Easy Sign Language for Every Age and Stage (200 Illustrated ASL Signs for Two-Way Communication)",
       "author": "Nancy Cadjan",
       "link": "https://www.goodreads.com/book/show/23418614",
+      "cover": "assets/books/covers/23418614.jpg",
       "genre": "Self-help & family"
     },
     {
@@ -39,6 +43,7 @@
       "title": "The Daily Stoic: 366 Meditations on Wisdom, Perseverance, and the Art of Living",
       "author": "Ryan Holiday",
       "link": "https://www.goodreads.com/book/show/29093292",
+      "cover": "assets/books/covers/29093292.jpg",
       "genre": "Self-help & family"
     },
     {
@@ -46,6 +51,7 @@
       "title": "The Daily Dad: 366 Meditations on Parenting, Love and Raising Great Kids",
       "author": "Ryan Holiday",
       "link": "https://www.goodreads.com/book/show/61992094",
+      "cover": "assets/books/covers/61992094.jpg",
       "genre": "Self-help & family"
     },
     {
@@ -53,6 +59,7 @@
       "title": "Cræft: An Inquiry Into the Origins and True Meaning of Traditional Crafts",
       "author": "Alex Langlands",
       "link": "https://www.goodreads.com/book/show/40180024",
+      "cover": "assets/books/covers/40180024.jpg",
       "genre": "History"
     },
     {
@@ -60,6 +67,7 @@
       "title": "The History of Childhood: A Very Short Introduction",
       "author": "James Marten",
       "link": "https://www.goodreads.com/book/show/38819243",
+      "cover": "assets/books/covers/38819243.jpg",
       "genre": "History"
     },
     {
@@ -67,6 +75,7 @@
       "title": "The Iliad",
       "author": "Homer",
       "link": "https://www.goodreads.com/book/show/1371",
+      "cover": "assets/books/covers/1371.jpg",
       "genre": "Classics & literature"
     }
   ],

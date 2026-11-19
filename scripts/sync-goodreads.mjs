@@ -30,7 +30,7 @@
  *   GOODREADS_WANT_SHELF     optional. Defaults to "to-read" (the "Want to Read" shelf).
  *   MAX_GENRE_LOOKUPS        optional. Genre lookups per run. Defaults to 800.
  */
-import { readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -79,6 +79,7 @@ export function parseWidget(js) {
     const author = block.match(/<div class="gr_custom_author[^"]*">\s*by\s*<a[^>]*>([\s\S]*?)<\/a>/);
     const img = block.match(/<img[^>]*src="[^"]*\/books\/\d+[a-z]\/(\d+)\./);
     const stars = block.match(/staticStars[^"]*"\s+title="([^"]+)"/);   // only present when you rated it
+    const src = block.match(/<img[^>]*src="([^"]+)"/);
     const id = img ? img[1] : "";
     const t = parseTitle(decode(full ? full[1] : title ? title[1] : ""));
     return {
@@ -87,6 +88,8 @@ export function parseWidget(js) {
       author: decode(author ? author[1] : ""),
       rating: stars ? RATINGS[stars[1].toLowerCase()] || 0 : 0,
       link: id ? `https://www.goodreads.com/book/show/${id}` : "",
+      // the cover; the widget's copy is a small thumbnail, so drop the size suffix for the full one
+      image: src && !/nophoto/.test(src[1]) ? decode(src[1]).replace(/\._S[XY]\d+_(?=\.)/, "") : "",
     };
   }).filter((b) => b.title);
 }
@@ -277,6 +280,38 @@ export function mergeWant(widget, archiveWant, read, current) {
   return list;
 }
 
+/* ---------- covers for the currently-reading shelf ---------- */
+
+const COVER_DIR = "assets/books/covers";
+
+/**
+ * Save a 200x300 cover for each book you are reading now (assets/books/covers/<id>.jpg, kept
+ * between runs) and point the book at it. A book without one gets a plain cloth cover in the room.
+ */
+async function saveBookCovers(books) {
+  let sharp, fitCover;
+  try { sharp = (await import("sharp")).default; ({ fitCover } = await import("./thumbs.mjs")); }
+  catch { console.error("covers: the sharp package is missing (run npm install); skipping book covers."); }
+  const root = path.join(DATA, "..");
+  for (const b of books) {
+    const image = b.image;
+    delete b.image;
+    if (!b.id || !sharp) continue;
+    const rel = `${COVER_DIR}/${b.id}.jpg`, abs = path.join(root, rel);
+    try { await access(abs); b.cover = rel; continue; } catch { /* not saved yet */ }
+    if (!/^https:\/\//.test(image || "")) continue;
+    try {
+      const res = await fetch(image, { headers: { "User-Agent": UA } });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await mkdir(path.dirname(abs), { recursive: true });
+      await writeFile(abs, await fitCover(sharp, Buffer.from(await res.arrayBuffer())));
+      b.cover = rel;
+    } catch (e) {
+      console.error(`covers: couldn't save the cover of ${b.title}: ${e.message}`);
+    }
+  }
+}
+
 async function main() {
   const userId = process.env.GOODREADS_USER_ID;
   if (!userId) {
@@ -289,7 +324,8 @@ async function main() {
   const maxLookups = parseInt(process.env.MAX_GENRE_LOOKUPS || "800", 10);
   const today = new Date().toISOString().slice(0, 10);
 
-  const widgetRead = await fetchShelf(userId, shelf, "date_read");
+  const noImage = (list) => list && list.map(({ image, ...rest }) => rest);   // only current books keep covers
+  const widgetRead = noImage(await fetchShelf(userId, shelf, "date_read"));
   if (!widgetRead || widgetRead.length === 0) {
     console.error("The read shelf widget returned no books. Check the user ID and that your shelves are public. Leaving data/books.json unchanged.");
     process.exit(1);
@@ -301,7 +337,8 @@ async function main() {
   const books = mergeRead(archiveFile.books || [], previous, widgetRead, today);
 
   const current = ((await fetchShelf(userId, currentShelf, "date_added")) || []).map(({ rating, ...rest }) => rest);
-  const widgetWant = await fetchShelf(userId, wantShelf, "date_added");
+  await saveBookCovers(current);
+  const widgetWant = noImage(await fetchShelf(userId, wantShelf, "date_added"));
   // if the want widget fails, keep the export's list rather than emptying the case
   const wantToRead = mergeWant(widgetWant || [], archiveFile.wantToRead || [], books, current);
 

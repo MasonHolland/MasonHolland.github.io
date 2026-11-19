@@ -13,20 +13,22 @@ import * as THREE from "three";
  * no model files.
  * ------------------------------------------------------------------ */
 
-export const R = 8;                   // hall radius (big enough that rooms 60 degrees apart don't overlap)
-export const HUB_H = 6;               // height of the hall wall, where the dome begins
-export const DOME_RISE = 5;           // how far the dome rises above the wall (its top is HUB_H + DOME_RISE)
+export const R = 6;                   // hall radius
+export const HUB_H = 5;               // height of the hall wall, where the dome begins
+export const DOME_RISE = 4;           // how far the dome rises above the wall (its top is HUB_H + DOME_RISE)
 // Each room is built in its own frame, as if the hall had a 4.5 m radius, then pushed out by SHIFT.
 export const FACE = 4.36;             // room frame: distance to the flat face of the door wall
 export const NEAR = 4.96;             // room frame: distance to where the room starts
 export const WALL_T = NEAR - FACE;    // thickness of the door wall (the passage length)
 export const RW = 8, RD = 8;          // room width and depth
-export const DOOR_HALF = 0.7;         // half the width of a doorway
-export const SPRING = 2.15;           // height where the door arch begins
+export const DOOR_HALF = 0.8;         // half the width of a doorway
+export const SPRING = 2.2;            // height where the door arch begins
 export const ARCH_TOP = SPRING + DOOR_HALF;
-export const GAP = 1.12;              // half the width of the gap in the hall wall at each door
-// how far each room is pushed out so its door wall meets the curved hall wall at the edge of the gap
-export const SHIFT = Math.sqrt(R * R - GAP * GAP) - FACE;
+export const GAP = 1.2;               // half the width of the gap in the hall wall at each door
+// how far each room is pushed out from the middle of the hall (far enough that rooms 60 degrees apart
+// don't overlap); the hall is smaller, so a short arched hallway joins it to each room's door wall
+export const SHIFT = 3.56;
+export const HALL_IN = Math.sqrt(R * R - GAP * GAP) - SHIFT;   // room frame: where that hallway meets the hall
 // door directions: 0 is 12 o'clock, positive turns left. 10 o'clock and 2 o'clock are 60 degrees either side.
 export const DOOR_ANGLES = { about: Math.PI / 3, work: 0, hobbies: -Math.PI / 3 };
 export const EYE = 1.6;
@@ -99,7 +101,7 @@ scene.background = new THREE.Color(0x0b0f14);
 
 export const camera = new THREE.PerspectiveCamera(70, 1, 0.05, 60);
 camera.rotation.order = "YXZ";
-camera.position.set(0, EYE, 5.5);
+camera.position.set(0, EYE, R - 2);
 
 export function resize() {
   const w = innerWidth, h = innerHeight;
@@ -228,12 +230,31 @@ export function archLeafGeo(hw, spring, depth) {
 
 /* ---------- signs ---------- */
 
+/**
+ * A box whose front (+z) face uses material 1 and every other face material 0, so it costs two
+ * draw calls instead of six. Boxes of the same size share one geometry.
+ */
+const frontBoxes = new Map();
+export function frontBox(w, h, d) {
+  const key = `${w.toFixed(4)},${h.toFixed(4)},${d.toFixed(4)}`;
+  if (frontBoxes.has(key)) return frontBoxes.get(key);
+  const geo = new THREE.BoxGeometry(w, h, d);
+  const idx = Array.from(geo.index.array);
+  // faces are +x, -x, +y, -y, +z, -z (6 indices each): move +z to the end
+  const order = [0, 1, 2, 3, 5, 4].flatMap((f) => idx.slice(f * 6, f * 6 + 6));
+  geo.setIndex(order);
+  geo.clearGroups();
+  geo.addGroup(0, 30, 0);
+  geo.addGroup(30, 6, 1);
+  frontBoxes.set(key, geo);
+  return geo;
+}
+
 export function signMesh(w, h, draw) {
   const tex = canvasTex(1024, Math.round(1024 * h / w), draw);
   const faces = mat(0x222222);
   const front = new THREE.MeshBasicMaterial({ map: tex });
-  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.06), [faces, faces, faces, faces, front, faces]);
-  return m;
+  return new THREE.Mesh(frontBox(w, h, 0.06), [faces, front]);
 }
 
 export const SIGNS = {
@@ -293,7 +314,7 @@ export function toWorld(angle, lx, lz) {
   return [lx * c + z * s, -lx * s + z * c];
 }
 
-export const hubObstacles = [];   // world-space boxes in the hall, e.g. the mailbox: { x0, x1, z0, z1 }
+export const hubObstacles = [];   // world-space boxes in the hall, e.g. the pigeon stand: { x0, x1, z0, z1 }
 
 export function walkable(x, z) {
   const hubR = R - 0.28;
@@ -302,7 +323,7 @@ export function walkable(x, z) {
   }
   for (const room of Object.values(rooms)) {
     const [lx, lz] = toLocal(room.angle, x, z);
-    if (Math.abs(lx) <= DOOR_HALF - 0.24 && lz <= -4.0 && lz >= -5.45) return true;
+    if (Math.abs(lx) <= DOOR_HALF - 0.24 && lz <= -(HALL_IN - 0.4) && lz >= -5.45) return true;
     const inBox = (b) => lx >= b.x0 && lx <= b.x1 && lz >= b.z0 && lz <= b.z1;
     if (inBox(room.bounds) || room.annexes.some((a) => inBox(a.walk))) {
       let hit = false;
@@ -377,11 +398,13 @@ export function makePlant(parent, x, z, scale = 1, potColor = 0x6b2d34) {
   plant.scale.setScalar(scale);
   parent.add(plant);
   cyl(0.22, 0.17, 0.4, mat(potColor), 0, 0.2, 0, plant);
+  cyl(0.2, 0.2, 0.02, mat(0x3b2a1e, { roughness: 1 }), 0, 0.385, 0, plant);   // soil
+  // the leaves start just inside the pot, so the plant sits in it rather than floating above
   for (let i = 0; i < 9; i++) {
     const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.17, 12, 10), mat(i % 2 ? 0x4c7a4f : 0x3d6a45));
     const a = (i / 9) * Math.PI * 2;
     leaf.scale.set(0.7, 1.9, 0.35);
-    leaf.position.set(Math.cos(a) * 0.12, 0.75 + (i % 3) * 0.1, Math.sin(a) * 0.12);
+    leaf.position.set(Math.cos(a) * 0.1, 0.62 + (i % 3) * 0.08, Math.sin(a) * 0.1);
     leaf.rotation.set(Math.sin(a) * 0.5, 0, -Math.cos(a) * 0.5);
     plant.add(leaf);
   }
@@ -453,15 +476,19 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
   left.position.set(-RW / 2, H / 2, zc);
   inner.add(left);
   // the right wall, in pieces around the opening if there is one
+  const zFar = -(NEAR + RD), zNear = -NEAR;
   const rightPiece = (zA, zB, yA, yB) => {
     const len = zB - zA, ht = yB - yA;
     if (len <= 0.001 || ht <= 0.001) return;
-    const p = new THREE.Mesh(new THREE.PlaneGeometry(len, ht), tiled(wall.tex, len / wall.tw, ht / wall.th, wall.opts));
+    // offset the texture by where the piece starts, so the pattern runs on across the pieces
+    // (the stone above a doorway lines up with the wall either side of it)
+    const m = tiled(wall.tex, len / wall.tw, ht / wall.th, wall.opts);
+    m.map.offset.set((zA - zFar) / wall.tw, yA / wall.th);
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(len, ht), m);
     p.rotation.y = -Math.PI / 2;
     p.position.set(RW / 2, (yA + yB) / 2, (zA + zB) / 2);
     inner.add(p);
   };
-  const zFar = -(NEAR + RD), zNear = -NEAR;
   if (rightOpening) {
     const { z0, z1, h } = rightOpening;
     rightPiece(zFar, z0, 0, H);
@@ -476,14 +503,24 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
   slab.position.z = -NEAR;
   g.add(slab);
 
+  // the short arched hallway from the hall to the door wall: a vaulted tunnel and its floor
+  const tunnelLen = FACE - HALL_IN + 0.02;
+  const tunnel = new THREE.Mesh(archFrameGeo(DOOR_HALF, GAP - DOOR_HALF, SPRING, tunnelLen), hallwayMat());
+  tunnel.position.z = -FACE - 0.01;
+  g.add(tunnel);
+  const tf = new THREE.Mesh(new THREE.PlaneGeometry(DOOR_HALF * 2, tunnelLen), tiled(floor.tex, (DOOR_HALF * 2) / floor.tw, tunnelLen / floor.th, floor.opts));
+  tf.rotation.x = -Math.PI / 2;
+  tf.position.set(0, 0.002, -(FACE + HALL_IN) / 2);
+  g.add(tf);
+
   // skin on the hall side, so the hall's wall looks continuous
   const skin = new THREE.Mesh(archSlabGeo(GAP + 0.02, HUB_H, 0.02), hubWallMat(1 / 2, 1 / HUB_H));
-  skin.position.z = -FACE;
+  skin.position.z = -HALL_IN;
   g.add(skin);
 
-  // arched frames on both sides of the passage
+  // arched frames at the hall end of the hallway and on the room side of the door wall
   const fHall = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), frameMat);
-  fHall.position.z = -FACE - 0.02;
+  fHall.position.z = -HALL_IN;
   g.add(fHall);
   const fRoom = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), frameMat);
   fRoom.position.z = -NEAR - 0.12;
@@ -491,12 +528,24 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
 
   // sign above the doorway, on the hall side
   const sign = signMesh(1.7, 0.44, SIGNS[key]);
-  sign.position.set(0, 3.32, -FACE + 0.14);
+  sign.position.set(0, ARCH_TOP + 0.5, -HALL_IN + 0.14);
   g.add(sign);
 
   return inner;
 }
 
+
+/** Plain warm plaster for the hallways between the hall and the rooms. */
+let hallwayMaterial = null;
+function hallwayMat() {
+  if (!hallwayMaterial) {
+    const t = canvasTex(256, 256, (ctx, w, h) => { ctx.fillStyle = "#ece6da"; ctx.fillRect(0, 0, w, h); noise(ctx, w, h, 0.05, 1200); });
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(0.5, 0.5);
+    hallwayMaterial = new THREE.MeshStandardMaterial({ map: t, roughness: 0.9, emissive: 0x4a453c });   // lit from the hall at one end and the room at the other
+  }
+  return hallwayMaterial;
+}
 
 export let hubWallTexture = null;
 export function hubWallMat(rx, ry) {

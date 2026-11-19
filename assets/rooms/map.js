@@ -1,6 +1,6 @@
 /* The floor-plan map in the Esc menu. Drawn as SVG from the same numbers that place the rooms,
  * so it stays right if the layout changes. Each room (and the hall) is a button that takes you there. */
-import { DOOR_HALF, FACE, NEAR, R, RW, esc, hubObstacles, rooms, toWorld } from "./core.js";
+import { DOOR_HALF, HALL_IN, NEAR, R, RW, esc, hubObstacles, rooms, toWorld } from "./core.js";
 
 const NS = "http://www.w3.org/2000/svg";
 let playerEl = null;
@@ -16,7 +16,7 @@ export function buildMap(container, onGo) {
   for (const [key, room] of Object.entries(rooms)) {
     const a = room.angle, RD = room.depth;
     const corners = [[-RW / 2, -NEAR], [RW / 2, -NEAR], [RW / 2, -NEAR - RD], [-RW / 2, -NEAR - RD]].map(([x, z]) => toWorld(a, x, z));
-    const passage = [[-DOOR_HALF, -FACE + 0.3], [DOOR_HALF, -FACE + 0.3], [DOOR_HALF, -NEAR - 0.05], [-DOOR_HALF, -NEAR - 0.05]].map(([x, z]) => toWorld(a, x, z));
+    const passage = [[-DOOR_HALF, -HALL_IN + 0.3], [DOOR_HALF, -HALL_IN + 0.3], [DOOR_HALF, -NEAR - 0.05], [-DOOR_HALF, -NEAR - 0.05]].map(([x, z]) => toWorld(a, x, z));
     corners.forEach(grow);
     // annexes such as a hallway: drawn under the room so the room's outline stays on top
     const annexes = (room.annexes || []).map(({ outline: o }) => {
@@ -44,7 +44,7 @@ export function buildMap(container, onGo) {
     <text class="map__small" x="0" y="${R + 1.3}">Way out</text>`);
   hubObstacles.forEach((o) => {
     parts.push(`<rect class="map__thing" x="${o.x0}" y="${o.z0}" width="${o.x1 - o.x0}" height="${o.z1 - o.z0}"/>
-      <text class="map__small" x="${(o.x0 + o.x1) / 2}" y="${o.z1 + 1.0}">Mailbox</text>`);
+      <text class="map__small" x="${(o.x0 + o.x1) / 2}" y="${o.z1 + 1.0}">Contact pigeon</text>`);
   });
   grow([0, R + 1.6]);
 

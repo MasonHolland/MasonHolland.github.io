@@ -22,6 +22,20 @@ async function exists(p) { try { await access(p); return true; } catch { return 
 export const thumbPath = (cover) => `${SMALL_DIR}/${path.basename(cover)}`;
 
 /**
+ * An image -> a SIZE JPEG: the whole image, centred, over a blurred and darkened copy of itself
+ * filling the box, so square PlayStation art and wide Steam banners aren't cut off.
+ */
+export async function fitCover(sharp, src) {
+  const backdrop = await sharp(src).resize(SIZE.w, SIZE.h, { fit: "cover" })
+    .blur(12).modulate({ brightness: 0.6 }).toBuffer();
+  const front = await sharp(src).resize(SIZE.w, SIZE.h, { fit: "inside" }).toBuffer();
+  return sharp(backdrop)
+    .composite([{ input: front, gravity: "center" }])
+    .jpeg({ quality: 78, mozjpeg: true })
+    .toBuffer();
+}
+
+/**
  * Give each game with a cover a `thumb`, making the file if it is missing (or if force).
  * If the image library isn't installed, games keep just their full-size cover.
  */
@@ -36,17 +50,7 @@ export async function addThumbs(games, { force = false } = {}) {
     const rel = thumbPath(g.cover), abs = path.join(ROOT, rel);
     if (force || !(await exists(abs))) {
       try {
-        const src = await readFile(path.join(ROOT, g.cover));
-        // the whole image, centred, over a blurred and darkened copy of itself filling the box,
-        // so square PlayStation art and wide Steam banners aren't cut off
-        const backdrop = await sharp(src).resize(SIZE.w, SIZE.h, { fit: "cover" })
-          .blur(12).modulate({ brightness: 0.6 }).toBuffer();
-        const front = await sharp(src).resize(SIZE.w, SIZE.h, { fit: "inside" }).toBuffer();
-        const buf = await sharp(backdrop)
-          .composite([{ input: front, gravity: "center" }])
-          .jpeg({ quality: 78, mozjpeg: true })
-          .toBuffer();
-        await writeFile(abs, buf);
+        await writeFile(abs, await fitCover(sharp, await readFile(path.join(ROOT, g.cover))));
         made++;
       } catch (e) {
         console.error(`thumbs: couldn't shrink ${g.cover}: ${e.message}`);

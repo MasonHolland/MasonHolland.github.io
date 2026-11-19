@@ -1,6 +1,6 @@
 /* The round hall in the middle: floor, curved wall, the three arched doorways, signs and lighting. */
 import * as THREE from "three";
-import { DOME_RISE, DOOR_ANGLES, DOOR_HALF, GAP, HUB_H, R, SIGNS, SPRING, archFrameGeo, archLeafGeo, basic, box, canvasTex, hubObstacles, hubWallMat, interactables, mat, noise, scene, signMesh } from "./core.js";
+import { ARCH_TOP, DOME_RISE, DOOR_ANGLES, DOOR_HALF, GAP, HUB_H, R, SIGNS, SPRING, animations, archFrameGeo, archLeafGeo, basic, box, canvasTex, cyl, hubObstacles, hubWallMat, interactables, mat, noise, scene, signMesh } from "./core.js";
 import { openContact } from "./contact.js";
 
 /* ---------- the dome: a half-ellipsoid on top of the wall, with ribs, a cornice and a bright oculus ---------- */
@@ -44,33 +44,86 @@ function buildDome() {
   scene.add(ring);
 
   // light falling from the oculus, so the dome isn't dark
-  const skyLight = new THREE.PointLight(0xfff3dc, 30, 14, 2);
+  const skyLight = new THREE.PointLight(0xfff3dc, 24, 11, 2);
   skyLight.position.set(0, top - 1.2, 0);
   scene.add(skyLight);
 }
 
-/* ---------- the mailbox: a post box on a wooden post. Clicking it opens the contact form. ---------- */
+/* ---------- the contact pigeon: a carrier pigeon on a wooden perch stand. Clicking it opens the contact form. ---------- */
 
-function buildMailbox(x, z) {
-  const mb = new THREE.Group();
-  mb.position.set(x, 0, z);
-  mb.rotation.y = Math.atan2(-x, 5.5 - z);   // turn its door towards where visitors start
-  scene.add(mb);
+function buildPigeon(x, z) {
+  const st = new THREE.Group();
+  st.position.set(x, 0, z);
+  st.rotation.y = Math.atan2(-x, (R - 2) - z);   // face where visitors start
+  scene.add(st);
 
-  const wood = mat(0x4a3020, { roughness: 0.7 });
-  const body = mat(0x23395b, { roughness: 0.45, metalness: 0.2 });
+  // the stand: a round foot, a turned post and a T-shaped perch with a seed cup at one end
+  const wood = mat(0x6b4a2f, { roughness: 0.6 }), dark = mat(0x4a3020, { roughness: 0.6 });
   const brass = mat(0xc99a3b, { metalness: 0.6, roughness: 0.4 });
-  box(0.3, 0.04, 0.3, wood, 0, 0.02, 0, mb);                      // foot
-  box(0.09, 1.0, 0.09, wood, 0, 0.5, 0, mb);                       // post
-  box(0.2, 0.04, 0.4, wood, 0, 0.99, 0, mb);                       // shelf it sits on
-  box(0.26, 0.18, 0.48, body, 0, 1.1, 0, mb);                      // box
-  const roof = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.48, 24, 1, false, Math.PI / 2, Math.PI), body);
-  roof.rotation.x = Math.PI / 2;                                   // half cylinder on top, axis front to back
-  roof.position.y = 1.19;
-  mb.add(roof);
-  box(0.06, 0.03, 0.03, brass, 0, 1.17, 0.255, mb);                // door handle
-  box(0.015, 0.22, 0.015, mat(0x2b2b2b), 0.14, 1.2, -0.08, mb);    // flag arm
-  box(0.012, 0.08, 0.13, mat(0xc4261d, { roughness: 0.5 }), 0.145, 1.27, -0.03, mb); // red flag, up
+  cyl(0.22, 0.24, 0.05, dark, 0, 0.025, 0, st, 28);
+  cyl(0.05, 0.08, 0.1, wood, 0, 0.1, 0, st, 16);
+  cyl(0.028, 0.032, 1.1, wood, 0, 0.7, 0, st, 14);
+  [0.35, 1.0].forEach((y) => cyl(0.045, 0.045, 0.03, dark, 0, y, 0, st, 16));
+  const bar = cyl(0.022, 0.022, 0.56, wood, 0, 1.27, 0, st, 12);
+  bar.rotation.z = Math.PI / 2;
+  [-0.29, 0.29].forEach((bx) => { const k = new THREE.Mesh(new THREE.SphereGeometry(0.032, 12, 10), dark); k.position.set(bx, 1.27, 0); st.add(k); });
+  cyl(0.05, 0.035, 0.05, brass, 0.22, 1.31, 0, st, 16);          // seed cup
+  cyl(0.04, 0.04, 0.012, mat(0xc9b27a, { roughness: 1 }), 0.22, 1.33, 0, st, 16);
+
+  // the pigeon, perched in the middle of the bar and facing forward (+z)
+  const bird = new THREE.Group();
+  bird.position.set(-0.04, 1.29, 0);
+  st.add(bird);
+  const grey = mat(0x9aa2b0, { roughness: 0.7 }), wingM = mat(0x7d8696, { roughness: 0.7 });
+  const neckM = mat(0x4f7d6e, { metalness: 0.55, roughness: 0.3, emissive: 0x2a1840, emissiveIntensity: 0.4 });
+  const ink = mat(0x22252b, { roughness: 0.6 });
+  const ell = (r, sx, sy, sz, m, px, py, pz, parent = bird) => {
+    const e = new THREE.Mesh(new THREE.SphereGeometry(r, 18, 14), m);
+    e.scale.set(sx, sy, sz); e.position.set(px, py, pz); parent.add(e); return e;
+  };
+  const body = ell(0.1, 0.82, 0.78, 1.3, grey, 0, 0.1, -0.01);
+  body.rotation.x = 0.35;                                          // chest up, tail down
+  ell(0.07, 1, 1.05, 1, neckM, 0, 0.17, 0.07);                     // the shimmering neck
+  [-1, 1].forEach((sd) => {
+    const w = ell(0.09, 0.3, 0.6, 1.35, wingM, sd * 0.068, 0.11, -0.03);
+    w.rotation.x = 0.35;
+    // two black wing bars
+    [0, 1].forEach((k) => { const b = box(0.006, 0.012, 0.07, ink, sd * 0.094, 0.085 - k * 0.025, -0.04 - k * 0.03, bird); b.rotation.x = 0.35; });
+  });
+  const tail = box(0.085, 0.018, 0.15, wingM, 0, 0.04, -0.16, bird);
+  tail.rotation.x = -0.45;
+  const band = box(0.087, 0.02, 0.03, ink, 0, 0.0, -0.225, bird);
+  band.rotation.x = -0.45;
+
+  const head = new THREE.Group();
+  head.position.set(0, 0.24, 0.1);
+  bird.add(head);
+  ell(0.048, 1, 0.95, 1.05, grey, 0, 0, 0, head);
+  const beak = new THREE.Mesh(new THREE.ConeGeometry(0.011, 0.045, 10), mat(0x3a3330, { roughness: 0.5 }));
+  beak.rotation.x = Math.PI / 2 + 0.2;
+  beak.position.set(0, -0.008, 0.062);
+  head.add(beak);
+  ell(0.012, 1.2, 0.8, 1, mat(0xece6dc, { roughness: 0.9 }), 0, 0.004, 0.045, head);   // the pale cere at the base of the beak
+  [-1, 1].forEach((sd) => {
+    ell(0.011, 1, 1, 0.6, mat(0xe0782a, { roughness: 0.3 }), sd * 0.04, 0.012, 0.02, head);
+    ell(0.006, 1, 1, 0.6, basic(0x0d0d0d), sd * 0.046, 0.012, 0.022, head);
+  });
+
+  // pink legs gripping the bar, and a brass message tube on one leg with a rolled note
+  const legM = mat(0xc4545a, { roughness: 0.6 });
+  [-1, 1].forEach((sd) => {
+    cyl(0.008, 0.008, 0.05, legM, sd * 0.03, 0.015, 0.0, bird, 8);
+    [-0.5, 0, 0.5].forEach((a) => { const toe = box(0.006, 0.006, 0.035, legM, sd * 0.03 + Math.sin(a) * 0.01, -0.005, 0.015, bird); toe.rotation.y = a; });
+  });
+  cyl(0.013, 0.013, 0.045, brass, 0.042, 0.02, 0.0, bird, 12);
+  cyl(0.008, 0.008, 0.02, mat(0xf2ead6, { roughness: 1 }), 0.042, 0.05, 0.0, bird, 8);
+
+  // now and then the pigeon bobs its head and glances round
+  animations.push((t) => {
+    const k = t % 6;
+    head.position.z = 0.1 + (k < 0.6 ? Math.sin((k / 0.6) * Math.PI * 2) * 0.012 : 0);
+    head.rotation.y = k > 3 && k < 4.4 ? Math.sin(((k - 3) / 1.4) * Math.PI) * 0.5 : 0;
+  });
 
   const plaque = signMesh(0.4, 0.13, (ctx, w, h) => {
     ctx.fillStyle = "#f6f2ea"; ctx.fillRect(0, 0, w, h);
@@ -79,14 +132,14 @@ function buildMailbox(x, z) {
     ctx.font = "800 150px 'Bricolage Grotesque', Arial, sans-serif";
     ctx.fillText("Contact me", w / 2, h / 2 + 6);
   });
-  plaque.position.set(0, 0.78, 0.075);
-  mb.add(plaque);
+  plaque.position.set(0, 0.78, 0.06);
+  st.add(plaque);
 
   // one invisible box over the whole thing, so it's easy to click
-  const hit = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.4, 0.6), new THREE.MeshBasicMaterial({ visible: false }));
-  hit.position.y = 0.7;
-  mb.add(hit);
-  interactables.push({ mesh: hit, hint: "Send me a message", mat: body, open: openContact });
+  const hit = new THREE.Mesh(new THREE.BoxGeometry(0.6, 1.6, 0.5), new THREE.MeshBasicMaterial({ visible: false }));
+  hit.position.y = 0.8;
+  st.add(hit);
+  interactables.push({ mesh: hit, hint: "Send me a message by pigeon", mat: neckM, base: 0.4, open: openContact });
   hubObstacles.push({ x0: x - 0.3, x1: x + 0.3, z0: z - 0.3, z1: z + 0.3 });
 }
 
@@ -149,15 +202,15 @@ export function buildHub() {
   ex.add(leaf);
   box(0.07, 0.2, 0.05, mat(0xc99a3b, { metalness: 0.6, roughness: 0.4 }), 0.5, 1.05, 0.09, ex);
   const exSign = signMesh(1.7, 0.44, SIGNS.exit);
-  exSign.position.set(0, 3.32, 0.1);
+  exSign.position.set(0, ARCH_TOP + 0.5, 0.1);
   ex.add(exSign);
   interactables.push({ mesh: leaf, hint: "Leave the room", mat: leaf.material, open: () => { location.href = "index.html"; } });
 
-  buildMailbox(2.2, 2.0);
+  buildPigeon(2.0, 1.6);
 
   // lighting
   scene.add(new THREE.HemisphereLight(0xe8eef5, 0x6a5a48, 0.55));
-  const hubLight = new THREE.PointLight(0xfff0d8, 40, 17, 2);
+  const hubLight = new THREE.PointLight(0xfff0d8, 30, 13, 2);
   hubLight.position.set(0, 2.8, 0);
   scene.add(hubLight);
 }

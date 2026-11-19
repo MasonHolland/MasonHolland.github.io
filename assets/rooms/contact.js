@@ -1,4 +1,4 @@
-/* The contact form behind the mailbox in the hall.
+/* The contact form behind the carrier pigeon in the hall.
  *
  * A static site can't send email by itself, so there are two ways a message gets to you:
  *   1. If data/profile.json has contact.endpoint (a form service such as Formspree), the form posts there

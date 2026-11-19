@@ -6,11 +6,17 @@ import { addPicture, loadInto, plankTex, plasterTex } from "./shared.js";
 
 /* ---------- Perth skyline, drawn for the big window ---------- */
 
-/** A bright daytime view across the Swan River to the Perth CBD, drawn as a stylised illustration. */
-function perthSkylineTexture() {
-  const S = 1.5, W = 1040, H = 440;
-  return canvasTex(W * S, H * S, (ctx) => {
+/**
+ * A bright daytime view across the Swan River to the Perth CBD, drawn as a stylised illustration.
+ * The scene is a panorama W wide: this room's window shows x 0 to 1040 (Kings Park, the city and
+ * the Bell Tower); further right are Matagarup Bridge, Optus Stadium and East Perth, which the
+ * Work room (60 degrees round) sees. x0 and vw pick the slice to draw.
+ */
+export function perthSkylineTexture(x0 = 0, vw = 1040, { sun: showSun = true } = {}) {
+  const S = 1.5, W = 1800, H = 440;
+  return canvasTex(Math.round(vw * S), H * S, (ctx) => {
     ctx.scale(S, S);
+    ctx.translate(-x0, 0);
     const HZ = 306;                                  // where the far bank meets the river
 
     // sky
@@ -18,9 +24,11 @@ function perthSkylineTexture() {
     sky.addColorStop(0, "#4f9fe6"); sky.addColorStop(0.7, "#a9d6f4"); sky.addColorStop(1, "#e3f3fb");
     ctx.fillStyle = sky; ctx.fillRect(0, 0, W, HZ + 2);
     // sun glow
-    const sun = ctx.createRadialGradient(880, 70, 6, 880, 70, 150);
-    sun.addColorStop(0, "rgba(255,250,220,0.95)"); sun.addColorStop(1, "rgba(255,250,220,0)");
-    ctx.fillStyle = sun; ctx.fillRect(700, 0, 340, 230);
+    if (showSun) {
+      const sun = ctx.createRadialGradient(880, 70, 6, 880, 70, 150);
+      sun.addColorStop(0, "rgba(255,250,220,0.95)"); sun.addColorStop(1, "rgba(255,250,220,0)");
+      ctx.fillStyle = sun; ctx.fillRect(700, 0, 340, 230);
+    }
     // clouds
     const cloud = (x, y, s) => {
       ctx.fillStyle = "rgba(255,255,255,0.92)";
@@ -29,6 +37,7 @@ function perthSkylineTexture() {
       });
     };
     cloud(150, 70, 1.1); cloud(560, 48, 0.9); cloud(760, 118, 0.8); cloud(985, 40, 0.7);
+    cloud(1190, 84, 1.0); cloud(1420, 52, 0.85); cloud(1660, 110, 0.9);
 
     // far buildings, paler for depth
     const tower = (x, w, h, base, shade, top = "flat", lines = true) => {
@@ -88,6 +97,30 @@ function perthSkylineTexture() {
     ctx.fillStyle = "#e9e3d6"; ctx.fillRect(98, HZ - 112, 7, 38);
     ctx.fillStyle = "#cfc6b4"; ctx.fillRect(95, HZ - 116, 13, 5);
 
+    // east of the bridge: low hills, the East Perth towers and Optus Stadium
+    ctx.fillStyle = "#6f9e66";
+    ctx.beginPath(); ctx.moveTo(1040, HZ + 2); ctx.bezierCurveTo(1300, HZ - 40, 1560, HZ - 30, W, HZ - 52); ctx.lineTo(W, HZ + 2); ctx.closePath(); ctx.fill();
+    tower(1440, 40, 74, "#bccfdf", "rgba(80,110,140,0.18)");
+    tower(1486, 34, 96, "#adc5d9", "rgba(80,110,140,0.2)", "step");
+    tower(1528, 48, 62, "#c3d5e3", "rgba(80,110,140,0.16)");
+    tower(1610, 30, 50, "#c7d8e5", "rgba(80,110,140,0.16)", "slant");
+    for (let i = 0; i < 30; i++) {
+      const x = 1030 + i * 14 + (i > 6 ? 230 : 0);
+      ctx.fillStyle = i % 3 ? "#3f7a43" : "#58964f";
+      ctx.beginPath(); ctx.arc(x, HZ - 6 - (i % 4) * 3, 10 + (i % 3) * 3, 0, Math.PI * 2); ctx.fill();
+    }
+    // the stadium: a bronze bowl with vertical fins under a white roof ring
+    ctx.fillStyle = "#c48a4e";
+    ctx.beginPath(); ctx.moveTo(1080, HZ); ctx.lineTo(1094, HZ - 60); ctx.quadraticCurveTo(1205, HZ - 82, 1316, HZ - 60); ctx.lineTo(1330, HZ); ctx.closePath(); ctx.fill();
+    ctx.save(); ctx.clip();
+    ctx.strokeStyle = "rgba(255,230,190,0.45)"; ctx.lineWidth = 2;
+    for (let x = 1084; x < 1330; x += 7) { ctx.beginPath(); ctx.moveTo(x, HZ); ctx.lineTo(x + 2, HZ - 90); ctx.stroke(); }
+    ctx.fillStyle = "rgba(90,50,20,0.25)"; ctx.fillRect(1240, HZ - 90, 100, 90);
+    ctx.restore();
+    ctx.strokeStyle = "#f6f3ec"; ctx.lineWidth = 7;
+    ctx.beginPath(); ctx.moveTo(1092, HZ - 58); ctx.quadraticCurveTo(1205, HZ - 82, 1318, HZ - 58); ctx.stroke();
+    [1110, 1300].forEach((x) => { ctx.fillStyle = "#e9e6df"; ctx.fillRect(x - 2, HZ - 96, 4, 40); ctx.fillRect(x - 7, HZ - 100, 14, 6); });
+
     // Matagarup Bridge: a white arch over the river on the right
     ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 5;
     ctx.beginPath(); ctx.moveTo(840, HZ + 22); ctx.quadraticCurveTo(940, HZ - 120, 1040, HZ + 22); ctx.stroke();
@@ -96,19 +129,19 @@ function perthSkylineTexture() {
       const t = (x - 840) / 200, ay = (1 - t) * (1 - t) * (HZ + 22) + 2 * t * (1 - t) * (HZ - 120) + t * t * (HZ + 22);
       ctx.beginPath(); ctx.moveTo(x, ay + 2); ctx.lineTo(x, HZ + 22); ctx.stroke();
     }
-    ctx.fillStyle = "#e6edf2"; ctx.fillRect(820, HZ + 21, 220, 5);
+    ctx.fillStyle = "#e6edf2"; ctx.fillRect(820, HZ + 21, 270, 5);
 
     // river
     const river = ctx.createLinearGradient(0, HZ, 0, H);
     river.addColorStop(0, "#5ec0e6"); river.addColorStop(0.5, "#2f95cf"); river.addColorStop(1, "#1d73ad");
     ctx.fillStyle = river; ctx.fillRect(0, HZ + 2, W, H - HZ);
     // far bank
-    ctx.fillStyle = "#6aa164"; ctx.fillRect(250, HZ, 780, 5);
-    ctx.fillStyle = "#d7c7a3"; ctx.fillRect(250, HZ + 5, 780, 3);
+    ctx.fillStyle = "#6aa164"; ctx.fillRect(250, HZ, W - 250, 5);
+    ctx.fillStyle = "#d7c7a3"; ctx.fillRect(250, HZ + 5, W - 250, 3);
     // reflections of the towers
     ctx.save();
     ctx.beginPath(); ctx.rect(0, HZ + 8, W, H); ctx.clip();
-    [[345, 40, "#6f8fae", 100], [432, 44, "#5f7f9f", 150], [482, 56, "#86a6c2", 100], [546, 38, "#6b8dab", 90], [800, 30, "#c98a4b", 90]].forEach(([x, w, c, h]) => {
+    [[345, 40, "#6f8fae", 100], [432, 44, "#5f7f9f", 150], [482, 56, "#86a6c2", 100], [546, 38, "#6b8dab", 90], [800, 30, "#c98a4b", 90], [1090, 230, "#c48a4e", 60]].forEach(([x, w, c, h]) => {
       const g = ctx.createLinearGradient(0, HZ + 8, 0, HZ + 8 + h);
       g.addColorStop(0, c); g.addColorStop(1, "rgba(47,149,207,0)");
       ctx.globalAlpha = 0.3; ctx.fillStyle = g; ctx.fillRect(x, HZ + 8, w, h);
@@ -117,7 +150,7 @@ function perthSkylineTexture() {
     ctx.globalAlpha = 1;
     // ripples
     ctx.strokeStyle = "rgba(255,255,255,0.35)"; ctx.lineWidth = 1.5;
-    for (let i = 0; i < 70; i++) {
+    for (let i = 0; i < 120; i++) {
       const y = HZ + 14 + ((i * 53) % (H - HZ - 20)), x = (i * 137) % W, l = 14 + (i % 5) * 9;
       ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + l, y); ctx.stroke();
     }
@@ -128,7 +161,7 @@ function perthSkylineTexture() {
       ctx.fillStyle = "#274a66"; ctx.beginPath(); ctx.moveTo(x - 26 * s, y - 3 * s); ctx.lineTo(x + 30 * s, y - 3 * s); ctx.lineTo(x + 22 * s, y + 5 * s); ctx.lineTo(x - 18 * s, y + 5 * s); ctx.closePath(); ctx.fill();
       ctx.fillStyle = "rgba(255,255,255,0.3)"; ctx.fillRect(x - 20 * s, y + 7 * s, 46 * s, 2);
     };
-    boat(250, 372, 1.3, "#f4b9a2"); boat(620, 342, 0.8, "#f6d97a"); boat(710, 398, 1.05, "#9fd6ea");
+    boat(250, 372, 1.3, "#f4b9a2"); boat(620, 342, 0.8, "#f6d97a"); boat(710, 398, 1.05, "#9fd6ea"); boat(1180, 384, 1.2, "#f4b9a2"); boat(1520, 352, 0.85, "#f6d97a");
     // foreground bank with a couple of trees, bottom left
     ctx.fillStyle = "#4b8a4a";
     ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, 398); ctx.bezierCurveTo(70, 388, 130, 408, 200, H); ctx.closePath(); ctx.fill();
@@ -383,28 +416,37 @@ function makePalm(g, x, z, s) {
   }
 }
 
-/** A woven rattan bell pendant hanging from the ceiling at (x, ceilingY, z). */
+/** A solid bell pendant in pale rattan hanging from the ceiling at (x, ceilingY, z). */
 function rattanPendant(g, x, ceilingY, z) {
   const drop = 0.75, bellH = 0.55;
   cyl(0.006, 0.006, drop, mat(0x1a1a1a), x, ceilingY - drop / 2, z, g, 6);
   cyl(0.05, 0.05, 0.03, mat(0x1a1a1a), x, ceilingY - 0.015, z, g, 12);
-  const weave = canvasTex(128, 128, (ctx, w, h) => {
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = "#d3a76c";
-    for (let k = 0; k < 8; k++) { ctx.fillRect(k * 16, 0, 5, h); ctx.fillRect(0, k * 16, w, 4); }
+  // a closed shade: fine horizontal cane ribs, no gaps (an open weave shimmered at screen resolution)
+  const weave = canvasTex(64, 256, (ctx, w, h) => {
+    ctx.fillStyle = "#c39363"; ctx.fillRect(0, 0, w, h);
+    for (let y = 0; y < h; y += 16) { ctx.fillStyle = "rgba(90,55,25,0.35)"; ctx.fillRect(0, y, w, 3); ctx.fillStyle = "rgba(255,235,200,0.22)"; ctx.fillRect(0, y + 5, w, 4); }
   });
   weave.wrapS = weave.wrapT = THREE.RepeatWrapping;
-  weave.repeat.set(10, 6);
+  weave.repeat.set(1, 1);
   const pts = [];
   for (let i = 0; i <= 12; i++) {
     const t = i / 12;
     pts.push(new THREE.Vector2(0.06 + 0.24 * Math.sin((t * Math.PI) / 2) ** 0.8, -t * bellH));
   }
-  const bell = new THREE.Mesh(new THREE.LatheGeometry(pts, 40), new THREE.MeshStandardMaterial({
-    map: weave, alphaTest: 0.5, side: THREE.DoubleSide, roughness: 0.9, emissive: 0x8a5a26, emissiveIntensity: 0.35,
-  }));
+  const bell = new THREE.Mesh(new THREE.LatheGeometry(pts, 48), new THREE.MeshStandardMaterial({ map: weave, color: 0xb8a48c, roughness: 0.95, side: THREE.BackSide }));
   bell.position.set(x, ceilingY - drop, z);
   g.add(bell);
+  // the inside glows warm from the bulb (a lathe drawn top to bottom faces inwards, so the
+  // outside of the shade is its back side and the inside its front)
+  const inside = new THREE.Mesh(new THREE.LatheGeometry(pts, 48), new THREE.MeshBasicMaterial({ color: 0xffd8a0 }));
+  inside.scale.setScalar(0.985);
+  inside.position.copy(bell.position);
+  g.add(inside);
+  // a darker rim along the bottom edge
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(pts[pts.length - 1].x, 0.012, 8, 48), mat(0x8a6238, { roughness: 0.7 }));
+  rim.rotation.x = Math.PI / 2;
+  rim.position.set(x, ceilingY - drop - bellH, z);
+  g.add(rim);
   const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 10), basic(0xffe2a8));
   bulb.position.set(x, ceilingY - drop - 0.2, z);
   g.add(bulb);
@@ -558,8 +600,8 @@ export function buildAbout() {
   });
 
   // lights: a warm ceiling light and daylight from the window
-  const ceilLight = new THREE.PointLight(0xfff0dc, 16, 12, 2);
-  ceilLight.position.set(-0.9, 2.1, -8.7);   // the rattan pendant
+  const ceilLight = new THREE.PointLight(0xfff0dc, 12, 12, 2);
+  ceilLight.position.set(-0.9, 1.6, -8.7);   // just under the rattan pendant, so the shade isn't lit from inside
   g.add(ceilLight);
   const dayLight = new THREE.PointLight(0xe3f0ff, 9, 9, 2);
   dayLight.position.set(0, 1.7, -11.6);

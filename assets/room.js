@@ -1,7 +1,7 @@
 /* Entry point: builds the hall and the rooms, then handles input, picking and the render loop.
  * The rooms themselves live in assets/rooms/. */
 import * as THREE from "three";
-import { $, EYE, NEAR, SPEED, TOUCH, animations, areaAt, camera, closePanel, crossEl, hintEl, inRoomArea, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, toWorld, walkable } from "./rooms/core.js";
+import { $, EYE, NEAR, SPEED, TOUCH, animations, resize, areaAt, camera, closePanel, crossEl, hintEl, inRoomArea, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, toWorld, walkable } from "./rooms/core.js";
 import { buildMap, updateMap } from "./rooms/map.js";
 import { buildHub } from "./rooms/hub.js";
 import { buildAbout } from "./rooms/about.js";
@@ -16,7 +16,19 @@ buildAbout();
 buildWork();
 buildHobbies();
 
-const meshes = interactables.map((i) => i.mesh);
+// what can be clicked, grouped by room ("hall" for the hall), so looking round only tests the
+// things where you are rather than all of them (hundreds of books and games) every frame
+const meshesBy = { hall: [] };
+interactables.forEach((it) => {
+  let key = "hall";
+  for (const [k, room] of Object.entries(rooms)) {
+    let o = it.mesh;
+    while (o && o !== room.group) o = o.parent;
+    if (o) { key = k; break; }
+  }
+  (meshesBy[key] = meshesBy[key] || []).push(it.mesh);
+});
+const allMeshes = interactables.map((i) => i.mesh);
 
 /* ---------- input ---------- */
 
@@ -150,7 +162,9 @@ function pick(screenPt) {
     ? new THREE.Vector2((screenPt.x / innerWidth) * 2 - 1, -(screenPt.y / innerHeight) * 2 + 1)
     : new THREE.Vector2(0, 0);
   ray.setFromCamera(ndc, camera);
-  const hit = ray.intersectObjects(meshes, false)[0];
+  // in the hall every room is in view through its doorway; inside a room, only that room
+  const list = shownRoom ? [...(meshesBy[shownRoom] || []), ...meshesBy.hall] : allMeshes;
+  const hit = ray.intersectObjects(list, false)[0];
   return hit ? interactables.find((i) => i.mesh === hit.object) : null;
 }
 function interact(screenPt) {
@@ -160,12 +174,15 @@ function interact(screenPt) {
 }
 function setHover(item) {
   if (hovered === item) return;
-  if (hovered && hovered.mat) {
+  if (hovered && hovered.glow) hovered.mesh.material = hovered.glow[0];
+  else if (hovered && hovered.mat) {
     if (hovered.base !== undefined) hovered.mat.emissiveIntensity = hovered.base;
     else hovered.mat.emissive?.setHex(0x000000);
   }
   hovered = item;
-  if (item && item.mat) {
+  // glow: [hidden, shown] materials for a pick box over something drawn in a batch (like a book)
+  if (item && item.glow) item.mesh.material = item.glow[1];
+  else if (item && item.mat) {
     if (item.base !== undefined) item.mat.emissiveIntensity = Math.min(item.base + 0.5, 1.3);
     else item.mat.emissive?.setHex(0x4a3510);
   }
@@ -204,8 +221,30 @@ function showOnly(key) {
 const clock = new THREE.Clock();
 let bob = 0;
 
+/*
+ * Resolution that adapts: on a high-density screen the room is drawn at up to twice the pixels.
+ * If frames take too long for a couple of seconds, step the detail down (2 -> 1.5 -> 1.25 -> 1).
+ */
+const startRatio = Math.max(1, Math.min(devicePixelRatio, 2));
+const ratios = [startRatio, ...[1.5, 1.25, 1].filter((r) => r < startRatio)];
+let ratioIdx = 0, slowTime = 0, sampleTime = 0;
+function adaptResolution(raw) {
+  if (!started || ratioIdx >= ratios.length - 1 || raw > 0.25) return;   // ignore pauses and tab switches
+  sampleTime += raw;
+  if (raw > 1 / 45) slowTime += raw;
+  if (sampleTime < 2) return;
+  if (slowTime / sampleTime > 0.5) {
+    ratioIdx++;
+    renderer.setPixelRatio(ratios[ratioIdx]);
+    resize();
+  }
+  sampleTime = slowTime = 0;
+}
+
 function frame() {
-  const dt = Math.min(clock.getDelta(), 0.05);
+  const raw = clock.getDelta();
+  adaptResolution(raw);
+  const dt = Math.min(raw, 0.05);
   const t = clock.elapsedTime;
 
   if (started && !panelOpen && (document.pointerLockElement || TOUCH)) {
@@ -263,6 +302,7 @@ frame();
 // hook for automated tests
 window.__room = {
   camera, interactables, walkable, rooms,
+  get stats() { let lights = 0; scene.traverseVisible((o) => { if (o.isLight) lights++; }); return { ...renderer.info.render, textures: renderer.info.memory.textures, geometries: renderer.info.memory.geometries, programs: renderer.info.programs.length, lights, interactables: interactables.length }; },
   get started() { return started; },
   showPanel,
   setView(x, z, y, p) { camera.position.x = x; camera.position.z = z; yaw = y; pitch = p; },

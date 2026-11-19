@@ -3,10 +3,10 @@
 A landing page with two doors:
 
 - **Read the short version** opens `resume.html`, a plain page with your experience, projects, awards and recent reads.
-- **Walk into the room** opens `room.html`, a round hall with three arched doors. Each door has a sign and leads to a room with its own look:
+- **Walk into the room** opens `room.html`, a round hall with three arched doorways. Each has a sign and a short arched hallway to a room with its own look:
   - **10 o'clock, About me:** a bright, modern living room with a Perth skyline window, large photo frames, and smaller frames for photos and info cards.
-  - **12 o'clock, Work:** a bright modern office with your awards, a resume monitor and a projects monitor.
-  - **2 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), bookcases for the books you've read (with a shelf for what you're reading now) and want to read, and three game shelves: PlayStation, Nintendo Switch and Steam, each with its console in the middle.
+  - **12 o'clock, Work:** a bright, minimal home office lit by daylight: a strip of high windows full of sky, a window onto the Perth view from the About room (turned to Matagarup Bridge and Optus Stadium), one black desk with two monitors (resume and projects) over a laptop, a steel-framed shelving wall, your awards and the project board.
+  - **2 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), bookcases for the books you've read (with a shelf for what you're reading now, covers facing out) and want to read (the teal case), and a game gallery: PlayStation and Steam shelves either side of a hallway, with the Nintendo Switch shelf inside it.
 
 ## Make it yours
 
@@ -43,11 +43,11 @@ Goodreads retired its shelf RSS feeds in October 2026, so the sync reads the pub
 2. Once: in Goodreads, go to My Books, Import and export, and export your library. Then run `node scripts/import-goodreads-export.mjs path/to/goodreads_library_export.csv`. This writes `data/books-archive.json` with only the read shelf's titles, authors, ratings and dates. Don't commit the CSV, because it holds your reviews and private notes (`.gitignore` skips it).
 3. Run `GOODREADS_USER_ID=12345678 node scripts/sync-goodreads.mjs` (Node 18 or newer).
 
-The read shelf merges the archive, books found by earlier syncs and the widget, matched by Goodreads book id so nothing appears twice. A book stays once it has been seen, even after it drops out of the widget's 100; to remove one, delete it from `data/books.json` and `data/books-archive.json`. Books read since the export show no "Finished" date. Currently reading and want to read come from the widget alone (up to 100 each). Each spine is coloured by genre, from the book's subjects on Open Library (looked up once per book and kept in `data/genres.json`). To set a genre yourself, or fill in one Open Library doesn't know, edit `data/genre-overrides.json`: it lists the books without a genre and the genre names to choose from. Comedy is only picked automatically when no other genre fits, because so many books are tagged as humour. Other fiction and Other nonfiction catch everything else. Series stay together on the shelf, in series order. Plain filler books fill the rest of each case.
+The read shelf merges the archive, books found by earlier syncs and the widget, matched by Goodreads book id so nothing appears twice. A book stays once it has been seen, even after it drops out of the widget's 100; to remove one, delete it from `data/books.json` and `data/books-archive.json`. Books read since the export show no "Finished" date. Currently reading and want to read come from the widget alone (up to 100 each). Books you're reading now get their cover saved in `assets/books/covers/`, so they can face out on their shelf. Each spine is coloured by genre, from the book's subjects on Open Library (looked up once per book and kept in `data/genres.json`). To set a genre yourself, or fill in one Open Library doesn't know, edit `data/genre-overrides.json`: it lists the books without a genre and the genre names to choose from. Comedy is only picked automatically when no other genre fits, because so many books are tagged as humour. Other fiction and Other nonfiction catch everything else. Series stay together on the shelf, in series order. Plain filler books fill the rest of each case.
 
 ## Games from Steam and PlayStation
 
-Run `node scripts/sync-games.mjs` after setting the variables below. Each platform is optional. If one fails, its games from the last good run are kept. Cover art is downloaded into `assets/covers/` at full size, and a 200x300 copy for the room goes in `assets/covers/small/` (`node scripts/thumbs.mjs --force` remakes them after changing the size). Run `npm install` first. The sync saves every game played for 5 hours or more (`MIN_HOURS` changes that), most recently played first, but the room only shows games played for 30 hours or more. To show more, lower `SHOW_MIN_HOURS` in `assets/rooms/hobbies.js`; the saved games come back without another sync. Each platform has a console shelf along the Hobbies room's right wall: the 4 games beside the console are the ones with the highest trophy or achievement completion, and 32 more sit around it. Extra games go on a second shelf beside it. If the shelves don't fit on the wall, the room adds the game gallery, a hallway off the right wall that grows to fit. Set `MAX_GAMES` to cap each platform. PlayStation play time covers PS4 and PS5 games; older games that only appear in your trophy list have no play time, so they are left out.
+Run `node scripts/sync-games.mjs` after setting the variables below. Each platform is optional. If one fails, its games from the last good run are kept. Cover art is downloaded into `assets/covers/` at full size, and a 200x300 copy for the room goes in `assets/covers/small/` (`node scripts/thumbs.mjs --force` remakes them after changing the size). Run `npm install` first. The sync saves every game played for 5 hours or more (`MIN_HOURS` changes that), most recently played first, but the room only shows games played for 30 hours or more. To show more, lower `SHOW_MIN_HOURS` in `assets/rooms/hobbies.js`; the saved games come back without another sync. Each platform has a console shelf: PlayStation to the right of the game gallery's opening, Steam to the left, and the Switch along the gallery's left-hand wall. The 4 games beside the console are the ones with the highest trophy completion (on Steam, the most hours), and 40 more sit around it. Any extra games carry on down the gallery, which grows to fit. While `SWITCH_UNDER_CONSTRUCTION` in `assets/rooms/hobbies.js` is true, the Switch shelf has an "Under construction" sign. Set `MAX_GAMES` to cap each platform. PlayStation play time covers PS4 and PS5 games; older games that only appear in your trophy list have no play time, so they are left out.
 
 **Steam** (reliable, official)
 
@@ -107,9 +107,9 @@ It is a static site with no build step. Upload the folder to GitHub Pages, Netli
 - The options menu has a floor-plan map (choose a room to jump to its doorway), "Read the simple version" and "Leave the room".
 - The exit door is behind you when you arrive.
 
-## Contact form (the mailbox)
+## Contact form (the carrier pigeon)
 
-The mailbox in the hall opens a contact form. A static site can't send email by itself, so set `contact` in `data/profile.json` one of two ways:
+The carrier pigeon on its perch in the hall opens a contact form. A static site can't send email by itself, so set `contact` in `data/profile.json` one of two ways:
 
 - **Form service (recommended):** create a free form at a service such as [Formspree](https://formspree.io), then put its address in `contact.endpoint`, e.g. `"https://formspree.io/f/abcdwxyz"`. Messages arrive in your inbox and visitors stay on the page.
 - **Email app:** leave `endpoint` empty and set `contact.email`. Sending opens the visitor's own email app with the message filled in. Without `contact.email`, the `mailto:` link in `links` is used.
@@ -123,8 +123,8 @@ There are no 3D model files. Everything is built from simple shapes, lighting an
 - `assets/room.js`: entry point (input, picking, render loop).
 - `assets/rooms/core.js`: renderer, helpers, doorway and sign builder, shared props.
 - `assets/rooms/shared.js`: textures and picture frames used by several rooms.
-- `assets/rooms/hub.js`: the round hall, its dome and the mailbox.
+- `assets/rooms/hub.js`: the round hall, its dome and the carrier pigeon.
 - `assets/rooms/map.js`: the floor-plan map in the options menu.
-- `assets/rooms/contact.js`: the contact form behind the mailbox.
+- `assets/rooms/contact.js`: the contact form behind the pigeon.
 - `assets/rooms/about.js`, `work.js`, `hobbies.js`: one file per room. Colours, light levels, furniture and layout live there.
 - `assets/world/`: unused leftovers, safe to delete.
