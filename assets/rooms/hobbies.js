@@ -753,10 +753,18 @@ const blankCover = (key) => blankCovers[key] || (blankCovers[key] = canvasTex(64
   ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
 }));
 
+/*
+ * Covers are put on a few at a time, each frame: every new cover is an image to send to the
+ * graphics card, and a couple of hundred at once froze the room for a moment.
+ */
+const coverJobs = [];
+animations.push(() => { for (let i = 0; i < 4 && coverJobs.length; i++) coverJobs.shift()(); });
 function setCover(material, tex) {
-  material.map = tex;
-  material.emissiveMap = tex;
-  material.needsUpdate = true;
+  coverJobs.push(() => {
+    material.map = tex;
+    material.emissiveMap = tex;
+    material.needsUpdate = true;
+  });
 }
 
 /** Load a cover into a small canvas (cropped to fill), or draw the title if there is none. */

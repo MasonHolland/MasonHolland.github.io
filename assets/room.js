@@ -311,14 +311,19 @@ function frame() {
   requestAnimationFrame(frame);
 }
 
-// Compile the shaders for every mix of rooms in view (each one changes the lights), so opening a
-// door or walking through one doesn't stutter.
+// Warm up behind the loading screen: draw every mix of rooms (each mix changes the lights) once,
+// with nothing left out for being off screen. Compiling alone isn't enough: graphics drivers
+// finish setting up shaders, and upload textures, the first time something is actually drawn,
+// and doing that when a door first opened froze the view.
 try {
-  const ks = Object.keys(rooms);
+  const ks = Object.keys(rooms), culled = [];
+  scene.traverse((o) => { if (o.frustumCulled) { culled.push(o); o.frustumCulled = false; } });
   for (let m = 0; m < 1 << ks.length; m++) {
     ks.forEach((k, i) => { rooms[k].group.visible = !!(m & (1 << i)); });
     renderer.compile(scene, camera);
+    renderer.render(scene, camera);
   }
+  culled.forEach((o) => { o.frustumCulled = true; });
 } catch (e) {}
 showRooms(null);
 
