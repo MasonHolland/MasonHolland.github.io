@@ -1,6 +1,6 @@
 {
   "source": "steam+psn",
-  "updated": "2026-11-18",
+  "updated": "2026-11-19",
   "games": [
     {
       "platform": "steam",
@@ -34,31 +34,22 @@
       "platform": "psn",
       "id": "PPSA10664_00",
       "title": "FINAL FANTASY XVI",
-      "hours": 53.2,
-      "lastPlayed": "2026-11-16",
+      "hours": 54,
+      "lastPlayed": "2026-11-18",
       "cover": "assets/covers/psn-edd2de8982.jpg",
       "trophies": {
-        "earned": 30,
+        "earned": 32,
         "total": 69,
-        "progress": 34
+        "progress": 37
       },
       "thumb": "assets/covers/small/psn-edd2de8982.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA01781_00",
-      "title": "Apple TV",
-      "hours": 14,
-      "lastPlayed": "2026-11-16",
-      "cover": "assets/covers/psn-5f2ed87bbd.jpg",
-      "thumb": "assets/covers/small/psn-5f2ed87bbd.jpg"
     },
     {
       "platform": "psn",
       "id": "PPSA29920_00",
       "title": "Aliens: Fireteam Elite 2",
       "hours": 5.8,
-      "lastPlayed": "2026-11-16",
+      "lastPlayed": "2026-11-17",
       "cover": "assets/covers/psn-c1259d982c.jpg",
       "trophies": {
         "earned": 3,
@@ -164,15 +155,6 @@
         "progress": 14
       },
       "thumb": "assets/covers/small/steam-5713e1c93a.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA03933_00",
-      "title": "Paramount+",
-      "hours": 15.5,
-      "lastPlayed": "2026-10-15",
-      "cover": "assets/covers/psn-87be44087a.jpg",
-      "thumb": "assets/covers/small/psn-87be44087a.jpg"
     },
     {
       "platform": "steam",
