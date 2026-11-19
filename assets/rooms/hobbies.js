@@ -1,6 +1,7 @@
 /* HOBBIES room (2 o'clock): a castle library with the bookcase and the game shelves. */
 import * as THREE from "three";
-import { DOOR_ANGLES, NEAR, RW, animations, archFrameGeo, basic, bookData, box, canvasTex, createRoom, cyl, esc, fitText, frontBox, gameData, interactables, mat, noise, rand, rooms, safeUrl, showPanel, signMesh, tiled, wrapText } from "./core.js";
+import { armourStand, fillHobbyShelf } from "./hobby-props.js";
+import { DOOR_ANGLES, NEAR, RW, animations, boardGameData, archFrameGeo, basic, bookData, box, canvasTex, createRoom, cyl, esc, fitText, frontBox, gameData, interactables, mat, noise, rand, rooms, safeUrl, showPanel, signMesh, tiled, wrapText } from "./core.js";
 import { plankTex } from "./shared.js";
 
 /* ================================================================== *
@@ -967,8 +968,8 @@ const GALLERY_HOLDS = PER_ROW * SHELF.rows;
 function buildGameShelves(g, wood, darkWood, stone, textures, runnerMat) {
   const { psn, steam, sw } = shownGames();
   // the Switch lines the hallway's left-hand wall (the one you see from the room), then Steam's
-  // overflow; PlayStation's overflow lines the other wall
-  const wallA = overflowUnits(psn);
+  // overflow; across from the Switch is the other-hobbies shelf, then PlayStation's overflow
+  const wallA = [null, ...overflowUnits(psn)];
   const wallB = [{ key: "switch", list: sw, console: true }, ...overflowUnits(steam).map((list, i) => ({ key: "steam", list, label: i === 0 ? "Steam, continued" : "" }))];
   const X0 = RW / 2;                                           // the room's right wall
   const L = Math.max(3.4, 0.15 + Math.max(wallA.length, wallB.length) * UNIT + 0.5);
@@ -1001,17 +1002,36 @@ function buildGameShelves(g, wood, darkWood, stone, textures, runnerMat) {
   const openW = HALL_OPEN.z1 - HALL_OPEN.z0;
   plane(openW, HALL.h - HALL_OPEN.h, wallMat(openW, HALL.h - HALL_OPEN.h, HALL.z1 - HALL_OPEN.z1, HALL_OPEN.h), X0 + 0.001, (HALL.h + HALL_OPEN.h) / 2, zc, 0, Math.PI / 2);
 
-  // a dark wooden frame round the opening, and a sign over it
+  // a dark wooden frame round the opening
   [HALL_OPEN.z0, HALL_OPEN.z1].forEach((z) => box(0.2, HALL_OPEN.h, 0.14, darkWood, X0, HALL_OPEN.h / 2, z, g));
   box(0.2, 0.18, openW + 0.14, darkWood, X0, HALL_OPEN.h + 0.09, zc, g);
-  const sign = platformSign("Game gallery");
-  sign.position.set(X0 - 0.05, HALL_OPEN.h + 0.55, zc);
-  sign.rotation.y = right;
-  g.add(sign);
 
   // the units along each hallway wall, from the opening outwards
-  wallA.forEach((list, i) => galleryUnit(g, "psn", list, X0 + 0.15 + UNIT * (i + 0.5), HALL.z1 - SHELF.d / 2, Math.PI, wood, darkWood,
-    i === 0 ? "PlayStation, continued" : ""));
+  wallA.forEach((list, i) => {
+    const x = X0 + 0.15 + UNIT * (i + 0.5), z = HALL.z1 - SHELF.d / 2;
+    if (!list) {
+      const { shelf, h } = placeUnit(g, x, z, Math.PI, wood, darkWood);
+      // the top two shelves hold board games from data/board-games.json; until there are some,
+      // plain books fill them
+      const boardGames = (boardGameData.games || []).filter((x) => x && x.title);
+      fillHobbyShelf(shelf, SHELF, boardGames);
+      const top = boardGames.length ? [] : [[-1.05, 1.05]];
+      decorativeBooks(shelf, SHELF, 7100, [[], [[0.85, 1.05]], [[-1.05, -0.45]], top, top]);
+      const lamp = new THREE.PointLight(0xffc48a, 2.2, 3, 2);
+      lamp.position.set(0, 1.9, 0.9);
+      shelf.add(lamp);
+      const sign = platformSign("Other hobbies");
+      sign.position.set(0, h + 0.38, 0.2);
+      shelf.add(sign);
+    } else galleryUnit(g, "psn", list, x, z, Math.PI, wood, darkWood, i === 1 ? "PlayStation, continued" : "");
+  });
+
+  // a suit of armour on a stand in the corner to the right of the PlayStation shelf, turned to the room
+  const armour = armourStand();
+  armour.position.set(X0 - 0.55, 0, -NEAR - 0.62);
+  armour.rotation.y = Math.atan2(-(X0 - 0.55), MID - (-NEAR - 0.62));
+  g.add(armour);
+  rooms.hobbies.obstacles.push({ x0: X0 - 0.95, x1: X0, z0: -NEAR - 1.0, z1: -NEAR - 0.2 });
   wallB.forEach((u, i) => {
     const x = X0 + 0.15 + UNIT * (i + 0.5), z = HALL.z0 + SHELF.d / 2;
     if (u.console) consoleUnit(g, u.key, u.list, x, z, 0, wood, darkWood);

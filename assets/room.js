@@ -210,13 +210,35 @@ function roomAt(x, z) {
   return null;
 }
 
-/** Hide the rooms you can't see from where you are. It saves drawing and lighting work. */
-function showOnly(key) {
-  shownRoom = key;
-  for (const [k, room] of Object.entries(rooms)) room.group.visible = !key || k === key;
-  // heavy things (like hundreds of game covers) load the first time you walk into their room
-  const room = rooms[key];
-  if (room && room.onEnter) { const once = room.onEnter; room.onEnter = null; once(); }
+/**
+ * Draw only the rooms you can see: the one you're in, or from the hall, those whose doors are open.
+ * It saves drawing and lighting work.
+ */
+let shownSet = null;
+function showRooms(inRoom) {
+  shownRoom = inRoom;
+  const vis = Object.keys(rooms).filter((k) => (inRoom ? k === inRoom : rooms[k].door.open > 0.001));
+  const id = vis.join(",");
+  if (id === shownSet) return;
+  shownSet = id;
+  for (const [k, room] of Object.entries(rooms)) room.group.visible = vis.includes(k);
+  // heavy things (like hundreds of game covers) load the first time a room comes into view
+  vis.forEach((k) => { const room = rooms[k]; if (room.onEnter) { const once = room.onEnter; room.onEnter = null; once(); } });
+}
+
+/** Doors swing open as you come within DOOR_NEAR metres, and shut again as you walk away. */
+const DOOR_NEAR = 2.6, DOOR_SWING = 1.45;
+function updateDoors(dt) {
+  for (const room of Object.values(rooms)) {
+    const d = room.door;
+    const near = Math.hypot(camera.position.x - d.x, camera.position.z - d.z) < DOOR_NEAR;
+    const next = Math.max(0, Math.min(1, d.open + (near ? 1 : -1) * dt * 2.2));
+    if (next === d.open) continue;
+    d.open = next;
+    const a = (1 - Math.cos(next * Math.PI)) / 2 * DOOR_SWING;   // eased
+    d.left.rotation.y = a;
+    d.right.rotation.y = -a;
+  }
 }
 const clock = new THREE.Clock();
 let bob = 0;
@@ -277,8 +299,8 @@ function frame() {
 
   const area = areaAt(camera.position.x, camera.position.z);
   if (area && area !== lastArea) { lastArea = area; whereEl.textContent = area; }
-  const inRoom = roomAt(camera.position.x, camera.position.z);
-  if (inRoom !== shownRoom) showOnly(inRoom);
+  updateDoors(dt);
+  showRooms(roomAt(camera.position.x, camera.position.z));
 
   animations.forEach((fn) => fn(t));
 
@@ -289,11 +311,16 @@ function frame() {
   requestAnimationFrame(frame);
 }
 
-// Compile the shaders for each view up front, so walking through a door doesn't stutter.
+// Compile the shaders for every mix of rooms in view (each one changes the lights), so opening a
+// door or walking through one doesn't stutter.
 try {
-  [null, ...Object.keys(rooms)].forEach((k) => { showOnly(k); renderer.compile(scene, camera); });
+  const ks = Object.keys(rooms);
+  for (let m = 0; m < 1 << ks.length; m++) {
+    ks.forEach((k, i) => { rooms[k].group.visible = !!(m & (1 << i)); });
+    renderer.compile(scene, camera);
+  }
 } catch (e) {}
-showOnly(null);
+showRooms(null);
 
 $("loading").hidden = true;
 startEl.hidden = false;

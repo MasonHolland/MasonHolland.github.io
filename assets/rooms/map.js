@@ -44,7 +44,7 @@ export function buildMap(container, onGo) {
     <text class="map__small" x="0" y="${R + 1.3}">Way out</text>`);
   hubObstacles.forEach((o) => {
     parts.push(`<rect class="map__thing" x="${o.x0}" y="${o.z0}" width="${o.x1 - o.x0}" height="${o.z1 - o.z0}"/>
-      <text class="map__small" x="${(o.x0 + o.x1) / 2}" y="${o.z1 + 1.0}">Contact pigeon</text>`);
+      ${o.label ? `<text class="map__small" x="${(o.x0 + o.x1) / 2}" y="${o.z1 + 1.0}">${esc(o.label)}</text>` : ""}`);
   });
   grow([0, R + 1.6]);
 

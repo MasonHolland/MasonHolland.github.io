@@ -1,0 +1,5 @@
+{
+  "_help": "Board games for the top two shelves of the other-hobbies shelf in the Hobbies room. Add one entry to \"games\" per game, copying _example. Only title is needed. size is the box: large, medium or small. colour is the box colour (like #2f5d8a); leave it out for one picked for you. players, note and link show on the card when the box is clicked. Up to about 30 fit. Until there are any, plain books fill those shelves. The daily sync never touches this file.",
+  "_example": { "title": "Catan", "size": "large", "colour": "#b23a2e", "players": "3 to 4", "note": "", "link": "" },
+  "games": []
+}

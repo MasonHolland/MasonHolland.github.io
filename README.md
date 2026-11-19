@@ -3,10 +3,10 @@
 A landing page with two doors:
 
 - **Read the short version** opens `resume.html`, a plain page with your experience, projects, awards and recent reads.
-- **Walk into the room** opens `room.html`, a round hall with three arched doorways. Each has a sign and a short arched hallway to a room with its own look:
+- **Walk into the room** opens `room.html`, a round Viking-style great hall (timber walls, posts and a planked roof; set `HALL_STYLE` in `assets/rooms/core.js` to `"classic"` for the cream plaster rotunda instead) with three arched doorways. Each has a sign, a pair of doors that swing open as you walk up (the room behind is only drawn while they're open, which keeps the hall smooth) and a short arched hallway to a room with its own look:
   - **10 o'clock, About me:** a bright, modern living room with a Perth skyline window, large photo frames, and smaller frames for photos and info cards.
   - **12 o'clock, Work:** a bright, minimal home office lit by daylight: a strip of high windows full of sky, a window onto the Perth view from the About room (turned to Matagarup Bridge and Optus Stadium), one black desk with two monitors (resume and projects) over a laptop, a steel-framed shelving wall, your awards and the project board.
-  - **2 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), bookcases for the books you've read (with a shelf for what you're reading now, covers facing out) and want to read (the teal case), and a game gallery: PlayStation and Steam shelves either side of a hallway, with the Nintendo Switch shelf inside it.
+  - **2 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), bookcases for the books you've read (with a shelf for what you're reading now, covers facing out) and want to read (the teal case), a game gallery (PlayStation and Steam shelves either side of a hallway, the Nintendo Switch shelf inside it, and across from it a shelf of other hobbies), and a suit of scale and chain armour in the corner.
 
 ## Make it yours
 
@@ -15,6 +15,7 @@ All content lives in three data files. Both the simple page and the room read fr
 - `data/profile.json`: name, headline, summary, links, experience, projects, awards, and the framed items in the About me room.
 - `data/books.json`: the bookcase. Filled by the Goodreads sync, or edit by hand.
 - `data/games.json`: the game cabinet. Filled by the games sync, or edit by hand.
+- `data/board-games.json`: board games for the top of the other-hobbies shelf in the Hobbies room. You edit this one by hand: copy `_example` into `games` for each game (only `title` is needed; `size` is `large`, `medium` or `small`). Until it has any, plain books fill those shelves.
 
 The shipped content is sample text. Replace it before you publish.
 
@@ -124,6 +125,8 @@ There are no 3D model files. Everything is built from simple shapes, lighting an
 - `assets/rooms/core.js`: renderer, helpers, doorway and sign builder, shared props.
 - `assets/rooms/shared.js`: textures and picture frames used by several rooms.
 - `assets/rooms/hub.js`: the round hall, its dome and the carrier pigeon.
+- `assets/rooms/hall-viking.js`: the Viking look for the hall (floor, walls, roof, posts, shields, hearth).
+- `assets/rooms/hobby-props.js`: the other-hobbies shelf and the suit of armour.
 - `assets/rooms/map.js`: the floor-plan map in the options menu.
 - `assets/rooms/contact.js`: the contact form behind the pigeon.
 - `assets/rooms/about.js`, `work.js`, `hobbies.js`: one file per room. Colours, light levels, furniture and layout live there.

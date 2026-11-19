@@ -57,7 +57,7 @@ export async function loadJSON(url, fallback) {
   }
 }
 
-export const [profile, bookData, gameData] = await Promise.all([
+export const [profile, bookData, gameData, boardGameData] = await Promise.all([
   loadJSON("data/profile.json", { name: "Mason", accolades: [], projects: [], experience: [], about: { frames: [] } }),
   loadJSON("data/books.json", { books: [] }),
   // Steam and PlayStation come from the sync; Switch games from the file you edit by hand
@@ -70,6 +70,7 @@ export const [profile, bookData, gameData] = await Promise.all([
           .sort((a, b) => String(b.lastPlayed || "").localeCompare(String(a.lastPlayed || "")) || (b.hours || 0) - (a.hours || 0)),
       ],
     })),
+  loadJSON("data/board-games.json", { games: [] }),   // hand-edited, for the other-hobbies shelf
 ]);
 
 // Fonts must be ready before text is painted onto canvas textures. Give up after two seconds.
@@ -451,7 +452,7 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
   scene.add(g);
   const inner = new THREE.Group();      // everything inside the room: hidden while you are in another room
   g.add(inner);
-  rooms[key] = { angle, label, bounds, obstacles: [], annexes: [], group: inner, H, depth };
+  rooms[key] = { angle, label, bounds, obstacles: [], annexes: [], group: inner, H, depth, door: null };
   const RD = depth;   // the rest of this function builds to this room's own depth
 
   const Hp = Math.max(H, HUB_H);
@@ -518,6 +519,33 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
   skin.position.z = -HALL_IN;
   g.add(skin);
 
+  // a pair of arched doors at the hall end of the hallway. They swing open into the hallway as you
+  // come near (room.js). While they're shut the room behind isn't drawn, which keeps the hall quick.
+  const doorMat = hallLook.doorMat || mat(0x5a3a26, { roughness: 0.6 });
+  const iron = mat(0x2a2a2c, { metalness: 0.6, roughness: 0.5 });
+  const leaf = (side) => {
+    const hw = DOOR_HALF, sh = new THREE.Shape();
+    if (side < 0) {   // hinged on the left: the leaf runs from the hinge (x = 0) to the middle (x = hw)
+      sh.moveTo(0, 0); sh.lineTo(hw, 0); sh.lineTo(hw, SPRING + hw);
+      sh.absarc(hw, SPRING, hw, Math.PI / 2, Math.PI, false); sh.lineTo(0, 0);
+    } else {          // hinged on the right: from the middle (x = -hw) to the hinge (x = 0)
+      sh.moveTo(-hw, 0); sh.lineTo(0, 0); sh.lineTo(0, SPRING);
+      sh.absarc(-hw, SPRING, hw, 0, Math.PI / 2, false); sh.lineTo(-hw, 0);
+    }
+    const pivot = new THREE.Group();
+    pivot.position.set(side * hw, 0, -HALL_IN - 0.1);
+    g.add(pivot);
+    pivot.add(new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: 0.06, bevelEnabled: false, curveSegments: 20 }), doorMat));
+    const mid = (side < 0 ? 1 : -1) * hw / 2;
+    [0.45, 1.25, 2.0].forEach((y) => box(hw - 0.1, 0.07, 0.015, iron, mid, y, 0.068, pivot));
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.01, 6, 20), iron);
+    ring.position.set((side < 0 ? 1 : -1) * (hw - 0.14), 1.1, 0.08);
+    pivot.add(ring);
+    return pivot;
+  };
+  const [dx, dz] = toWorld(angle, 0, -HALL_IN);
+  rooms[key].door = { left: leaf(-1), right: leaf(1), open: 0, x: dx, z: dz };
+
   // arched frames at the hall end of the hallway and on the room side of the door wall
   const fHall = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), frameMat);
   fHall.position.z = -HALL_IN;
@@ -535,20 +563,31 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
 }
 
 
-/** Plain warm plaster for the hallways between the hall and the rooms. */
+/**
+ * The hall's look: "viking" (a timber great hall with a hearth) or "classic" (the cream plaster
+ * rotunda with a marble floor and dome). Change it here to switch back.
+ */
+export const HALL_STYLE = "viking";
+
+/** hub.js hands over the Viking hall's wall and hallway textures before the rooms are built. */
+const hallLook = { wallTex: null, hallwayTex: null, doorMat: null };
+export function useHallLook(look) { Object.assign(hallLook, look); }
+
+/** The hallways between the hall and the rooms: warm plaster, or dark planks in the Viking hall. */
 let hallwayMaterial = null;
 function hallwayMat() {
   if (!hallwayMaterial) {
-    const t = canvasTex(256, 256, (ctx, w, h) => { ctx.fillStyle = "#ece6da"; ctx.fillRect(0, 0, w, h); noise(ctx, w, h, 0.05, 1200); });
+    const t = hallLook.hallwayTex || canvasTex(256, 256, (ctx, w, h) => { ctx.fillStyle = "#ece6da"; ctx.fillRect(0, 0, w, h); noise(ctx, w, h, 0.05, 1200); });
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.repeat.set(0.5, 0.5);
-    hallwayMaterial = new THREE.MeshStandardMaterial({ map: t, roughness: 0.9, emissive: 0x4a453c });   // lit from the hall at one end and the room at the other
+    hallwayMaterial = new THREE.MeshStandardMaterial({ map: t, roughness: 0.9, emissive: hallLook.hallwayTex ? 0x2a1c10 : 0x4a453c });   // lit from the hall at one end and the room at the other
   }
   return hallwayMaterial;
 }
 
 export let hubWallTexture = null;
 export function hubWallMat(rx, ry) {
+  if (!hubWallTexture && hallLook.wallTex) hubWallTexture = hallLook.wallTex;
   if (!hubWallTexture) {
     hubWallTexture = canvasTex(512, 1024, (ctx, w, h) => {
       // 2 m wide, 3.8 m tall: plaster above, panelled dado below

@@ -1,7 +1,10 @@
 /* The round hall in the middle: floor, curved wall, the three arched doorways, signs and lighting. */
 import * as THREE from "three";
-import { ARCH_TOP, DOME_RISE, DOOR_ANGLES, DOOR_HALF, GAP, HUB_H, R, SIGNS, SPRING, animations, archFrameGeo, archLeafGeo, basic, box, canvasTex, cyl, hubObstacles, hubWallMat, interactables, mat, noise, scene, signMesh } from "./core.js";
+import { ARCH_TOP, HALL_STYLE, useHallLook, DOME_RISE, DOOR_ANGLES, DOOR_HALF, GAP, HUB_H, R, SIGNS, SPRING, animations, archFrameGeo, archLeafGeo, basic, box, canvasTex, cyl, hubObstacles, hubWallMat, interactables, mat, noise, scene, signMesh } from "./core.js";
 import { openContact } from "./contact.js";
+import { buildPosts, buildTimberRoof, doorPlanksTex, doorStraps, vikingFloorTex, vikingHallwayTex, vikingWallTex } from "./hall-viking.js";
+
+const VIKING = HALL_STYLE === "viking";
 
 /* ---------- the dome: a half-ellipsoid on top of the wall, with ribs, a cornice and a bright oculus ---------- */
 
@@ -74,7 +77,7 @@ function buildPigeon(x, z) {
   const bird = new THREE.Group();
   bird.position.set(-0.04, 1.29, 0);
   st.add(bird);
-  const grey = mat(0x9aa2b0, { roughness: 0.7 }), wingM = mat(0x7d8696, { roughness: 0.7 });
+  const grey = mat(0x9aa2b0, { roughness: 0.7 }), wingM = mat(0x7d8696, { roughness: 0.7 });   // wingM: the tail
   const neckM = mat(0x4f7d6e, { metalness: 0.55, roughness: 0.3, emissive: 0x2a1840, emissiveIntensity: 0.4 });
   const ink = mat(0x22252b, { roughness: 0.6 });
   const ell = (r, sx, sy, sz, m, px, py, pz, parent = bird) => {
@@ -83,16 +86,26 @@ function buildPigeon(x, z) {
   };
   const body = ell(0.1, 0.82, 0.78, 1.3, grey, 0, 0.1, -0.01);
   body.rotation.x = 0.35;                                          // chest up, tail down
-  ell(0.07, 1, 1.05, 1, neckM, 0, 0.17, 0.07);                     // the shimmering neck
-  [-1, 1].forEach((sd) => {
-    const w = ell(0.09, 0.3, 0.6, 1.35, wingM, sd * 0.068, 0.11, -0.03);
-    w.rotation.x = 0.35;
-    // two black wing bars
-    [0, 1].forEach((k) => { const b = box(0.006, 0.012, 0.07, ink, sd * 0.094, 0.085 - k * 0.025, -0.04 - k * 0.03, bird); b.rotation.x = 0.35; });
+  ell(0.054, 1, 1.12, 0.95, neckM, 0, 0.165, 0.075);              // the shimmering neck
+  // folded wings with the two black wing bars painted on, so they follow the wing's curve.
+  // The sphere is turned so its poles point front and back: the texture's top is the front.
+  const wingTex = canvasTex(64, 128, (ctx, w, h) => {
+    ctx.fillStyle = "#7d8696"; ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = "#23262c"; ctx.fillRect(0, h * 0.5, w, h * 0.06); ctx.fillRect(0, h * 0.64, w, h * 0.06);
+    ctx.fillStyle = "#5d6574"; ctx.fillRect(0, h * 0.86, w, h * 0.14);   // darker flight feathers at the tip
   });
-  const tail = box(0.085, 0.018, 0.15, wingM, 0, 0.04, -0.16, bird);
+  const wingGeo = new THREE.SphereGeometry(0.09, 20, 16).rotateX(Math.PI / 2);
+  const wingMat = mat(0xffffff, { map: wingTex, roughness: 0.7 });
+  [-1, 1].forEach((sd) => {
+    const w = new THREE.Mesh(wingGeo, wingMat);
+    w.scale.set(0.3, 0.6, 1.35);
+    w.position.set(sd * 0.068, 0.11, -0.03);
+    w.rotation.x = 0.35;
+    bird.add(w);
+  });
+  const tail = box(0.085, 0.018, 0.12, wingM, 0, 0.045, -0.15, bird);
   tail.rotation.x = -0.45;
-  const band = box(0.087, 0.02, 0.03, ink, 0, 0.0, -0.225, bird);
+  const band = box(0.087, 0.02, 0.025, ink, 0, 0.012, -0.2, bird);
   band.rotation.x = -0.45;
 
   const head = new THREE.Group();
@@ -140,16 +153,22 @@ function buildPigeon(x, z) {
   hit.position.y = 0.8;
   st.add(hit);
   interactables.push({ mesh: hit, hint: "Send me a message by pigeon", mat: neckM, base: 0.4, open: openContact });
-  hubObstacles.push({ x0: x - 0.3, x1: x + 0.3, z0: z - 0.3, z1: z + 0.3 });
+  hubObstacles.push({ x0: x - 0.3, x1: x + 0.3, z0: z - 0.3, z1: z + 0.3, label: "Contact pigeon" });
 }
 
 /* ---------- the hall ---------- */
 
 export function buildHub() {
-  // floor: plain square tiles with grout lines
+  if (VIKING) {
+    const t = doorPlanksTex();
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(1 / (DOOR_HALF * 2), 1 / (SPRING + DOOR_HALF));   // door UVs are in metres
+    useHallLook({ wallTex: vikingWallTex(), hallwayTex: vikingHallwayTex(), doorMat: mat(0xffffff, { map: t, roughness: 0.75 }) });
+  }
+  // floor: plank boards in the Viking hall, otherwise plain square tiles with grout lines
   const D = 2 * (R + 0.15);
   const TILE = 0.6; // tile size in metres
-  const floorTex = canvasTex(2048, 2048, (ctx, w, h) => {
+  const floorTex = VIKING ? vikingFloorTex(D) : canvasTex(2048, 2048, (ctx, w, h) => {
     const px = w / D;
     const step = TILE * px;
     ctx.fillStyle = "#bfb6a6"; ctx.fillRect(0, 0, w, h); // grout
@@ -164,11 +183,13 @@ export function buildHub() {
     }
     noise(ctx, w, h, 0.05, 24000);
   });
-  const floor = new THREE.Mesh(new THREE.CircleGeometry(R + 0.15, 96), new THREE.MeshStandardMaterial({ map: floorTex, roughness: 0.55, polygonOffset: true, polygonOffsetFactor: 2, polygonOffsetUnits: 2 }));
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(R + 0.15, 96), new THREE.MeshStandardMaterial({ map: floorTex, roughness: VIKING ? 0.8 : 0.55, polygonOffset: true, polygonOffsetFactor: 2, polygonOffsetUnits: 2 }));
   floor.rotation.x = -Math.PI / 2;
   scene.add(floor);
 
-  buildDome();
+  // (hall-viking.js also has buildShields and buildHearth, left out to keep the hall simple)
+  if (VIKING) { buildTimberRoof(); buildPosts(); }
+  else buildDome();
 
   // round wall in pieces, leaving a gap at each door (10, 12 and 2 o'clock).
   // The cylinder measures angles from 6 o'clock, so a door turned by a sits at PI + a.
@@ -198,19 +219,28 @@ export function buildHub() {
   const dark = mat(0x3a2619, { roughness: 0.6 });
   const exFrame = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), dark);
   ex.add(exFrame);
-  const leaf = new THREE.Mesh(archLeafGeo(DOOR_HALF, SPRING, 0.06), mat(0x6b2d34, { roughness: 0.6 }));
+  let leafMat = mat(0x6b2d34, { roughness: 0.6 });
+  if (VIKING) {
+    const t = doorPlanksTex();
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(1 / (DOOR_HALF * 2), 1 / (SPRING + DOOR_HALF));   // the door's UVs are in metres
+    t.offset.set(0.5, 0);
+    leafMat = mat(0xffffff, { map: t, roughness: 0.75 });
+  }
+  const leaf = new THREE.Mesh(archLeafGeo(DOOR_HALF, SPRING, 0.06), leafMat);
   ex.add(leaf);
+  if (VIKING) doorStraps(ex, DOOR_HALF);
   box(0.07, 0.2, 0.05, mat(0xc99a3b, { metalness: 0.6, roughness: 0.4 }), 0.5, 1.05, 0.09, ex);
   const exSign = signMesh(1.7, 0.44, SIGNS.exit);
   exSign.position.set(0, ARCH_TOP + 0.5, 0.1);
   ex.add(exSign);
   interactables.push({ mesh: leaf, hint: "Leave the room", mat: leaf.material, open: () => { location.href = "index.html"; } });
 
-  buildPigeon(2.0, 1.6);
+  buildPigeon(3.0, 1.2);
 
   // lighting
-  scene.add(new THREE.HemisphereLight(0xe8eef5, 0x6a5a48, 0.55));
-  const hubLight = new THREE.PointLight(0xfff0d8, 30, 13, 2);
+  scene.add(VIKING ? new THREE.HemisphereLight(0xffe6c8, 0x3a2614, 0.6) : new THREE.HemisphereLight(0xe8eef5, 0x6a5a48, 0.55));
+  const hubLight = VIKING ? new THREE.PointLight(0xffd2a0, 18, 13, 2) : new THREE.PointLight(0xfff0d8, 30, 13, 2);
   hubLight.position.set(0, 2.8, 0);
   scene.add(hubLight);
 }
