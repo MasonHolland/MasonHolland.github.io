@@ -340,6 +340,79 @@ function modularShelving(parent, cols, rows, cw, ch, d) {
   return g;
 }
 
+/** Set the biggest font (up to size) at which text fits in maxW, so nothing is ever cut off. */
+function fitFont(ctx, text, weight, size, family, maxW) {
+  for (let s = size; s >= 10; s--) {
+    ctx.font = `${weight} ${s}px ${family}`;
+    if (ctx.measureText(text).width <= maxW) return;
+  }
+}
+
+/**
+ * A certificate for an accolade: cream paper in a double gold border, the school's seal at the top
+ * when the accolade has a logo, then the kind, the title, who it's from and the year. Every line
+ * shrinks to fit rather than being cut short.
+ */
+function certificateTexture(a) {
+  const draw = (ctx, w, h, seal) => {
+    ctx.fillStyle = "#fbf8ef"; ctx.fillRect(0, 0, w, h);
+    noise(ctx, w, h, 0.025, 1500);
+    ctx.strokeStyle = "#b8934a"; ctx.lineWidth = 8; ctx.strokeRect(26, 26, w - 52, h - 52);
+    ctx.lineWidth = 2; ctx.strokeRect(44, 44, w - 88, h - 88);
+    const serif = "'Literata', Georgia, serif", sans = "'Bricolage Grotesque', Arial, sans-serif";
+    const maxW = w - 160;
+    let y = seal ? 280 : 190;
+    if (seal) ctx.drawImage(seal, w / 2 - 100, 66, 200, 200);
+    ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#a07c38";
+    const kind = a.kind === "degree" ? "Certificate of completion" : String(a.kind || "award");
+    fitFont(ctx, kind.toUpperCase(), 600, 28, sans, maxW);
+    ctx.fillText(kind.toUpperCase(), w / 2, (y += 50));
+    ctx.fillStyle = "#1d2b38";
+    fitFont(ctx, a.title || "", 700, 70, serif, maxW);
+    ctx.fillText(a.title || "", w / 2, (y += 100));
+    ctx.fillStyle = "#4a5a68";
+    fitFont(ctx, a.from || "", 500, 38, serif, maxW);
+    ctx.fillText(a.from || "", w / 2, (y += 72));
+    ctx.fillStyle = "#b8934a"; ctx.fillRect(w / 2 - 120, (y += 40), 240, 2);
+    ctx.fillStyle = "#4a5a68";
+    fitFont(ctx, String(a.year || ""), 500, 32, serif, maxW);
+    ctx.fillText(String(a.year || ""), w / 2, (y += 64));
+  };
+  const tex = canvasTex(1024, 768, (ctx, w, h) => draw(ctx, w, h, null));
+  if (a.logo) {
+    const img = new Image();
+    img.onload = () => { draw(tex.image.getContext("2d"), 1024, 768, img); tex.needsUpdate = true; };
+    img.src = a.logo;
+  }
+  return tex;
+}
+
+/**
+ * The resume, framed on the wall: a picture of the PDF (assets/work/resume.jpg, made with the
+ * contact line removed, so no email or phone number) in a thin black frame with a white mat.
+ * Clicking it opens the resume.
+ */
+function framedResume(g, x, y, z) {
+  const f = new THREE.Group();
+  f.position.set(x, y, z);
+  g.add(f);
+  const pw = 0.74, ph = pw * (1584 / 1224);
+  box(pw + 0.16, ph + 0.16, 0.03, mat(0x1b1d20, { roughness: 0.5 }), 0, 0, 0, f);
+  box(pw + 0.11, ph + 0.11, 0.032, mat(0xffffff, { roughness: 0.7 }), 0, 0, 0.001, f);
+  const tex = new THREE.TextureLoader().load("assets/work/resume.jpg");
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+  const pm = new THREE.MeshStandardMaterial({ map: tex, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.2, roughness: 0.8 });
+  const pic = new THREE.Mesh(new THREE.PlaneGeometry(pw, ph), pm);
+  pic.position.z = 0.018;
+  f.add(pic);
+  interactables.push({
+    mesh: pic, hint: "Read the resume", mat: pm, base: 0.2,
+    open: () => showPanel({ title: profile.name + "'s resume", meta: profile.headline || "", html: resumeHtml() }),
+  });
+}
+
 /** Colourful zigzag and circle prints, like the ones over the desk in the photo. */
 function printTexture(seed) {
   const palette = ["#e94f64", "#f6a623", "#3fb6c9", "#7d5ce0", "#4fbf6f", "#f2d43a"];
@@ -378,6 +451,7 @@ export function buildWork() {
     front: { tex: wallTex, tw: 2, th: 2 },
     bounds: { x0: -3.7, x1: 3.7, z0: -12.66, z1: -5.26 },
     frameMat: mat(0xe9e6e0, { roughness: 0.6 }),
+    doorStyle: "white",
   });
   const room = rooms.work;
   const white = mat(0xf4f3f0, { roughness: 0.6 });
@@ -403,10 +477,11 @@ export function buildWork() {
   const strip = blackWindow(g, RW - 0.4, 0.5, skyTexture(2432, 160), 5);
   strip.position.set(0, 2.72, Zb + 0.005);
   const square = blackWindow(g, 1.5, 1.25, perthSkylineTexture(820, 528, { sun: false }), 1);
-  square.position.set(-0.5, 1.45, Zb + 0.005);
+  square.position.set(0, 1.45, Zb + 0.005);
 
+  // the project board to the left of the window, the resume framed to its right
   const board = new THREE.Group();
-  board.position.set(2.15, 1.55, Zb + 0.03);
+  board.position.set(-2.15, 1.55, Zb + 0.03);
   g.add(board);
   box(1.96, 1.08, 0.04, mat(0xd7d9dc, { metalness: 0.4, roughness: 0.4 }), 0, 0, 0, board);
   const bm = new THREE.MeshStandardMaterial({ map: boardTexture(), roughness: 0.5, emissive: 0xffffff, emissiveIntensity: 0.12 });
@@ -418,6 +493,8 @@ export function buildWork() {
     mesh: bp, hint: "Open the project list", mat: bm, base: 0.12,
     open: () => showPanel({ title: "Projects", meta: (profile.projects || []).length + " projects", html: projectsHtml(profile.projects || []) }),
   });
+
+  framedResume(g, 2.1, 1.5, Zb + 0.02);
 
   // right wall: the shelving wall, 7 cells by 5
   const shelving = modularShelving(g, 7, 5, 0.76, 0.4, 0.38);
@@ -456,18 +533,7 @@ export function buildWork() {
   for (let row = 0; row < 2; row++) for (let col = 0; col < 6; col++) slots.push({ z: -6.4 - col * 1.08, y: row === 0 ? 2.05 : 1.3 });
   accolades.forEach((a, i) => {
     const { z, y } = slots[i];
-    const tex = canvasTex(512, 384, (ctx, w, h) => {
-      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, w, h);
-      ctx.strokeStyle = "#e3e6e9"; ctx.lineWidth = 3; ctx.strokeRect(14, 14, w - 28, h - 28);
-      ctx.fillStyle = "#c9a25a"; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
-      ctx.font = "600 24px 'Bricolage Grotesque', Arial, sans-serif";
-      ctx.fillText(String(a.kind || "award").toUpperCase(), w / 2, 68);
-      ctx.fillStyle = "#1d2b38"; ctx.font = "800 42px 'Bricolage Grotesque', Arial, sans-serif";
-      const yy = wrapText(ctx, a.title, w / 2, 130, w - 90, 48, 3);
-      ctx.fillStyle = "#5a6a78"; ctx.font = "500 26px 'Literata', Georgia, serif";
-      ctx.fillText(fitText(ctx, a.from, w - 90), w / 2, Math.min(yy + 14, h - 66));
-      ctx.fillText(String(a.year || ""), w / 2, h - 34);
-    });
+    const tex = certificateTexture(a);
     const f = new THREE.Group();
     f.position.set(-RW / 2 + 0.03, y, z);
     f.rotation.y = Math.PI / 2;
@@ -512,7 +578,7 @@ export function buildWork() {
     g.add(l, l.target);
   };
   sun(0, 6.5, Zb - 2.5, 0, Zb + 4.0, 1.5, 0.75, 13);          // through the long strip windows
-  sun(-0.5, 4.0, Zb - 1.8, -0.5, Zb + 2.0, 1.3, 0.4, 7);      // through the square window
+  sun(0, 4.0, Zb - 1.8, 0, Zb + 2.0, 1.3, 0.4, 7);            // through the square window
   [Zc - 1.8, Zc + 1.8].forEach((z) => {
     const bounce = new THREE.PointLight(0xf1f4fb, 1.15, 7.5, 0);
     bounce.position.set(0, 1.5, z);

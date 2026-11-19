@@ -1,6 +1,6 @@
 /* The round hall in the middle: floor, curved wall, the three arched doorways, signs and lighting. */
 import * as THREE from "three";
-import { ARCH_TOP, HALL_STYLE, useHallLook, DOME_RISE, DOOR_ANGLES, DOOR_HALF, GAP, HUB_H, R, SIGNS, SPRING, animations, archFrameGeo, archLeafGeo, basic, box, canvasTex, cyl, hubObstacles, hubWallMat, interactables, mat, noise, scene, signMesh } from "./core.js";
+import { ARCH_TOP, HALL_STYLE, hallFrameMat, useHallLook, DOME_RISE, DOOR_ANGLES, DOOR_HALF, GAP, HUB_H, R, SIGNS, SPRING, animations, archFrameGeo, archLeafGeo, basic, box, canvasTex, cyl, hubObstacles, hubWallMat, interactables, mat, noise, scene, signMesh } from "./core.js";
 import { openContact } from "./contact.js";
 import { buildPosts, buildTimberRoof, doorPlanksTex, doorStraps, vikingFloorTex, vikingHallwayTex, vikingWallTex } from "./hall-viking.js";
 
@@ -216,8 +216,7 @@ export function buildHub() {
   ex.position.set(0, 0, R - 0.02);
   ex.rotation.y = Math.PI;
   scene.add(ex);
-  const dark = mat(0x3a2619, { roughness: 0.6 });
-  const exFrame = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), dark);
+  const exFrame = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), hallFrameMat());   // the same pale trim as the room doorways
   ex.add(exFrame);
   let leafMat = mat(0x6b2d34, { roughness: 0.6 });
   if (VIKING) {

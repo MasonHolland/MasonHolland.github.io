@@ -48,6 +48,7 @@
       "from": "Turing School of Software and Design",
       "year": "2017",
       "kind": "degree",
+      "logo": "assets/work/turing-seal.png",
       "summary": "Full-time program (Mar to Nov 2017) in object-oriented Ruby and Ruby on Rails RESTful APIs, finishing with full-stack group projects in JavaScript and Node."
     }
   ],

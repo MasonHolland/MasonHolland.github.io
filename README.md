@@ -3,9 +3,9 @@
 A landing page with two doors:
 
 - **Read the short version** opens `resume.html`, a plain page with your experience, projects, awards and recent reads.
-- **Walk into the room** opens `room.html`, a round Viking-style great hall (timber walls, posts and a planked roof; set `HALL_STYLE` in `assets/rooms/core.js` to `"classic"` for the cream plaster rotunda instead) with three arched doorways. Each has a sign, a pair of doors that swing open as you walk up (the room behind is only drawn while they're open, which keeps the hall smooth) and a short arched hallway to a room with its own look:
+- **Walk into the room** opens `room.html`, a round Viking-style great hall (timber walls, posts and a planked roof; set `HALL_STYLE` in `assets/rooms/core.js` to `"classic"` for the cream plaster rotunda instead) with three arched doorways. Each has a sign, a pair of doors in the room's style (stained glass for Hobbies, white for Work, pale birch for About; `DOOR_LOOKS` in `core.js`) that swing open as you walk up (the room behind is only drawn while they're open, which keeps the hall smooth) and a short arched hallway to a room with its own look:
   - **10 o'clock, About me:** a bright, modern living room with a Perth skyline window, large photo frames, and smaller frames for photos and info cards.
-  - **12 o'clock, Work:** a bright, minimal home office lit by daylight: a strip of high windows full of sky, a window onto the Perth view from the About room (turned to Matagarup Bridge and Optus Stadium), one black desk with two monitors (resume and projects) over a laptop, a steel-framed shelving wall, your awards and the project board.
+  - **12 o'clock, Work:** a bright, minimal home office lit by daylight: a strip of high windows full of sky, a centred window onto the Perth view from the About room (turned to Matagarup Bridge and Optus Stadium) between the project board and your framed resume, one black desk with two monitors (resume and projects) over a laptop, a steel-framed shelving wall and your awards as framed certificates.
   - **2 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), bookcases for the books you've read (with a shelf for what you're reading now, covers facing out) and want to read (the teal case), a game gallery (PlayStation and Steam shelves either side of a hallway, the Nintendo Switch shelf inside it, and across from it a shelf of other hobbies), and a suit of scale and chain armour in the corner.
 
 ## Make it yours
@@ -34,7 +34,9 @@ Put photo files in `assets/photos/`. Until a file exists, the frame shows a "You
 
 ### Awards
 
-`accolades` holds up to 12 items. Each has a `title`, `from`, `year`, `kind` (`award`, `certificate`, `degree` or `press`) and a `summary`. They hang on the wall of the Work room.
+`accolades` holds up to 12 items. Each has a `title`, `from`, `year`, `kind` (`award`, `certificate`, `degree` or `press`), a `summary` and optionally a `logo` (an image path, drawn as a seal at the top of the certificate). They hang on the wall of the Work room.
+
+The framed resume in the Work room is `assets/work/resume.jpg`, a picture of the resume PDF with the contact line (email and phone) blanked out. Remake it the same way when the resume changes; never put the original PDF in the repo.
 
 ## Bookshelf from Goodreads
 

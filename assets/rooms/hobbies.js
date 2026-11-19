@@ -464,6 +464,7 @@ export function buildHobbies() {
     depth: DEPTH,
     bounds: { x0: -3.3, x1: 3.3, z0: BACK + 0.7, z1: -5.26 },
     frameMat: mat(0x3a2619, { roughness: 0.7 }),
+    doorStyle: "glass",
   });
   const stoneM = mat(0x6c665c, { roughness: 0.95 });
   const wood = mat(0x4a3020, { roughness: 0.7 });

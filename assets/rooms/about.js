@@ -462,6 +462,7 @@ export function buildAbout() {
     front: { tex: plasterTex("#f4f0e8"), tw: 1, th: 1 },
     bounds: { x0: -3.7, x1: 3.7, z0: -12.66, z1: -5.26 },
     frameMat: mat(0xf2ece0, { roughness: 0.5 }),
+    doorStyle: "birch",
   });
   const room = rooms.about;
   const white = mat(0xffffff, { roughness: 0.6 });
@@ -526,7 +527,6 @@ export function buildAbout() {
   lantern(table, 0.12, 0.48, -0.12, 0.22);
   cyl(0.09, 0.06, 0.03, mat(0xdcd7cc), 0.3, 0.495, 0.15, table, 20);
   room.obstacles.push({ x0: -1.5, x1: -0.3, z0: -9.3, z1: -8.1 });
-  lantern(g, -3.2, 0, -10.25, 0.45);   // a bigger one on the floor at the end of the sofa
 
   // two bamboo armchairs facing the sofa
   [[2.2, -7.3, -1.9], [2.2, -10.1, -1.25]].forEach(([x, z, r]) => {
@@ -545,24 +545,23 @@ export function buildAbout() {
   lantern(side, 0, 0.515, 0, 0.24);
   room.obstacles.push({ x0: 1.9, x1: 2.5, z0: -9.0, z1: -8.4 });
 
-  // black-framed glass display cabinet by the door wall
-  displayCabinet(g, 2.55, -5.27);
-  room.obstacles.push({ x0: 1.95, x1: 3.15, z0: -5.6, z1: -5.0 });
+  // black-framed glass display cabinet, its back against the door wall
+  displayCabinet(g, 2.55, -NEAR);
+  room.obstacles.push({ x0: 1.95, x1: 3.15, z0: -5.45, z1: -4.9 });
 
   // palms in the corners
   makePalm(g, -3.35, -5.75, 1.0);
   makePalm(g, 3.35, -12.25, 1.25);
-  makePalm(g, -3.35, -12.25, 1.1);
-  room.obstacles.push({ x0: -3.7, x1: -3.0, z0: -6.1, z1: -5.4 }, { x0: 3.0, x1: 3.7, z0: -12.6, z1: -11.9 }, { x0: -3.7, x1: -3.0, z0: -12.6, z1: -11.9 });
+  room.obstacles.push({ x0: -3.7, x1: -3.0, z0: -6.1, z1: -5.4 }, { x0: 3.0, x1: 3.7, z0: -12.6, z1: -11.9 });
 
-  // floor lamp
+  // floor lamp in the back corner, by the window
   const lamp = new THREE.Group();
-  lamp.position.set(-3.3, 0, -10.9);
+  lamp.position.set(-3.55, 0, -12.3);
   g.add(lamp);
   cyl(0.15, 0.15, 0.03, mat(0x2b2b2b), 0, 0.015, 0, lamp);
   cyl(0.015, 0.015, 1.5, mat(0x2b2b2b), 0, 0.78, 0, lamp, 8);
   cyl(0.18, 0.25, 0.3, new THREE.MeshStandardMaterial({ color: 0xfff1d6, emissive: 0xffe2a8, emissiveIntensity: 0.7 }), 0, 1.65, 0, lamp, 24);
-  room.obstacles.push({ x0: -3.5, x1: -3.1, z0: -11.1, z1: -10.7 });
+  room.obstacles.push({ x0: -3.75, x1: -3.35, z0: -12.5, z1: -12.1 });
 
   // a woven rattan pendant over the coffee table, and small flush lights elsewhere
   rattanPendant(g, -0.9, H, -8.7);
@@ -578,7 +577,7 @@ export function buildAbout() {
   // small frames: two between the big ones on the right, one pair flanking the sofa picture, one pair beside the window
   const slots = [
     [3.96, 2.2, -8.7, -Math.PI / 2], [3.96, 1.45, -8.7, -Math.PI / 2],
-    [-3.96, 1.85, -6.3, Math.PI / 2], [-3.96, 2.2, -11.6, Math.PI / 2],
+    [-3.96, 1.85, -6.3, Math.PI / 2], [-3.96, 1.85, -11.6, Math.PI / 2],
     [-3.3, 2.0, -(NEAR + RD) + 0.03, 0], [3.3, 2.0, -(NEAR + RD) + 0.03, 0],
   ];
   const frames = (profile.about && profile.about.frames) || [];

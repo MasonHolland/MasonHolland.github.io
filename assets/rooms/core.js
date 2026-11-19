@@ -445,7 +445,7 @@ export function makeSofa(color, w = 2.3) {
  * z0 and z1 (room frame, z0 < z1), for an annex such as a hallway.
  * depth (optional) is how far the room runs from its door wall to its back wall; RD by default.
  */
-export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bounds, frameMat, rightOpening, depth = RD }) {
+export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bounds, frameMat, rightOpening, depth = RD, doorStyle }) {
   const g = new THREE.Group();          // door wall, frames and sign: always visible
   g.rotation.y = angle;
   g.position.set(-SHIFT * Math.sin(angle), 0, -SHIFT * Math.cos(angle));
@@ -521,8 +521,24 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
 
   // a pair of arched doors at the hall end of the hallway. They swing open into the hallway as you
   // come near (room.js). While they're shut the room behind isn't drawn, which keeps the hall quick.
+  // doorStyle picks a look from DOOR_LOOKS; without one they're the hall's plank doors with iron straps
   const doorMat = hallLook.doorMat || mat(0x5a3a26, { roughness: 0.6 });
   const iron = mat(0x2a2a2c, { metalness: 0.6, roughness: 0.5 });
+  const look = doorStyle && DOOR_LOOKS[doorStyle]();
+  const leafMat = (side) => {
+    if (!look) return doorMat;
+    // one picture across both doors: each leaf shows its own half (the shape's UVs are in metres)
+    const t = look.tex.clone();
+    t.repeat.set(1 / (DOOR_HALF * 2), 1 / (SPRING + DOOR_HALF));
+    t.offset.set(side < 0 ? 0 : 1, 0);
+    const opts = { map: t, roughness: look.roughness };
+    if (look.glow) {
+      const gt = look.glow.clone();
+      gt.repeat.copy(t.repeat); gt.offset.copy(t.offset);
+      Object.assign(opts, { emissive: 0xffffff, emissiveMap: gt, emissiveIntensity: look.glowBy });
+    }
+    return [new THREE.MeshStandardMaterial(opts), look.edge];
+  };
   const leaf = (side) => {
     const hw = DOOR_HALF, sh = new THREE.Shape();
     if (side < 0) {   // hinged on the left: the leaf runs from the hinge (x = 0) to the middle (x = hw)
@@ -535,19 +551,21 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
     const pivot = new THREE.Group();
     pivot.position.set(side * hw, 0, -HALL_IN - 0.1);
     g.add(pivot);
-    pivot.add(new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: 0.06, bevelEnabled: false, curveSegments: 20 }), doorMat));
-    const mid = (side < 0 ? 1 : -1) * hw / 2;
-    [0.45, 1.25, 2.0].forEach((y) => box(hw - 0.1, 0.07, 0.015, iron, mid, y, 0.068, pivot));
+    pivot.add(new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: 0.06, bevelEnabled: false, curveSegments: 20 }), leafMat(side)));
+    const inward = side < 0 ? 1 : -1;   // towards the middle, where the doors meet
+    if (look) { look.handle(pivot, inward * (hw - 0.1)); return pivot; }
+    [0.45, 1.25, 2.0].forEach((y) => box(hw - 0.1, 0.07, 0.015, iron, inward * hw / 2, y, 0.068, pivot));
     const ring = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.01, 6, 20), iron);
-    ring.position.set((side < 0 ? 1 : -1) * (hw - 0.14), 1.1, 0.08);
+    ring.position.set(inward * (hw - 0.14), 1.1, 0.08);
     pivot.add(ring);
     return pivot;
   };
   const [dx, dz] = toWorld(angle, 0, -HALL_IN);
   rooms[key].door = { left: leaf(-1), right: leaf(1), open: 0, x: dx, z: dz };
 
-  // arched frames at the hall end of the hallway and on the room side of the door wall
-  const fHall = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), frameMat);
+  // arched frames at the hall end of the hallway (the same pale trim for every room) and on the
+  // room side of the door wall (the room's own)
+  const fHall = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), hallFrameMat());
   fHall.position.z = -HALL_IN;
   g.add(fHall);
   const fRoom = new THREE.Mesh(archFrameGeo(DOOR_HALF, 0.14, SPRING, 0.12), frameMat);
@@ -562,6 +580,141 @@ export function createRoom(key, { angle, H, label, wall, floor, ceil, front, bou
   return inner;
 }
 
+
+/** Pale trim round each doorway on the hall side (and the exit door), the same for every room. */
+let hallFrame = null;
+export function hallFrameMat() {
+  return hallFrame || (hallFrame = mat(0xece6dc, { roughness: 0.55 }));
+}
+
+/*
+ * Door looks for createRoom's doorStyle. Each texture is one picture of the closed pair (256 x 480
+ * px for 1.6 x 3.0 m, so 160 px a metre, the arch a half circle at the top); each leaf shows its
+ * half, so everything splits cleanly down the middle. glow (with glowBy) lifts a door out of the
+ * dim hall. handle(pivot, x) adds a leaf's handle on
+ * both faces, x being where on the leaf it goes.
+ */
+const DOOR_PX = 256, DOOR_PY = 480;
+const onBothFaces = (pivot, make) => [0.06, 0].forEach((z, i) => {
+  // make() builds the handle standing out from the face along +z; the back one is mirrored
+  const face = new THREE.Group();
+  face.position.z = z;
+  if (i) face.scale.z = -1;
+  face.add(make());
+  pivot.add(face);
+});
+const DOOR_LOOKS = {
+  // the library: the stained glass window's jewel lattice in black lead, a rose split down its
+  // middle, over dark oak panels. The glass glows a little, as if lit from the room behind.
+  glass() {
+    const draw = (glowOnly) => canvasTex(DOOR_PX, DOOR_PY, (ctx, w, h) => {
+      const cx = w / 2, r = w / 2, m = 20, bottom = h * 0.6, LEAD = "#0b0b10";
+      ctx.fillStyle = glowOnly ? "#000" : "#3e2a1b"; ctx.fillRect(0, 0, w, h);
+      if (!glowOnly) {
+        for (let i = 0; i < 70; i++) { ctx.fillStyle = `rgba(0,0,0,${rand(i) * 0.18})`; ctx.fillRect(rand(i + 3) * w, 0, 1 + rand(i + 7) * 2, h); }
+        // two raised panels on each leaf below the glass
+        [[m, cx - 10], [cx + 10, w - m]].forEach(([x0, x1]) => {
+          ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(x0, bottom + 18, x1 - x0, h - bottom - 38);
+          ctx.fillStyle = "rgba(255,220,170,0.08)"; ctx.fillRect(x0 + 6, bottom + 24, x1 - x0 - 12, h - bottom - 50);
+        });
+        noise(ctx, w, h, 0.06, 1500);
+      }
+      ctx.save();
+      ctx.beginPath(); ctx.moveTo(m, bottom); ctx.lineTo(m, r); ctx.arc(cx, r, r - m, Math.PI, 0); ctx.lineTo(w - m, bottom); ctx.closePath(); ctx.clip();
+      ctx.fillStyle = LEAD; ctx.fillRect(0, 0, w, h);
+      const pal = ["#2646c9", "#b3262b", "#1f7a3f", "#c27a12", "#6d2aa8", "#117a96", "#b81f65"];
+      // diamond quarries, mirrored about the middle so both leaves match: across the 45 degree
+      // grid, the mirror of cell (a, b) is (b, a)
+      ctx.save();
+      ctx.translate(cx, 0); ctx.rotate(Math.PI / 4);
+      const s = 26;
+      for (let a = -4; a < 24; a++) for (let b = -24; b < 24; b++) {
+        const lo = Math.min(a, b), hi = Math.max(a, b);
+        ctx.fillStyle = pal[Math.floor(rand(7 + lo * 31 + hi * 17) * pal.length)];
+        ctx.fillRect(a * s + 1.5, b * s + 1.5, s - 3, s - 3);
+        ctx.fillStyle = `rgba(255,255,255,${rand(lo * 7 + hi * 13) * 0.18})`;
+        ctx.fillRect(a * s + 1.5, b * s + 1.5, s - 3, s - 3);
+      }
+      ctx.restore();
+      // the rose: a gold ring of eight petals, alternating red and blue, round a gold boss
+      const ry = r + 34, rr = 62;
+      for (let k = 0; k < 8; k++) {
+        ctx.beginPath(); ctx.moveTo(cx, ry); ctx.arc(cx, ry, rr, (k * Math.PI) / 4 - Math.PI / 2, ((k + 1) * Math.PI) / 4 - Math.PI / 2); ctx.closePath();
+        ctx.fillStyle = [0, 3, 4, 7].includes(k) ? "#b3262b" : "#2646c9"; ctx.fill();
+        ctx.strokeStyle = LEAD; ctx.lineWidth = 4; ctx.stroke();
+      }
+      ctx.beginPath(); ctx.arc(cx, ry, rr, 0, Math.PI * 2); ctx.strokeStyle = "#e3a82a"; ctx.lineWidth = 9; ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, ry, rr + 6, 0, Math.PI * 2); ctx.strokeStyle = LEAD; ctx.lineWidth = 3; ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, ry, 15, 0, Math.PI * 2); ctx.fillStyle = "#e3a82a"; ctx.fill(); ctx.strokeStyle = LEAD; ctx.lineWidth = 4; ctx.stroke();
+      ctx.fillStyle = LEAD; ctx.fillRect(cx - 3, 0, 6, h);   // the lead where the doors meet
+      ctx.restore();
+      ctx.beginPath(); ctx.moveTo(m, bottom); ctx.lineTo(m, r); ctx.arc(cx, r, r - m, Math.PI, 0); ctx.lineTo(w - m, bottom); ctx.closePath();
+      ctx.strokeStyle = glowOnly ? "#000" : "#22160d"; ctx.lineWidth = 7; ctx.stroke();
+    });
+    const brass = mat(0xb08a45, { metalness: 0.6, roughness: 0.35 });
+    return {
+      tex: draw(false), glow: draw(true), glowBy: 0.55, roughness: 0.45, edge: mat(0x3e2a1b, { roughness: 0.7 }),
+      handle: (pivot, x) => onBothFaces(pivot, () => {
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(0.055, 0.009, 6, 20), brass);
+        ring.position.set(x, 1.05, 0.015);
+        return ring;
+      }),
+    };
+  },
+  // the office: plain white doors with a groove inset round each leaf and long black bar pulls
+  white() {
+    const tex = canvasTex(DOOR_PX, DOOR_PY, (ctx, w, h) => {
+      ctx.fillStyle = "#f3f2ee"; ctx.fillRect(0, 0, w, h);
+      noise(ctx, w, h, 0.02, 800);
+      ctx.strokeStyle = "#cfccc4"; ctx.lineWidth = 3;
+      const m = 26, r = w / 2;
+      [[m, r - m], [r + m, w - m]].forEach(([x0, x1], i) => {
+        ctx.beginPath();
+        if (i === 0) { ctx.moveTo(x1, h - m); ctx.lineTo(x0, h - m); ctx.lineTo(x0, r); ctx.arc(r, r, r - m, Math.PI, Math.PI * 1.5); ctx.lineTo(x1, m); }
+        else { ctx.moveTo(x0, m); ctx.arc(r, r, r - m, Math.PI * 1.5, 0); ctx.lineTo(x1, h - m); ctx.lineTo(x0, h - m); }
+        ctx.closePath(); ctx.stroke();
+      });
+    });
+    const black = mat(0x1a1a1c, { metalness: 0.4, roughness: 0.4 });
+    return {
+      tex, glow: tex, glowBy: 0.22, roughness: 0.6, edge: mat(0xe8e6e0, { roughness: 0.6 }),
+      handle: (pivot, x) => onBothFaces(pivot, () => {
+        const h = new THREE.Group();
+        h.position.x = x;
+        cyl(0.013, 0.013, 0.7, black, 0, 1.1, 0.045, h, 10);
+        [0.8, 1.4].forEach((y) => { const st = cyl(0.008, 0.008, 0.045, black, 0, y, 0.022, h, 8); st.rotation.x = Math.PI / 2; });
+        return h;
+      }),
+    };
+  },
+  // the sitting room: pale birch boards and a round brass knob
+  birch() {
+    const tex = canvasTex(DOOR_PX, DOOR_PY, (ctx, w, h) => {
+      ctx.fillStyle = "#dcc59c"; ctx.fillRect(0, 0, w, h);
+      for (let i = 0; i < 160; i++) {
+        ctx.fillStyle = `rgba(${rand(i) > 0.5 ? "120,85,40" : "255,245,220"},${rand(i + 4) * 0.12})`;
+        ctx.fillRect(rand(i + 9) * w, 0, 1 + rand(i + 2) * 2, h);
+      }
+      ctx.fillStyle = "rgba(90,60,30,0.45)";
+      for (let x = 32; x < w; x += 32) ctx.fillRect(x - 1, 0, 2, h);   // board joints (one is the middle)
+      noise(ctx, w, h, 0.04, 1200);
+    });
+    const brass = mat(0xc29a4a, { metalness: 0.7, roughness: 0.3 });
+    return {
+      tex, glow: tex, glowBy: 0.12, roughness: 0.55, edge: mat(0xd2b98d, { roughness: 0.6 }),
+      handle: (pivot, x) => onBothFaces(pivot, () => {
+        const k = new THREE.Group();
+        k.position.x = x;
+        const rose = cyl(0.035, 0.035, 0.012, brass, 0, 1.0, 0.006, k, 16); rose.rotation.x = Math.PI / 2;
+        const stem = cyl(0.01, 0.01, 0.04, brass, 0, 1.0, 0.03, k, 8); stem.rotation.x = Math.PI / 2;
+        const knob = new THREE.Mesh(new THREE.SphereGeometry(0.03, 14, 10), brass);
+        knob.position.set(0, 1.0, 0.055);
+        k.add(knob);
+        return k;
+      }),
+    };
+  },
+};
 
 /**
  * The hall's look: "viking" (a timber great hall with a hearth) or "classic" (the cream plaster

@@ -1,7 +1,7 @@
 /* Entry point: builds the hall and the rooms, then handles input, picking and the render loop.
  * The rooms themselves live in assets/rooms/. */
 import * as THREE from "three";
-import { $, EYE, NEAR, SPEED, TOUCH, animations, resize, areaAt, camera, closePanel, crossEl, hintEl, inRoomArea, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, toWorld, walkable } from "./rooms/core.js";
+import { $, EYE, HALL_IN, NEAR, SPEED, TOUCH, animations, resize, areaAt, camera, closePanel, crossEl, hintEl, inRoomArea, interactables, panelOpen, renderer, rooms, scene, showPanel, toLocal, toWorld, walkable } from "./rooms/core.js";
 import { buildMap, updateMap } from "./rooms/map.js";
 import { buildHub } from "./rooms/hub.js";
 import { buildAbout } from "./rooms/about.js";
@@ -226,12 +226,18 @@ function showRooms(inRoom) {
   vis.forEach((k) => { const room = rooms[k]; if (room.onEnter) { const once = room.onEnter; room.onEnter = null; once(); } });
 }
 
-/** Doors swing open as you come within DOOR_NEAR metres, and shut again as you walk away. */
+/**
+ * Doors swing open as you come within DOOR_NEAR metres, and shut again as you walk away. They stay
+ * open while you are anywhere on the room side of them (hallway, doorway or room), so a room is
+ * only hidden once you are back in the hall and its door has shut behind you.
+ */
 const DOOR_NEAR = 2.6, DOOR_SWING = 1.45;
 function updateDoors(dt) {
   for (const room of Object.values(rooms)) {
     const d = room.door;
-    const near = Math.hypot(camera.position.x - d.x, camera.position.z - d.z) < DOOR_NEAR;
+    const [lx, lz] = toLocal(room.angle, camera.position.x, camera.position.z);
+    const behind = lz < -HALL_IN && (Math.abs(lx) < 4.05 || inRoomArea(room, lx, lz));
+    const near = behind || Math.hypot(camera.position.x - d.x, camera.position.z - d.z) < DOOR_NEAR;
     const next = Math.max(0, Math.min(1, d.open + (near ? 1 : -1) * dt * 2.2));
     if (next === d.open) continue;
     d.open = next;
