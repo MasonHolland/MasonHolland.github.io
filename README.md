@@ -5,7 +5,7 @@ A landing page with two doors:
 - **Read the short version** opens `resume.html`, a plain page with your experience, projects, awards and recent reads.
 - **Walk into the room** opens `room.html`, a round Viking-style great hall (timber walls, posts and a planked roof; set `HALL_STYLE` in `assets/rooms/core.js` to `"classic"` for the cream plaster rotunda instead) with three arched doorways. Each has a sign, a pair of doors in the room's style (stained glass for Hobbies, white for Work, pale birch for About; `DOOR_LOOKS` in `core.js`) that swing open as you walk up (the room behind is only drawn while they're open, which keeps the hall smooth) and a short arched hallway to a room with its own look:
   - **10 o'clock, About me:** a bright, modern living room with a Perth skyline window, large photo frames, and smaller frames for photos and info cards.
-  - **12 o'clock, Work:** a bright, minimal home office lit by daylight: a strip of high windows full of sky, a centred window onto the Perth view from the About room (turned to Matagarup Bridge and Optus Stadium) between the project board and your framed resume, one black desk with two monitors (resume and projects) over a laptop, a steel-framed shelving wall and your awards as framed certificates.
+  - **12 o'clock, Work:** a bright, minimal home office lit by daylight: a strip of high windows full of sky, a centred window onto the Perth view from the About room (turned to Matagarup Bridge and Optus Stadium) between the desk (two monitors over a laptop) and your framed resume. On the left wall, the project board by the door is linked to a big screen: click a project on the board and the screen shows it. Your certificates hang past the screen. On the right wall, a career timeline built from your experience and certificates, with a switch to "Before tech" (2011 to 2017, from `data/career-before-tech.json`), and a small shelving unit with one skill in each cubby (from `skills`, with each tool's official logo or an icon for general skills; click one to see where it shows up in your experience). Navy and cream geometric rugs zone the middle of the room and run under the timeline.
   - **2 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), bookcases for the books you've read (with a shelf for what you're reading now, covers facing out) and want to read (the teal case), a game gallery (PlayStation and Steam shelves either side of a hallway, the Nintendo Switch shelf inside it, and across from it a shelf of other hobbies), and a suit of scale and chain armour in the corner.
 
 ## Make it yours
@@ -16,6 +16,7 @@ All content lives in three data files. Both the simple page and the room read fr
 - `data/books.json`: the bookcase. Filled by the Goodreads sync, or edit by hand.
 - `data/games.json`: the game cabinet. Filled by the games sync, or edit by hand.
 - `data/board-games.json`: board games for the top of the other-hobbies shelf in the Hobbies room. You edit this one by hand: copy `_example` into `games` for each game (only `title` is needed; `size` is `large`, `medium` or `small`). Until it has any, plain books fill those shelves.
+- `data/career-before-tech.json`: your jobs before tech (2011 to 2017) for the "Before tech" side of the Work room timeline. You edit this one by hand: copy `_example` into `jobs` for each role (`role` and `start` are needed; `summary` and `highlights` show when its card is clicked). Your Turing course is added at the end automatically. Until it has any, a "Coming soon" card holds the place.
 
 The shipped content is sample text. Replace it before you publish.
 
@@ -34,7 +35,9 @@ Put photo files in `assets/photos/`. Until a file exists, the frame shows a "You
 
 ### Awards
 
-`accolades` holds up to 12 items. Each has a `title`, `from`, `year`, `kind` (`award`, `certificate`, `degree` or `press`), a `summary` and optionally a `logo` (an image path, drawn as a seal at the top of the certificate). They hang on the wall of the Work room.
+`projects` appear as notes on the Work room project board (up to 8). Each has a `title`, `summary`, optional `year` and `url`, and to show it on the big screen in action, either a `video` (an mp4 path, played muted on a loop) or an `image` (a screenshot path). Without either, the screen shows a title card.
+
+`accolades` holds up to 4 items (the certificate wall in the Work room). Each has a `title`, `from`, `year`, `kind` (`award`, `certificate`, `degree` or `press`), a `summary` and optionally a `logo` (an image path, drawn as a seal at the top of the certificate). They hang on the wall of the Work room.
 
 The framed resume in the Work room is `assets/work/resume.jpg`, a picture of the resume PDF with the contact line (email and phone) blanked out. Remake it the same way when the resume changes; never put the original PDF in the repo.
 
@@ -129,6 +132,7 @@ There are no 3D model files. Everything is built from simple shapes, lighting an
 - `assets/rooms/hub.js`: the round hall, its dome and the carrier pigeon.
 - `assets/rooms/hall-viking.js`: the Viking look for the hall (floor, walls, roof, posts, shields, hearth).
 - `assets/rooms/hobby-props.js`: the other-hobbies shelf and the suit of armour.
+- `assets/rooms/skill-icons.js`: logos and icons for the Work room skill tiles, made by `scripts/make-skill-icons.mjs` (Simple Icons, CC0, and Lucide, ISC).
 - `assets/rooms/map.js`: the floor-plan map in the options menu.
 - `assets/rooms/contact.js`: the contact form behind the pigeon.
 - `assets/rooms/about.js`, `work.js`, `hobbies.js`: one file per room. Colours, light levels, furniture and layout live there.

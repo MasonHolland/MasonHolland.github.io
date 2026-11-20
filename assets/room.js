@@ -164,7 +164,9 @@ function pick(screenPt) {
   ray.setFromCamera(ndc, camera);
   // in the hall every room is in view through its doorway; inside a room, only that room
   const list = shownRoom ? [...(meshesBy[shownRoom] || []), ...meshesBy.hall] : allMeshes;
-  const hit = ray.intersectObjects(list, false)[0];
+  // skip anything hidden (or inside something hidden), like the timeline that is switched off
+  const shown = (o) => { for (; o; o = o.parent) if (!o.visible) return false; return true; };
+  const hit = ray.intersectObjects(list, false).find((h) => shown(h.object));
   return hit ? interactables.find((i) => i.mesh === hit.object) : null;
 }
 function interact(screenPt) {

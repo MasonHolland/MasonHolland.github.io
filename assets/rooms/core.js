@@ -57,7 +57,7 @@ export async function loadJSON(url, fallback) {
   }
 }
 
-export const [profile, bookData, gameData, boardGameData] = await Promise.all([
+export const [profile, bookData, gameData, boardGameData, careerBeforeTech] = await Promise.all([
   loadJSON("data/profile.json", { name: "Mason", accolades: [], projects: [], experience: [], about: { frames: [] } }),
   loadJSON("data/books.json", { books: [] }),
   // Steam and PlayStation come from the sync; Switch games from the file you edit by hand
@@ -71,6 +71,7 @@ export const [profile, bookData, gameData, boardGameData] = await Promise.all([
       ],
     })),
   loadJSON("data/board-games.json", { games: [] }),   // hand-edited, for the other-hobbies shelf
+  loadJSON("data/career-before-tech.json", { jobs: [] }),   // hand-edited, for the Work room timeline
 ]);
 
 // Fonts must be ready before text is painted onto canvas textures. Give up after two seconds.

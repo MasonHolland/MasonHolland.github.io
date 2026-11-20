@@ -1,8 +1,9 @@
 /* WORK room (12 o'clock): a bright, minimal home office. */
 import * as THREE from "three";
-import { DOOR_ANGLES, NEAR, RD, RW, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, makePlant, mat, noise, profile, projectsHtml, rand, resumeHtml, rooms, showPanel, wrapText } from "./core.js";
+import { DOOR_ANGLES, NEAR, RD, RW, basic, box, canvasTex, careerBeforeTech, createRoom, cyl, esc, fitText, frontBox, hintEl, interactables, makePlant, mat, noise, profile, projectsHtml, rand, resumeHtml, rooms, showPanel, wrapText } from "./core.js";
 import { plasterTex } from "./shared.js";
 import { perthSkylineTexture } from "./about.js";
+import { BRAND, OUTLINE } from "./skill-icons.js";
 
 /* ================================================================== *
  * WORK (12 o'clock): white walls, pale carpet, one black desk, a modular
@@ -77,38 +78,6 @@ function projectsScreenTexture() {
     });
     ctx.fillStyle = "#8a96a6"; ctx.font = "500 20px 'Literata', Georgia, serif";
     ctx.fillText("Click to open the project list", 30, h - 24);
-  });
-}
-
-function boardTexture() {
-  const projects = (profile.projects || []).map((p) => p.title);
-  const pick = (i, d) => projects[i] || d;
-  return canvasTex(1024, 540, (ctx, w, h) => {
-    ctx.fillStyle = "#fbfbfa"; ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = "#1d2b38"; ctx.font = "800 44px 'Bricolage Grotesque', Arial, sans-serif"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    ctx.fillText("Project board", 40, 70);
-    ctx.strokeStyle = "#b9c3cc"; ctx.lineWidth = 3;
-    const cw = (w - 80) / 3;
-    ["To do", "In progress", "Done"].forEach((t, i) => {
-      ctx.fillStyle = "#4d5d6b"; ctx.font = "700 28px 'Bricolage Grotesque', Arial, sans-serif";
-      ctx.fillText(t, 40 + i * cw + 12, 130);
-      ctx.strokeRect(40 + i * cw, 100, cw, h - 140);
-    });
-    const notes = [
-      [0, 0, "#ffe27a", "New idea"], [0, 1, "#ffb3a7", "Plan the next release"],
-      [1, 0, "#a8d8f0", pick(0, "Current project")], [1, 1, "#c8e6a8", "Review and test"],
-      [2, 0, "#ffe27a", pick(1, "Shipped")], [2, 1, "#d9c4f0", pick(2, "Shipped")],
-    ];
-    notes.forEach(([c, r, col, text], k) => {
-      ctx.save();
-      ctx.translate(40 + c * cw + 18, 150 + r * 150);
-      ctx.rotate((rand(k + 3) - 0.5) * 0.08);
-      ctx.fillStyle = col; ctx.fillRect(0, 0, cw - 36, 120);
-      ctx.fillStyle = "#c0392b"; ctx.beginPath(); ctx.arc((cw - 36) / 2, 10, 7, 0, Math.PI * 2); ctx.fill();   // the pin
-      ctx.fillStyle = "#1d2b38"; ctx.font = "600 26px 'Bricolage Grotesque', Arial, sans-serif";
-      wrapText(ctx, text, 14, 44, cw - 64, 32, 3);
-      ctx.restore();
-    });
   });
 }
 
@@ -252,9 +221,10 @@ function officeChair(parent, x, z, rotY) {
 /**
  * A modular shelving wall in the steel-tube style of the photo: chrome frame, warm gold backs,
  * and a mix of open cells (books, ornaments) and doors (cream, white, graphite) with round knobs.
- * Built along x, facing +z, standing on y = 0.
+ * Built along x, facing +z, standing on y = 0. With fillCell(g, k, cx, cy), every cell is open and
+ * filled by that instead (k counts from the top left, along each row).
  */
-function modularShelving(parent, cols, rows, cw, ch, d) {
+function modularShelving(parent, cols, rows, cw, ch, d, fillCell = null) {
   const g = new THREE.Group();
   parent.add(g);
   const W = cols * cw, foot = 0.06;
@@ -281,6 +251,16 @@ function modularShelving(parent, cols, rows, cw, ch, d) {
     });
     box(0.016, rows * ch, d, panel, x, y0 + (rows * ch) / 2, 0, g);   // side panels between cells
     [-1, 1].forEach((s) => cyl(0.012, 0.012, foot, steel, x, foot / 2, s * (d / 2 - 0.02), g, 8));
+  }
+
+  if (fillCell) {
+    for (let k = 0; k < cols * rows; k++) {
+      const c = k % cols, r = rows - 1 - Math.floor(k / cols);
+      const cx = x0 + (c + 0.5) * cw, cy = y0 + (r + 0.5) * ch;
+      box(cw - 0.02, ch - 0.02, 0.01, gold, cx, cy, -d / 2 + 0.01, g);
+      fillCell(g, k, cx, cy);
+    }
+    return g;
   }
 
   const books = [];
@@ -413,6 +393,478 @@ function framedResume(g, x, y, z) {
   });
 }
 
+/* ---------- the project board and the big screen ---------- */
+
+const NOTE_COLOURS = ["#ffe27a", "#a8d8f0", "#c8e6a8", "#ffb3a7", "#d9c4f0", "#ffd0a0", "#b8e0d8", "#f5c6dd"];
+const sans = "'Bricolage Grotesque', Arial, sans-serif", serifFont = "'Literata', Georgia, serif";
+
+/**
+ * The big screen on the left wall. It shows whichever project was last picked on the board: the
+ * project's video (p.video, an mp4) or screenshot (p.image) when it has one, otherwise a title
+ * card. Until something is picked it says the board is connected. Clicking it opens the project.
+ * Returns show(project).
+ */
+function bigScreen(g, x, y, z, rotY, W, H) {
+  const tv = new THREE.Group();
+  tv.position.set(x, y, z);
+  tv.rotation.y = rotY;
+  g.add(tv);
+  box(W + 0.05, H + 0.05, 0.05, mat(0x0d0e10, { roughness: 0.35 }), 0, 0, 0.025, tv);
+  const canvas = document.createElement("canvas");
+  canvas.width = 1280; canvas.height = 720;
+  const ctx = canvas.getContext("2d");
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 4;
+  const sm = new THREE.MeshBasicMaterial({ map: tex });
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(W, H), sm);
+  screen.position.z = 0.052;
+  tv.add(screen);
+  let current = null, video = null, token = 0;
+  const projects = profile.projects || [];
+
+  const idle = () => {
+    const w = 1280, h = 720;
+    const bg = ctx.createLinearGradient(0, 0, w, h);
+    bg.addColorStop(0, "#14202c"); bg.addColorStop(1, "#1f3346");
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+    ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    // a "connected" link badge
+    ctx.fillStyle = "#5fc46a"; ctx.beginPath(); ctx.arc(w / 2 - 190, 236, 11, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#9fe3a8"; ctx.font = `600 34px ${sans}`; ctx.textAlign = "left";
+    ctx.fillText("Project board connected", w / 2 - 160, 248);
+    ctx.textAlign = "center"; ctx.fillStyle = "#f2f5f8";
+    if (projects.length) {
+      fitFont(ctx, "Click a project to see it in action", 800, 66, sans, w - 160);
+      ctx.fillText("Click a project to see it in action", w / 2, 380);
+      ctx.fillStyle = "#9fb0c2"; ctx.font = `500 32px ${serifFont}`;
+      ctx.fillText("← pick one on the project board by the door", w / 2, 450);
+    } else {
+      ctx.font = `800 66px ${sans}`;
+      ctx.fillText("Projects coming soon", w / 2, 380);
+      ctx.fillStyle = "#9fb0c2"; ctx.font = `500 32px ${serifFont}`;
+      ctx.fillText("When they're up, click one on the board to see it in action", w / 2, 450);
+    }
+    tex.needsUpdate = true;
+  };
+
+  // a title card, with the screenshot (if any) filling the left of the screen
+  const card = (p, img) => {
+    const w = 1280, h = 720;
+    ctx.fillStyle = "#14202c"; ctx.fillRect(0, 0, w, h);
+    const textX = img ? 760 : 90, textW = img ? w - textX - 60 : w - 180;
+    if (img) {
+      const s = Math.min(660 / img.width, 600 / img.height), iw = img.width * s, ih = img.height * s;
+      ctx.drawImage(img, 50 + (660 - iw) / 2, (h - ih) / 2, iw, ih);
+    }
+    ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#7fc4ff"; ctx.font = `600 28px ${sans}`;
+    ctx.fillText(("Now showing" + (p.year ? " · " + p.year : "")).toUpperCase(), textX, 150);
+    ctx.fillStyle = "#f2f5f8";
+    ctx.font = `800 60px ${sans}`;
+    const ty = wrapText(ctx, p.title || "", textX, 230, textW, 66, 2);
+    ctx.fillStyle = "#c6d2de"; ctx.font = `500 30px ${serifFont}`;
+    wrapText(ctx, p.summary || "", textX, ty + 30, textW, 42, 7);
+    ctx.fillStyle = "#8a96a6"; ctx.font = `500 26px ${serifFont}`;
+    ctx.fillText("Click the screen for details", textX, h - 50);
+    tex.needsUpdate = true;
+  };
+
+  const show = (p) => {
+    const mine = ++token;
+    current = p;
+    if (video) { video.pause(); video.removeAttribute("src"); video.load(); video = null; sm.map = tex; sm.needsUpdate = true; }
+    if (p.video) {
+      video = document.createElement("video");
+      Object.assign(video, { src: p.video, muted: true, loop: true, playsInline: true, crossOrigin: "anonymous" });
+      video.play().then(() => {
+        if (mine !== token) return;
+        const vt = new THREE.VideoTexture(video);
+        vt.colorSpace = THREE.SRGBColorSpace;
+        sm.map = vt; sm.needsUpdate = true;
+      }).catch(() => card(p, null));
+      card(p, null);   // shown until the video starts
+      return;
+    }
+    card(p, null);
+    if (p.image) {
+      const img = new Image();
+      img.onload = () => { if (mine === token) card(p, img); };
+      img.src = p.image;
+    }
+  };
+
+  idle();
+  interactables.push({
+    mesh: screen, hint: "Open the project on screen",
+    open: () => current
+      ? showPanel({ title: current.title, meta: current.year || "Project", html: projectsHtml([current]) })
+      : showPanel({ title: "Projects", meta: projects.length + " projects", html: projects.length ? projectsHtml(projects) : "<p>Projects are coming soon.</p>" }),
+  });
+  return show;
+}
+
+/**
+ * The project board: a whiteboard with a sticky note for each project (up to 8). Clicking a note
+ * puts that project on the big screen. With no projects yet, faint outlines hold the places.
+ */
+function projectBoard(g, x, y, z, rotY, onPick) {
+  const board = new THREE.Group();
+  board.position.set(x, y, z);
+  board.rotation.y = rotY;
+  g.add(board);
+  box(1.96, 1.08, 0.04, mat(0xd7d9dc, { metalness: 0.4, roughness: 0.4 }), 0, 0, 0, board);
+  const projects = (profile.projects || []).slice(0, 8);
+  const bgTex = canvasTex(1024, 540, (ctx, w, h) => {
+    ctx.fillStyle = "#fbfbfa"; ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = "#1d2b38"; ctx.font = `800 44px ${sans}`; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.fillText("Project board", 40, 70);
+    ctx.fillStyle = "#5a6a78"; ctx.font = `500 24px ${serifFont}`; ctx.textAlign = "right";
+    ctx.fillText(projects.length ? "Click a project to show it on the screen →" : "Projects coming soon", w - 40, 68);
+    ctx.strokeStyle = "#cfd6dc"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(40, 92); ctx.lineTo(w - 40, 92); ctx.stroke();
+    if (!projects.length) {
+      ctx.setLineDash([10, 8]); ctx.strokeStyle = "#c3cbd2"; ctx.lineWidth = 3;
+      for (let i = 0; i < 4; i++) ctx.strokeRect(60 + i * 232, 140, 196, 160);
+    }
+  });
+  const bm = new THREE.MeshStandardMaterial({ map: bgTex, roughness: 0.5, emissive: 0xffffff, emissiveMap: bgTex, emissiveIntensity: 0.12 });
+  const bp = new THREE.Mesh(new THREE.PlaneGeometry(1.88, 0.99), bm);
+  bp.position.z = 0.021;
+  board.add(bp);
+  projects.forEach((p, i) => {
+    const col = i % 4, row = Math.floor(i / 4);
+    const colour = NOTE_COLOURS[i % NOTE_COLOURS.length];
+    const tex = canvasTex(256, 200, (ctx, w, h) => {
+      ctx.fillStyle = colour; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(0,0,0,0.06)"; ctx.fillRect(0, h - 14, w, 14);
+      ctx.fillStyle = "#c0392b"; ctx.beginPath(); ctx.arc(w / 2, 14, 8, 0, Math.PI * 2); ctx.fill();   // the pin
+      ctx.fillStyle = "#1d2b38"; ctx.textAlign = "left"; ctx.font = `700 30px ${sans}`;
+      const yy = wrapText(ctx, p.title || "", 16, 62, w - 32, 34, 3);
+      if (p.year) { ctx.fillStyle = "#5a6a78"; ctx.font = `500 22px ${serifFont}`; ctx.fillText(String(p.year), 16, Math.min(yy + 8, h - 22)); }
+    });
+    const nm = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.8, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.1 });
+    const note = new THREE.Mesh(new THREE.PlaneGeometry(0.38, 0.3), nm);
+    note.position.set(-0.69 + col * 0.46, 0.13 - row * 0.4, 0.025 + i * 0.0005);
+    note.rotation.z = (rand(i + 3) - 0.5) * 0.08;
+    board.add(note);
+    interactables.push({ mesh: note, hint: "Show on the big screen: " + p.title, mat: nm, base: 0.1, open: () => { onPick(p); return false; } });
+  });
+}
+
+/* ---------- the career timeline ---------- */
+
+const MONTHS = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+/** "Oct 2018" or "2017" to a sortable number. */
+function when(s) {
+  const m = String(s || "").match(/([a-z]{3})?[a-z]*\s*(\d{4})/i);
+  return m ? +m[2] * 12 + (m[1] ? MONTHS[m[1].toLowerCase()] ?? 0 : 0) : 0;
+}
+
+const jobHtml = (e) => `<p>${esc(e.summary || "")}</p>${(e.highlights || []).length ? `<ul>${e.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>` : ""}`;
+const jobItem = (e, colour) => ({
+  sort: when(e.start), year: (String(e.start || "").match(/\d{4}/) || [""])[0], title: e.role, sub: e.org,
+  dates: [e.start, e.end].filter(Boolean).join(" to "), colour, html: jobHtml(e),
+});
+const courseItem = (a) => ({
+  sort: when(a.year), year: String(a.year || ""), title: a.title, sub: a.from, dates: String(a.year || ""), colour: "#b8934a",
+  html: `<p>${esc(a.summary || "")}</p>`,
+});
+
+/**
+ * The two stories the timeline can tell. In tech: each job (experience) and each degree or
+ * certificate (accolades). Before tech: the jobs in data/career-before-tech.json, ending with the
+ * course that started the move into tech (the degrees and certificates from before the first
+ * tech job).
+ */
+function timelineStories() {
+  const courses = (profile.accolades || []).filter((a) => ["degree", "certificate"].includes(a.kind));
+  const inTech = [...(profile.experience || []).map((e) => jobItem(e, "#2f6f8f")), ...courses.map(courseItem)].sort((a, b) => a.sort - b.sort);
+  const firstJob = Math.min(...(profile.experience || []).map((e) => when(e.start)).filter(Boolean), Infinity);
+  const jobs = ((careerBeforeTech && careerBeforeTech.jobs) || []).filter((j) => j && j.role);
+  const before = [
+    ...jobs.map((j) => jobItem(j, "#6f8a5a")),
+    ...courses.filter((a) => when(a.year) < firstJob).map(courseItem),
+  ].sort((a, b) => a.sort - b.sort);
+  if (!jobs.length) {
+    before.unshift({ sort: 0, year: "2011", title: "Coming soon", sub: "My career before tech", dates: "2011 to 2017", colour: "#6f8a5a", html: "<p>This part of the story is on its way.</p>" });
+  }
+  return { inTech, before };
+}
+
+/**
+ * One telling of the timeline in its own group: a heading, a line ending in an arrow, and for each
+ * milestone a dot with the year above and a card below. Clicking a card opens the details. Cards
+ * shrink when there are more milestones, so they never overlap.
+ */
+function timelineTrack(parent, items, heading, length) {
+  const t = new THREE.Group();
+  parent.add(t);
+  const LINE_Y = 1.75, navy = mat(0x1d2b38, { roughness: 0.5 });
+  const half = length / 2;
+  box(length, 0.022, 0.012, navy, 0, LINE_Y, 0.006, t);
+  const head = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.09, 12), navy);   // the story carries on
+  head.rotation.z = -Math.PI / 2;
+  head.position.set(half + 0.04, LINE_Y, 0.012);
+  t.add(head);
+
+  const headTex = canvasTex(512, 96, (ctx, w, h) => {
+    ctx.fillStyle = "#1d2b38"; fitFont(ctx, heading, 800, 52, sans, w - 8); ctx.textBaseline = "middle";
+    ctx.fillText(heading, 4, h / 2);
+  });
+  const title = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 0.2625), new THREE.MeshBasicMaterial({ map: headTex, transparent: true }));
+  title.position.set(-half + 0.7, 2.3, 0.004);
+  t.add(title);
+
+  const n = items.length;
+  const step = n > 1 ? (length - 1.1) / (n - 1) : 0;
+  const CW = Math.min(1.0, n > 1 ? step * 0.92 : 1.0), CH = CW * 0.586;
+  items.forEach((it, i) => {
+    const px = n > 1 ? -half + 0.55 + i * step : 0;
+    const dot = cyl(0.065, 0.065, 0.02, mat(it.colour, { roughness: 0.4 }), px, LINE_Y, 0.014, t, 24);
+    dot.rotation.x = Math.PI / 2;
+    const yTex = canvasTex(256, 96, (ctx, w, h) => {
+      ctx.fillStyle = it.colour; ctx.font = `800 64px ${sans}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(it.year, w / 2, h / 2);
+    });
+    const yr = new THREE.Mesh(new THREE.PlaneGeometry(0.53, 0.2), new THREE.MeshBasicMaterial({ map: yTex, transparent: true }));
+    yr.position.set(px, LINE_Y + 0.2, 0.004);
+    t.add(yr);
+    box(0.01, 0.12, 0.008, navy, px, LINE_Y - 0.11, 0.005, t);   // a stem down to the card
+    const cTex = canvasTex(512, 300, (ctx, w, h) => {
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = it.colour; ctx.fillRect(0, 0, w, 10);
+      ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.fillStyle = "#1d2b38";
+      ctx.font = `800 40px ${sans}`;
+      const y1 = wrapText(ctx, it.title, 28, 70, w - 56, 44, 2);
+      ctx.fillStyle = "#4a5a68"; fitFont(ctx, it.sub || "", 500, 28, serifFont, w - 56);
+      ctx.fillText(it.sub || "", 28, y1 + 22);
+      ctx.fillStyle = "#7a8794"; fitFont(ctx, it.dates, 500, 24, serifFont, w - 56);
+      ctx.fillText(it.dates, 28, h - 30);
+    });
+    const cm = new THREE.MeshStandardMaterial({ map: cTex, roughness: 0.7, emissive: 0xffffff, emissiveMap: cTex, emissiveIntensity: 0.15 });
+    const cardMesh = new THREE.Mesh(frontBox(CW, CH, 0.02), [mat(0xf4f3f0), cm]);
+    cardMesh.position.set(px, LINE_Y - 0.17 - CH / 2, 0.012);
+    t.add(cardMesh);
+    interactables.push({ mesh: cardMesh, hint: "Read about: " + it.title, mat: cm, base: 0.15, open: () => showPanel({ title: it.title, meta: [it.sub, it.dates].filter(Boolean).join(" · "), html: it.html }) });
+  });
+  return t;
+}
+
+/**
+ * The career timeline on a wall, with a switch at its top right between "In tech" (the default)
+ * and "Before tech" (2011 to 2017, from data/career-before-tech.json). Both are built up front and
+ * the switch shows one at a time.
+ */
+function careerTimeline(g, x, z, rotY, length) {
+  const { inTech, before } = timelineStories();
+  if (!inTech.length && !before.length) return;
+  const root = new THREE.Group();
+  root.position.set(x, 0, z);
+  root.rotation.y = rotY;
+  g.add(root);
+  const tracks = [timelineTrack(root, inTech, "My path so far", length), timelineTrack(root, before, "My career before tech", length)];
+  let showing = 0;
+
+  const SW = 1.0, SH = 0.16;
+  const canvas = document.createElement("canvas");
+  canvas.width = 512; canvas.height = 82;
+  const ctx = canvas.getContext("2d");
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const labels = ["In tech", "Before tech"];
+  const paint = () => {
+    const w = 512, h = 82, r = h / 2;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#e4e7ea"; ctx.beginPath(); ctx.roundRect(0, 0, w, h, r); ctx.fill();
+    ctx.fillStyle = "#1d2b38"; ctx.beginPath(); ctx.roundRect(showing * (w / 2) + 5, 5, w / 2 - 10, h - 10, r - 5); ctx.fill();
+    ctx.font = `700 32px ${sans}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    labels.forEach((l, i) => { ctx.fillStyle = i === showing ? "#ffffff" : "#4a5a68"; ctx.fillText(l, w / 4 + i * (w / 2), h / 2 + 2); });
+    tex.needsUpdate = true;
+  };
+  const sm = new THREE.MeshStandardMaterial({ map: tex, transparent: true, roughness: 0.5, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.15 });
+  const toggle = new THREE.Mesh(new THREE.PlaneGeometry(SW, SH), sm);
+  toggle.position.set(length / 2 - SW / 2, 2.3, 0.006);
+  root.add(toggle);
+  const item = {
+    mesh: toggle, hint: "", mat: sm, base: 0.15,
+    open: () => { showing = 1 - showing; show(); },
+  };
+  const show = () => {
+    tracks.forEach((t, i) => { t.visible = i === showing; });
+    item.hint = "Show " + (showing ? "my career in tech" : "my career before tech");
+    if (hintEl.classList.contains("on")) hintEl.textContent = item.hint + "  (click or E)";   // you're pointing at it
+    paint();
+  };
+  show();
+  interactables.push(item);
+}
+
+/* ---------- skills, one to a cubby ---------- */
+
+/** Everything in profile.skills, one entry per cubby: areas of expertise, then each technical group. */
+function skillList() {
+  const s = profile.skills || {};
+  return [
+    ...(s.expertise || []).map((name) => ({ name, group: "Expertise", terms: [name] })),
+    ...(s.technical || []).map((t) => ({ name: t.label, group: "Technical", items: t.items, terms: String(t.items || "").split(/,\s*/) })),
+  ];
+}
+
+/** Lines from the resume that mention any of the skill's terms. */
+function whereUsed(skill) {
+  const lines = [...(profile.experience || []).flatMap((e) => (e.highlights || []).map((h) => ({ h, at: e.role }))), ...(profile.accomplishments || []).map((h) => ({ h, at: "" }))];
+  const terms = skill.terms.map((t) => t.toLowerCase().replace(/-/g, " ")).filter((t) => t.length > 2);
+  return lines.filter(({ h }) => { const l = String(h).toLowerCase().replace(/-/g, " "); return terms.some((t) => l.includes(t)); });
+}
+
+const TILE_STYLES = [
+  { bg: "#1d2b38", ink: "#f2f5f8", sub: "#9fb0c2" }, { bg: "#e2d3ad", ink: "#2b2b2b", sub: "#6b5a3a" },
+  { bg: "#f1efe9", ink: "#1d2b38", sub: "#6a7784" }, { bg: "#58595d", ink: "#f4f3f0", sub: "#c9ccd0" },
+];
+
+/**
+ * Which icons a skill gets: the official logo of each tool it names (JavaScript, React, Docker...),
+ * or failing that an outline icon in the spirit of a general skill. Skills with neither stay text.
+ */
+const BRAND_TERMS = {
+  javascript: "javascript", typescript: "typescript", postgresql: "postgresql", git: "git", github: "github",
+  react: "react", vue: "vue", s3: "s3", cloudfront: "aws", circleci: "circleci", jenkins: "jenkins", docker: "docker",
+};
+const OUTLINE_FOR = {
+  "technical leadership": "compass", "full-stack development": "layers", accessibility: "accessibility",
+  collaboration: "users", communication: "messages", "problem-solving": "puzzle", "customer engagement": "handshake",
+  databases: "database",
+};
+function skillIcons(skill) {
+  const brands = [...new Set(skill.terms.map((t) => BRAND_TERMS[t.toLowerCase().trim()]).filter((k) => k && BRAND[k]))];
+  const name = OUTLINE_FOR[skill.name.toLowerCase()];
+  return { brands, outline: brands.length ? null : name && OUTLINE[name] ? name : null };
+}
+
+/** A brand logo on a white rounded badge, size px square, its top left at (x, y). */
+function drawBrandBadge(ctx, key, x, y, size) {
+  const b = BRAND[key];
+  ctx.save();
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath(); ctx.roundRect(x, y, size, size, size * 0.18); ctx.fill();
+  const pad = size * 0.16, s = (size - pad * 2) / 24;
+  ctx.translate(x + pad, y + pad); ctx.scale(s, s);
+  // JavaScript's logo is black letters on its yellow square: the path is the square with the
+  // letters cut out, so put black behind it
+  if (key === "javascript") { ctx.fillStyle = "#000000"; ctx.fillRect(1, 1, 22, 22); }
+  ctx.fillStyle = b.hex;
+  ctx.fill(new Path2D(b.d));
+  ctx.restore();
+}
+
+/** An outline icon (24 x 24 grid, 2 px strokes) drawn size px square at (x, y). */
+function drawOutlineIcon(ctx, key, x, y, size, colour) {
+  ctx.save();
+  ctx.translate(x, y); ctx.scale(size / 24, size / 24);
+  ctx.strokeStyle = colour; ctx.lineWidth = 2; ctx.lineCap = "round"; ctx.lineJoin = "round";
+  ctx.stroke(new Path2D(OUTLINE[key]));
+  ctx.restore();
+}
+
+/** A skill plaque standing in a cubby (centred at cx, cy in the shelving's frame). Clickable. */
+function skillTile(shelf, skill, i, cx, cy, cw, ch, d) {
+  const st = skill.group === "Technical" ? { bg: "#c9a25a", ink: "#1d1a14", sub: "#5a4720" } : TILE_STYLES[i % TILE_STYLES.length];
+  const w = cw - 0.12, h = ch - 0.12;
+  const tex = canvasTex(384, Math.round((384 * h) / w), (ctx, cw2, ch2) => {
+    ctx.fillStyle = st.bg; ctx.fillRect(0, 0, cw2, ch2);
+    ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    const icons = skillIcons(skill);
+    if (icons.brands.length) {
+      // official logos, each on a small white badge so its own colours show on any tile
+      const B = 66, gap = 12, total = icons.brands.length * B + (icons.brands.length - 1) * gap;
+      icons.brands.forEach((key, k) => drawBrandBadge(ctx, key, cw2 / 2 - total / 2 + k * (B + gap), 18, B));
+    } else if (icons.outline) {
+      drawOutlineIcon(ctx, icons.outline, cw2 / 2 - 34, 16, 68, st.ink);
+    } else {
+      ctx.fillStyle = st.sub; ctx.font = `600 22px ${sans}`;
+      ctx.fillText(skill.group.toUpperCase(), cw2 / 2, 42);
+    }
+    const hasIcon = icons.brands.length || icons.outline;
+    ctx.fillStyle = st.ink;
+    fitFont(ctx, skill.name, 800, hasIcon ? 40 : 46, sans, cw2 - 36);
+    ctx.fillText(skill.name, cw2 / 2, hasIcon ? (skill.items ? 136 : 150) : skill.items ? ch2 / 2 + 14 : ch2 / 2 + 28);
+    if (skill.items) {
+      ctx.fillStyle = st.sub; fitFont(ctx, skill.items, 500, hasIcon ? 25 : 28, serifFont, cw2 - 36);
+      ctx.fillText(skill.items, cw2 / 2, ch2 - (hasIcon ? 26 : 34));
+    }
+  });
+  const fm = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.6, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.12 });
+  const tile = new THREE.Mesh(frontBox(w, h, 0.03), [mat(st.bg, { roughness: 0.6 }), fm]);
+  tile.position.set(cx, cy - ch / 2 + 0.008 + h / 2 + 0.01, d / 2 - 0.12);
+  tile.rotation.x = -0.06;
+  shelf.add(tile);
+  const used = whereUsed(skill);
+  interactables.push({
+    mesh: tile, hint: "Skill: " + skill.name, mat: fm, base: 0.12,
+    open: () => showPanel({
+      title: skill.name, meta: skill.group === "Technical" ? skill.items : "Area of expertise",
+      html: used.length ? `<p>Where it shows up:</p><ul>${used.map(({ h }) => `<li>${esc(h)}</li>`).join("")}</ul>` : `<p>${skill.group === "Technical" ? "Tools I work with." : "One of my areas of expertise."}</p>`,
+    }),
+  });
+}
+
+/* ---------- rugs ---------- */
+
+/**
+ * A flat-woven geometric rug, w x d metres: a navy border with a cream line inside it, then a cream
+ * field crossed by a navy diamond trellis with gold dots where the lines meet. The diamonds are
+ * sized so a whole number fit each way, so none are cut off at the border.
+ */
+function geoRugTex(w, d) {
+  const PX = 200;   // pixels a metre
+  return canvasTex(Math.round(w * PX), Math.round(d * PX), (ctx, cw, ch) => {
+    const NAVY = "#1d2b38", CREAM = "#efe7d6", GOLD = "#c9a25a";
+    ctx.fillStyle = NAVY; ctx.fillRect(0, 0, cw, ch);
+    const b = 0.16 * PX;                       // border
+    ctx.fillStyle = CREAM; ctx.fillRect(b * 0.45, b * 0.45, cw - b * 0.9, ch - b * 0.9);
+    ctx.fillStyle = NAVY; ctx.fillRect(b * 0.6, b * 0.6, cw - b * 1.2, ch - b * 1.2);
+    ctx.fillStyle = CREAM; ctx.fillRect(b, b, cw - b * 2, ch - b * 2);
+    const fw = cw - b * 2, fh = ch - b * 2;
+    const nx = Math.max(1, Math.round(fw / (0.42 * PX))), ny = Math.max(1, Math.round(fh / (0.42 * PX)));
+    const sx = fw / nx, sy = fh / ny;
+    ctx.save();
+    ctx.translate(b, b);
+    ctx.strokeStyle = NAVY; ctx.lineWidth = 0.022 * PX;
+    for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++) {
+      const x = i * sx, y = j * sy;
+      ctx.beginPath();
+      ctx.moveTo(x + sx / 2, y + 6); ctx.lineTo(x + sx - 6, y + sy / 2); ctx.lineTo(x + sx / 2, y + sy - 6); ctx.lineTo(x + 6, y + sy / 2); ctx.closePath();
+      ctx.stroke();
+      ctx.fillStyle = GOLD; ctx.beginPath(); ctx.arc(x + sx / 2, y + sy / 2, 0.03 * PX, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.restore();
+    noise(ctx, cw, ch, 0.06, Math.round((cw * ch) / 60));
+  });
+}
+
+/** Lay a rug of w (along x) by d (along z) metres on the floor at (x, z). */
+function layRug(g, x, z, w, d) {
+  const rug = new THREE.Mesh(new THREE.PlaneGeometry(w, d), new THREE.MeshStandardMaterial({ map: geoRugTex(w, d), roughness: 1 }));
+  rug.rotation.x = -Math.PI / 2;
+  rug.position.set(x, 0.01, z);
+  g.add(rug);
+}
+
+/* ---------- wall art (not hung at the moment; kept for later) ---------- */
+
+/** A print in a thin white frame on a wall (rotY turns it to face into the room). */
+export function hangPrint(g, x, y, z, rotY, seed) {
+  const f = new THREE.Group();
+  f.position.set(x, y, z);
+  f.rotation.y = rotY;
+  g.add(f);
+  box(0.5, 0.62, 0.03, mat(0xf7f7f5, { roughness: 0.5 }), 0, 0, 0, f);
+  const p = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.54), new THREE.MeshStandardMaterial({ map: printTexture(seed), roughness: 0.9 }));
+  p.position.z = 0.017;
+  f.add(p);
+  return f;
+}
+
 /** Colourful zigzag and circle prints, like the ones over the desk in the photo. */
 function printTexture(seed) {
   const palette = ["#e94f64", "#f6a623", "#3fb6c9", "#7d5ce0", "#4fbf6f", "#f2d43a"];
@@ -479,64 +931,55 @@ export function buildWork() {
   const square = blackWindow(g, 1.5, 1.25, perthSkylineTexture(820, 528, { sun: false }), 1);
   square.position.set(0, 1.45, Zb + 0.005);
 
-  // the project board to the left of the window, the resume framed to its right
-  const board = new THREE.Group();
-  board.position.set(-2.15, 1.55, Zb + 0.03);
-  g.add(board);
-  box(1.96, 1.08, 0.04, mat(0xd7d9dc, { metalness: 0.4, roughness: 0.4 }), 0, 0, 0, board);
-  const bm = new THREE.MeshStandardMaterial({ map: boardTexture(), roughness: 0.5, emissive: 0xffffff, emissiveIntensity: 0.12 });
-  bm.emissiveMap = bm.map;
-  const bp = new THREE.Mesh(new THREE.PlaneGeometry(1.88, 0.99), bm);
-  bp.position.z = 0.025;
-  board.add(bp);
-  interactables.push({
-    mesh: bp, hint: "Open the project list", mat: bm, base: 0.12,
-    open: () => showPanel({ title: "Projects", meta: (profile.projects || []).length + " projects", html: projectsHtml(profile.projects || []) }),
-  });
+  // back wall: the desk to the left of the window, the resume framed to its right
+  const DX = -2.3, DZ = Zb + 0.47;   // the desk's middle
+  blackDesk(g, 2.1, 0.9).position.set(DX, 0, DZ);
+  const resumeOpen = () => showPanel({ title: profile.name + "'s resume", meta: profile.headline || "", html: resumeHtml() });
+  const projectsOpen = () => showPanel({ title: "Projects", meta: (profile.projects || []).length + " projects", html: projectsHtml(profile.projects || []) });
+  // two monitors at the back of the desk, angled in a little, with the laptop in front under them
+  monitor(g, DX - 0.33, Zb + 0.24, 0.14, resumeScreenTexture(), "Read the resume", resumeOpen);
+  monitor(g, DX + 0.33, Zb + 0.24, -0.14, projectsScreenTexture(), "Open the project list", projectsOpen);
+  laptop(g, DX, Zb + 0.6, 0);
+  mouseOnPad(g, DX + 0.55, Zb + 0.62, 0);
+  deskLamp(g, DX - 0.85, Zb + 0.2, 0.6);
+  box(0.27, 0.012, 0.2, mat(0xfff7e6), DX - 0.65, 0.758, Zb + 0.6, g);   // a notepad
+  room.obstacles.push({ x0: DX - 1.1, x1: DX + 1.1, z0: Zb, z1: Zb + 0.97 });
+  officeChair(g, DX + 0.05, Zb + 1.45, 0.12);
+  room.obstacles.push({ x0: DX - 0.3, x1: DX + 0.4, z0: Zb + 1.15, z1: Zb + 1.75 });
+  // a cream rug under the desk and chair
+  const rugTex = canvasTex(256, 256, (ctx, w, h) => { ctx.fillStyle = "#ece6da"; ctx.fillRect(0, 0, w, h); noise(ctx, w, h, 0.05, 3000); });
+  const rug = new THREE.Mesh(new THREE.PlaneGeometry(3.0, 2.2), new THREE.MeshStandardMaterial({ map: rugTex, roughness: 1 }));
+  rug.rotation.x = -Math.PI / 2;
+  rug.position.set(DX, 0.008, Zb + 1.15);
+  g.add(rug);
 
   framedResume(g, 2.1, 1.5, Zb + 0.02);
 
-  // right wall: the shelving wall, 7 cells by 5
-  const shelving = modularShelving(g, 7, 5, 0.76, 0.4, 0.38);
-  shelving.rotation.y = -Math.PI / 2;
-  shelving.position.set(RW / 2 - 0.21, 0, -9.0);
-  room.obstacles.push({ x0: 3.5, x1: 4.0, z0: -11.8, z1: -6.2 });
+  // left wall, from the door: the project board, then the big screen over a low console. Clicking a
+  // project on the board puts it on the screen.
+  const LW = -RW / 2 + 0.03, FACE_IN = Math.PI / 2;
+  const show = bigScreen(g, LW, 1.5, -9.0, FACE_IN, 1.9, 1.07);
+  projectBoard(g, LW, 1.55, -6.55, FACE_IN, show);
+  const media = new THREE.Group();
+  media.position.set(-RW / 2 + 0.23, 0, -9.0);
+  media.rotation.y = FACE_IN;
+  g.add(media);
+  box(1.8, 0.4, 0.42, mat(0xf1efe9, { roughness: 0.5 }), 0, 0.26, 0, media);
+  [-0.6, 0, 0.6].forEach((cx) => box(0.56, 0.32, 0.005, mat(0xe8e6e0, { roughness: 0.5 }), cx, 0.26, 0.212, media));
+  [-1, 1].forEach((sx) => box(0.03, 0.06, 0.38, chrome(), sx * 0.85, 0.03, 0, media));
+  room.obstacles.push({ x0: -4.0, x1: -3.5, z0: -9.95, z1: -8.05 });
 
-  // left wall: the desk, side-on to the wall, with the chair on the room side; prints and awards above
-  // 2.1 m long and 0.9 m deep, pushed to the wall, so the monitors, laptop, lamp and mouse all fit
-  const desk = blackDesk(g, 2.1, 0.9);
-  desk.rotation.y = Math.PI / 2;
-  desk.position.set(-RW / 2 + 0.47, 0, -9.0);
-  // two monitors at the back of the desk, angled in a little, with the laptop in front under them
-  const resumeOpen = () => showPanel({ title: profile.name + "'s resume", meta: profile.headline || "", html: resumeHtml() });
-  const projectsOpen = () => showPanel({ title: "Projects", meta: (profile.projects || []).length + " projects", html: projectsHtml(profile.projects || []) });
-  monitor(g, -RW / 2 + 0.22, -8.7, Math.PI / 2 + 0.14, resumeScreenTexture(), "Read the resume", resumeOpen);
-  monitor(g, -RW / 2 + 0.22, -9.36, Math.PI / 2 - 0.14, projectsScreenTexture(), "Open the project list", projectsOpen);
-  laptop(g, -RW / 2 + 0.6, -9.03, Math.PI / 2);
-  mouseOnPad(g, -RW / 2 + 0.62, -9.5, Math.PI / 2);
-  deskLamp(g, -RW / 2 + 0.25, -8.2, Math.PI / 2);
-  box(0.2, 0.012, 0.27, mat(0xfff7e6), -RW / 2 + 0.6, 0.758, -8.45, g);   // a notepad
-  room.obstacles.push({ x0: -4.0, x1: -3.0, z0: -10.1, z1: -7.9 });
-  officeChair(g, -RW / 2 + 1.55, -9.05, Math.PI / 2 + 0.25);
-  room.obstacles.push({ x0: -2.75, x1: -2.15, z0: -9.4, z1: -8.7 });
-
-  // a cream rug under the desk and chair
-  const rugTex = canvasTex(256, 256, (ctx, w, h) => { ctx.fillStyle = "#ece6da"; ctx.fillRect(0, 0, w, h); noise(ctx, w, h, 0.05, 3000); });
-  const rug = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 3.2), new THREE.MeshStandardMaterial({ map: rugTex, roughness: 1 }));
-  rug.rotation.x = -Math.PI / 2;
-  rug.position.set(-RW / 2 + 1.25, 0.008, -9.0);
-  g.add(rug);
-
-  // awards over the desk in thin white frames, with colourful prints either side
-  const accolades = (profile.accolades || []).slice(0, 12);
-  const slots = [];
-  for (let row = 0; row < 2; row++) for (let col = 0; col < 6; col++) slots.push({ z: -6.4 - col * 1.08, y: row === 0 ? 2.05 : 1.3 });
+  // the certificates, beyond the screen
+  const accolades = (profile.accolades || []).slice(0, 4);
+  const slots = accolades.length <= 2
+    ? [{ z: -11.05, y: 1.55 }, { z: -12.15, y: 1.55 }]
+    : [{ z: -11.05, y: 1.95 }, { z: -12.15, y: 1.95 }, { z: -11.05, y: 1.2 }, { z: -12.15, y: 1.2 }];
   accolades.forEach((a, i) => {
     const { z, y } = slots[i];
     const tex = certificateTexture(a);
     const f = new THREE.Group();
-    f.position.set(-RW / 2 + 0.03, y, z);
-    f.rotation.y = Math.PI / 2;
+    f.position.set(LW, y, z);
+    f.rotation.y = FACE_IN;
     g.add(f);
     box(0.92, 0.72, 0.03, mat(0xf7f7f5, { roughness: 0.5 }), 0, 0, 0, f);
     const pm = new THREE.MeshStandardMaterial({ map: tex, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.18, roughness: 0.9 });
@@ -548,25 +991,30 @@ export function buildWork() {
       open: () => showPanel({ title: a.title, meta: [a.from, a.year].filter(Boolean).join(" · "), html: `<p>${esc(a.summary)}</p>` }),
     });
   });
-  // prints fill the free spots over the desk (between the door and the far corner)
-  slots.slice(accolades.length).filter((s) => s.z > -10.4 && s.z < -6.0).slice(0, 4).forEach((s, i) => {
-    const f = new THREE.Group();
-    f.position.set(-RW / 2 + 0.03, s.y, s.z);
-    f.rotation.y = Math.PI / 2;
-    g.add(f);
-    box(0.5, 0.62, 0.03, mat(0xf7f7f5, { roughness: 0.5 }), 0, 0, 0, f);
-    const p = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.54), new THREE.MeshStandardMaterial({ map: printTexture(i + 1), roughness: 0.9 }));
-    p.position.z = 0.017;
-    f.add(p);
-  });
 
-  // plants by the door, and one by the shelving
+  // right wall: the career timeline nearer the door, and a small shelving unit at the back with one
+  // skill in each cubby (4 across, as many rows as the skills need)
+  careerTimeline(g, RW / 2 - 0.01, -7.85, -Math.PI / 2, 3.7);
+  const skills = skillList();
+  const SC = 4, SR = Math.max(3, Math.ceil(skills.length / SC)), SCW = 0.62, SCH = 0.4, SD = 0.36;
+  const shelving = modularShelving(g, SC, SR, SCW, SCH, SD, (shelf, k, cx, cy) => {
+    if (skills[k]) skillTile(shelf, skills[k], k, cx, cy, SCW, SCH, SD);
+  });
+  shelving.rotation.y = -Math.PI / 2;
+  shelving.position.set(RW / 2 - SD / 2 - 0.02, 0, -11.1);
+  room.obstacles.push({ x0: 3.5, x1: 4.0, z0: -11.1 - (SC * SCW) / 2 - 0.05, z1: -11.1 + (SC * SCW) / 2 + 0.05 });
+
+  // a geometric rug in the open middle of the room, and a runner of the same along the timeline
+  layRug(g, -0.2, -8.6, 3.4, 2.6);
+  layRug(g, 3.22, -7.85, 0.75, 3.6);
+
+  // plants by the door, and one in the back corner by the shelving
   makePlant(g, -3.45, -5.6, 1.4, 0xe8e6e1);
   room.obstacles.push({ x0: -3.8, x1: -3.1, z0: -5.95, z1: -5.25 });
   makePlant(g, 3.55, -5.7, 1.3, 0x2b2d31);
   room.obstacles.push({ x0: 3.25, x1: 3.9, z0: -6.05, z1: -5.3 });
-  makePlant(g, 3.45, -12.4, 1.5, 0xe8e6e1);
-  room.obstacles.push({ x0: 3.1, x1: 3.9, z0: -12.8, z1: -12.0 });
+  makePlant(g, 3.45, -12.62, 1.5, 0xe8e6e1);
+  room.obstacles.push({ x0: 3.1, x1: 3.9, z0: -13.0, z1: -12.3 });
 
   // light: nearly all of it is daylight. Sun from high outside the windows falls in a broad, soft
   // pool on the floor in front of them; skylight bounced round the white room is an even fill.

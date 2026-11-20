@@ -1,0 +1,13 @@
+{
+  "_help": "Your career before tech (2011 to 2017), shown on the Work room timeline when its switch is set to 'Before tech'. Add one entry to \"jobs\" per role, copying _example, oldest or newest first (they are sorted by start). role and start are needed; start and end are like \"Jun 2011\" or \"2011\". summary and highlights show when the card is clicked. Up to about 4 fit on the wall (your Turing course is added at the end as the switch into tech). The daily sync never touches this file.",
+  "_example": {
+    "role": "Shift supervisor",
+    "org": "Example Coffee Co.",
+    "location": "Denver, Colorado, USA",
+    "start": "Jun 2011",
+    "end": "Feb 2014",
+    "summary": "One line about the job.",
+    "highlights": ["Something you're proud of from it."]
+  },
+  "jobs": []
+}
