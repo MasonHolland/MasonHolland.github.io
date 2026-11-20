@@ -1,7 +1,63 @@
 {
   "source": "steam+psn",
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "games": [
+    {
+      "platform": "psn",
+      "id": "PPSA01413_00",
+      "title": "HELLDIVERS™ 2",
+      "hours": 293.2,
+      "lastPlayed": "2026-11-19",
+      "cover": "assets/covers/psn-b425ee3e40.jpg",
+      "trophies": {
+        "earned": 39,
+        "total": 39,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-b425ee3e40.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA04998_00",
+      "title": "ARC Raiders",
+      "hours": 231.2,
+      "lastPlayed": "2026-11-19",
+      "cover": "assets/covers/psn-ab370bb6ae.jpg",
+      "trophies": {
+        "earned": 51,
+        "total": 51,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-ab370bb6ae.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA10664_00",
+      "title": "FINAL FANTASY XVI",
+      "hours": 56.7,
+      "lastPlayed": "2026-11-19",
+      "cover": "assets/covers/psn-edd2de8982.jpg",
+      "trophies": {
+        "earned": 34,
+        "total": 69,
+        "progress": 39
+      },
+      "thumb": "assets/covers/small/psn-edd2de8982.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA29920_00",
+      "title": "Aliens: Fireteam Elite 2",
+      "hours": 7.3,
+      "lastPlayed": "2026-11-19",
+      "cover": "assets/covers/psn-c1259d982c.jpg",
+      "trophies": {
+        "earned": 3,
+        "total": 31,
+        "progress": 4
+      },
+      "thumb": "assets/covers/small/psn-c1259d982c.jpg"
+    },
     {
       "platform": "steam",
       "id": "892970",
@@ -32,34 +88,6 @@
     },
     {
       "platform": "psn",
-      "id": "PPSA10664_00",
-      "title": "FINAL FANTASY XVI",
-      "hours": 54,
-      "lastPlayed": "2026-11-18",
-      "cover": "assets/covers/psn-edd2de8982.jpg",
-      "trophies": {
-        "earned": 32,
-        "total": 69,
-        "progress": 37
-      },
-      "thumb": "assets/covers/small/psn-edd2de8982.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA29920_00",
-      "title": "Aliens: Fireteam Elite 2",
-      "hours": 5.8,
-      "lastPlayed": "2026-11-17",
-      "cover": "assets/covers/psn-c1259d982c.jpg",
-      "trophies": {
-        "earned": 3,
-        "total": 31,
-        "progress": 4
-      },
-      "thumb": "assets/covers/small/psn-c1259d982c.jpg"
-    },
-    {
-      "platform": "psn",
       "id": "PPSA28000_00",
       "title": "The Blood of Dawnwalker",
       "hours": 68,
@@ -85,34 +113,6 @@
         "progress": 15
       },
       "thumb": "assets/covers/small/psn-88c7aace2b.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA01413_00",
-      "title": "HELLDIVERS™ 2",
-      "hours": 292.4,
-      "lastPlayed": "2026-11-05",
-      "cover": "assets/covers/psn-b425ee3e40.jpg",
-      "trophies": {
-        "earned": 39,
-        "total": 39,
-        "progress": 100
-      },
-      "thumb": "assets/covers/small/psn-b425ee3e40.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA04998_00",
-      "title": "ARC Raiders",
-      "hours": 230.4,
-      "lastPlayed": "2026-11-05",
-      "cover": "assets/covers/psn-ab370bb6ae.jpg",
-      "trophies": {
-        "earned": 51,
-        "total": 51,
-        "progress": 100
-      },
-      "thumb": "assets/covers/small/psn-ab370bb6ae.jpg"
     },
     {
       "platform": "psn",
