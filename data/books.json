@@ -1,6 +1,6 @@
 {
   "source": "goodreads",
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "currentlyReading": [
     {
       "id": "126918599",
@@ -80,6 +80,13 @@
     }
   ],
   "wantToRead": [
+    {
+      "id": "55618299",
+      "title": "Reminiscence of a stock operator",
+      "author": "Edwin Lefèvre",
+      "link": "https://www.goodreads.com/book/show/55618299",
+      "genre": "Society & politics"
+    },
     {
       "id": "208703053",
       "title": "Artificial Intelligence in Byte-sized Chunks",
