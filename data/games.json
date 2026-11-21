@@ -1,7 +1,21 @@
 {
   "source": "steam+psn",
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "games": [
+    {
+      "platform": "psn",
+      "id": "PPSA10664_00",
+      "title": "FINAL FANTASY XVI",
+      "hours": 60.2,
+      "lastPlayed": "2026-11-20",
+      "cover": "assets/covers/psn-edd2de8982.jpg",
+      "trophies": {
+        "earned": 39,
+        "total": 69,
+        "progress": 49
+      },
+      "thumb": "assets/covers/small/psn-edd2de8982.jpg"
+    },
     {
       "platform": "psn",
       "id": "PPSA01413_00",
@@ -29,20 +43,6 @@
         "progress": 100
       },
       "thumb": "assets/covers/small/psn-ab370bb6ae.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA10664_00",
-      "title": "FINAL FANTASY XVI",
-      "hours": 56.7,
-      "lastPlayed": "2026-11-19",
-      "cover": "assets/covers/psn-edd2de8982.jpg",
-      "trophies": {
-        "earned": 34,
-        "total": 69,
-        "progress": 39
-      },
-      "thumb": "assets/covers/small/psn-edd2de8982.jpg"
     },
     {
       "platform": "psn",
