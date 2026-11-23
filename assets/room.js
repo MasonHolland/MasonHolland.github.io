@@ -17,18 +17,25 @@ buildWork();
 buildHobbies();
 
 // what can be clicked, grouped by room ("hall" for the hall), so looking round only tests the
-// things where you are rather than all of them (hundreds of books and games) every frame
-const meshesBy = { hall: [] };
-interactables.forEach((it) => {
-  let key = "hall";
-  for (const [k, room] of Object.entries(rooms)) {
-    let o = it.mesh;
-    while (o && o !== room.group) o = o.parent;
-    if (o) { key = k; break; }
-  }
-  (meshesBy[key] = meshesBy[key] || []).push(it.mesh);
-});
-const allMeshes = interactables.map((i) => i.mesh);
+// things where you are rather than all of them (hundreds of books and games) every frame. Rooms
+// can add things later (the Work room's project notes arrive when its door opens), so the lists
+// are rebuilt whenever more have been added.
+let meshesBy = { hall: [] }, allMeshes = [], indexed = -1;
+function indexMeshes() {
+  if (indexed === interactables.length) return;
+  indexed = interactables.length;
+  meshesBy = { hall: [] };
+  interactables.forEach((it) => {
+    let key = "hall";
+    for (const [k, room] of Object.entries(rooms)) {
+      let o = it.mesh;
+      while (o && o !== room.group) o = o.parent;
+      if (o) { key = k; break; }
+    }
+    (meshesBy[key] = meshesBy[key] || []).push(it.mesh);
+  });
+  allMeshes = interactables.map((i) => i.mesh);
+}
 
 /* ---------- input ---------- */
 
@@ -79,8 +86,8 @@ if (TOUCH) {
 }
 
 const HOME = { x: camera.position.x, z: camera.position.z };
-/** Jump to the hall, or to just inside a room's doorway, facing into the room. */
-function goTo(key) {
+/** Stand in the hall, or just inside a room's doorway, facing into the room. */
+function placeAt(key) {
   let x = HOME.x, z = HOME.z, facing = 0;
   const room = rooms[key];
   if (room) {
@@ -94,6 +101,10 @@ function goTo(key) {
   camera.position.z = z;
   yaw = facing;
   pitch = 0;
+}
+/** Jump there from the map and carry on exploring. */
+function goTo(key) {
+  placeAt(key);
   resume();
 }
 buildMap($("map"), goTo);
@@ -163,6 +174,7 @@ function pick(screenPt) {
     : new THREE.Vector2(0, 0);
   ray.setFromCamera(ndc, camera);
   // in the hall every room is in view through its doorway; inside a room, only that room
+  indexMeshes();
   const list = shownRoom ? [...(meshesBy[shownRoom] || []), ...meshesBy.hall] : allMeshes;
   // skip anything hidden (or inside something hidden), like the timeline that is switched off
   const shown = (o) => { for (; o; o = o.parent) if (!o.visible) return false; return true; };
@@ -334,6 +346,10 @@ try {
   culled.forEach((o) => { o.frustumCulled = true; });
 } catch (e) {}
 showRooms(null);
+
+// a link like room.html#about starts you just inside that room's doorway (#about, #work, #hobbies)
+const startAt = decodeURIComponent(location.hash.slice(1)).toLowerCase();
+if (rooms[startAt]) placeAt(startAt);
 
 $("loading").hidden = true;
 startEl.hidden = false;

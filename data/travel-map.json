@@ -1,0 +1,10 @@
+{
+  "_help": "Pins for the world map in the About room (and the list on about.html). Add one entry to \"places\" per place, copying _example. lat and lon are the place's coordinates: in Google Maps, right-click the spot and click the numbers at the top of the menu to copy them (latitude first, then longitude; south and west are negative). category is the id of one of the categories, which sets the pin colour and its line in the map key. years and note are optional and show when a pin is clicked. Add, rename or recolour categories as you like (colour is like #c0392b). The daily sync never touches this file.",
+  "categories": [
+    { "id": "lived", "label": "Lived here", "colour": "#c0392b" },
+    { "id": "travelled", "label": "Travelled together", "colour": "#2f6f8f" },
+    { "id": "next", "label": "Next on the list", "colour": "#d9a33a" }
+  ],
+  "_example": { "name": "Perth, Western Australia", "lat": -31.95, "lon": 115.86, "category": "lived", "years": "2026 to now", "note": "" },
+  "places": []
+}

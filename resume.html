@@ -3,19 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Resume and projects</title>
+  <title>Resume</title>
   <meta name="description" content="Work history, skills and education on one page.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="theme-work">
+  <header class="site-nav">
+    <a class="site-nav__brand" href="index.html" data-name>Mason Holland</a>
+    <nav aria-label="Site">
+      <ul>
+        <li><a href="resume.html" aria-current="page">Resume</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="site-nav__room" href="room.html">Walk into the room</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <div class="page">
-    <div class="page__top">
-      <a href="index.html">Back to the doors</a>
-      <a href="room.html">Walk into the room instead</a>
-    </div>
 
     <header>
       <h1 id="name"></h1>
@@ -38,36 +47,18 @@
 
       <section aria-labelledby="h-skills">
         <h2 id="h-skills">Skills</h2>
-        <ul class="tags" id="expertise"></ul>
-        <dl class="skills" id="technical"></dl>
-      </section>
-
-      <section aria-labelledby="h-proj">
-        <h2 id="h-proj">Projects</h2>
-        <div id="projects"></div>
+        <ul class="skill-tiles" id="skills"></ul>
       </section>
 
       <section aria-labelledby="h-acc">
         <h2 id="h-acc">Awards, certificates and education</h2>
         <div id="accolades"></div>
       </section>
-
-      <section aria-labelledby="h-books">
-        <h2 id="h-books">Recently read</h2>
-        <div id="books"></div>
-      </section>
     </main>
   </div>
 
+  <script src="assets/site.js"></script>
   <script>
-    function el(tag, attrs, children) {
-      var n = document.createElement(tag);
-      Object.keys(attrs || {}).forEach(function (k) {
-        if (k === "text") n.textContent = attrs[k]; else n.setAttribute(k, attrs[k]);
-      });
-      (children || []).forEach(function (c) { if (c) n.appendChild(c); });
-      return n;
-    }
 
     function entry(title, when, body, extra) {
       return el("article", { "class": "entry" }, [
@@ -79,12 +70,8 @@
       ].concat(extra || []));
     }
 
-    Promise.all([
-      fetch("data/profile.json").then(function (r) { return r.json(); }),
-      fetch("data/books.json").then(function (r) { return r.json(); }).catch(function () { return { books: [] }; })
-    ]).then(function (res) {
-      var p = res[0], b = res[1];
-      document.title = p.name + " – resume and projects";
+    loadJSON("data/profile.json", {}).then(function (p) {
+      fillName(p);
       document.getElementById("name").textContent = p.name;
       document.getElementById("headline").textContent = p.headline;
       document.getElementById("summary").textContent = p.summary;
@@ -104,7 +91,9 @@
           ? el("ul", {}, x.highlights.map(function (h) { return el("li", { text: h }); }))
           : null;
         var where = x.location ? el("p", { "class": "entry__where", text: x.location }) : null;
-        exp.appendChild(entry(x.role + ", " + x.org, x.start + " to " + x.end, x.summary, [where, ul]));
+        var job = entry(x.role + ", " + x.org, x.start + " to " + x.end, x.summary, [where, ul]);
+        job.classList.add("entry--job");
+        exp.appendChild(job);
       });
 
       var wins = p.accomplishments || [];
@@ -113,21 +102,11 @@
 
       var skills = p.skills || {};
       if (!(skills.expertise || []).length && !(skills.technical || []).length) hide("h-skills");
-      (skills.expertise || []).forEach(function (t) { document.getElementById("expertise").appendChild(el("li", { text: t })); });
+      // one tile per skill, like the skill shelf in the Work room: areas of expertise, then the tools
+      var tiles = document.getElementById("skills");
+      (skills.expertise || []).forEach(function (t) { tiles.appendChild(el("li", { text: t })); });
       (skills.technical || []).forEach(function (t) {
-        var dl = document.getElementById("technical");
-        dl.appendChild(el("dt", { text: t.label }));
-        dl.appendChild(el("dd", { text: t.items }));
-      });
-
-      var proj = document.getElementById("projects");
-      if (!(p.projects || []).length) hide("h-proj");
-      p.projects.forEach(function (x) {
-        var tags = x.tags && x.tags.length
-          ? el("ul", { "class": "tags" }, x.tags.map(function (t) { return el("li", { text: t }); }))
-          : null;
-        var a = x.url ? el("p", {}, [el("a", { href: x.url, text: "View " + x.title })]) : null;
-        proj.appendChild(entry(x.title, x.year, x.summary, [tags, a]));
+        tiles.appendChild(el("li", { "class": "is-tech" }, [document.createTextNode(t.label), el("span", { text: t.items })]));
       });
 
       var acc = document.getElementById("accolades");
@@ -137,16 +116,6 @@
         acc.appendChild(entry(x.title + ", " + x.from, x.year, x.summary));
       });
 
-      var books = document.getElementById("books");
-      var list = (b.books || []).slice(0, 8);
-      if (!list.length) {
-        document.getElementById("h-books").parentNode.hidden = true;
-      } else {
-        list.forEach(function (x) {
-          var stars = x.rating ? x.rating + " out of 5" : "";
-          books.appendChild(entry(x.title, stars, "by " + x.author));
-        });
-      }
     });
   </script>
 </body>

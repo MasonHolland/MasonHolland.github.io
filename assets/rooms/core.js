@@ -57,7 +57,7 @@ export async function loadJSON(url, fallback) {
   }
 }
 
-export const [profile, bookData, gameData, boardGameData, careerBeforeTech] = await Promise.all([
+export const [profile, bookData, gameData, boardGameData, careerBeforeTech, travelMap] = await Promise.all([
   loadJSON("data/profile.json", { name: "Mason", accolades: [], projects: [], experience: [], about: { frames: [] } }),
   loadJSON("data/books.json", { books: [] }),
   // Steam and PlayStation come from the sync; Switch games from the file you edit by hand
@@ -72,7 +72,20 @@ export const [profile, bookData, gameData, boardGameData, careerBeforeTech] = aw
     })),
   loadJSON("data/board-games.json", { games: [] }),   // hand-edited, for the other-hobbies shelf
   loadJSON("data/career-before-tech.json", { jobs: [] }),   // hand-edited, for the Work room timeline
+  loadJSON("data/travel-map.json", { categories: [], places: [] }),   // hand-edited, for the About room map
 ]);
+
+/**
+ * The projects: from their READMEs (data/projects.json, made by scripts/sync-projects.mjs), then
+ * any written straight into the profile. Not part of the start-up load above: nothing fetches
+ * them until something asks (the Work room does when its door first opens), so they never slow
+ * the room down. Screenshots and videos load later still, when a project is clicked.
+ */
+let projectList = null;
+export function loadProjects() {
+  return projectList || (projectList = loadJSON("data/projects.json", { projects: [] })
+    .then((d) => [...(d.projects || []), ...(profile.projects || []).filter((p) => p && p.title)]));
+}
 
 // Fonts must be ready before text is painted onto canvas textures. Give up after two seconds.
 if (document.fonts && document.fonts.load) {
@@ -372,12 +385,22 @@ export function closePanel() {
 $("panelClose").addEventListener("click", closePanel);
 
 export function projectsHtml(list) {
-  return list.map((p) => `
+  return list.map((p) => {
+    const links = [
+      safeUrl(p.url) ? `<a href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener">Visit the live site</a>` : "",
+      safeUrl(p.repo) ? `<a href="${esc(safeUrl(p.repo))}" target="_blank" rel="noopener">Source code</a>` : "",
+    ].filter(Boolean).join(" · ");
+    return `
     <div class="item">
       <h3>${esc(p.title)}${p.year ? ` <span style="font-weight:400;color:#4d5d6b">(${esc(p.year)})</span>` : ""}</h3>
-      <p>${esc(p.summary)}</p>
-      ${safeUrl(p.url) ? `<p><a href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener">View ${esc(p.title)}</a></p>` : ""}
-    </div>`).join("");
+      <p>${esc(p.blurb || p.summary || "")}</p>
+      ${p.problem ? `<p><strong>The problem:</strong> ${esc(p.problem)}</p>` : ""}
+      ${(p.problemPoints || []).length ? `<ul>${p.problemPoints.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
+      ${(p.features || []).length ? `<ul>${p.features.map((f) => `<li><strong>${esc(f.name)}:</strong> ${esc(f.what)}</li>`).join("")}</ul>` : ""}
+      ${(p.tags || []).length ? `<p style="color:#4d5d6b">Built with ${p.tags.map(esc).join(", ")}</p>` : ""}
+      ${links ? `<p>${links}</p>` : ""}
+    </div>`;
+  }).join("");
 }
 
 export function resumeHtml() {
@@ -411,32 +434,6 @@ export function makePlant(parent, x, z, scale = 1, potColor = 0x6b2d34) {
     plant.add(leaf);
   }
   return plant;
-}
-
-export function makeArmchair(color) {
-  const g = new THREE.Group();
-  const m = mat(color, { roughness: 0.9 });
-  box(0.9, 0.3, 0.85, m, 0, 0.3, 0, g);
-  box(0.9, 0.55, 0.2, m, 0, 0.72, -0.33, g);
-  box(0.16, 0.3, 0.85, m, -0.37, 0.55, 0, g);
-  box(0.16, 0.3, 0.85, m, 0.37, 0.55, 0, g);
-  box(0.64, 0.12, 0.6, m, 0, 0.5, 0.07, g);
-  [[-0.38, -0.36], [0.38, -0.36], [-0.38, 0.36], [0.38, 0.36]].forEach(([x, z]) => cyl(0.03, 0.025, 0.15, mat(0x2a2018), x, 0.075, z, g, 8));
-  return g;
-}
-
-export function makeSofa(color, w = 2.3) {
-  const g = new THREE.Group();
-  const m = mat(color, { roughness: 0.95 });
-  const cush = mat(new THREE.Color(color).offsetHSL(0, 0, 0.04), { roughness: 0.95 });
-  box(w, 0.3, 0.95, m, 0, 0.3, 0, g);
-  box(w, 0.5, 0.22, m, 0, 0.72, -0.36, g);
-  box(0.2, 0.32, 0.95, m, -w / 2 + 0.1, 0.56, 0, g);
-  box(0.2, 0.32, 0.95, m, w / 2 - 0.1, 0.56, 0, g);
-  const n = 3, cw = (w - 0.4) / n;
-  for (let i = 0; i < n; i++) box(cw - 0.03, 0.14, 0.72, cush, -w / 2 + 0.2 + cw * (i + 0.5), 0.52, 0.1, g);
-  [[-w / 2 + 0.15, -0.38], [w / 2 - 0.15, -0.38], [-w / 2 + 0.15, 0.38], [w / 2 - 0.15, 0.38]].forEach(([x, z]) => cyl(0.03, 0.025, 0.15, mat(0x3a2a1c), x, 0.075, z, g, 8));
-  return g;
 }
 
 /* ---------- room shell: floor, ceiling, walls, arched door wall ---------- */

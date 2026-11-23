@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact</title>
+  <meta name="description" content="Get in touch: send a message, or find me on LinkedIn.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="theme-work">
+  <header class="site-nav">
+    <a class="site-nav__brand" href="index.html" data-name>Mason Holland</a>
+    <nav aria-label="Site">
+      <ul>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+        <li><a class="site-nav__room" href="room.html">Walk into the room</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="page">
+    <header>
+      <h1>Contact</h1>
+      <p class="page__summary">Send me a message and it comes straight to my inbox, or find me on LinkedIn.</p>
+      <p class="project__links" id="profiles"></p>
+    </header>
+
+    <main>
+      <section class="contact-card" aria-labelledby="h-form">
+        <h2 id="h-form">Send me a message</h2>
+        <div id="form"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/site.js"></script>
+  <script type="module">
+    // the same form, and the same way of sending it, as the carrier pigeon in the room
+    import { contactFormHtml, contactSetup, wireContactForm } from "./assets/contact-form.js";
+
+    const p = await loadJSON("data/profile.json", {});
+    fillName(p);
+
+    // LinkedIn first, then any other profiles (GitHub...), skipping email links
+    const links = (p.links || []).filter((l) => safeUrl(l.url) && /^https?:/i.test(l.url))
+      .sort((a, b) => (/linkedin/i.test(b.label + b.url) ? 1 : 0) - (/linkedin/i.test(a.label + a.url) ? 1 : 0));
+    const box = document.getElementById("profiles");
+    links.forEach((l, i) => box.appendChild(el("a", {
+      "class": i === 0 ? "button" : "button button--quiet", href: safeUrl(l.url), target: "_blank", rel: "noopener", text: l.label,
+    })));
+
+    const setup = contactSetup(p);
+    const holder = document.getElementById("form");
+    if (!setup.endpoint && !setup.email) {
+      holder.appendChild(el("p", { "class": "page__empty", text: "The contact form isn't set up yet." }));
+    } else {
+      holder.innerHTML = contactFormHtml(setup);
+      wireContactForm(holder.querySelector("form"), setup);
+    }
+  </script>
+</body>
+</html>

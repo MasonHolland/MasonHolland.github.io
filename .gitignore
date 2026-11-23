@@ -19,3 +19,6 @@ node_modules/
 
 # Personal to-do list
 TODO.md
+
+# Private maintenance guide (the public overview is README.md)
+documentation.md

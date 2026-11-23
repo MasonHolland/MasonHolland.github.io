@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects</title>
+  <meta name="description" content="Personal projects: what each one does, with links to the live site, screenshots and a demo video.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="theme-work">
+  <header class="site-nav">
+    <a class="site-nav__brand" href="index.html" data-name>Mason Holland</a>
+    <nav aria-label="Site">
+      <ul>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html" aria-current="page">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="site-nav__room" href="room.html">Walk into the room</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="page">
+    <header>
+      <h1>Projects</h1>
+      <p class="page__summary">Things I've built on my own time: what each one does, and where to see it running.</p>
+    </header>
+
+    <main>
+      <div class="projects" id="projects"></div>
+      <p class="page__empty" id="empty" hidden>Projects are on their way. Check back soon.</p>
+    </main>
+  </div>
+
+  <script src="assets/site.js"></script>
+  <script>
+    // projects come from their READMEs (data/projects.json, made by scripts/sync-projects.mjs);
+    // any written straight into the profile follow them
+    Promise.all([loadJSON("data/profile.json", {}), loadJSON("data/projects.json", { projects: [] })]).then(function (res) {
+      var p = res[0];
+      fillName(p);
+      var list = (res[1].projects || []).concat(p.projects || []).filter(function (x) { return x && x.title; });
+      var box = document.getElementById("projects");
+      if (!list.length) { document.getElementById("empty").hidden = false; return; }
+      list.forEach(function (x) {
+        var shots = screenshotsOf(x), caps = x.captions || [];
+        var links = [];
+        if (safeUrl(x.url)) links.push(el("a", { "class": "button", href: safeUrl(x.url), target: "_blank", rel: "noopener", text: "Visit the live site" }));
+        if (safeUrl(x.repo)) links.push(el("a", { "class": "button button--quiet", href: safeUrl(x.repo), target: "_blank", rel: "noopener", text: "Source code" }));
+        var video = x.video ? el("video", { "class": "project__video", src: x.video + "#t=0.5", controls: "", preload: "metadata", playsinline: "", muted: "" }) : null;
+        var features = (x.features || []).length
+          ? el("ul", { "class": "project__features" }, x.features.map(function (f) {
+              return el("li", {}, [el("strong", { text: f.name + ":" }), document.createTextNode(" " + f.what)]);
+            }))
+          : null;
+        var gallery = shots.length
+          ? el("ul", { "class": "project__shots" }, shots.map(function (s, i) {
+              return el("li", {}, [el("a", { href: s, target: "_blank", rel: "noopener" }, [
+                el("img", { src: s, alt: caps[i] || x.title + " screenshot " + (i + 1), loading: "lazy" })
+              ]), caps[i] ? el("span", { "class": "project__caption", text: caps[i] }) : null]);
+            }))
+          : null;
+        box.appendChild(el("article", { "class": "project" }, [
+          el("div", { "class": "entry__head" }, [
+            el("h2", { "class": "project__title", text: x.title }),
+            x.year ? el("span", { "class": "entry__when", text: String(x.year) }) : null
+          ]),
+          el("p", { "class": "project__blurb", text: x.blurb || x.summary || "" }),
+          tagList(x.tags),
+          links.length ? el("p", { "class": "project__links" }, links) : null,
+          x.problem ? el("h3", { "class": "project__sub", text: "The problem" }) : null,
+          x.problem ? el("p", { text: x.problem }) : null,
+          (x.problemPoints || []).length ? el("ul", { "class": "project__features" }, x.problemPoints.map(function (t) { return el("li", { text: t }); })) : null,
+          features ? el("h3", { "class": "project__sub", text: "What it does" }) : null,
+          features,
+          video ? el("h3", { "class": "project__sub", text: "Demo" }) : null,
+          video,
+          gallery ? el("h3", { "class": "project__sub", text: "Screenshots" }) : null,
+          gallery
+        ]));
+      });
+    });
+  </script>
+</body>
+</html>

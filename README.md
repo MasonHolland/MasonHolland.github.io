@@ -1,139 +1,90 @@
-# Portfolio
+# masonholland.github.io
 
-A landing page with two doors:
+My personal site: **https://masonholland.github.io/**
 
-- **Read the short version** opens `resume.html`, a plain page with your experience, projects, awards and recent reads.
-- **Walk into the room** opens `room.html`, a round Viking-style great hall (timber walls, posts and a planked roof; set `HALL_STYLE` in `assets/rooms/core.js` to `"classic"` for the cream plaster rotunda instead) with three arched doorways. Each has a sign, a pair of doors in the room's style (stained glass for Hobbies, white for Work, pale birch for About; `DOOR_LOOKS` in `core.js`) that swing open as you walk up (the room behind is only drawn while they're open, which keeps the hall smooth) and a short arched hallway to a room with its own look:
-  - **10 o'clock, About me:** a bright, modern living room with a Perth skyline window, large photo frames, and smaller frames for photos and info cards.
-  - **12 o'clock, Work:** a bright, minimal home office lit by daylight: a strip of high windows full of sky, a centred window onto the Perth view from the About room (turned to Matagarup Bridge and Optus Stadium) between the desk (two monitors over a laptop) and your framed resume. On the left wall, the project board by the door is linked to a big screen: click a project on the board and the screen shows it. Your certificates hang past the screen. On the right wall, a career timeline built from your experience and certificates, with a switch to "Before tech" (2011 to 2017, from `data/career-before-tech.json`), and a small shelving unit with one skill in each cubby (from `skills`, with each tool's official logo or an icon for general skills; click one to see where it shows up in your experience). Navy and cream geometric rugs zone the middle of the room and run under the timeline.
-  - **2 o'clock, Hobbies:** a stone castle library with a stained glass window (a multicoloured lattice with a single sword), bookcases for the books you've read (with a shelf for what you're reading now, covers facing out) and want to read (the teal case), a game gallery (PlayStation and Steam shelves either side of a hallway, the Nintendo Switch shelf inside it, and across from it a shelf of other hobbies), and a suit of scale and chain armour in the corner.
+There are two ways to look around:
 
-## Make it yours
+- **The short version:** plain pages for my [resume](https://masonholland.github.io/resume.html), [projects](https://masonholland.github.io/projects.html), a bit [about me](https://masonholland.github.io/about.html), and a [contact form](https://masonholland.github.io/contact.html).
+- **[Walk into the room](https://masonholland.github.io/room.html):** a 3D space you explore in the browser. A timber great hall has three doors, each opening onto a room:
+  - **About me:** a Scandinavian-style living room with a Perth skyline window, photos, and a world map pinned with the places my family has lived and travelled.
+  - **Work:** a bright home office. A project board drives a big screen that shows each project's blurb, screenshots and demo video. There's also a career timeline (with a switch to my career before tech), a shelf with one skill per cubby, and my resume and certificate on the walls.
+  - **Hobbies:** a stone library. It has every book I've read, coloured by genre, a gallery of the games I've played most on PlayStation, Steam and Switch, a shelf of other hobbies, and a suit of armour.
 
-All content lives in three data files. Both the simple page and the room read from them.
+  A carrier pigeon in the hall takes messages. To start inside a room, add its name to the link: [#about](https://masonholland.github.io/room.html#about), [#work](https://masonholland.github.io/room.html#work), [#hobbies](https://masonholland.github.io/room.html#hobbies).
 
-- `data/profile.json`: name, headline, summary, links, experience, projects, awards, and the framed items in the About me room.
-- `data/books.json`: the bookcase. Filled by the Goodreads sync, or edit by hand.
-- `data/games.json`: the game cabinet. Filled by the games sync, or edit by hand.
-- `data/board-games.json`: board games for the top of the other-hobbies shelf in the Hobbies room. You edit this one by hand: copy `_example` into `games` for each game (only `title` is needed; `size` is `large`, `medium` or `small`). Until it has any, plain books fill those shelves.
-- `data/career-before-tech.json`: your jobs before tech (2011 to 2017) for the "Before tech" side of the Work room timeline. You edit this one by hand: copy `_example` into `jobs` for each role (`role` and `start` are needed; `summary` and `highlights` show when its card is clicked). Your Turing course is added at the end automatically. Until it has any, a "Coming soon" card holds the place.
+## How it's built
 
-The shipped content is sample text. Replace it before you publish.
+There's no framework and no build step. It's plain HTML, CSS and JavaScript served as static files by GitHub Pages, with [three.js](https://threejs.org/) for the 3D.
 
-### About me frames
+**Everything in the room is made in code.** There are no 3D model files or texture images for the furniture, walls or props. Every object is assembled from simple shapes (boxes, cylinders, lathes, extrusions), and every surface (wood grain, stone, brick, carpet, book spines, signs, screens) is painted on a canvas when the page loads. Text on screens, certificates, labels and cards is drawn from the same data the plain pages use.
 
-`about.frames` in `data/profile.json` holds up to 9 frames. Each is one of:
+**One set of data, two views.** The content lives in JSON files in `data/`. The plain pages and the 3D rooms both read them, so there's a single place to update. Some of it is kept up to date automatically:
 
-- `{ "type": "photo", "src": "assets/photos/family-1.jpg", "caption": "..." }`
-- `{ "type": "info", "title": "...", "text": "..." }`
+| Content | Source | How |
+|---|---|---|
+| Projects | Each project repo's README | `scripts/sync-projects.mjs` reads the title, pitch, problem, feature table, tech stack, screenshots and demo video, and copies the media into the site. Adding a project means adding one repo link. |
+| Books | Goodreads | `scripts/sync-goodreads.mjs` reads the public shelf widget; genres come from Open Library subjects. |
+| Games | Steam and PlayStation | `scripts/sync-games.mjs` uses the Steam Web API and the community [psn-api](https://github.com/achievements-app/psn-api) library. |
 
-Put photo files in `assets/photos/`. Until a file exists, the frame shows a "Your photo goes here" placeholder. Use landscape photos for the best fit. Only publish photos you are happy for anyone to see, because everything on a public site is public.
+A [GitHub Actions workflow](.github/workflows/sync-data.yml) runs these syncs daily, and right away when the project list changes, then commits the results.
 
-### Large frames
+**Keeping the 3D smooth.**
 
-`about.largeFrames` holds up to 3 big frames, each `{ "src": "assets/photos/large-1.jpg", "caption": "...", "text": "..." }`. Until the file exists the frame shows a placeholder that names the file to add. The small frames hold up to 6.
+- Rooms are only drawn while you're inside them or their doors are open; the doors swing open as you approach.
+- The books on each bookcase are drawn as a single instanced mesh with one merged spine texture, which takes a wall of several hundred books from thousands of draw calls down to a handful.
+- Boxes that only show one detailed face use two materials instead of six.
+- Every shader is compiled behind the loading screen, so opening a door doesn't stutter.
+- Project data loads only when the Work room first opens, and its screenshots and videos only when you ask for them.
+- Game covers load a few per frame.
+- The render resolution steps down automatically on slower devices.
 
-### Awards
+**Accessible and privacy-minded.**
 
-`projects` appear as notes on the Work room project board (up to 8). Each has a `title`, `summary`, optional `year` and `url`, and to show it on the big screen in action, either a `video` (an mp4 path, played muted on a loop) or an `image` (a screenshot path). Without either, the screen shows a title card.
+- The plain pages work without the 3D, and the room has keyboard, mouse and touch controls.
+- The contact form posts to [Formspree](https://formspree.io), so no email address appears in the site's files.
+- The framed resume is an image of the PDF with the contact line removed.
 
-`accolades` holds up to 4 items (the certificate wall in the Work room). Each has a `title`, `from`, `year`, `kind` (`award`, `certificate`, `degree` or `press`), a `summary` and optionally a `logo` (an image path, drawn as a seal at the top of the certificate). They hang on the wall of the Work room.
+## Project layout
 
-The framed resume in the Work room is `assets/work/resume.jpg`, a picture of the resume PDF with the contact line (email and phone) blanked out. Remake it the same way when the resume changes; never put the original PDF in the repo.
-
-## Bookshelf from Goodreads
-
-Goodreads retired its shelf RSS feeds in October 2026, so the sync reads the public shelf widget instead. The widget only returns the 100 most recent books per shelf and no "date read", so your older history comes from a one-time export.
-
-1. Your user ID is the digits after `/user/show/` in your Goodreads profile address. Your profile must be public.
-2. Once: in Goodreads, go to My Books, Import and export, and export your library. Then run `node scripts/import-goodreads-export.mjs path/to/goodreads_library_export.csv`. This writes `data/books-archive.json` with only the read shelf's titles, authors, ratings and dates. Don't commit the CSV, because it holds your reviews and private notes (`.gitignore` skips it).
-3. Run `GOODREADS_USER_ID=12345678 node scripts/sync-goodreads.mjs` (Node 18 or newer).
-
-The read shelf merges the archive, books found by earlier syncs and the widget, matched by Goodreads book id so nothing appears twice. A book stays once it has been seen, even after it drops out of the widget's 100; to remove one, delete it from `data/books.json` and `data/books-archive.json`. Books read since the export show no "Finished" date. Currently reading and want to read come from the widget alone (up to 100 each). Books you're reading now get their cover saved in `assets/books/covers/`, so they can face out on their shelf. Each spine is coloured by genre, from the book's subjects on Open Library (looked up once per book and kept in `data/genres.json`). To set a genre yourself, or fill in one Open Library doesn't know, edit `data/genre-overrides.json`: it lists the books without a genre and the genre names to choose from. Comedy is only picked automatically when no other genre fits, because so many books are tagged as humour. Other fiction and Other nonfiction catch everything else. Series stay together on the shelf, in series order. Plain filler books fill the rest of each case.
-
-## Games from Steam and PlayStation
-
-Run `node scripts/sync-games.mjs` after setting the variables below. Each platform is optional. If one fails, its games from the last good run are kept. Cover art is downloaded into `assets/covers/` at full size, and a 200x300 copy for the room goes in `assets/covers/small/` (`node scripts/thumbs.mjs --force` remakes them after changing the size). Run `npm install` first. The sync saves every game played for 5 hours or more (`MIN_HOURS` changes that), most recently played first, but the room only shows games played for 30 hours or more. To show more, lower `SHOW_MIN_HOURS` in `assets/rooms/hobbies.js`; the saved games come back without another sync. Each platform has a console shelf: PlayStation to the right of the game gallery's opening, Steam to the left, and the Switch along the gallery's left-hand wall. The 4 games beside the console are the ones with the highest trophy completion (on Steam, the most hours), and 40 more sit around it. Any extra games carry on down the gallery, which grows to fit. While `SWITCH_UNDER_CONSTRUCTION` in `assets/rooms/hobbies.js` is true, the Switch shelf has an "Under construction" sign. Set `MAX_GAMES` to cap each platform. PlayStation play time covers PS4 and PS5 games; older games that only appear in your trophy list have no play time, so they are left out.
-
-**Steam** (reliable, official)
-
-1. Get a free key at https://steamcommunity.com/dev/apikey and set `STEAM_API_KEY`.
-2. Set `STEAM_ID` to your 17-digit Steam ID.
-3. In Steam, set your profile's "Game details" to Public. Without this Steam returns nothing.
-
-You get total hours, hours in the last two weeks and last played date.
-
-**PlayStation** (unofficial, may break)
-
-Sony has no public API. This uses the community `psn-api` library, so run `npm install` first.
-
-1. Sign in at playstation.com, then open https://ca.account.sony.com/api/v1/ssocookie in the same browser.
-2. Copy the 64-character `npsso` value and set `PSN_NPSSO`. It works like a password, so never put it in a file you publish.
-3. The token expires after a while, so replace it when the sync starts failing.
-
-PlayStation does not share play time this way, so PS games show last played and trophy progress instead of hours.
-
-**Nintendo Switch** (manual)
-
-Nintendo has no API, so Switch games go in `data/switch-games.json`, a file only you edit. The daily sync never writes to it, so your edits can't clash with its commits. Copy the `_example` entry into `games` for each game:
-
-    { "id": "zelda-totk", "title": "The Legend of Zelda: Tears of the Kingdom", "hours": 120, "lastPlayed": "2026-09-14", "cover": "assets/covers/switch-zelda-totk.jpg", "completion": 75 }
-
-Hours are on the Switch: open your user page from the Home screen, then Play Activity. Save each cover in `assets/covers/`; the sync makes its small copy (or run `node scripts/thumbs.mjs`). `cover` is optional: without it the game shows a plain red box with its title. `completion` (0 to 100) is optional too and picks the 4 games beside the console; otherwise the shelf is newest `lastPlayed` first.
-
-## Keep it fresh automatically
-
-Push this folder to GitHub. Under Settings, Secrets and variables, Actions, add whichever of these you use: `GOODREADS_USER_ID`, `STEAM_API_KEY`, `STEAM_ID`, `PSN_NPSSO`. The workflow in `.github/workflows/sync-data.yml` then refreshes books and games every day and commits the result. You can also run it by hand from the Actions tab.
-
-## Work in GitHub Codespaces
-
-The `.devcontainer/` folder sets this up for you. Create a Codespace from the repository and it will:
-
-1. run `scripts/setup.sh`, which installs dependencies and downloads `assets/vendor/three.module.js` if it is missing;
-2. start a live-reload server on port 8000 and open the preview. Edits show up in the browser as you save.
-
-If the preview doesn't open, use the Ports tab and open port 8000. On an iPad this runs entirely in the browser, so there is nothing to install. To restart the server by hand: `npx live-server --port=8000 --no-browser .`
+```
+index.html, resume.html, projects.html,
+about.html, contact.html                             plain pages
+room.html                                            the 3D room
+assets/site.css, assets/site.js                      styles and helpers for the plain pages
+assets/contact-form.js                               the contact form, shared by the Contact page and the room
+assets/room.js                                       the room's entry point: input, picking, doors, render loop
+assets/rooms/core.js                                 renderer, shared helpers, the hall's doorways and doors, data loading
+assets/rooms/hub.js, hall-viking.js                  the hall, its timber look and the pigeon
+assets/rooms/about.js, work.js, hobbies.js           one file per room
+assets/rooms/hobby-props.js, skill-icons.js          props for the Hobbies room; logos for the skill shelf
+assets/rooms/map.js, contact.js, shared.js           floor-plan map, contact form, shared textures and frames
+assets/vendor/three.module.js                        three.js 0.170.0
+data/                                                content (JSON)
+scripts/                                             syncs and asset generators (Node)
+```
 
 ## Run it locally
 
-The room loads data files, so serve the folder rather than double-clicking the file:
+The pages load data files, so serve the folder rather than opening the HTML directly:
 
-    npx http-server -p 8000 -c-1
+```
+npx http-server -p 8000 -c-1
+```
 
-then visit http://localhost:8000. This needs Node 18 or newer. The first run asks to download `http-server`; `-c-1` turns off caching so edits show on refresh.
-
-## Publish it
-
-It is a static site with no build step. Upload the folder to GitHub Pages, Netlify, Cloudflare Pages or Vercel. three.js is included in `assets/vendor`.
+Then open http://localhost:8000 (Node 18 or newer). The sync scripts need `npm install` first.
 
 ## Controls in the room
 
-- Desktop: W A S D or the arrow keys to walk, mouse to look, click or press E to inspect, Esc to close a card or open the options menu.
-- Touch: drag on the left to walk, drag on the right to look, tap things to inspect. The "Options and map" button at the top opens the menu.
-- The options menu has a floor-plan map (choose a room to jump to its doorway), "Read the simple version" and "Leave the room".
-- The exit door is behind you when you arrive.
+- **Desktop:** W A S D or the arrow keys to walk, the mouse to look, click or E to inspect, Esc for the options menu.
+- **Touch:** drag on the left side to walk, drag on the right side to look, tap things to inspect.
+- **Options menu:** a floor-plan map for jumping between rooms, and links back to the plain pages.
 
-## Contact form (the carrier pigeon)
+## Credits
 
-The carrier pigeon on its perch in the hall opens a contact form. A static site can't send email by itself, so set `contact` in `data/profile.json` one of two ways:
-
-- **Form service (recommended):** create a free form at a service such as [Formspree](https://formspree.io), then put its address in `contact.endpoint`, e.g. `"https://formspree.io/f/abcdwxyz"`. Messages arrive in your inbox and visitors stay on the page.
-- **Email app:** leave `endpoint` empty and set `contact.email`. Sending opens the visitor's own email app with the message filled in. Without `contact.email`, the `mailto:` link in `links` is used.
-
-With the email-app option your address is in the site's public files. With a form service only the form's address is public.
-
-## How the room is built
-
-There are no 3D model files. Everything is built from simple shapes, lighting and textures drawn on canvases at load time, and text comes from the data files.
-
-- `assets/room.js`: entry point (input, picking, render loop).
-- `assets/rooms/core.js`: renderer, helpers, doorway and sign builder, shared props.
-- `assets/rooms/shared.js`: textures and picture frames used by several rooms.
-- `assets/rooms/hub.js`: the round hall, its dome and the carrier pigeon.
-- `assets/rooms/hall-viking.js`: the Viking look for the hall (floor, walls, roof, posts, shields, hearth).
-- `assets/rooms/hobby-props.js`: the other-hobbies shelf and the suit of armour.
-- `assets/rooms/skill-icons.js`: logos and icons for the Work room skill tiles, made by `scripts/make-skill-icons.mjs` (Simple Icons, CC0, and Lucide, ISC).
-- `assets/rooms/map.js`: the floor-plan map in the options menu.
-- `assets/rooms/contact.js`: the contact form behind the pigeon.
-- `assets/rooms/about.js`, `work.js`, `hobbies.js`: one file per room. Colours, light levels, furniture and layout live there.
-- `assets/world/`: unused leftovers, safe to delete.
+- [three.js](https://threejs.org/) (MIT) for the 3D.
+- Skill logos from [Simple Icons](https://simpleicons.org/) (CC0). The logos are trademarks of their owners.
+- Outline icons from [Lucide](https://lucide.dev/) (ISC).
+- The world map is drawn from [Natural Earth](https://www.naturalearthdata.com/) data (public domain), via [world-atlas](https://github.com/topojson/world-atlas).
+- Fonts: [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Grotesque) and [Literata](https://fonts.google.com/specimen/Literata) (SIL Open Font License), from Google Fonts.
+- The Turing School seal on the certificate belongs to [Turing School of Software and Design](https://www.turing.edu/).
+- Book data from Goodreads and [Open Library](https://openlibrary.org/); game data from Steam and PlayStation Network.

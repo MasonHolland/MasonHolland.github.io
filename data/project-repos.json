@@ -1,0 +1,9 @@
+{
+  "_help": "Your projects, in the order to show them. Add the GitHub link of each repo to \"repos\" and push: the sync reads each README and fills data/projects.json (title, what it does, the problem, features, tech, live site, screenshots and demo video). It runs when this file changes and once a day. Public repos just work. Private repos need the PROJECTS_TOKEN secret (see documentation.md), and their README text and media become public here. To change something the README gets wrong, use an object instead of a link, like { \"repo\": \"https://github.com/you/app\", \"blurb\": \"Your own words\" }.",
+  "repos": [
+    "https://github.com/MasonHolland/StorageSolution",
+    "https://github.com/MasonHolland/MyWords",
+    "https://github.com/MasonHolland/Convert",
+    "https://github.com/MasonHolland/NightWorkout"
+  ]
+}

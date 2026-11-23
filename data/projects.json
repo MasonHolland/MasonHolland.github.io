@@ -1,0 +1,264 @@
+{
+  "projects": [
+    {
+      "repo": "https://github.com/MasonHolland/StorageSolution",
+      "name": "StorageSolution",
+      "title": "StorageSolution",
+      "blurb": "A free, offline-first phone app for packing a house into boxes and finding things again later.",
+      "problem": "Packing up a home for a move or for long-term storage is a hassle, and it's hard to stay organised:",
+      "problemPoints": [
+        "Contents are forgotten. Once a box is taped shut, nobody remembers what's in it. \"Kitchen\" written in marker doesn't tell you which box has the waffle iron.",
+        "Locations are forgotten. In a storage unit or garage with dozens of boxes stacked three high, finding one box means unstacking half the room.",
+        "Lists drift. Paper lists and spreadsheets get lost, aren't with you at the storage unit, and don't match the boxes.",
+        "Existing tools cost money or need accounts. Many inventory apps are subscriptions, cloud-only, or built for warehouses rather than households."
+      ],
+      "features": [
+        {
+          "name": "Box log",
+          "what": "Each box, tote, bag or drawer unit gets a code (B-001, B-002…), a photo, the room it came from, its size, and flags such as fragile or open first. Its status moves from packing → sealed → stored → unpacked."
+        },
+        {
+          "name": "Fast item entry",
+          "what": "Type items as you pack: 6 mugs or mugs x6 sets the quantity, and items you use often appear as one-tap buttons. Items can have tags."
+        },
+        {
+          "name": "Photo → box colour",
+          "what": "The box colour is sampled from its photo, so the layout drawings look like the real boxes."
+        },
+        {
+          "name": "Floor plan",
+          "what": "A to-scale top-down view of a storage space (unit, garage, spare room). Drag stacks of boxes to where they really sit. Overlapping stacks are outlined in red."
+        },
+        {
+          "name": "Stack front view",
+          "what": "Each stack seen from the front, with boxes drawn to scale in their own colours, bottom to top, against the ceiling height. Reorder boxes, add unplaced boxes, or take boxes out."
+        },
+        {
+          "name": "Search",
+          "what": "Search items, tags, rooms and box codes, with tolerance for typos. Results show the location, e.g. Unit 214 › Stack 1 › 3rd from bottom. Locate opens the layout with that box highlighted."
+        },
+        {
+          "name": "QR labels",
+          "what": "Print a sheet of labels (QR code, box code, name, room, fragile flag). Scanning one with any phone camera, or with the in-app scanner, opens that box."
+        },
+        {
+          "name": "Backup & sharing",
+          "what": "Export everything, photos included, as a .zip. Import it on another device by merging or replacing."
+        },
+        {
+          "name": "Offline & installable",
+          "what": "It's a Progressive Web App (PWA): add it to your home screen and it works with no signal, which is common in storage units."
+        }
+      ],
+      "tags": [
+        "TypeScript",
+        "React",
+        "Vite",
+        "vite-plugin-pwa",
+        "Dexie.js"
+      ],
+      "url": "https://masonholland.github.io/StorageSolution/",
+      "year": "2026",
+      "updated": "2026-11-23T13:26:59Z",
+      "screenshots": [
+        "assets/projects/StorageSolution/shot-1.png",
+        "assets/projects/StorageSolution/shot-2.png",
+        "assets/projects/StorageSolution/shot-3.png",
+        "assets/projects/StorageSolution/shot-4.png",
+        "assets/projects/StorageSolution/shot-5.png",
+        "assets/projects/StorageSolution/shot-6.png"
+      ],
+      "captions": [
+        "Boxes",
+        "A box",
+        "Search (with a typo)",
+        "Locate: the box in its stack",
+        "Floor plan",
+        "QR labels"
+      ],
+      "video": "assets/projects/StorageSolution/demo.mp4",
+      "summary": "A free, offline-first phone app for packing a house into boxes and finding things again later."
+    },
+    {
+      "repo": "https://github.com/MasonHolland/MyWords",
+      "name": "MyWords",
+      "title": "MyWords",
+      "blurb": "A flashcard app for your phone. Cards can have a photo on the front, taken with the camera or picked from your library.",
+      "problem": "Paper flashcards get lost and are slow to make, especially if you want pictures on them. Most flashcard apps are built around typed text, and many want an account or a subscription.",
+      "problemPoints": [],
+      "features": [
+        {
+          "name": "Decks",
+          "what": "Create, rename and delete decks."
+        },
+        {
+          "name": "Cards",
+          "what": "The front is text or an image, the back is text. Images come from your photo library or the camera and are shrunk before saving. Save & add another keeps the editor open for the next card."
+        },
+        {
+          "name": "Card order",
+          "what": "Drag a card's ⠿ handle to reorder the deck. On a phone, press briefly before dragging so the list still scrolls."
+        },
+        {
+          "name": "Study",
+          "what": "Go through a deck in order or shuffled. Tap the card to flip it, Prev/Next to move. A progress bar shows where you are, and at the end you can restart, shuffle again or go back. Shuffling doesn't change the deck's saved order."
+        },
+        {
+          "name": "Offline",
+          "what": "It's a Progressive Web App (PWA), so once it's on your home screen it opens full screen and works without signal."
+        }
+      ],
+      "tags": [
+        "TypeScript",
+        "React",
+        "Vite",
+        "vite-plugin-pwa",
+        "Dexie"
+      ],
+      "url": "https://masonholland.github.io/MyWords/",
+      "year": "2026",
+      "updated": "2026-11-23T13:26:55Z",
+      "screenshots": [
+        "assets/projects/MyWords/shot-1.png",
+        "assets/projects/MyWords/shot-2.png",
+        "assets/projects/MyWords/shot-3.png",
+        "assets/projects/MyWords/shot-4.png",
+        "assets/projects/MyWords/shot-5.png",
+        "assets/projects/MyWords/shot-6.png"
+      ],
+      "captions": [
+        "Decks",
+        "A deck of picture cards",
+        "Adding a card",
+        "Studying (front)",
+        "Studying (back)",
+        "Dark mode"
+      ],
+      "video": "assets/projects/MyWords/demo.mp4",
+      "summary": "A flashcard app for your phone. Cards can have a photo on the front, taken with the camera or picked from your library."
+    },
+    {
+      "repo": "https://github.com/MasonHolland/Convert",
+      "name": "Convert",
+      "title": "Convert",
+      "blurb": "An iPhone app to use instead of Apple's Weather app. It shows the temperature in °C and °F at the same time, and has two more tabs for converting currency and units.",
+      "problem": "Weather apps show one temperature unit at a time, so if you need both °C and °F you're either changing settings or converting in your head. Currency and unit converters are usually separate apps or websites, and most of them don't remember the currencies you use or work offline.",
+      "problemPoints": [],
+      "features": [
+        {
+          "name": "Weather",
+          "what": "Current temperature in °C and °F, feels-like, and today's high and low. Below that, the next 24 hours and a 7-day list where a bar shows each day's range against the whole week."
+        },
+        {
+          "name": "Locations",
+          "what": "Your current location, plus any cities you add with +. Swipe between them; dots at the top show which one you're on. Press and hold a city's name to remove it."
+        },
+        {
+          "name": "Currency",
+          "what": "About 160 currencies. Type an amount, tap a currency code to change it (the picker is searchable and shows flags), or tap ⇅ to swap. Shows the rate, e.g. 1 USD = 0.91 EUR, and when it was updated."
+        },
+        {
+          "name": "Favorites & defaults",
+          "what": "Starred currencies go to the top of the picker and show as chips under the converter. The tab opens on your default pair, and a Set as default button appears when you change it."
+        },
+        {
+          "name": "Measure",
+          "what": "Weight (mg, g, kg, t, oz, lb, st) and distance (mm, cm, m, km, in, ft, yd, mi, nmi). Any unit to any other, with a table of the amount in every unit. Each has its own default pair, kg → lb and km → mi to start."
+        },
+        {
+          "name": "Offline",
+          "what": "The last forecast and rates are saved and shown, marked \"Offline\". Measure doesn't need a connection at all."
+        }
+      ],
+      "tags": [
+        "Expo",
+        "TypeScript",
+        "Expo Router",
+        "Zustand",
+        "expo-location"
+      ],
+      "url": "https://masonholland.github.io/Convert/",
+      "year": "2026",
+      "updated": "2026-11-23T13:34:39Z",
+      "screenshots": [
+        "assets/projects/Convert/shot-1.png",
+        "assets/projects/Convert/shot-2.png",
+        "assets/projects/Convert/shot-3.png",
+        "assets/projects/Convert/shot-4.png",
+        "assets/projects/Convert/shot-5.png"
+      ],
+      "captions": [
+        "Weather",
+        "A saved city",
+        "Currency",
+        "Currency picker",
+        "Measure"
+      ],
+      "video": "assets/projects/Convert/demo.mp4",
+      "summary": "An iPhone app to use instead of Apple's Weather app. It shows the temperature in °C and °F at the same time, and has two more tabs for converting currency and units."
+    },
+    {
+      "repo": "https://github.com/MasonHolland/NightWorkout",
+      "name": "NightWorkout",
+      "title": "NightWorkout",
+      "blurb": "An iPhone app for parents up at night with a newborn. It only uses red on black, and does three things: a feed timer that buzzes you every few minutes so you don't fall asleep, short guided movement routines, and a walking metronome for settling laps.",
+      "problem": "A phone screen at 3 am is bright enough to wake you up properly, and sometimes the baby too. Dark mode and Night Shift still use white text. It's also easy to nod off during a long feed, and after hours of sitting and rocking you get stiff, but workout apps expect you to watch the screen.",
+      "problemPoints": [],
+      "features": [
+        {
+          "name": "Red only",
+          "what": "Every colour is pure red (#RR0000) or black, so on OLED iPhones (X and later, all 12+) only the red subpixels light up. The screen is dimmed to 10% (adjustable) while the app is open, and your brightness comes back when you leave."
+        },
+        {
+          "name": "Feed timer",
+          "what": "Pick left, right or bottle; it suggests the other side from last time. Every 10 minutes (5–30, adjustable) you get a soft buzz and a small prompt like \"Roll your shoulders 5 times\". Recent feeds are listed with time, length and side."
+        },
+        {
+          "name": "Move",
+          "what": "Three short routines: Holding baby (things you can do with the baby in your arms), Quick wake-up and Gentle stretch. One tap per rep, two taps for a new move, so you can follow along without looking. Pause, skip or stop at any time."
+        },
+        {
+          "name": "Walk",
+          "what": "Taps at a set pace (50–110 steps per minute) to walk to, and counts your steps with the iPhone's motion sensor."
+        },
+        {
+          "name": "No system pop-ups",
+          "what": "Native alerts, pickers and the keyboard can't be made red, so the app doesn't use them."
+        },
+        {
+          "name": "Red screen setup",
+          "what": "A guide (shown on first launch and in Settings) for turning on iOS Color Filters, Reduce White Point and the Accessibility Shortcut, so notifications and Control Center are red too."
+        }
+      ],
+      "tags": [
+        "Expo",
+        "TypeScript",
+        "Expo Router",
+        "expo-sensors Pedometer"
+      ],
+      "url": "https://masonholland.github.io/NightWorkout/",
+      "year": "2026",
+      "updated": "2026-11-23T13:26:52Z",
+      "screenshots": [
+        "assets/projects/NightWorkout/shot-1.png",
+        "assets/projects/NightWorkout/shot-2.png",
+        "assets/projects/NightWorkout/shot-3.png",
+        "assets/projects/NightWorkout/shot-4.png",
+        "assets/projects/NightWorkout/shot-5.png",
+        "assets/projects/NightWorkout/shot-6.png",
+        "assets/projects/NightWorkout/shot-7.png"
+      ],
+      "captions": [
+        "Home",
+        "Feed timer",
+        "A nudge during a feed",
+        "Routines",
+        "During a routine",
+        "Walk",
+        "Red screen setup"
+      ],
+      "video": "assets/projects/NightWorkout/demo.mp4",
+      "summary": "An iPhone app for parents up at night with a newborn. It only uses red on black, and does three things: a feed timer that buzzes you every few minutes so you don't fall asleep, short guided movement routines, and a walking metronome for settling laps."
+    }
+  ]
+}

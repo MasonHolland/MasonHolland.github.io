@@ -1,9 +1,12 @@
-name: Sync books and games
+name: Sync books, games and projects
 
 on:
   schedule:
     - cron: "17 18 * * *"   # once a day (18:17 UTC)
   workflow_dispatch:         # run by hand from the Actions tab
+  push:                      # and straight away when the project list changes
+    paths:
+      - data/project-repos.json
 
 permissions:
   contents: write
@@ -39,16 +42,24 @@ jobs:
           PSN_NPSSO: ${{ secrets.PSN_NPSSO }}
         run: node scripts/sync-games.mjs
 
+      - name: Sync projects from their READMEs
+        continue-on-error: true
+        env:
+          # PROJECTS_TOKEN (optional): a token that can read private project repos; without it only public repos sync
+          GITHUB_TOKEN: ${{ secrets.PROJECTS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: node scripts/sync-projects.mjs
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
-          git add data/books.json data/games.json data/genres.json
+          git add data/books.json data/games.json data/genres.json data/projects.json
+          git add -A assets/projects
           if [ -d assets/covers ]; then git add assets/covers; fi
           if [ -d assets/books/covers ]; then git add assets/books/covers; fi
           if git diff --cached --quiet; then
             echo "Nothing changed."
           else
-            git commit -m "Sync books and games"
+            git commit -m "Sync books, games and projects"
             git push
           fi

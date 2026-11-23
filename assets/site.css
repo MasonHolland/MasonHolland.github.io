@@ -1,4 +1,4 @@
-/* Shared tokens and styles for the landing page and the simple resume page. */
+/* Styles for the plain pages: the landing page, resume, projects and about. */
 :root {
   --wall: #243240;
   --floor: #151d26;
@@ -31,14 +31,6 @@ a { color: inherit; }
 :focus-visible {
   outline: 3px solid var(--brass);
   outline-offset: 4px;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px; height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
 }
 
 /* ---------- Landing page ---------- */
@@ -201,7 +193,6 @@ a { color: inherit; }
 }
 
 .landing__stage { padding-bottom: 0; margin-bottom: clamp(4.5rem, 12vh, 7rem); }
-.landing__plaques-space { height: 0; }
 
 @media (max-width: 760px) {
   .landing {
@@ -219,26 +210,49 @@ a { color: inherit; }
   .door__leaf, .door__light { transition: none !important; }
 }
 
-/* ---------- Simple resume page ---------- */
+/* ---------- Site nav (every page) ---------- */
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  padding: 1.1rem max(clamp(1.25rem, 5vw, 2rem), calc((100% - 68rem) / 2));
+  font-family: var(--display);
+  background: var(--nav-bg, transparent);
+  border-bottom: var(--nav-rule, 0);
+  color: var(--nav-ink, inherit);
+}
+.site-nav--landing { position: relative; z-index: 1; }
+.site-nav__brand { font-weight: 800; font-size: 1.1875rem; letter-spacing: -0.01em; text-decoration: none; }
+.site-nav ul { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.5rem; margin: 0; padding: 0; list-style: none; }
+.site-nav a { text-decoration: none; }
+.site-nav ul a { color: var(--nav-muted, var(--muted)); font-size: 0.9875rem; padding: 0.35rem 0; border-bottom: 2px solid transparent; }
+.site-nav ul a:hover { color: var(--nav-ink, var(--paper)); }
+.site-nav ul a[aria-current="page"] { color: var(--nav-ink, var(--paper)); border-bottom-color: var(--accent, var(--brass)); }
+.site-nav ul a.site-nav__room {
+  color: var(--cta-ink, var(--ink));
+  background: var(--cta-bg, var(--brass));
+  border: 0;
+  border-radius: 999px;
+  padding: 0.4rem 0.95rem;
+  font-weight: 600;
+}
+.site-nav ul a.site-nav__room:hover { filter: brightness(1.08); color: var(--cta-ink, var(--ink)); }
+.landing { min-height: calc(100vh - 4.5rem); min-height: calc(100dvh - 4.5rem); }
+@media (max-width: 34rem) {
+  .site-nav { justify-content: flex-start; }
+  .site-nav ul { gap: 0.25rem 1.1rem; }
+}
+
+/* ---------- Plain pages (resume, projects, about) ---------- */
 
 .page {
   max-width: 46rem;
   margin: 0 auto;
-  padding: clamp(1.5rem, 5vw, 4rem) clamp(1.25rem, 5vw, 2rem) 5rem;
+  padding: clamp(1.5rem, 5vw, 3.5rem) clamp(1.25rem, 5vw, 2rem) 5rem;
 }
-
-.page__top {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  font-family: var(--display);
-  font-size: 0.9375rem;
-  margin-bottom: 3rem;
-}
-
-.page__top a { color: var(--muted); text-decoration-thickness: 1px; text-underline-offset: 4px; }
-.page__top a:hover { color: var(--paper); }
 
 .page h1 {
   font-family: var(--display);
@@ -247,19 +261,13 @@ a { color: inherit; }
   letter-spacing: -0.03em;
   line-height: 0.95;
   margin: 0 0 1rem;
+  color: var(--heading, inherit);
 }
-
-.page__headline {
-  font-family: var(--display);
-  font-size: 1.375rem;
-  font-weight: 500;
-  margin: 0 0 1.25rem;
-}
-
-.page__location { font-family: var(--display); color: var(--muted); margin: -0.75rem 0 1.25rem; }
+.page__headline { font-family: var(--display); font-size: 1.375rem; font-weight: 500; margin: 0 0 1.25rem; }
+.page__location { font-family: var(--display); color: var(--place, var(--muted)); margin: -0.5rem 0 1.25rem; }
 .page__summary { color: var(--muted); max-width: 38rem; margin: 0 0 1.5rem; }
-
-.page__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0 0 4rem; padding: 0; list-style: none; font-family: var(--display); }
+.page__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0 0 3.5rem; padding: 0; list-style: none; font-family: var(--display); }
+.page__empty { color: var(--muted); font-family: var(--display); }
 
 .page h2 {
   font-family: var(--display);
@@ -268,8 +276,10 @@ a { color: inherit; }
   letter-spacing: -0.01em;
   margin: 0 0 1.5rem;
   padding-top: 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid var(--rule);
+  color: var(--heading, inherit);
 }
+.page section { margin-bottom: 3.5rem; }
 
 .entry { margin: 0 0 2.25rem; }
 .entry__head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; }
@@ -278,14 +288,120 @@ a { color: inherit; }
 .entry p { margin: 0.4rem 0 0; max-width: 38rem; }
 .entry ul { margin: 0.6rem 0 0; padding-left: 1.2rem; max-width: 38rem; }
 .entry li { margin-bottom: 0.25rem; }
-.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0.7rem 0 0; padding: 0; }
-.entry .tags { padding-left: 0; }
-.tags li { font-family: var(--display); font-size: 0.8125rem; padding: 0.15rem 0.6rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; margin: 0; }
-.page section { margin-bottom: 3.5rem; }
 .entry .entry__where { color: var(--muted); font-size: 0.9375rem; margin-top: 0.15rem; }
 .page__list { margin: 0; padding-left: 1.2rem; max-width: 38rem; }
 .page__list li { margin-bottom: 0.5rem; }
-.skills { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1.25rem; margin: 1.5rem 0 0; max-width: 38rem; }
-.skills dt { font-family: var(--display); font-weight: 600; }
-.skills dd { margin: 0; color: var(--muted); }
-@media (max-width: 30rem) { .skills { grid-template-columns: 1fr; gap: 0.1rem; } .skills dd { margin-bottom: 0.6rem; } }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0.7rem 0 0; padding: 0; }
+.tags li { font-family: var(--display); font-size: 0.8125rem; padding: 0.15rem 0.6rem; border: 1px solid var(--chip, rgba(255,255,255,0.2)); border-radius: 999px; margin: 0; }
+
+/* skills as tiles, like the cubbies of the skill shelf in the Work room */
+.skill-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0.45rem; list-style: none; margin: 0; padding: 0.45rem; background: #c9ccd0; border-radius: 4px; }
+.skill-tiles li { min-height: 4.2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0.5rem; border-radius: 2px; font-family: var(--display); font-weight: 700; font-size: 0.9375rem; line-height: 1.2; }
+.skill-tiles li span { font-family: var(--body); font-weight: 400; font-size: 0.8125rem; margin-top: 0.2rem; opacity: 0.8; }
+.skill-tiles li:nth-child(4n + 1) { background: #1d2b38; color: #f2f5f8; }
+.skill-tiles li:nth-child(4n + 2) { background: #e2d3ad; color: #2b2b2b; }
+.skill-tiles li:nth-child(4n + 3) { background: #fbfaf7; color: #1d2b38; }
+.skill-tiles li:nth-child(4n + 4) { background: #58595d; color: #f4f3f0; }
+.skill-tiles li.is-tech { background: #c9a25a; color: #1d1a14; }
+
+/* ---------- Projects ---------- */
+
+.project { padding: 1.6rem 1.6rem 1.8rem; margin-bottom: 1.75rem; background: var(--card, transparent); border: 1px solid var(--rule); border-top: 4px solid var(--accent-2, var(--rule)); border-radius: 6px; }
+.page .project__title { font-family: var(--display); font-size: 1.625rem; font-weight: 700; margin: 0; border: 0; padding: 0; }
+.project p { margin: 0.6rem 0 0; max-width: 40rem; }
+.project__blurb { font-size: 1.125rem; }
+.project__links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem !important; }
+.project__sub { font-family: var(--display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent, var(--muted)); margin: 1.6rem 0 0.6rem; }
+.project__features { margin: 0; padding-left: 1.2rem; max-width: 40rem; }
+.project__features li { margin-bottom: 0.4rem; }
+.project__features strong { font-family: var(--display); font-weight: 600; }
+.project__video { display: block; width: 100%; max-width: 20rem; border-radius: 10px; background: #10161d; border: 6px solid #1d1d20; }
+.project__shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: 0.85rem; list-style: none; margin: 0; padding: 0; }
+.project__shots img { display: block; width: 100%; aspect-ratio: 9 / 19; object-fit: contain; border-radius: 10px; background: #10161d; border: 4px solid #1d1d20; }
+.project__caption { display: block; font-family: var(--display); font-size: 0.8125rem; color: var(--muted); margin-top: 0.35rem; text-align: center; }
+.button {
+  display: inline-block;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  color: var(--button-ink, var(--ink));
+  background: var(--button-bg, var(--brass));
+  border-radius: 999px;
+  padding: 0.45rem 1.05rem;
+}
+.button:hover { filter: brightness(1.1); }
+.button--quiet { color: var(--button-bg, var(--paper)); background: transparent; box-shadow: inset 0 0 0 1.5px var(--button-bg, rgba(255, 255, 255, 0.3)); }
+.button--quiet:hover { background: var(--quiet-hover, rgba(255, 255, 255, 0.08)); filter: none; }
+
+/* ---------- Themes: each plain page takes its look from a room ---------- */
+
+/* Resume and Projects: the Work room. Off-white walls, navy, gold. */
+.theme-work {
+  color-scheme: light;
+  --wall: #f4f3f0;
+  --paper: #1d2b38;
+  --ink: #1d2b38;
+  --muted: #5a6a78;
+  --heading: #1d2b38;
+  --accent: #b08640;
+  --accent-2: #2f6f8f;
+  --rule: #dfdcd5;
+  --chip: #b9c3cc;
+  --card: #ffffff;
+  --nav-bg: #ffffff;
+  --nav-rule: 1px solid #dfdcd5;
+  --nav-ink: #1d2b38;
+  --nav-muted: #5a6a78;
+  --cta-bg: #c9a25a;
+  --cta-ink: #1d1a14;
+  --button-bg: #1d2b38;
+  --button-ink: #ffffff;
+  --quiet-hover: #eef1f4;
+}
+.theme-work .page h1::after { content: ""; display: block; width: 4.5rem; height: 5px; margin-top: 1rem; background: #c9a25a; }
+.theme-work .entry--job { border-left: 4px solid #2f6f8f; padding-left: 1rem; }
+.theme-work .page__links a { color: #2f6f8f; }
+
+/* About: the sitting room. Pale birch, cream, sage. */
+.theme-about {
+  color-scheme: light;
+  --wall: #fbf8f1;
+  --paper: #2b2b2b;
+  --ink: #2b2b2b;
+  --muted: #6b6152;
+  --heading: #3a2a12;
+  --accent: #8a6a3a;
+  --rule: #e6dcc6;
+  --chip: #d9c7a4;
+  --place: #5f7a55;
+  --nav-bg: repeating-linear-gradient(90deg, #dcc59c 0 26px, #cfb589 26px 27px);
+  --nav-ink: #3a2a12;
+  --nav-muted: #5e4a2c;
+  --cta-bg: #3a2a12;
+  --cta-ink: #fbf1dc;
+}
+.theme-about .site-nav ul a[aria-current="page"] { border-bottom-color: #3a2a12; }
+
+/* ---------- Contact page ---------- */
+
+.contact-card { background: var(--card, transparent); border: 1px solid var(--rule); border-top: 4px solid var(--accent-2, var(--rule)); border-radius: 6px; padding: 0.4rem 1.6rem 1.6rem; max-width: 38rem; }
+.contact-card h2 { border-top: 0; }
+.contact label { display: block; font-family: var(--display); font-weight: 600; font-size: 0.9375rem; margin: 0 0 0.9rem; }
+.contact input, .contact textarea {
+  display: block; width: 100%; margin-top: 0.3rem; padding: 0.6rem 0.75rem;
+  font: 400 1rem var(--body); color: var(--ink); background: var(--wall);
+  border: 1px solid var(--chip, #b9c3cc); border-radius: 5px;
+}
+.contact textarea { resize: vertical; min-height: 8rem; }
+.contact input:focus-visible, .contact textarea:focus-visible { outline: 2px solid var(--accent-2, var(--brass)); outline-offset: 1px; }
+.contact__trap { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.contact__status { min-height: 1.4em; margin: 0 0 0.6rem; font-family: var(--display); font-size: 0.9375rem; color: #9a3b2b; }
+.contact .btn {
+  font-family: var(--display); font-weight: 600; font-size: 0.9375rem; cursor: pointer;
+  color: var(--button-ink, var(--ink)); background: var(--button-bg, var(--brass));
+  border: 0; border-radius: 999px; padding: 0.55rem 1.3rem;
+}
+.contact .btn:disabled { opacity: 0.6; cursor: default; }
+.contact__done { font-family: var(--display); font-size: 1.0625rem; }

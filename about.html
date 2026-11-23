@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About</title>
+  <meta name="description" content="A bit about me, and what I'm reading.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="theme-about">
+  <header class="site-nav">
+    <a class="site-nav__brand" href="index.html" data-name>Mason Holland</a>
+    <nav aria-label="Site">
+      <ul>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="site-nav__room" href="room.html">Walk into the room</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="page">
+    <header>
+      <h1>About me</h1>
+      <p class="page__location" id="location"></p>
+      <div id="intro"></div>
+    </header>
+
+    <main>
+      <section aria-labelledby="h-reading">
+        <h2 id="h-reading">Reading</h2>
+        <p class="page__summary" id="read-count"></p>
+        <div id="reading"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/site.js"></script>
+  <script>
+    Promise.all([
+      loadJSON("data/profile.json", {}),
+      loadJSON("data/books.json", { books: [] })
+    ]).then(function (res) {
+      var p = res[0], b = res[1];
+      var about = p.about || {};
+      fillName(p);
+      var hide = function (id) { document.getElementById(id).parentNode.hidden = true; };
+      document.getElementById("location").textContent = p.location || "";
+
+      // the "info" frames from the About room, skipping any still holding placeholder text
+      var intro = document.getElementById("intro");
+      var notes = (about.frames || []).filter(function (f) { return f.type === "info" && f.text && !/Replace this/i.test(f.text); });
+      if (!notes.length && p.summary) intro.appendChild(el("p", { "class": "page__summary", text: p.summary }));
+      notes.forEach(function (f) {
+        intro.appendChild(el("div", { "class": "entry" }, [el("h3", { text: f.title }), el("p", { text: f.text })]));
+      });
+
+      var current = b.currentlyReading || [], read = b.books || [];
+      if (!current.length && !read.length) hide("h-reading");
+      if (read.length) document.getElementById("read-count").textContent = read.length + " books read so far. The full collection is on the shelves in the room.";
+      var reading = document.getElementById("reading");
+      if (current.length) {
+        reading.appendChild(el("h3", { "class": "project__sub", text: "Reading now" }));
+        reading.appendChild(el("ul", { "class": "page__list" }, current.map(function (x) { return el("li", { text: x.title + " by " + x.author }); })));
+      }
+      if (read.length) {
+        reading.appendChild(el("h3", { "class": "project__sub", text: "Recently finished" }));
+        reading.appendChild(el("ul", { "class": "page__list" }, read.slice(0, 8).map(function (x) {
+          return el("li", { text: x.title + " by " + x.author + (x.rating ? " (" + x.rating + " out of 5)" : "") });
+        })));
+      }
+    });
+  </script>
+</body>
+</html>

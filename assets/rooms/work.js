@@ -1,6 +1,6 @@
 /* WORK room (12 o'clock): a bright, minimal home office. */
 import * as THREE from "three";
-import { DOOR_ANGLES, NEAR, RD, RW, basic, box, canvasTex, careerBeforeTech, createRoom, cyl, esc, fitText, frontBox, hintEl, interactables, makePlant, mat, noise, profile, projectsHtml, rand, resumeHtml, rooms, showPanel, wrapText } from "./core.js";
+import { DOOR_ANGLES, NEAR, RD, RW, animations, basic, box, canvasTex, careerBeforeTech, createRoom, loadProjects, cyl, esc, fitText, frontBox, hintEl, interactables, makePlant, mat, noise, profile, projectsHtml, rand, resumeHtml, rooms, safeUrl, showPanel, wrapText } from "./core.js";
 import { plasterTex } from "./shared.js";
 import { perthSkylineTexture } from "./about.js";
 import { BRAND, OUTLINE } from "./skill-icons.js";
@@ -61,24 +61,28 @@ function skyTexture(w, h) {
   });
 }
 
-/** The second monitor: a list of projects. */
+/** The second monitor: a list of projects. paint(titles) redraws it once they've loaded. */
 function projectsScreenTexture() {
-  const projects = (profile.projects || []).map((p) => p.title);
-  return canvasTex(640, 380, (ctx, w, h) => {
+  const tex = canvasTex(640, 380, (ctx, w, h) => drawProjectsScreen(ctx, w, h, null));
+  tex.paint = (titles) => { drawProjectsScreen(tex.image.getContext("2d"), 640, 380, titles); tex.needsUpdate = true; };
+  return tex;
+}
+function drawProjectsScreen(ctx, w, h, projects) {
+  {
     ctx.fillStyle = "#1e2530"; ctx.fillRect(0, 0, w, h);
     ctx.fillStyle = "#2b3442"; ctx.fillRect(0, 0, w, 44);
     ["#e9605a", "#f2be4c", "#5fc46a"].forEach((c, i) => { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(24 + i * 22, 22, 7, 0, Math.PI * 2); ctx.fill(); });
     ctx.fillStyle = "#e8edf3"; ctx.font = "800 34px 'Bricolage Grotesque', Arial, sans-serif"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
     ctx.fillText("Projects", 30, 100);
     ctx.font = "500 22px 'Bricolage Grotesque', Arial, sans-serif";
-    const list = projects.length ? projects.slice(0, 5) : ["Project list coming soon"];
+    const list = projects === null ? [] : projects.length ? projects.slice(0, 5) : ["Project list coming soon"];
     list.forEach((t, i) => {
       ctx.fillStyle = ["#7fc4ff", "#ffd27a", "#9be59b", "#e0a8ff", "#ff9f8f"][i % 5]; ctx.fillRect(30, 130 + i * 44, 8, 26);
       ctx.fillStyle = "#cfd8e3"; ctx.fillText(fitText(ctx, t, w - 90), 52, 151 + i * 44);
     });
     ctx.fillStyle = "#8a96a6"; ctx.font = "500 20px 'Literata', Georgia, serif";
     ctx.fillText("Click to open the project list", 30, h - 24);
-  });
+  }
 }
 
 /* ---------- props ---------- */
@@ -398,11 +402,30 @@ function framedResume(g, x, y, z) {
 const NOTE_COLOURS = ["#ffe27a", "#a8d8f0", "#c8e6a8", "#ffb3a7", "#d9c4f0", "#ffd0a0", "#b8e0d8", "#f5c6dd"];
 const sans = "'Bricolage Grotesque', Arial, sans-serif", serifFont = "'Literata', Georgia, serif";
 
+/** A project's screenshots (paths), skipping blanks. */
+const screenshotsOf = (p) => (p.screenshots || []).filter(Boolean);
+
+/** Load an image once; later calls get the same promise. */
+const imageCache = new Map();
+function loadImage(src) {
+  if (!imageCache.has(src)) {
+    imageCache.set(src, new Promise((resolve, reject) => { const img = new Image(); img.crossOrigin = "anonymous"; img.onload = () => resolve(img); img.onerror = reject; img.src = src; }));
+  }
+  return imageCache.get(src);
+}
+
+/** If the hint is showing (you're pointing at the thing that changed), update its text. */
+function refreshHint(item) {
+  if (hintEl.classList.contains("on")) hintEl.textContent = item.hint + "  (click or E)";
+}
+
 /**
- * The big screen on the left wall. It shows whichever project was last picked on the board: the
- * project's video (p.video, an mp4) or screenshot (p.image) when it has one, otherwise a title
- * card. Until something is picked it says the board is connected. Clicking it opens the project.
- * Returns show(project).
+ * The big screen on the left wall, with three buttons on the wall under it. Picking a project on
+ * the board puts its blurb on the screen (p.blurb, or its summary). The buttons then open the live
+ * site (p.url) in a new tab, step through its screenshots (p.screenshots) on the screen, or play its
+ * demo video (p.video, an mp4, muted and looping). Buttons a project has nothing for are greyed out.
+ * Until a project is picked, the screen says the board is connected. Clicking the screen opens the
+ * project's details. Returns show(project).
  */
 function bigScreen(g, x, y, z, rotY, W, H) {
   const tv = new THREE.Group();
@@ -410,8 +433,9 @@ function bigScreen(g, x, y, z, rotY, W, H) {
   tv.rotation.y = rotY;
   g.add(tv);
   box(W + 0.05, H + 0.05, 0.05, mat(0x0d0e10, { roughness: 0.35 }), 0, 0, 0.025, tv);
+  const SW = 1600, SH = Math.round((1600 * H) / W);
   const canvas = document.createElement("canvas");
-  canvas.width = 1280; canvas.height = 720;
+  canvas.width = SW; canvas.height = SH;
   const ctx = canvas.getContext("2d");
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
@@ -420,93 +444,243 @@ function bigScreen(g, x, y, z, rotY, W, H) {
   const screen = new THREE.Mesh(new THREE.PlaneGeometry(W, H), sm);
   screen.position.z = 0.052;
   tv.add(screen);
-  let current = null, video = null, token = 0;
-  const projects = profile.projects || [];
+
+  let projects = null;   // until the Work room's door opens (see buildWork)
+  let current = null, mode = "idle", shot = 0, video = null, token = 0;
+
+  const backdrop = () => {
+    const bg = ctx.createLinearGradient(0, 0, SW, SH);
+    bg.addColorStop(0, "#14202c"); bg.addColorStop(1, "#1f3346");
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, SW, SH);
+  };
+  const done = () => { tex.needsUpdate = true; };
 
   const idle = () => {
-    const w = 1280, h = 720;
-    const bg = ctx.createLinearGradient(0, 0, w, h);
-    bg.addColorStop(0, "#14202c"); bg.addColorStop(1, "#1f3346");
-    ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+    backdrop();
     ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
-    // a "connected" link badge
-    ctx.fillStyle = "#5fc46a"; ctx.beginPath(); ctx.arc(w / 2 - 190, 236, 11, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#9fe3a8"; ctx.font = `600 34px ${sans}`; ctx.textAlign = "left";
-    ctx.fillText("Project board connected", w / 2 - 160, 248);
+    ctx.fillStyle = "#5fc46a"; ctx.beginPath(); ctx.arc(SW / 2 - 190, SH * 0.34 - 12, 12, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#9fe3a8"; ctx.font = `600 38px ${sans}`; ctx.textAlign = "left";
+    ctx.fillText("Project board connected", SW / 2 - 160, SH * 0.34);
     ctx.textAlign = "center"; ctx.fillStyle = "#f2f5f8";
-    if (projects.length) {
-      fitFont(ctx, "Click a project to see it in action", 800, 66, sans, w - 160);
-      ctx.fillText("Click a project to see it in action", w / 2, 380);
-      ctx.fillStyle = "#9fb0c2"; ctx.font = `500 32px ${serifFont}`;
-      ctx.fillText("← pick one on the project board by the door", w / 2, 450);
-    } else {
-      ctx.font = `800 66px ${sans}`;
-      ctx.fillText("Projects coming soon", w / 2, 380);
-      ctx.fillStyle = "#9fb0c2"; ctx.font = `500 32px ${serifFont}`;
-      ctx.fillText("When they're up, click one on the board to see it in action", w / 2, 450);
-    }
-    tex.needsUpdate = true;
+    const head = projects === null || projects.length ? "Click a project to see it in action" : "Projects coming soon";
+    fitFont(ctx, head, 800, 84, sans, SW - 200);
+    ctx.fillText(head, SW / 2, SH * 0.52);
+    ctx.fillStyle = "#9fb0c2"; ctx.font = `500 38px ${serifFont}`;
+    ctx.fillText(projects === null || projects.length ? "← pick one on the project board by the door" : "When they're up, click one on the board to see it in action", SW / 2, SH * 0.64);
+    done();
   };
 
-  // a title card, with the screenshot (if any) filling the left of the screen
-  const card = (p, img) => {
-    const w = 1280, h = 720;
-    ctx.fillStyle = "#14202c"; ctx.fillRect(0, 0, w, h);
-    const textX = img ? 760 : 90, textW = img ? w - textX - 60 : w - 180;
+  // what the project does, with its first screenshot beside it when it has one
+  const blurb = (p, img) => {
+    backdrop();
+    const pad = 110, textX = img ? SW * 0.5 + 40 : pad, textW = img ? SW - textX - pad : SW - pad * 2;
     if (img) {
-      const s = Math.min(660 / img.width, 600 / img.height), iw = img.width * s, ih = img.height * s;
-      ctx.drawImage(img, 50 + (660 - iw) / 2, (h - ih) / 2, iw, ih);
+      const bw = SW * 0.5 - pad - 20, bh = SH - pad * 2, s = Math.min(bw / img.width, bh / img.height), iw = img.width * s, ih = img.height * s;
+      ctx.fillStyle = "rgba(0,0,0,0.3)"; ctx.fillRect(pad - 10, (SH - ih) / 2 - 10, bw + 20, ih + 20);
+      ctx.drawImage(img, pad + (bw - iw) / 2, (SH - ih) / 2, iw, ih);
     }
     ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    ctx.fillStyle = "#7fc4ff"; ctx.font = `600 28px ${sans}`;
-    ctx.fillText(("Now showing" + (p.year ? " · " + p.year : "")).toUpperCase(), textX, 150);
-    ctx.fillStyle = "#f2f5f8";
-    ctx.font = `800 60px ${sans}`;
-    const ty = wrapText(ctx, p.title || "", textX, 230, textW, 66, 2);
-    ctx.fillStyle = "#c6d2de"; ctx.font = `500 30px ${serifFont}`;
-    wrapText(ctx, p.summary || "", textX, ty + 30, textW, 42, 7);
-    ctx.fillStyle = "#8a96a6"; ctx.font = `500 26px ${serifFont}`;
-    ctx.fillText("Click the screen for details", textX, h - 50);
-    tex.needsUpdate = true;
+    ctx.fillStyle = "#7fc4ff"; ctx.font = `600 32px ${sans}`;
+    ctx.fillText((p.soon ? "Coming soon" : "What it does" + (p.year ? " · " + p.year : "")).toUpperCase(), textX, 190);
+    ctx.fillStyle = "#f2f5f8"; ctx.font = `800 74px ${sans}`;
+    const ty = wrapText(ctx, p.title || "", textX, 280, textW, 80, 2);
+    ctx.fillStyle = "#d3dde7"; ctx.font = `500 38px ${serifFont}`;
+    const by = wrapText(ctx, p.blurb || p.summary || "", textX, ty + 40, textW, 54, 7);
+    // tags as little chips
+    let cx = textX, cy = Math.min(by + 40, SH - 170);
+    ctx.font = `600 28px ${sans}`;
+    (p.tags || []).slice(0, 6).forEach((t) => {
+      const tw = ctx.measureText(t).width + 36;
+      if (cx + tw > textX + textW) return;
+      ctx.strokeStyle = "rgba(255,255,255,0.35)"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(cx, cy - 34, tw, 48, 24); ctx.stroke();
+      ctx.fillStyle = "#c6d2de"; ctx.fillText(t, cx + 18, cy);
+      cx += tw + 12;
+    });
+    if (!p.soon) {
+      const what = [safeUrl(p.url) && "the live site", screenshotsOf(p).length && "screenshots", p.video && "a demo video"].filter(Boolean);
+      const foot = what.length ? "Buttons below: " + what.join(", ") + " · click the screen for details" : "Click the screen for details";
+      ctx.fillStyle = "#8a96a6"; fitFont(ctx, foot, 500, 30, serifFont, textW);
+      ctx.fillText(foot, textX, SH - 80);
+    }
+    done();
   };
 
-  const show = (p) => {
-    const mine = ++token;
-    current = p;
-    if (video) { video.pause(); video.removeAttribute("src"); video.load(); video = null; sm.map = tex; sm.needsUpdate = true; }
-    if (p.video) {
+  // one screenshot, as big as fits, with a caption bar
+  const screenshot = (p, img, i, n) => {
+    ctx.fillStyle = "#0b1118"; ctx.fillRect(0, 0, SW, SH);
+    const barH = 80, s = Math.min(SW / img.width, (SH - barH) / img.height), iw = img.width * s, ih = img.height * s;
+    ctx.drawImage(img, (SW - iw) / 2, (SH - barH - ih) / 2, iw, ih);
+    ctx.fillStyle = "rgba(20,32,44,0.95)"; ctx.fillRect(0, SH - barH, SW, barH);
+    ctx.fillStyle = "#f2f5f8"; ctx.font = `700 34px ${sans}`; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+    const cap = p.title + (p.captions && p.captions[i] ? ": " + p.captions[i] : "");
+    fitFont(ctx, cap, 700, 34, sans, SW * 0.55);
+    ctx.fillText(cap, 40, SH - barH / 2);
+    ctx.fillStyle = "#9fb0c2"; ctx.textAlign = "right"; ctx.font = `500 30px ${serifFont}`;
+    ctx.fillText(`Screenshot ${i + 1} of ${n}` + (n > 1 ? " · press Screenshots again for the next" : ""), SW - 40, SH - barH / 2);
+    ctx.textBaseline = "alphabetic";
+    done();
+  };
+
+  const message = (title, line) => {
+    backdrop();
+    ctx.textAlign = "center"; ctx.fillStyle = "#f2f5f8"; ctx.font = `800 64px ${sans}`;
+    ctx.fillText(title, SW / 2, SH * 0.48);
+    ctx.fillStyle = "#9fb0c2"; ctx.font = `500 36px ${serifFont}`;
+    ctx.fillText(line, SW / 2, SH * 0.6);
+    done();
+  };
+
+  const stopVideo = () => {
+    if (!video) return;
+    video.pause(); video.removeAttribute("src"); video.load(); video = null;
+  };
+
+  // while a video plays, draw each frame onto the screen as big as fits, with bars either side (demo
+  // videos are often phone-shaped), and a caption bar like the screenshots have
+  let lastFrame = -1;
+  animations.push(() => {
+    if (mode !== "video" || !video || video.readyState < 2 || video.currentTime === lastFrame) return;
+    lastFrame = video.currentTime;
+    const barH = 80, vw = video.videoWidth, vh = video.videoHeight;
+    if (!vw || !vh) return;
+    const s = Math.min(SW / vw, (SH - barH) / vh), iw = vw * s, ih = vh * s;
+    ctx.fillStyle = "#0b1118"; ctx.fillRect(0, 0, SW, SH - barH);
+    ctx.drawImage(video, (SW - iw) / 2, (SH - barH - ih) / 2, iw, ih);
+    if (!videoCaption) {
+      videoCaption = true;
+      ctx.fillStyle = "rgba(20,32,44,0.95)"; ctx.fillRect(0, SH - barH, SW, barH);
+      ctx.fillStyle = "#f2f5f8"; ctx.font = `700 34px ${sans}`; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      ctx.fillText(current.title + ": demo", 40, SH - barH / 2);
+      ctx.fillStyle = "#9fb0c2"; ctx.textAlign = "right"; ctx.font = `500 30px ${serifFont}`;
+      ctx.fillText("Press Demo video again to stop", SW - 40, SH - barH / 2);
+      ctx.textBaseline = "alphabetic";
+    }
+    done();
+  });
+  let videoCaption = false;
+
+  /* -- the buttons under the screen -- */
+  const BW = 0.68, BH = 0.17;
+  const icon = (c, kind, x, y, s, colour) => {
+    c.save(); c.translate(x, y); c.strokeStyle = colour; c.fillStyle = colour; c.lineWidth = s * 0.12; c.lineCap = "round"; c.lineJoin = "round";
+    if (kind === "live") {   // an arrow out of a box
+      c.beginPath(); c.moveTo(-s * 0.1, -s * 0.45); c.lineTo(-s * 0.45, -s * 0.45); c.lineTo(-s * 0.45, s * 0.45); c.lineTo(s * 0.45, s * 0.45); c.lineTo(s * 0.45, s * 0.1); c.stroke();
+      c.beginPath(); c.moveTo(-s * 0.05, s * 0.05); c.lineTo(s * 0.5, -s * 0.5); c.moveTo(s * 0.1, -s * 0.5); c.lineTo(s * 0.5, -s * 0.5); c.lineTo(s * 0.5, -s * 0.1); c.stroke();
+    } else if (kind === "shots") {   // a picture: frame, sun and hills
+      c.strokeRect(-s * 0.5, -s * 0.4, s, s * 0.8);
+      c.beginPath(); c.arc(s * 0.18, -s * 0.12, s * 0.1, 0, Math.PI * 2); c.fill();
+      c.beginPath(); c.moveTo(-s * 0.45, s * 0.35); c.lineTo(-s * 0.12, -s * 0.02); c.lineTo(s * 0.12, s * 0.2); c.lineTo(s * 0.25, s * 0.08); c.lineTo(s * 0.45, s * 0.35); c.stroke();
+    } else {   // play
+      c.beginPath(); c.moveTo(-s * 0.3, -s * 0.45); c.lineTo(s * 0.45, 0); c.lineTo(-s * 0.3, s * 0.45); c.closePath(); c.fill();
+    }
+    c.restore();
+  };
+  const buttons = [
+    { key: "live", label: "Visit live site" },
+    { key: "shots", label: "Screenshots" },
+    { key: "video", label: "Demo video" },
+  ].map((b, i) => {
+    const bc = document.createElement("canvas");
+    bc.width = 512; bc.height = Math.round((512 * BH) / BW);
+    const btex = new THREE.CanvasTexture(bc);
+    btex.colorSpace = THREE.SRGBColorSpace;
+    const fm = new THREE.MeshStandardMaterial({ map: btex, roughness: 0.5, emissive: 0xffffff, emissiveMap: btex, emissiveIntensity: 0.2 });
+    const mesh = new THREE.Mesh(frontBox(BW, BH, 0.025), [mat(0x1d2b38, { roughness: 0.5 }), fm]);
+    mesh.position.set((i - 1) * (BW + 0.1), -H / 2 - 0.19, 0.0125);
+    tv.add(mesh);
+    const item = { ...b, mesh, mat: fm, base: 0.2, hint: "", canvas: bc, tex: btex, open: () => press(item) };
+    interactables.push(item);
+    return item;
+  });
+  const available = (key) => {
+    if (!current || current.soon) return false;
+    if (key === "live") return !!safeUrl(current.url);
+    if (key === "shots") return screenshotsOf(current).length > 0;
+    return !!current.video;
+  };
+  const paintButtons = () => {
+    buttons.forEach((b) => {
+      const c = b.canvas.getContext("2d"), w = b.canvas.width, h = b.canvas.height;
+      const on = available(b.key), active = on && mode === b.key;
+      c.fillStyle = active ? "#c99a3b" : on ? "#1d2b38" : "#d5d8dc"; c.fillRect(0, 0, w, h);
+      const ink = active ? "#1d1a14" : on ? "#f2f5f8" : "#9aa3ad";
+      icon(c, b.key, 62, h / 2, 46, ink);
+      c.fillStyle = ink; c.textAlign = "left"; c.textBaseline = "middle";
+      fitFont(c, b.label, 700, 46, sans, w - 130);
+      c.fillText(b.label, 110, h / 2 + 2);
+      b.tex.needsUpdate = true;
+      b.hint = !current ? b.label + ": pick a project on the board first"
+        : !on ? b.label + ": not available for " + current.title
+        : b.key === "live" ? "Open " + current.title + " in a new tab"
+        : b.key === "shots" ? (mode === "shots" ? "Next screenshot" : "Show screenshots on the screen")
+        : mode === "video" ? "Stop the demo video" : "Play the demo video";
+    });
+  };
+
+  const showShot = (p, i) => {
+    const list = screenshotsOf(p), mine = token;
+    loadImage(list[i]).then((img) => { if (mine === token && mode === "shots") screenshot(p, img, i, list.length); })
+      .catch(() => { if (mine === token) message("Screenshot not found", list[i]); });
+  };
+
+  const showBlurb = (p) => {
+    const mine = token, first = screenshotsOf(p)[0];
+    blurb(p, null);
+    if (first) loadImage(first).then((img) => { if (mine === token && mode === "blurb") blurb(p, img); }).catch(() => {});
+  };
+
+  function press(b) {
+    if (!available(b.key)) return;
+    const p = current;
+    if (b.key === "live") { window.open(safeUrl(p.url), "_blank", "noopener"); return; }
+    token++;
+    if (b.key === "shots") {
+      stopVideo();
+      shot = mode === "shots" ? (shot + 1) % screenshotsOf(p).length : 0;
+      mode = "shots";
+      showShot(p, shot);
+    } else if (mode === "video") {
+      stopVideo(); mode = "blurb"; showBlurb(p);
+    } else {
+      stopVideo();
+      mode = "video";
+      message(p.title, "Loading the demo video...");
+      const mine = token;
       video = document.createElement("video");
       Object.assign(video, { src: p.video, muted: true, loop: true, playsInline: true, crossOrigin: "anonymous" });
-      video.play().then(() => {
-        if (mine !== token) return;
-        const vt = new THREE.VideoTexture(video);
-        vt.colorSpace = THREE.SRGBColorSpace;
-        sm.map = vt; sm.needsUpdate = true;
-      }).catch(() => card(p, null));
-      card(p, null);   // shown until the video starts
-      return;
+      videoCaption = false; lastFrame = -1;
+      video.play().catch(() => { if (mine === token) message("The video couldn't play", String(p.video)); });
     }
-    card(p, null);
-    if (p.image) {
-      const img = new Image();
-      img.onload = () => { if (mine === token) card(p, img); };
-      img.src = p.image;
-    }
+    paintButtons();
+    refreshHint(b);
+  }
+
+  const show = (p) => {
+    token++;
+    stopVideo();
+    current = p; mode = "blurb"; shot = 0;
+    showBlurb(p);
+    paintButtons();
   };
 
   idle();
+  paintButtons();
   interactables.push({
     mesh: screen, hint: "Open the project on screen",
-    open: () => current
+    open: () => current && !current.soon
       ? showPanel({ title: current.title, meta: current.year || "Project", html: projectsHtml([current]) })
-      : showPanel({ title: "Projects", meta: projects.length + " projects", html: projects.length ? projectsHtml(projects) : "<p>Projects are coming soon.</p>" }),
+      : loadProjects().then((list) => showPanel({ title: "Projects", meta: list.length + " projects", html: list.length ? projectsHtml(list) : "<p>Projects are coming soon.</p>" })),
   });
+  show.setProjects = (list) => { projects = list; if (mode === "idle") idle(); };
   return show;
 }
 
 /**
  * The project board: a whiteboard with a sticky note for each project (up to 8). Clicking a note
- * puts that project on the big screen. With no projects yet, faint outlines hold the places.
+ * puts that project's blurb on the big screen. With no projects yet, four grey "Coming soon" notes
+ * hold the places (they work the same way). The board is built straight away; the notes go up when
+ * the returned function is handed the projects.
  */
 function projectBoard(g, x, y, z, rotY, onPick) {
   const board = new THREE.Group();
@@ -514,31 +688,29 @@ function projectBoard(g, x, y, z, rotY, onPick) {
   board.rotation.y = rotY;
   g.add(board);
   box(1.96, 1.08, 0.04, mat(0xd7d9dc, { metalness: 0.4, roughness: 0.4 }), 0, 0, 0, board);
-  const projects = (profile.projects || []).slice(0, 8);
   const bgTex = canvasTex(1024, 540, (ctx, w, h) => {
     ctx.fillStyle = "#fbfbfa"; ctx.fillRect(0, 0, w, h);
     ctx.fillStyle = "#1d2b38"; ctx.font = `800 44px ${sans}`; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
     ctx.fillText("Project board", 40, 70);
     ctx.fillStyle = "#5a6a78"; ctx.font = `500 24px ${serifFont}`; ctx.textAlign = "right";
-    ctx.fillText(projects.length ? "Click a project to show it on the screen →" : "Projects coming soon", w - 40, 68);
+    ctx.fillText("Click a project to show it on the screen →", w - 40, 68);
     ctx.strokeStyle = "#cfd6dc"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(40, 92); ctx.lineTo(w - 40, 92); ctx.stroke();
-    if (!projects.length) {
-      ctx.setLineDash([10, 8]); ctx.strokeStyle = "#c3cbd2"; ctx.lineWidth = 3;
-      for (let i = 0; i < 4; i++) ctx.strokeRect(60 + i * 232, 140, 196, 160);
-    }
   });
   const bm = new THREE.MeshStandardMaterial({ map: bgTex, roughness: 0.5, emissive: 0xffffff, emissiveMap: bgTex, emissiveIntensity: 0.12 });
   const bp = new THREE.Mesh(new THREE.PlaneGeometry(1.88, 0.99), bm);
   bp.position.z = 0.021;
   board.add(bp);
-  projects.forEach((p, i) => {
+  return (list) => {
+  const real = list.filter((p) => p && p.title).slice(0, 8);
+  const notes = real.length ? real : [1, 2, 3, 4].map(() => ({ title: "Coming soon", soon: true, summary: "A new project is on its way. Check back soon." }));
+  notes.forEach((p, i) => {
     const col = i % 4, row = Math.floor(i / 4);
-    const colour = NOTE_COLOURS[i % NOTE_COLOURS.length];
+    const colour = p.soon ? "#e6e9ec" : NOTE_COLOURS[i % NOTE_COLOURS.length];
     const tex = canvasTex(256, 200, (ctx, w, h) => {
       ctx.fillStyle = colour; ctx.fillRect(0, 0, w, h);
       ctx.fillStyle = "rgba(0,0,0,0.06)"; ctx.fillRect(0, h - 14, w, 14);
       ctx.fillStyle = "#c0392b"; ctx.beginPath(); ctx.arc(w / 2, 14, 8, 0, Math.PI * 2); ctx.fill();   // the pin
-      ctx.fillStyle = "#1d2b38"; ctx.textAlign = "left"; ctx.font = `700 30px ${sans}`;
+      ctx.fillStyle = p.soon ? "#7a8794" : "#1d2b38"; ctx.textAlign = "left"; ctx.font = `700 30px ${sans}`;
       const yy = wrapText(ctx, p.title || "", 16, 62, w - 32, 34, 3);
       if (p.year) { ctx.fillStyle = "#5a6a78"; ctx.font = `500 22px ${serifFont}`; ctx.fillText(String(p.year), 16, Math.min(yy + 8, h - 22)); }
     });
@@ -547,8 +719,9 @@ function projectBoard(g, x, y, z, rotY, onPick) {
     note.position.set(-0.69 + col * 0.46, 0.13 - row * 0.4, 0.025 + i * 0.0005);
     note.rotation.z = (rand(i + 3) - 0.5) * 0.08;
     board.add(note);
-    interactables.push({ mesh: note, hint: "Show on the big screen: " + p.title, mat: nm, base: 0.1, open: () => { onPick(p); return false; } });
+    interactables.push({ mesh: note, hint: p.soon ? "Coming soon" : "Show on the big screen: " + p.title, mat: nm, base: 0.1, open: () => onPick(p) });
   });
+  };
 }
 
 /* ---------- the career timeline ---------- */
@@ -935,10 +1108,11 @@ export function buildWork() {
   const DX = -2.3, DZ = Zb + 0.47;   // the desk's middle
   blackDesk(g, 2.1, 0.9).position.set(DX, 0, DZ);
   const resumeOpen = () => showPanel({ title: profile.name + "'s resume", meta: profile.headline || "", html: resumeHtml() });
-  const projectsOpen = () => showPanel({ title: "Projects", meta: (profile.projects || []).length + " projects", html: projectsHtml(profile.projects || []) });
+  const projectsOpen = () => loadProjects().then((list) => showPanel({ title: "Projects", meta: list.length + " projects", html: projectsHtml(list) }));
+  const projectsScreen = projectsScreenTexture();
   // two monitors at the back of the desk, angled in a little, with the laptop in front under them
   monitor(g, DX - 0.33, Zb + 0.24, 0.14, resumeScreenTexture(), "Read the resume", resumeOpen);
-  monitor(g, DX + 0.33, Zb + 0.24, -0.14, projectsScreenTexture(), "Open the project list", projectsOpen);
+  monitor(g, DX + 0.33, Zb + 0.24, -0.14, projectsScreen, "Open the project list", projectsOpen);
   laptop(g, DX, Zb + 0.6, 0);
   mouseOnPad(g, DX + 0.55, Zb + 0.62, 0);
   deskLamp(g, DX - 0.85, Zb + 0.2, 0.6);
@@ -958,22 +1132,29 @@ export function buildWork() {
   // left wall, from the door: the project board, then the big screen over a low console. Clicking a
   // project on the board puts it on the screen.
   const LW = -RW / 2 + 0.03, FACE_IN = Math.PI / 2;
-  const show = bigScreen(g, LW, 1.5, -9.0, FACE_IN, 1.9, 1.07);
-  projectBoard(g, LW, 1.55, -6.55, FACE_IN, show);
+  const show = bigScreen(g, LW, 1.78, -9.1, FACE_IN, 2.6, 1.4625);
+  const pinNotes = projectBoard(g, LW, 1.55, -6.55, FACE_IN, show);
+  // the projects load the first time this room comes into view (its door opening), not with the
+  // rest of the site; their screenshots and videos only when one is clicked
+  rooms.work.onEnter = () => loadProjects().then((list) => {
+    pinNotes(list);
+    show.setProjects(list);
+    projectsScreen.paint(list.map((p) => p.title));
+  });
   const media = new THREE.Group();
-  media.position.set(-RW / 2 + 0.23, 0, -9.0);
+  media.position.set(-RW / 2 + 0.23, 0, -9.1);
   media.rotation.y = FACE_IN;
   g.add(media);
-  box(1.8, 0.4, 0.42, mat(0xf1efe9, { roughness: 0.5 }), 0, 0.26, 0, media);
-  [-0.6, 0, 0.6].forEach((cx) => box(0.56, 0.32, 0.005, mat(0xe8e6e0, { roughness: 0.5 }), cx, 0.26, 0.212, media));
-  [-1, 1].forEach((sx) => box(0.03, 0.06, 0.38, chrome(), sx * 0.85, 0.03, 0, media));
-  room.obstacles.push({ x0: -4.0, x1: -3.5, z0: -9.95, z1: -8.05 });
+  box(2.4, 0.4, 0.42, mat(0xf1efe9, { roughness: 0.5 }), 0, 0.26, 0, media);
+  [-0.8, 0, 0.8].forEach((cx) => box(0.76, 0.32, 0.005, mat(0xe8e6e0, { roughness: 0.5 }), cx, 0.26, 0.212, media));
+  [-1, 1].forEach((sx) => box(0.03, 0.06, 0.38, chrome(), sx * 1.15, 0.03, 0, media));
+  room.obstacles.push({ x0: -4.0, x1: -3.5, z0: -10.35, z1: -7.85 });
 
   // the certificates, beyond the screen
   const accolades = (profile.accolades || []).slice(0, 4);
   const slots = accolades.length <= 2
-    ? [{ z: -11.05, y: 1.55 }, { z: -12.15, y: 1.55 }]
-    : [{ z: -11.05, y: 1.95 }, { z: -12.15, y: 1.95 }, { z: -11.05, y: 1.2 }, { z: -12.15, y: 1.2 }];
+    ? [{ z: -11.25, y: 1.6 }, { z: -12.35, y: 1.6 }]
+    : [{ z: -11.25, y: 1.95 }, { z: -12.35, y: 1.95 }, { z: -11.25, y: 1.2 }, { z: -12.35, y: 1.2 }];
   accolades.forEach((a, i) => {
     const { z, y } = slots[i];
     const tex = certificateTexture(a);

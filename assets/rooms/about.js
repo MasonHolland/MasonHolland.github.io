@@ -1,7 +1,7 @@
 /* ABOUT ME room (10 o'clock): a bright Scandinavian living room: white panelling, pale pine,
  * bamboo and rattan, with the Perth skyline through the big window. */
 import * as THREE from "three";
-import { DOOR_ANGLES, NEAR, RD, RW, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, mat, noise, profile, rand, rooms, safeUrl, showPanel } from "./core.js";
+import { DOOR_ANGLES, NEAR, RD, RW, basic, box, canvasTex, createRoom, cyl, esc, fitText, interactables, mat, noise, profile, rand, rooms, safeUrl, showPanel, travelMap } from "./core.js";
 import { addPicture, loadInto, plankTex, plasterTex } from "./shared.js";
 
 /* ---------- Perth skyline, drawn for the big window ---------- */
@@ -370,6 +370,92 @@ function displayCabinet(g, x, z) {
   basket(-0.22, 0.08, 0.17, 0.22); vase(0.25, 0.08, 0.26);
 }
 
+/* ---------- the family map ---------- */
+
+// assets/about/world-map.png runs from latitude 84 N to 58 S, all the way round (scripts/make-world-map.mjs)
+const MAP_TOP = 84, MAP_BOTTOM = -58;
+
+/**
+ * A world map in a pale oak frame, facing +z with its middle at the group's origin, with a pin for
+ * each place in data/travel-map.json coloured by its category. Clicking a pin tells you about the
+ * place. Returns the map's width and height.
+ */
+function worldMap(parent, W) {
+  const H = (W * (MAP_TOP - MAP_BOTTOM)) / 360;
+  const oak = mat(0xc8a06c, { roughness: 0.6 });
+  box(W + 0.1, H + 0.1, 0.035, oak, 0, 0, 0, parent);
+  const tex = new THREE.TextureLoader().load("assets/about/world-map.png");
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+  const pic = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.85, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.15 }));
+  pic.position.z = 0.019;
+  parent.add(pic);
+
+  const cats = new Map((travelMap.categories || []).map((c) => [c.id, c]));
+  const needle = new THREE.CylinderGeometry(0.0025, 0.0025, 0.045, 6);
+  const headGeo = new THREE.SphereGeometry(0.017, 14, 10), hitGeo = new THREE.SphereGeometry(0.04, 8, 6);
+  const steel = mat(0xb8bcc2, { metalness: 0.7, roughness: 0.3 });
+  const hitMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false });
+  (travelMap.places || []).filter((p) => p && p.name && Number.isFinite(+p.lat) && Number.isFinite(+p.lon)).forEach((p, i) => {
+    const lat = Math.max(MAP_BOTTOM, Math.min(MAP_TOP, +p.lat)), lon = ((((+p.lon + 180) % 360) + 360) % 360) - 180;
+    const x = ((lon + 180) / 360) * W - W / 2, y = H / 2 - ((MAP_TOP - lat) / (MAP_TOP - MAP_BOTTOM)) * H;
+    const cat = cats.get(p.category) || { label: "", colour: "#888888" };
+    const pin = new THREE.Group();
+    pin.position.set(x, y, 0.02);
+    pin.rotation.set(0.25 * (rand(i) - 0.5), 0.25 * (rand(i + 7) - 0.5), 0);   // pushed in by hand, not quite straight
+    parent.add(pin);
+    const n = new THREE.Mesh(needle, steel);
+    n.rotation.x = Math.PI / 2;
+    n.position.z = 0.0225;
+    pin.add(n);
+    const hm = mat(cat.colour, { roughness: 0.35, emissive: 0xffffff, emissiveIntensity: 0 });
+    const head = new THREE.Mesh(headGeo, hm);
+    head.position.z = 0.05;
+    pin.add(head);
+    const hit = new THREE.Mesh(hitGeo, hitMat);   // a bigger target than the pin head
+    hit.position.z = 0.05;
+    pin.add(hit);
+    interactables.push({
+      mesh: hit, hint: p.name, mat: hm, base: 0,
+      open: () => showPanel({ title: p.name, meta: [cat.label, p.years].filter(Boolean).join(" · "), html: p.note ? `<p>${esc(p.note)}</p>` : "" }),
+    });
+  });
+  return { W, H };
+}
+
+/** The key to the pin colours: a small card in the same frame, facing +z, middle at the origin. */
+function mapKey(parent, w) {
+  const cats = travelMap.categories || [], places = travelMap.places || [];
+  const rows = Math.max(1, cats.length), PX = 640;
+  const h = 0.13 + rows * 0.085;
+  const tex = canvasTex(PX, Math.round((PX * h) / w), (ctx, cw, ch) => {
+    ctx.fillStyle = "#fbf8f1"; ctx.fillRect(0, 0, cw, ch);
+    ctx.strokeStyle = "#d9c7a4"; ctx.lineWidth = 4; ctx.strokeRect(14, 14, cw - 28, ch - 28);
+    const k = PX / w;   // pixels a metre
+    ctx.fillStyle = "#2b2b2b"; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+    ctx.font = `800 ${Math.round(0.05 * k)}px 'Bricolage Grotesque', Arial, sans-serif`;
+    ctx.fillText("Map key", 0.045 * k, 0.07 * k);
+    if (!cats.length) {
+      ctx.fillStyle = "#5a5a5a"; ctx.font = `500 ${Math.round(0.034 * k)}px 'Literata', Georgia, serif`;
+      ctx.fillText("Pins coming soon", 0.045 * k, 0.16 * k);
+    }
+    cats.forEach((c, i) => {
+      const y = (0.165 + i * 0.085) * k;
+      ctx.fillStyle = c.colour; ctx.beginPath(); ctx.arc(0.065 * k, y, 0.02 * k, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "rgba(0,0,0,0.25)"; ctx.lineWidth = 2; ctx.stroke();
+      const n = places.filter((p) => p.category === c.id).length;
+      ctx.fillStyle = "#2b2b2b"; ctx.font = `500 ${Math.round(0.036 * k)}px 'Literata', Georgia, serif`;
+      ctx.fillText(fitText(ctx, c.label, cw - 0.2 * k), 0.105 * k, y);
+      if (n) { ctx.fillStyle = "#8a7a60"; ctx.textAlign = "right"; ctx.fillText(String(n), cw - 0.045 * k, y); ctx.textAlign = "left"; }
+    });
+  });
+  box(w + 0.06, h + 0.06, 0.03, mat(0xc8a06c, { roughness: 0.6 }), 0, 0, 0, parent);
+  const card = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.9, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.2 }));
+  card.position.z = 0.016;
+  parent.add(card);
+  return h;
+}
+
 /** A frond for the palms: a rib with leaflets either side, on a transparent canvas. */
 let frondTexture = null;
 function frondTex() {
@@ -550,9 +636,21 @@ export function buildAbout() {
   room.obstacles.push({ x0: 1.95, x1: 3.15, z0: -5.45, z1: -4.9 });
 
   // palms in the corners
-  makePalm(g, -3.35, -5.75, 1.0);
+  makePalm(g, 3.5, -5.55, 1.0);   // by the glass cabinet, leaving the wall left of the door for the map
   makePalm(g, 3.35, -12.25, 1.25);
-  room.obstacles.push({ x0: -3.7, x1: -3.0, z0: -6.1, z1: -5.4 }, { x0: 3.0, x1: 3.7, z0: -12.6, z1: -11.9 });
+  room.obstacles.push({ x0: 3.15, x1: 3.85, z0: -5.9, z1: -5.2 }, { x0: 3.0, x1: 3.7, z0: -12.6, z1: -11.9 });
+
+  // the family map on the door wall, left of the doorway as you face it, with its key beside it
+  // (pins come from data/travel-map.json)
+  const mapWall = new THREE.Group();
+  mapWall.position.set(-2.0, 1.68, -NEAR - 0.02);
+  mapWall.rotation.y = Math.PI;   // facing into the room
+  g.add(mapWall);
+  worldMap(mapWall, 1.6);
+  const keyG = new THREE.Group();
+  keyG.position.set(1.27, 0.02, 0);   // to the right of the map as you look at it
+  mapWall.add(keyG);
+  mapKey(keyG, 0.6);
 
   // floor lamp in the back corner, by the window
   const lamp = new THREE.Group();

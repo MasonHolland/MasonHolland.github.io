@@ -9,6 +9,10 @@
   },
   "links": [
     {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/mason-holland/"
+    },
+    {
       "label": "GitHub",
       "url": "https://github.com/MasonHolland"
     }
@@ -53,6 +57,7 @@
     }
   ],
   "about": {
+    "hobbies": ["Climbing", "Pickleball", "Snowboarding", "Chainmail", "Board games", "Video games", "Reading"],
     "frames": [
       {
         "type": "info",
