@@ -1,7 +1,35 @@
 {
   "source": "steam+psn",
-  "updated": "2026-11-25",
+  "updated": "2026-11-26",
   "games": [
+    {
+      "platform": "steam",
+      "id": "892970",
+      "title": "Valheim",
+      "hours": 1490.5,
+      "lastPlayed": "2026-11-25",
+      "cover": "assets/covers/steam-2c6698ddcd.jpg",
+      "achievements": {
+        "earned": 18,
+        "total": 53,
+        "progress": 34
+      },
+      "thumb": "assets/covers/small/steam-2c6698ddcd.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA06954_00",
+      "title": "Granblue Fantasy: Relink",
+      "hours": 6.8,
+      "lastPlayed": "2026-11-25",
+      "cover": "assets/covers/psn-c4d2538069.jpg",
+      "trophies": {
+        "earned": 16,
+        "total": 96,
+        "progress": 11
+      },
+      "thumb": "assets/covers/small/psn-c4d2538069.jpg"
+    },
     {
       "platform": "psn",
       "id": "PPSA10664_00",
@@ -57,20 +85,6 @@
         "progress": 4
       },
       "thumb": "assets/covers/small/psn-c1259d982c.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "892970",
-      "title": "Valheim",
-      "hours": 1490.4,
-      "lastPlayed": "2026-11-18",
-      "cover": "assets/covers/steam-2c6698ddcd.jpg",
-      "achievements": {
-        "earned": 18,
-        "total": 53,
-        "progress": 34
-      },
-      "thumb": "assets/covers/small/steam-2c6698ddcd.jpg"
     },
     {
       "platform": "steam",
@@ -734,20 +748,6 @@
         "progress": 18
       },
       "thumb": "assets/covers/small/steam-cf32406111.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA06954_00",
-      "title": "Granblue Fantasy: Relink",
-      "hours": 6.5,
-      "lastPlayed": "2024-02-07",
-      "cover": "assets/covers/psn-c4d2538069.jpg",
-      "trophies": {
-        "earned": 16,
-        "total": 96,
-        "progress": 11
-      },
-      "thumb": "assets/covers/small/psn-c4d2538069.jpg"
     },
     {
       "platform": "steam",
