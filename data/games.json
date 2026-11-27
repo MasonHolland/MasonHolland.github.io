@@ -1,7 +1,77 @@
 {
   "source": "steam+psn",
-  "updated": "2026-11-26",
+  "updated": "2026-11-27",
   "games": [
+    {
+      "platform": "psn",
+      "id": "PPSA01413_00",
+      "title": "HELLDIVERS™ 2",
+      "hours": 293.3,
+      "lastPlayed": "2026-11-26",
+      "cover": "assets/covers/psn-b425ee3e40.jpg",
+      "trophies": {
+        "earned": 39,
+        "total": 39,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-b425ee3e40.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA04610_00",
+      "title": "ELDEN RING",
+      "hours": 261,
+      "lastPlayed": "2026-11-26",
+      "cover": "assets/covers/psn-e4db859b18.jpg",
+      "trophies": {
+        "earned": 42,
+        "total": 42,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-e4db859b18.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA04998_00",
+      "title": "ARC Raiders",
+      "hours": 232.6,
+      "lastPlayed": "2026-11-26",
+      "cover": "assets/covers/psn-ab370bb6ae.jpg",
+      "trophies": {
+        "earned": 51,
+        "total": 51,
+        "progress": 100
+      },
+      "thumb": "assets/covers/small/psn-ab370bb6ae.jpg"
+    },
+    {
+      "platform": "steam",
+      "id": "632360",
+      "title": "Risk of Rain 2",
+      "hours": 67.7,
+      "lastPlayed": "2026-11-26",
+      "cover": "assets/covers/steam-c7b763f5a4.jpg",
+      "achievements": {
+        "earned": 58,
+        "total": 205,
+        "progress": 28
+      },
+      "thumb": "assets/covers/small/steam-c7b763f5a4.jpg"
+    },
+    {
+      "platform": "psn",
+      "id": "PPSA29920_00",
+      "title": "Aliens: Fireteam Elite 2",
+      "hours": 9.3,
+      "lastPlayed": "2026-11-26",
+      "cover": "assets/covers/psn-c1259d982c.jpg",
+      "trophies": {
+        "earned": 4,
+        "total": 31,
+        "progress": 6
+      },
+      "thumb": "assets/covers/small/psn-c1259d982c.jpg"
+    },
     {
       "platform": "steam",
       "id": "892970",
@@ -43,48 +113,6 @@
         "progress": 57
       },
       "thumb": "assets/covers/small/psn-edd2de8982.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA01413_00",
-      "title": "HELLDIVERS™ 2",
-      "hours": 293.2,
-      "lastPlayed": "2026-11-19",
-      "cover": "assets/covers/psn-b425ee3e40.jpg",
-      "trophies": {
-        "earned": 39,
-        "total": 39,
-        "progress": 100
-      },
-      "thumb": "assets/covers/small/psn-b425ee3e40.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA04998_00",
-      "title": "ARC Raiders",
-      "hours": 231.2,
-      "lastPlayed": "2026-11-19",
-      "cover": "assets/covers/psn-ab370bb6ae.jpg",
-      "trophies": {
-        "earned": 51,
-        "total": 51,
-        "progress": 100
-      },
-      "thumb": "assets/covers/small/psn-ab370bb6ae.jpg"
-    },
-    {
-      "platform": "psn",
-      "id": "PPSA29920_00",
-      "title": "Aliens: Fireteam Elite 2",
-      "hours": 7.3,
-      "lastPlayed": "2026-11-19",
-      "cover": "assets/covers/psn-c1259d982c.jpg",
-      "trophies": {
-        "earned": 3,
-        "total": 31,
-        "progress": 4
-      },
-      "thumb": "assets/covers/small/psn-c1259d982c.jpg"
     },
     {
       "platform": "steam",
@@ -255,20 +283,6 @@
     },
     {
       "platform": "psn",
-      "id": "PPSA04610_00",
-      "title": "ELDEN RING",
-      "hours": 261,
-      "lastPlayed": "2026-08-04",
-      "cover": "assets/covers/psn-e4db859b18.jpg",
-      "trophies": {
-        "earned": 42,
-        "total": 42,
-        "progress": 100
-      },
-      "thumb": "assets/covers/small/psn-e4db859b18.jpg"
-    },
-    {
-      "platform": "psn",
       "id": "PPSA05132_00",
       "title": "Sifu",
       "hours": 18.7,
@@ -413,20 +427,6 @@
       "lastPlayed": "2026-02-06",
       "cover": "assets/covers/psn-54a3c9904c.jpg",
       "thumb": "assets/covers/small/psn-54a3c9904c.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "632360",
-      "title": "Risk of Rain 2",
-      "hours": 65.1,
-      "lastPlayed": "2026-01-23",
-      "cover": "assets/covers/steam-c7b763f5a4.jpg",
-      "achievements": {
-        "earned": 57,
-        "total": 205,
-        "progress": 28
-      },
-      "thumb": "assets/covers/small/steam-c7b763f5a4.jpg"
     },
     {
       "platform": "steam",
