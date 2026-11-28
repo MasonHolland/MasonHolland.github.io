@@ -1,7 +1,21 @@
 {
   "source": "steam+psn",
-  "updated": "2026-11-27",
+  "updated": "2026-11-28",
   "games": [
+    {
+      "platform": "steam",
+      "id": "632360",
+      "title": "Risk of Rain 2",
+      "hours": 70.4,
+      "lastPlayed": "2026-11-27",
+      "cover": "assets/covers/steam-c7b763f5a4.jpg",
+      "achievements": {
+        "earned": 58,
+        "total": 205,
+        "progress": 28
+      },
+      "thumb": "assets/covers/small/steam-c7b763f5a4.jpg"
+    },
     {
       "platform": "psn",
       "id": "PPSA01413_00",
@@ -43,20 +57,6 @@
         "progress": 100
       },
       "thumb": "assets/covers/small/psn-ab370bb6ae.jpg"
-    },
-    {
-      "platform": "steam",
-      "id": "632360",
-      "title": "Risk of Rain 2",
-      "hours": 67.7,
-      "lastPlayed": "2026-11-26",
-      "cover": "assets/covers/steam-c7b763f5a4.jpg",
-      "achievements": {
-        "earned": 58,
-        "total": 205,
-        "progress": 28
-      },
-      "thumb": "assets/covers/small/steam-c7b763f5a4.jpg"
     },
     {
       "platform": "psn",
